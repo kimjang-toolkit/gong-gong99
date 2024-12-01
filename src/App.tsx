@@ -11,7 +11,7 @@ function App() {
 
   return (
     <BaseLayout>
-      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+      <RouterProvider router={router} />
     </BaseLayout>
   );
 }
