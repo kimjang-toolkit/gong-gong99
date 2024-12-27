@@ -10,7 +10,8 @@ export default {
       fontFamily: {
         sans: ['Pretendard', 'sans-serif'],
       },
-      color: {
+      colors: {
+        black: '#262626',
         primary: {
           200: '#99C7FB',
           300: '#66AAF9',
@@ -51,6 +52,18 @@ export default {
         },
         '.shadow-top': {
           boxShadow: '0 -8px 20px 0 rgba(0, 0, 0, 0.05)',
+        },
+        '.text-h2': {
+          '@apply text-[20px] font-medium leading-7': '',
+        },
+        '.text-h3-bold': {
+          '@apply text-[18px] font-bold leading-normal': '',
+        },
+        '.text-body': {
+          '@apply text-[16px] font-normal leading-normal': '',
+        },
+        '.text-caption': {
+          '@apply text-[14px] font-normal leading-normal': '',
         },
       });
     },
