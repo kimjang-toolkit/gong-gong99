@@ -16,7 +16,6 @@ type Actions = {
 const useModalStore = create<State & Actions>((set) => ({
   modals: [],
   openModal: (component) => {
-    document.body.style.overflow = 'hidden';
     set((state) => ({
       modals: [...state.modals, { element: component }],
     }));
@@ -24,9 +23,6 @@ const useModalStore = create<State & Actions>((set) => ({
   closeModal: () =>
     set((state) => {
       const newModals = state.modals.slice(0, -1);
-      if (newModals.length === 0) {
-        document.body.style.overflow = 'auto';
-      }
       return {
         modals: newModals,
       };
