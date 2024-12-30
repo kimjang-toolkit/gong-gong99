@@ -41,7 +41,6 @@ export default {
   },
   darkMode: 'class',
   plugins: [
-    nextui(),
     ({ addUtilities }) => {
       addUtilities({
         '.default-box': {

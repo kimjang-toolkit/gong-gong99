@@ -97,7 +97,9 @@ input:-webkit-autofill:active {
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
+}
+@layer components {
+  .border-border {
+    border-color: var(--border);
   }
 }
