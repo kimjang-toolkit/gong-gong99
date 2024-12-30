@@ -10,12 +10,7 @@ const BaseLayout = ({ children }: { children: React.ReactNode }) => {
       </aside>
       {/* 우측 앱화면 */}
       <main className="relative h-svh w-full max-w-[500px] bg-[#F4F4F5] shadow-xl lg:min-w-[500px]">
-        <div
-          id="scroll-parent"
-          className="w-full overflow-y-scroll h-svh max-h-svh scrollbar-hide"
-        >
-          {children}
-        </div>
+        {children}
         <ModalProvider />
       </main>
     </div>

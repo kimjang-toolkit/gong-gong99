@@ -8,7 +8,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    }
-  }
+      "@/*": ["./src/*"]
+    },
+    "types": ["vite-plugin-svgr/client"]
+  },
+  "include": ["svg.d.ts"]
 }
