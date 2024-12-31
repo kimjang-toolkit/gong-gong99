@@ -8,6 +8,7 @@ interface BoarderedInputProps extends InputHTMLAttributes<HTMLInputElement> {
   regex?: RegExp; // 정규식 추가
   regexErrorMessage?: string; // 정규식 에러 메시지 추가
   isRequired?: boolean; // 필수 입력 여부 추가
+  defaultValue?: string | number;
 }
 
 export default function BoarderedInput({
@@ -18,25 +19,30 @@ export default function BoarderedInput({
   regex,
   regexErrorMessage = 'Invalid input', // 기본값 설정
   isRequired,
+  defaultValue,
   ...props
 }: BoarderedInputProps) {
   const [inputError, setInputError] = useState<string | undefined>(undefined);
+  const [inputValue, setInputValue] = useState<string | number>(
+    defaultValue ?? ''
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+
     if (value === '' || (regex && regex.test(value))) {
       setInputError(undefined); // 올바른 입력 시 에러 메시지 제거
     }
     if (props.onChange) {
       props.onChange(e);
     }
+    setInputValue(value);
   };
 
-  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (isRequired && !value) {
+  const handleBlur = () => {
+    if (isRequired && !inputValue) {
       setInputError('필수 입력항목입니다.');
-    } else if (regex && !regex.test(value)) {
+    } else if (regex && !regex.test(String(inputValue))) {
       setInputError(regexErrorMessage);
     } else {
       setInputError(undefined);
@@ -64,6 +70,7 @@ export default function BoarderedInput({
           onChange={handleChange}
           onBlur={handleBlur}
           {...props}
+          value={inputValue}
         />
       </div>
       {inputError && (
