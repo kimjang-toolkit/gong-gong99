@@ -65,7 +65,7 @@ export default {
           '@apply text-[14px] font-medium leading-normal': '',
         },
         '.text-tiny': {
-          '@apply text-[12px] font-medium leading-normal': '',
+          '@apply text-[12px] font-normal leading-normal': '',
         },
       });
     },
