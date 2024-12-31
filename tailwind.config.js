@@ -58,8 +58,14 @@ export default {
         '.text-body': {
           '@apply text-[16px] font-normal leading-normal': '',
         },
+        '.text-body-bold': {
+          '@apply text-[16px] font-semibold leading-normal': '',
+        },
         '.text-caption': {
-          '@apply text-[14px] font-normal leading-normal': '',
+          '@apply text-[14px] font-medium leading-normal': '',
+        },
+        '.text-tiny': {
+          '@apply text-[12px] font-medium leading-normal': '',
         },
       });
     },
