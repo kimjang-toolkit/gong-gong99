@@ -24,47 +24,50 @@ export default function BoarderedInput({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (isRequired && !value) {
-      setInputError('필수 입력항목입니다.');
-    } else if (regex && !regex.test(value)) {
-      setInputError(regexErrorMessage); // 사용자 정의 에러 메시지 사용
-    } else {
-      setInputError(undefined);
+    if (value === '' || (regex && regex.test(value))) {
+      setInputError(undefined); // 올바른 입력 시 에러 메시지 제거
     }
     if (props.onChange) {
       props.onChange(e);
     }
   };
 
-  const handleBlur = () => {
-    if (isRequired && !props.value) {
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (isRequired && !value) {
       setInputError('필수 입력항목입니다.');
+    } else if (regex && !regex.test(value)) {
+      setInputError(regexErrorMessage);
+    } else {
+      setInputError(undefined);
     }
   };
 
   return (
-    <div
-      className={cn(
-        'flex flex-col border rounded-xl px-3 py-1.5 border-default-200  ',
-        inputError
-          ? 'focus-within:border-red-400'
-          : 'focus-within:border-primary-200',
-        className
-      )}
-    >
-      <label className="text-caption text-default-600">{label}</label>
-      <input
-        autoComplete="off"
-        spellCheck={false}
-        type={type}
-        placeholder={placeholder}
-        className={cn('text-body text-black focus:outline-none')}
-        onChange={handleChange} // 변경 핸들러 추가
-        onBlur={handleBlur} // 블러 핸들러 추가
-        {...props}
-      />
+    <div className="flex flex-col gap-0.5">
+      <div
+        className={cn(
+          'flex flex-col border rounded-xl px-3 py-1.5 border-default-200  ',
+          inputError
+            ? 'focus-within:border-red-400'
+            : 'focus-within:border-primary-200',
+          className
+        )}
+      >
+        <label className="text-caption text-default-600">{label}</label>
+        <input
+          autoComplete="off"
+          spellCheck={false}
+          type={type}
+          placeholder={placeholder}
+          className={cn('text-body text-black focus:outline-none')}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          {...props}
+        />
+      </div>
       {inputError && (
-        <span className="text-red-400 text-tiny">{inputError}</span>
+        <span className="pl-2 text-red-400 text-tiny">{inputError}</span>
       )}
     </div>
   );
