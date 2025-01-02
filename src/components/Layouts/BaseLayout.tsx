@@ -9,7 +9,7 @@ const BaseLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </aside>
       {/* 우측 앱화면 */}
-      <main className="relative h-dvh w-full max-w-[500px] bg-[#F4F4F5] shadow-xl lg:min-w-[450px]">
+      <main className="relative h-svh w-full max-w-[500px] bg-[#F4F4F5] shadow-xl lg:min-w-[500px]">
         {children}
         <ModalProvider />
       </main>
