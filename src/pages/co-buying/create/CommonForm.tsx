@@ -1,5 +1,6 @@
 import BoarderedInput from '@/components/Input/BoarderedInput';
 import { cn } from '@/lib/utils';
+import DevideByQuantityForm from '@/pages/co-buying/create/DevideByQuantityForm';
 import { useState } from 'react';
 
 function CommonForm() {
@@ -92,6 +93,7 @@ function CommonForm() {
           * {devideTypeDescription[devideType]}
         </p>
       </section>
+      {devideType === 'quantity' && <DevideByQuantityForm />}
     </>
   );
 }

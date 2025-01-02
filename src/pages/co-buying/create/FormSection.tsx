@@ -1,7 +1,7 @@
 import CommonForm from '@/pages/co-buying/create/CommonForm';
 export default function FormSection() {
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col h-full gap-4">
       {/* 1.상품 기본정보 폼 */}
       <CommonForm />
       {/* 2. 공구 나눔방식 선택 */}
