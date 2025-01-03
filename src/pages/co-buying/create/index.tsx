@@ -10,11 +10,33 @@ import { createContext, useMemo, useState } from 'react';
 const FormContext = createContext({});
 export { FormContext };
 
+export interface FormData {
+  productName: string;
+  totalPrice: number;
+  productLink: string;
+  deadline: string;
+  devideType: 'quantity' | 'person';
+  totalQuantity: number;
+  recruitmentNumbers: number;
+  attendeeQuantity?: number;
+  ownerQuantity?: number;
+  attendeePrice?: number;
+}
+
 function CreatePage() {
   const [devideType, setDevideType] = useState<'quantity' | 'person'>(
     'quantity'
   );
-  const [formData, setFormData] = useState({});
+
+  const [formData, setFormData] = useState<FormData>({
+    productName: '',
+    totalPrice: 0,
+    productLink: '',
+    deadline: '',
+    devideType: devideType,
+    totalQuantity: 0,
+    recruitmentNumbers: 0,
+  });
 
   const formContextValue = useMemo(
     () => ({
@@ -26,11 +48,15 @@ function CreatePage() {
     [devideType, formData]
   );
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <DefaultLayout>
       <TitleHeader title="임시 메인" />
       <FormContext.Provider value={formContextValue}>
-        <form className="flex flex-col h-full gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col h-full gap-4">
           {/* 1.상품 기본정보 폼 */}
           <CommonForm />
 
@@ -42,7 +68,12 @@ function CreatePage() {
           {devideType === 'person' && <DevideByAttendeeForm />}
         </form>
       </FormContext.Provider>
-      <BottomButton label="다음" onClick={() => {}} />
+      <BottomButton
+        type="submit"
+        label="다음"
+        onClick={() => {}}
+        disabled={true}
+      />
     </DefaultLayout>
   );
 }

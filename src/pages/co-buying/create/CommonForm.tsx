@@ -1,6 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import BoarderedInput from '@/components/Input/BoarderedInput';
+import { FormContext } from '@/pages/co-buying/create';
+import { useContext } from 'react';
 
 function CommonForm() {
+  const { formData, setFormData } = useContext(FormContext);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
   return (
     <>
       <BoarderedInput
@@ -18,6 +26,7 @@ function CommonForm() {
         type="number"
         isRequired
         defaultValue={0}
+        onChange={handleChange}
       />
       <BoarderedInput
         id="productLink"
