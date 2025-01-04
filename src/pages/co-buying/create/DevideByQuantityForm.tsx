@@ -6,12 +6,14 @@ export default function DevideByQuantityForm() {
       <BoarderedInput
         id="totalQuantity"
         label="상품 총 수량"
+        placeholder="공구할 상품 수량을 입력해주세요."
         type="number"
         required
       />
       <BoarderedInput
         id="ownerQuantity"
         label="내 구매 수량"
+        placeholder="내가 구매할 상품 수량을 입력해주세요."
         type="number"
         required
         defaultValue={0}
