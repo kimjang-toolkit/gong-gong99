@@ -5,7 +5,7 @@ import CommonForm from '@/pages/co-buying/create/CommonForm';
 import DevideByQuantityForm from '@/pages/co-buying/create/DevideByQuantityForm';
 import DevideByAttendeeForm from '@/pages/co-buying/create/DevideByAttendeeForm';
 import DevideTypeSection from '@/pages/co-buying/create/DevideTypeSection';
-import { useMemo, useState } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import {
   CobuyingFormData,
   FormContext,
@@ -35,14 +35,26 @@ function CreatePage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  const handleFormChange = (e: React.FormEvent<HTMLFormElement>) => {
-    const form = e.target as HTMLFormElement;
-    if (form.checkValidity()) {
-      setSubmitDisabled(false);
-    } else {
-      setSubmitDisabled(true);
+
+  // 폼 버튼 비활성화를 위한 유효성 실시간 검사
+  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    const form = formRef.current;
+    if (form) {
+      const allInputsValid = Array.from(form.elements).every((input) => {
+        if (
+          input instanceof HTMLInputElement ||
+          input instanceof HTMLTextAreaElement
+        ) {
+          return input.checkValidity();
+        }
+        return true;
+      });
+
+      setSubmitDisabled(!allInputsValid);
     }
-  };
+  }, [formData, devideType]);
+
   const handleFormBlur = (e: React.FormEvent<HTMLFormElement>) => {
     const formEntries = new FormData(e.currentTarget);
     const data = Object.fromEntries(formEntries);
@@ -52,6 +64,7 @@ function CreatePage() {
       ...data,
     }));
   };
+
   return (
     <DefaultLayout>
       <TitleHeader title="공구글 작성" />
@@ -62,8 +75,8 @@ function CreatePage() {
         }}
       >
         <form
+          ref={formRef}
           onBlur={handleFormBlur}
-          onChange={(e) => handleFormChange(e)}
           onSubmit={handleSubmit}
           className="flex flex-col h-full gap-4"
         >

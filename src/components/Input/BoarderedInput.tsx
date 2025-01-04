@@ -37,7 +37,9 @@ export default function BoarderedInput({
     setInputValue(value);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    console.log('Input validity:', e.target.validity);
+
     if (
       required &&
       (inputValue === null || inputValue === undefined || inputValue === '')
