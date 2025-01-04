@@ -17,7 +17,7 @@ export interface FormData {
   deadline: string;
   devideType: 'quantity' | 'person';
   totalQuantity: number;
-  recruitmentNumbers: number;
+  recruitmentNumbers?: number;
   attendeeQuantity?: number;
   ownerQuantity?: number;
   attendeePrice?: number;
@@ -57,7 +57,6 @@ function CreatePage() {
   };
   const handleFormValidity = (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.target as HTMLFormElement;
-    console.log(form.checkValidity());
     if (form.checkValidity()) {
       setSubmitDisabled(false);
     } else {
@@ -82,6 +81,20 @@ function CreatePage() {
           {/* 3. 공구 나눔방식 선택에 따라 수량으로 나누기 폼/ 인원으로 나누기 폼 */}
           {devideType === 'quantity' && <DevideByQuantityForm />}
           {devideType === 'person' && <DevideByAttendeeForm />}
+
+          {/* 4. 알리는 말 */}
+          <section className="flex flex-col gap-2">
+            <div className="w-full h-24 border rounded-xl px-3 py-1.5 border-default-200">
+              <label className="text-caption text-default-600">
+                안내 메시지
+              </label>
+              <textarea
+                placeholder="신청자에게 안내할 내용을 자유롭게 입력해주세요."
+                className="w-full text-black border-none focus:outline-none"
+                maxLength={200}
+              />
+            </div>
+          </section>
         </form>
       </FormContext.Provider>
       <BottomButton
