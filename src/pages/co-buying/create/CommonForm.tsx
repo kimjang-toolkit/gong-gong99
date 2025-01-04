@@ -5,28 +5,23 @@ import { useContext } from 'react';
 
 function CommonForm() {
   const { formData, setFormData } = useContext(FormContext);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
-  };
+
   return (
     <>
       <BoarderedInput
         id="productName"
         label="상품 이름"
         placeholder="상품 이름을 입력 (5~100자)"
-        regex={/^[a-zA-Z0-9가-힣\s]{5,100}$/}
-        isRequired
-        regexErrorMessage="상품 이름은 5~100자의 한글, 영문, 숫자만 입력 가능합니다"
+        pattern={'^[a-zA-Z0-9가-힣\\s]{5,100}$'}
+        required
+        patternErrorMessage="상품 이름은 5~100자의 한글, 영문, 숫자만 입력 가능합니다"
       />
       <BoarderedInput
         id="totalPrice"
         label="상품 총액"
         placeholder="상품 총 가격 입력"
         type="number"
-        isRequired
-        defaultValue={0}
-        onChange={handleChange}
+        required
       />
       <BoarderedInput
         id="productLink"

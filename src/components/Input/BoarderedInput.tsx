@@ -5,9 +5,8 @@ interface BoarderedInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   type?: string;
   placeholder?: string;
-  pattern?: string; // pattern 속성으로 변경
-  patternErrorMessage?: string; // 에러 메시지 속성명 변경
-  isRequired?: boolean;
+  pattern?: string;
+  patternErrorMessage?: string;
   defaultValue?: string | number;
 }
 
@@ -17,9 +16,9 @@ export default function BoarderedInput({
   type,
   placeholder,
   pattern,
-  patternErrorMessage = '올바르지 않은 입력입니다.', // 기본값 설정
-  isRequired,
+  patternErrorMessage,
   defaultValue,
+  required,
   ...props
 }: BoarderedInputProps) {
   const [inputError, setInputError] = useState<string | undefined>(undefined);
@@ -31,7 +30,7 @@ export default function BoarderedInput({
     const value = e.target.value;
 
     if (value === '' || (pattern && new RegExp(pattern).test(value))) {
-      setInputError(undefined); // 올바른 입력 시 에러 메시지 제거
+      setInputError(undefined);
     }
     if (props.onChange) {
       props.onChange(e);
@@ -40,7 +39,10 @@ export default function BoarderedInput({
   };
 
   const handleBlur = () => {
-    if (isRequired && !inputValue) {
+    if (
+      required &&
+      (inputValue === null || inputValue === undefined || inputValue === '')
+    ) {
       setInputError('필수 입력항목입니다.');
     } else if (pattern && !new RegExp(pattern).test(String(inputValue))) {
       setInputError(patternErrorMessage);
@@ -66,7 +68,8 @@ export default function BoarderedInput({
           spellCheck={false}
           type={type}
           placeholder={placeholder}
-          pattern={pattern} // pattern 속성 추가
+          pattern={pattern}
+          required={required}
           className={cn('text-body text-black focus:outline-none')}
           onChange={handleChange}
           onBlur={handleBlur}

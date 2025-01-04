@@ -27,7 +27,9 @@ function CreatePage() {
   const [devideType, setDevideType] = useState<'quantity' | 'person'>(
     'quantity'
   );
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
+  // 폼 데이터
   const [formData, setFormData] = useState<FormData>({
     productName: '',
     totalPrice: 0,
@@ -38,6 +40,7 @@ function CreatePage() {
     recruitmentNumbers: 0,
   });
 
+  // 폼 컨텍스트 값
   const formContextValue = useMemo(
     () => ({
       devideType,
@@ -48,15 +51,28 @@ function CreatePage() {
     [devideType, formData]
   );
 
+  // 폼제출 핸들러
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-
+  const handleFormValidity = (e: React.FormEvent<HTMLFormElement>) => {
+    const form = e.target as HTMLFormElement;
+    console.log(form.checkValidity());
+    if (form.checkValidity()) {
+      setSubmitDisabled(false);
+    } else {
+      setSubmitDisabled(true);
+    }
+  };
   return (
     <DefaultLayout>
-      <TitleHeader title="임시 메인" />
+      <TitleHeader title="공구글 작성" />
       <FormContext.Provider value={formContextValue}>
-        <form onSubmit={handleSubmit} className="flex flex-col h-full gap-4">
+        <form
+          onChange={(e) => handleFormValidity(e)}
+          onSubmit={handleSubmit}
+          className="flex flex-col h-full gap-4"
+        >
           {/* 1.상품 기본정보 폼 */}
           <CommonForm />
 
@@ -72,7 +88,7 @@ function CreatePage() {
         type="submit"
         label="다음"
         onClick={() => {}}
-        disabled={true}
+        disabled={submitDisabled}
       />
     </DefaultLayout>
   );

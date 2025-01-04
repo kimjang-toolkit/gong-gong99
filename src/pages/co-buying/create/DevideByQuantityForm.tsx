@@ -7,14 +7,13 @@ export default function DevideByQuantityForm() {
         id="totalQuantity"
         label="상품 총 수량"
         type="number"
-        isRequired
-        defaultValue={0}
+        required
       />
       <BoarderedInput
         id="ownerQuantity"
         label="내 구매 수량"
         type="number"
-        isRequired
+        required
         defaultValue={0}
       />
       <section className="flex items-center py-3 text-center rounded-lg shadow-sm justify-evenly bg-zinc-50 ">
