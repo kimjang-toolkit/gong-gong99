@@ -1,19 +1,22 @@
 import BoarderedInput from '@/components/Input/BoarderedInput';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { formatNumberWithCommas } from '@/util/formatNumberWithCommas';
-import { FormContext } from '@/pages/co-buying/create';
+import { FormContext } from '@/pages/co-buying/create/formContext';
 
 export default function DevideByQuantityForm() {
   const { formData, setFormData } = useContext(FormContext);
 
   const { totalPrice, totalQuantity, ownerQuantity } = formData;
 
-  const unitPrice = totalPrice / totalQuantity;
-
-  // setFormData({
-  //   ...formData,
-  //   unitPrice,
-  // });
+  useEffect(() => {
+    if (totalQuantity && totalPrice) {
+      const unitPrice = totalPrice / totalQuantity;
+      setFormData({
+        ...formData,
+        unitPrice,
+      });
+    }
+  }, [totalPrice, totalQuantity]);
 
   return (
     <>
@@ -39,8 +42,8 @@ export default function DevideByQuantityForm() {
           {/* 내구매량 * 상품 총액 / 상품 총 수량 */}
           <p className="text-tiny text-default-600">내 부담액</p>
           <p className="text-tiny text-primary-600">
-            {ownerQuantity > 0
-              ? formatNumberWithCommas(unitPrice * ownerQuantity)
+            {ownerQuantity && formData.unitPrice
+              ? formatNumberWithCommas(formData.unitPrice * ownerQuantity)
               : '-'}
           </p>
         </div>
@@ -51,7 +54,11 @@ export default function DevideByQuantityForm() {
             신청자 총 부담액
           </p>
           <p className="text-tiny text-primary-600">
-            {formatNumberWithCommas(totalPrice - unitPrice * ownerQuantity)}
+            {totalPrice && formData.unitPrice && ownerQuantity
+              ? formatNumberWithCommas(
+                  totalPrice - formData.unitPrice * ownerQuantity
+                )
+              : '-'}
           </p>
         </div>
         <p className="text-tiny text-default-400">=</p>
@@ -59,7 +66,7 @@ export default function DevideByQuantityForm() {
           {/* 상품총액  */}
           <p className="text-tiny text-default-600 min-w-[100px]">상품 총액</p>
           <p className="text-tiny text-default-600">
-            {formatNumberWithCommas(totalPrice)} 원
+            {totalPrice ? formatNumberWithCommas(totalPrice) : '-'} 원
           </p>
         </div>
       </section>

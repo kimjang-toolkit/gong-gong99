@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { FormContext } from '@/pages/co-buying/create';
+import { FormContext } from '@/pages/co-buying/create/formContext';
 import { useContext } from 'react';
 
 export default function DevideTypeSection() {

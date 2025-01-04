@@ -5,23 +5,11 @@ import CommonForm from '@/pages/co-buying/create/CommonForm';
 import DevideByQuantityForm from '@/pages/co-buying/create/DevideByQuantityForm';
 import DevideByAttendeeForm from '@/pages/co-buying/create/DevideByAttendeeForm';
 import DevideTypeSection from '@/pages/co-buying/create/DevideTypeSection';
-import { createContext, useMemo, useState } from 'react';
-
-const FormContext = createContext({});
-export { FormContext };
-
-export interface FormData {
-  productName: string;
-  totalPrice: number;
-  productLink: string;
-  deadline: string;
-  devideType: 'quantity' | 'person';
-  totalQuantity: number;
-  recruitmentNumbers?: number;
-  attendeeQuantity?: number;
-  ownerQuantity?: number;
-  attendeePrice?: number;
-}
+import { useMemo, useState } from 'react';
+import {
+  CobuyingFormData,
+  FormContext,
+} from '@/pages/co-buying/create/formContext';
 
 function CreatePage() {
   const [devideType, setDevideType] = useState<'quantity' | 'person'>(
@@ -30,15 +18,7 @@ function CreatePage() {
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
   // 폼 데이터
-  const [formData, setFormData] = useState<FormData>({
-    productName: '',
-    totalPrice: 0,
-    productLink: '',
-    deadline: '',
-    devideType: devideType,
-    totalQuantity: 0,
-    recruitmentNumbers: 0,
-  });
+  const [formData, setFormData] = useState<CobuyingFormData>();
 
   // 폼 컨텍스트 값
   const formContextValue = useMemo(
@@ -67,18 +47,20 @@ function CreatePage() {
     const formEntries = new FormData(e.currentTarget);
     const data = Object.fromEntries(formEntries);
 
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       ...data,
-      totalPrice: Number(data.totalPrice) || 0,
-      totalQuantity: Number(data.totalQuantity) || 0,
-      recruitmentNumbers: Number(data.recruitmentNumbers) || 0,
-    });
+    }));
   };
   return (
     <DefaultLayout>
       <TitleHeader title="공구글 작성" />
-      <FormContext.Provider value={formContextValue}>
+      <FormContext.Provider
+        value={{
+          ...formContextValue,
+          formData: formData || ({} as CobuyingFormData),
+        }}
+      >
         <form
           onBlur={handleFormBlur}
           onChange={(e) => handleFormChange(e)}
