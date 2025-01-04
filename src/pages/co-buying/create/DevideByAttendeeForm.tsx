@@ -5,16 +5,18 @@ export default function DevideByAttendeeForm() {
     <>
       <BoarderedInput
         id="totalQuantity"
+        name="totalQuantity"
         label="상품 총 수량"
         type="number"
-        isRequired
+        required
         defaultValue={0}
       />
       <BoarderedInput
         id="recruitmentNumbers"
+        name="recruitmentNumbers"
         label="모집인원"
         type="number"
-        isRequired
+        required
         defaultValue={0}
       />
       <section className="flex items-center w-full gap-2">

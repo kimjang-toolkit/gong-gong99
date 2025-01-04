@@ -3,10 +3,7 @@ import { FormContext } from '@/pages/co-buying/create';
 import { useContext } from 'react';
 
 export default function DevideTypeSection() {
-  const { devideType, setDevideType } = useContext(FormContext) as {
-    devideType: 'quantity' | 'person';
-    setDevideType: (devideType: 'quantity' | 'person') => void;
-  };
+  const { devideType, setDevideType } = useContext(FormContext);
 
   // 공구방식 선택에 따른 CSS
   const selectedTypeClass = 'bg-primary-300 text-white';

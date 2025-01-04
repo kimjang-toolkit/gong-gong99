@@ -55,7 +55,7 @@ function CreatePage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  const handleFormValidity = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormChange = (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.target as HTMLFormElement;
     if (form.checkValidity()) {
       setSubmitDisabled(false);
@@ -63,12 +63,25 @@ function CreatePage() {
       setSubmitDisabled(true);
     }
   };
+  const handleFormBlur = (e: React.FormEvent<HTMLFormElement>) => {
+    const formEntries = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formEntries);
+
+    setFormData({
+      ...formData,
+      ...data,
+      totalPrice: Number(data.totalPrice) || 0,
+      totalQuantity: Number(data.totalQuantity) || 0,
+      recruitmentNumbers: Number(data.recruitmentNumbers) || 0,
+    });
+  };
   return (
     <DefaultLayout>
       <TitleHeader title="공구글 작성" />
       <FormContext.Provider value={formContextValue}>
         <form
-          onChange={(e) => handleFormValidity(e)}
+          onBlur={handleFormBlur}
+          onChange={(e) => handleFormChange(e)}
           onSubmit={handleSubmit}
           className="flex flex-col h-full gap-4"
         >
@@ -89,6 +102,7 @@ function CreatePage() {
                 안내 메시지
               </label>
               <textarea
+                name="noticeMessage"
                 placeholder="신청자에게 안내할 내용을 자유롭게 입력해주세요."
                 className="w-full text-black border-none focus:outline-none"
                 maxLength={200}

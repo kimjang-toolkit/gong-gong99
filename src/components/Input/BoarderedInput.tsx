@@ -22,13 +22,12 @@ export default function BoarderedInput({
   ...props
 }: BoarderedInputProps) {
   const [inputError, setInputError] = useState<string | undefined>(undefined);
-  const [inputValue, setInputValue] = useState<string | number>(
-    defaultValue ?? ''
+  const [inputValue, setInputValue] = useState<string | number | null>(
+    defaultValue ?? null
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-
     if (value === '' || (pattern && new RegExp(pattern).test(value))) {
       setInputError(undefined);
     }
@@ -74,7 +73,6 @@ export default function BoarderedInput({
           onChange={handleChange}
           onBlur={handleBlur}
           {...props}
-          value={inputValue}
         />
       </div>
       {inputError && (

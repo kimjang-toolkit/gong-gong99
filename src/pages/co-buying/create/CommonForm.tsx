@@ -1,15 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import BoarderedInput from '@/components/Input/BoarderedInput';
-import { FormContext } from '@/pages/co-buying/create';
-import { useContext } from 'react';
 
 function CommonForm() {
-  const { formData, setFormData } = useContext(FormContext);
-
   return (
     <>
       <BoarderedInput
         id="productName"
+        name="productName"
         label="상품 이름"
         placeholder="상품 이름을 입력해주세요. (5~100자)"
         pattern={'^[a-zA-Z0-9가-힣\\s]{5,100}$'}
@@ -18,6 +14,7 @@ function CommonForm() {
       />
       <BoarderedInput
         id="totalPrice"
+        name="totalPrice"
         label="상품 총액"
         placeholder="상품 총 가격을 입력해주세요."
         type="number"
@@ -25,6 +22,7 @@ function CommonForm() {
       />
       <BoarderedInput
         id="productLink"
+        name="productLink"
         label="상품 링크 (선택)"
         placeholder="공구할 상품 구매링크를 입력해주세요."
         type="url"
@@ -32,6 +30,7 @@ function CommonForm() {
       {/* 추후 모바일용 날짜 인풋 컴포넌트 만들기 */}
       <BoarderedInput
         id="deadline"
+        name="deadline"
         label="신청 마감일"
         type="date"
         // leftIcon={
