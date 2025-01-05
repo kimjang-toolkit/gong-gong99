@@ -3,7 +3,7 @@ function DefaultLayout({ children }: { children: React.ReactNode[] }) {
   return (
     <>
       <header className="fixed top-0 w-full max-w-[500px]">{header}</header>
-      <main className="px-5 overflow-y-auto bg-white pt-[64px] pb-[96px]">
+      <main className="px-5 overflow-y-auto bg-white pt-[64px] pb-[96px] min-h-full">
         {content}
       </main>
       <footer className="fixed bottom-0 w-full max-w-[500px]">{footer}</footer>
