@@ -41,7 +41,7 @@ function App() {
         { index: true, element: <HomePage /> },
         { path: ':id', element: <DetailPage /> }, // 공구글 상세페이지
         { path: ':id/management', element: <ManagementPage /> }, // 공구글 관리페이지 , 추후 loader 추가 또는 private router씌우기
-        { path: ':id/password', element: <PasswordPage /> },
+        { path: ':id?/password', element: <PasswordPage /> },
         { path: 'create', element: <CreatePage /> }, // 공구글 작성페이지
         // 비밀번호를 작성하는 페이지를 라우터로 관리해야할까? 상태관리는?
       ],

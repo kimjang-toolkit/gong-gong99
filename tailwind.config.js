@@ -52,6 +52,9 @@ export default {
         '.text-h2': {
           '@apply text-[20px] font-medium leading-7': '',
         },
+        '.text-h2-bold': {
+          '@apply text-[20px] font-bold leading-7': '',
+        },
         '.text-h3-bold': {
           '@apply text-[18px] font-bold leading-normal': '',
         },
