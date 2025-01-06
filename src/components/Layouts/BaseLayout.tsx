@@ -2,7 +2,7 @@ import ModalProvider from '@/providers/modalProvider';
 
 const BaseLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex justify-center w-full mx-auto h-svh bg-[#F4F4F5]">
+    <div className="flex justify-center w-full mx-auto h-svh  bg-[#F4F4F5]">
       <aside className="hidden p-6 text-gray-700 lg:flex lg:items-center">
         <div className="max-w-96">
           <div>image</div>

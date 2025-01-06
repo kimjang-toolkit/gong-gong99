@@ -78,7 +78,7 @@ function CreatePage() {
           ref={formRef}
           onBlur={handleFormBlur}
           onSubmit={handleSubmit}
-          className="flex flex-col h-full gap-4"
+          className="flex flex-col gap-4"
         >
           {/* 1.상품 기본정보 폼 */}
           <CommonForm />
