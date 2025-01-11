@@ -10,12 +10,15 @@ import {
   CobuyingFormData,
   FormContext,
 } from '@/pages/co-buying/create/formContext';
+import { useNavigate } from 'react-router-dom';
 
 function CreatePage() {
+  const navigate = useNavigate();
+
   const [devideType, setDevideType] = useState<'quantity' | 'person'>(
     'quantity'
   );
-  const [submitDisabled, setSubmitDisabled] = useState(true);
+  const [nextDisabled, setNextDisabled] = useState(true);
 
   // 폼 데이터
   const [formData, setFormData] = useState<CobuyingFormData>();
@@ -31,9 +34,9 @@ function CreatePage() {
     [devideType, formData]
   );
 
-  // 폼제출 핸들러
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // 다음 버튼 핸들러
+  const handleNextClick = () => {
+    navigate('/co-buying/password', { state: { formData } });
   };
 
   // 폼 버튼 비활성화를 위한 유효성 실시간 검사
@@ -51,7 +54,7 @@ function CreatePage() {
         return true;
       });
 
-      setSubmitDisabled(!allInputsValid);
+      setNextDisabled(!allInputsValid);
     }
   }, [formData, devideType]);
 
@@ -77,7 +80,7 @@ function CreatePage() {
         <form
           ref={formRef}
           onBlur={handleFormBlur}
-          onSubmit={handleSubmit}
+          onSubmit={handleNextClick}
           className="flex flex-col gap-4"
         >
           {/* 1.상품 기본정보 폼 */}
@@ -107,10 +110,10 @@ function CreatePage() {
         </form>
       </FormContext.Provider>
       <BottomButton
-        type="submit"
+        type="button"
         label="다음"
-        onClick={() => {}}
-        disabled={submitDisabled}
+        onClick={handleNextClick}
+        disabled={nextDisabled}
       />
     </DefaultLayout>
   );

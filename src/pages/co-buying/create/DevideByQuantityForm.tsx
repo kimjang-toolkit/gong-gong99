@@ -1,4 +1,4 @@
-import BoarderedInput from '@/components/Input/BoarderedInput';
+import Input from '@/components/Input/index';
 import { useContext, useEffect } from 'react';
 import { formatNumberWithCommas } from '@/util/formatNumberWithCommas';
 import { FormContext } from '@/pages/co-buying/create/formContext';
@@ -20,7 +20,7 @@ export default function DevideByQuantityForm() {
 
   return (
     <>
-      <BoarderedInput
+      <Input
         id="totalQuantity"
         name="totalQuantity"
         label="상품 총 수량"
@@ -28,7 +28,7 @@ export default function DevideByQuantityForm() {
         type="number"
         required
       />
-      <BoarderedInput
+      <Input
         id="ownerQuantity"
         name="ownerQuantity"
         label="내 구매 수량"

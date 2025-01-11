@@ -1,18 +1,18 @@
-import BoarderedInput from '@/components/Input/BoarderedInput';
+import Input from '@/components/Input/index';
 
 function CommonForm() {
   return (
     <>
-      <BoarderedInput
+      <Input
         id="productName"
         name="productName"
         label="상품 이름"
         placeholder="상품 이름을 입력해주세요. (5~100자)"
         pattern={'^[a-zA-Z0-9가-힣\\s]{5,100}$'}
         required
-        patternErrorMessage="상품 이름은 5~100자의 한글, 영문, 숫자만 입력 가능합니다"
+        patternErrorMessage="5~100자의 한글, 영문, 숫자만 입력 가능합니다"
       />
-      <BoarderedInput
+      <Input
         id="totalPrice"
         name="totalPrice"
         label="상품 총액"
@@ -20,7 +20,7 @@ function CommonForm() {
         type="number"
         required
       />
-      <BoarderedInput
+      <Input
         id="productLink"
         name="productLink"
         label="상품 링크 (선택)"
@@ -28,7 +28,7 @@ function CommonForm() {
         type="url"
       />
       {/* 추후 모바일용 날짜 인풋 컴포넌트 만들기 */}
-      <BoarderedInput
+      <Input
         id="deadline"
         name="deadline"
         label="신청 마감일"

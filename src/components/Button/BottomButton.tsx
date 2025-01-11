@@ -1,7 +1,7 @@
 interface BottomButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function BottomButton({ label, onClick, ...props }: BottomButtonProps) {

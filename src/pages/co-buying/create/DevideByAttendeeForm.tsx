@@ -1,9 +1,10 @@
-import BoarderedInput from '@/components/Input/BoarderedInput';
+import Input from '@/components/Input/index';
+
 
 export default function DevideByAttendeeForm() {
   return (
     <>
-      <BoarderedInput
+      <Input
         id="totalQuantity"
         name="totalQuantity"
         label="상품 총 수량"
@@ -11,7 +12,7 @@ export default function DevideByAttendeeForm() {
         required
         defaultValue={0}
       />
-      <BoarderedInput
+      <Input
         id="recruitmentNumbers"
         name="recruitmentNumbers"
         label="모집인원"
