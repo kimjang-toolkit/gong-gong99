@@ -1,17 +1,16 @@
 import BottomButton from '@/components/Button/BottomButton';
 import TitleHeader from '@/components/Header/TitleHeader';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
+import useFormValidation from '@/hooks/useFormButtonValidation';
 import CheckForm from '@/pages/co-buying/password/CheckForm';
 import CreateForm from '@/pages/co-buying/password/CreateForm';
-import { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 const createFormText = ['공구글 게시를 위해', '기본정보', '공구 열기'];
 const checkFormText = ['공구글 관리를 위해', '비밀번호', '다음'];
 
 export default function PasswordPage() {
-  const [submitDisabled, setSubmitDisabled] = useState(true);
-  const formRef = useRef<HTMLFormElement>(null);
+  const { formRef, isDisabled } = useFormValidation();
 
   // pathparam으로 id가져오기
   const { id } = useParams();
@@ -33,21 +32,6 @@ export default function PasswordPage() {
       console.log(data);
     }
   };
-
-  // 폼 유효성검사에 따라 버튼 활성화
-  useEffect(() => {
-    const form = formRef.current;
-    if (form) {
-      const handleFormChange = () => {
-        setSubmitDisabled(!form.checkValidity());
-      };
-
-      form.addEventListener('input', handleFormChange);
-      return () => {
-        form.removeEventListener('input', handleFormChange);
-      };
-    }
-  }, [formRef]);
 
   return (
     <DefaultLayout>
@@ -76,7 +60,7 @@ export default function PasswordPage() {
       <BottomButton
         type="submit"
         label={isCreateMode ? createFormText[2] : checkFormText[2]}
-        disabled={submitDisabled}
+        disabled={isDisabled}
       />
     </DefaultLayout>
   );

@@ -34,7 +34,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   );
 
   const defaultHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('Input value:');
     const value = e.target.value;
     if (value === '' || (pattern && new RegExp(pattern).test(value))) {
       setInputError(undefined);
