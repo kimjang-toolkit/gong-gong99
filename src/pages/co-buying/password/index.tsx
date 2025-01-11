@@ -20,9 +20,13 @@ export default function PasswordPage() {
   const location = useLocation();
   const formData = location.state?.formData || {}; // 이전 페이지(폼)에서 받아온 데이터
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    const formEntries = new FormData(e.currentTarget);
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!formRef.current) return;
+
+    const formEntries = new FormData(formRef.current);
     const data = Object.fromEntries(formEntries);
+
     // 비밀번호 생성페이지
     if (isCreateMode) {
       console.log({ ...formData, ...data });
@@ -48,17 +52,14 @@ export default function PasswordPage() {
             <p className="text-h2">를 입력해주세요.</p>
           </div>
         </section>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-4 mt-3"
-          ref={formRef}
-        >
+        <form className="flex flex-col gap-4 mt-3" ref={formRef}>
           {isCreateMode ? <CreateForm /> : <CheckForm />}
         </form>
       </>
 
       <BottomButton
-        type="submit"
+        type="button"
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
         label={isCreateMode ? createFormText[2] : checkFormText[2]}
         disabled={isDisabled}
       />
