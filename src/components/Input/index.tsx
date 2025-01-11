@@ -29,9 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   ref
 ) {
   const [inputError, setInputError] = useState<string | undefined>(undefined);
-  const [inputValue, setInputValue] = useState<string | number | null>(
-    defaultValue ?? null
-  );
+  const [inputValue, setInputValue] = useState(defaultValue ?? null);
 
   const defaultHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -87,6 +85,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           className={cn('text-body text-black focus:outline-none')}
           onChange={defaultHandleChange}
           onBlur={handleBlur}
+          value={inputValue || ''}
           {...props}
         />
       </div>

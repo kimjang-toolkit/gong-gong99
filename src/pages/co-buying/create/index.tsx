@@ -17,7 +17,8 @@ function CreatePage() {
   const { setFormData, devideType } = useFormStore();
 
   // 다음 버튼 핸들러
-  const handleNextClick = () => {
+  const handleNextClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     navigate('/co-buying/password');
   };
 
@@ -35,7 +36,6 @@ function CreatePage() {
       <form
         ref={formRef}
         onBlur={handleFormBlur}
-        onSubmit={handleNextClick}
         className="flex flex-col gap-4"
       >
         {/* 1.상품 기본정보 폼 */}
@@ -64,7 +64,7 @@ function CreatePage() {
       <BottomButton
         type="button"
         label="다음"
-        onClick={handleNextClick}
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleNextClick(e)}
         disabled={isDisabled}
       />
     </DefaultLayout>

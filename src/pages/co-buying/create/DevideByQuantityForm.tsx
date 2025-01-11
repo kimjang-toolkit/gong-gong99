@@ -25,6 +25,7 @@ export default function DevideByQuantityForm() {
         placeholder="공구할 상품 수량을 입력해주세요."
         type="number"
         required
+        defaultValue={totalQuantity}
       />
       <Input
         id="ownerQuantity"
@@ -33,7 +34,7 @@ export default function DevideByQuantityForm() {
         placeholder="내가 구매할 상품 수량을 입력해주세요."
         type="number"
         required
-        defaultValue={0}
+        defaultValue={ownerQuantity}
       />
       <section className="flex items-center py-3 text-center rounded-lg shadow-sm justify-evenly bg-zinc-50 ">
         <div className="flex flex-col gap-2.5 min-w-[90px]">

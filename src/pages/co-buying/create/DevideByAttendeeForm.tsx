@@ -1,7 +1,9 @@
 import Input from '@/components/Input/index';
-
+import useFormStore from '@/stores/coBuyingFormStore';
 
 export default function DevideByAttendeeForm() {
+  const { formData } = useFormStore();
+  const { totalQuantity, recruitmentNumbers } = formData;
   return (
     <>
       <Input
@@ -10,7 +12,7 @@ export default function DevideByAttendeeForm() {
         label="상품 총 수량"
         type="number"
         required
-        defaultValue={0}
+        defaultValue={totalQuantity}
       />
       <Input
         id="recruitmentNumbers"
@@ -18,7 +20,7 @@ export default function DevideByAttendeeForm() {
         label="모집인원"
         type="number"
         required
-        defaultValue={0}
+        defaultValue={recruitmentNumbers}
       />
       <section className="flex items-center w-full gap-2">
         <div className="flex justify-between px-4 py-3 rounded-lg shadow-sm items-justify min-w-[130px] flex-1 bg-zinc-50">
