@@ -4,12 +4,15 @@ import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import useFormValidation from '@/hooks/useFormButtonValidation';
 import CheckForm from '@/pages/co-buying/password/CheckForm';
 import CreateForm from '@/pages/co-buying/password/CreateForm';
-import { useLocation, useParams } from 'react-router-dom';
+import useFormStore from '@/stores/coBuyingFormStore';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const createFormText = ['공구글 게시를 위해', '기본정보', '공구 열기'];
 const checkFormText = ['공구글 관리를 위해', '비밀번호', '다음'];
 
 export default function PasswordPage() {
+  const { formData } = useFormStore();
   const { formRef, isDisabled } = useFormValidation();
 
   // pathparam으로 id가져오기
@@ -17,10 +20,7 @@ export default function PasswordPage() {
   //id가 없다면 공구글 생성을 위한 비밀번호 입력페이지
   const isCreateMode = !id;
 
-  const location = useLocation();
-  const formData = location.state?.formData || {}; // 이전 페이지(폼)에서 받아온 데이터
-
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (!formRef.current) return;
 
@@ -30,6 +30,11 @@ export default function PasswordPage() {
     // 비밀번호 생성페이지
     if (isCreateMode) {
       console.log({ ...formData, ...data });
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_SERVER_URL}co-buying`,
+        { ...formData, ...data }
+      );
+      console.log(response);
     }
     // 비밀번호 확인페이지
     else {

@@ -1,9 +1,8 @@
 import { cn } from '@/lib/utils';
-import { FormContext } from '@/pages/co-buying/create/formContext';
-import { useContext } from 'react';
+import useFormStore from '@/stores/coBuyingFormStore';
 
 export default function DevideTypeSection() {
-  const { devideType, setDevideType } = useContext(FormContext);
+  const { devideType, setDevideType } = useFormStore();
 
   // 공구방식 선택에 따른 CSS
   const selectedTypeClass = 'bg-primary-300 text-white';

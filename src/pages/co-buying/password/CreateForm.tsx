@@ -24,7 +24,6 @@ export default function CreateForm() {
         handleChange={(e) => setPassword(e.target.value)}
       />
       <Input
-        name="pwdCheck"
         type="password"
         label="비밀번호 확인"
         variant="underlined"

@@ -1,18 +1,16 @@
 import Input from '@/components/Input/index';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { formatNumberWithCommas } from '@/util/formatNumberWithCommas';
-import { FormContext } from '@/pages/co-buying/create/formContext';
+import useFormStore from '@/stores/coBuyingFormStore';
 
 export default function DevideByQuantityForm() {
-  const { formData, setFormData } = useContext(FormContext);
-
+  const { formData, setFormData } = useFormStore();
   const { totalPrice, totalQuantity, ownerQuantity } = formData;
 
   useEffect(() => {
     if (totalQuantity && totalPrice) {
       const unitPrice = totalPrice / totalQuantity;
       setFormData({
-        ...formData,
         unitPrice,
       });
     }
