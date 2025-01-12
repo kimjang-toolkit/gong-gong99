@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const {nextui} = require("@nextui-org/react");
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}',
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -44,8 +41,6 @@ export default {
   },
   darkMode: 'class',
   plugins: [
-    nextui()
-    ,
     ({ addUtilities }) => {
       addUtilities({
         '.default-box': {
@@ -57,14 +52,23 @@ export default {
         '.text-h2': {
           '@apply text-[20px] font-medium leading-7': '',
         },
+        '.text-h2-bold': {
+          '@apply text-[20px] font-bold leading-7': '',
+        },
         '.text-h3-bold': {
           '@apply text-[18px] font-bold leading-normal': '',
         },
         '.text-body': {
           '@apply text-[16px] font-normal leading-normal': '',
         },
+        '.text-body-bold': {
+          '@apply text-[16px] font-semibold leading-normal': '',
+        },
         '.text-caption': {
-          '@apply text-[14px] font-normal leading-normal': '',
+          '@apply text-[14px] font-medium leading-normal': '',
+        },
+        '.text-tiny': {
+          '@apply text-[12px] font-normal leading-normal': '',
         },
       });
     },
