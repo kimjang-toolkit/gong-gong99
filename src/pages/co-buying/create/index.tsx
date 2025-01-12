@@ -1,25 +1,25 @@
-import BottomButton from '@/components/Button/BottomButton';
-import TitleHeader from '@/components/Header/TitleHeader';
-import DefaultLayout from '@/components/Layouts/DefaultLayout';
-import CommonForm from '@/pages/co-buying/create/CommonForm';
-import DevideByQuantityForm from '@/pages/co-buying/create/DevideByQuantityForm';
-import DevideByAttendeeForm from '@/pages/co-buying/create/DevideByAttendeeForm';
-import DevideTypeSection from '@/pages/co-buying/create/DevideTypeSection';
+import BottomButton from "@/components/Button/BottomButton";
+import TitleHeader from "@/components/Header/TitleHeader";
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import CommonForm from "@/pages/co-buying/create/CommonForm";
+import DevideByQuantityForm from "@/pages/co-buying/create/DevideByQuantityForm";
+import DevideByAttendeeForm from "@/pages/co-buying/create/DevideByAttendeeForm";
+import DevideTypeSection from "@/pages/co-buying/create/DevideTypeSection";
 
-import { useNavigate } from 'react-router-dom';
-import useFormValidation from '@/hooks/useFormButtonValidation';
-import useFormStore from '@/stores/coBuyingFormStore';
+import { useNavigate } from "react-router-dom";
+import useFormValidation from "@/hooks/useFormButtonValidation";
+import useFormStore from "@/stores/coBuyingFormStore";
 
 function CreatePage() {
   const navigate = useNavigate();
 
   const { formRef, isDisabled } = useFormValidation();
-  const { setFormData, devideType } = useFormStore();
+  const { setFormData, type } = useFormStore();
 
   // 다음 버튼 핸들러
   const handleNextClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    navigate('/co-buying/password');
+    navigate("/co-buying/password");
   };
 
   const handleFormBlur = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,8 +45,8 @@ function CreatePage() {
         <DevideTypeSection />
 
         {/* 3. 공구 나눔방식 선택에 따라 수량으로 나누기 폼/ 인원으로 나누기 폼 */}
-        {devideType === 'quantity' && <DevideByQuantityForm />}
-        {devideType === 'person' && <DevideByAttendeeForm />}
+        {type === "quantity" && <DevideByQuantityForm />}
+        {type === "person" && <DevideByAttendeeForm />}
 
         {/* 4. 알리는 말 */}
         <section className="flex flex-col gap-2">

@@ -1,21 +1,21 @@
-import { cn } from '@/lib/utils';
-import useFormStore from '@/stores/coBuyingFormStore';
+import { cn } from "@/lib/utils";
+import useFormStore from "@/stores/coBuyingFormStore";
 
 export default function DevideTypeSection() {
-  const { devideType, setDevideType } = useFormStore();
+  const { type, setType } = useFormStore();
 
   // 공구방식 선택에 따른 CSS
-  const selectedTypeClass = 'bg-primary-300 text-white';
-  const unselectedTypeClass = 'bg-default-300 text-default-600';
+  const selectedTypeClass = "bg-primary-300 text-white";
+  const unselectedTypeClass = "bg-default-300 text-default-600";
 
   const devideTypeDescription = {
-    quantity: '참여자들이 필요한 수량만큼 선택할 수 있도록 해요.',
-    person: '참여인원 수대로 금액 및 상품수량을 균등하게 나눠요.',
+    quantity: "참여자들이 필요한 수량만큼 선택할 수 있도록 해요.",
+    person: "참여인원 수대로 금액 및 상품수량을 균등하게 나눠요.",
   };
 
   const handleDevideTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setDevideType(e.currentTarget.id as 'quantity' | 'person');
+    setType(e.currentTarget.id as "quantity" | "person");
   };
   return (
     <section>
@@ -24,8 +24,8 @@ export default function DevideTypeSection() {
         <button
           id="quantity"
           className={cn(
-            'text-center text-body rounded-lg h-[62px] flex-1 shadow-sm',
-            devideType === 'quantity' ? selectedTypeClass : unselectedTypeClass
+            "text-center text-body rounded-lg h-[62px] flex-1 shadow-sm",
+            type === "quantity" ? selectedTypeClass : unselectedTypeClass
           )}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
             handleDevideTypeChange(e)
@@ -36,8 +36,8 @@ export default function DevideTypeSection() {
         <button
           id="person"
           className={cn(
-            'text-center  text-body rounded-lg h-[62px] flex-1 shadow-sm',
-            devideType === 'person' ? selectedTypeClass : unselectedTypeClass
+            "text-center  text-body rounded-lg h-[62px] flex-1 shadow-sm",
+            type === "person" ? selectedTypeClass : unselectedTypeClass
           )}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
             handleDevideTypeChange(e)
@@ -47,7 +47,7 @@ export default function DevideTypeSection() {
         </button>
       </div>
       <p className="mt-1 text-tiny text-default-500">
-        * {devideTypeDescription[devideType]}
+        * {devideTypeDescription[type]}
       </p>
     </section>
   );
