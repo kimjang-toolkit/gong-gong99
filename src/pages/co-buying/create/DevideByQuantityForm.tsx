@@ -1,20 +1,15 @@
-import Input from '@/components/Input/index';
-import { useEffect } from 'react';
-import { formatNumberWithCommas } from '@/util/formatNumberWithCommas';
-import useFormStore from '@/stores/coBuyingFormStore';
+import Input from "@/components/Input/index";
+import { formatNumberWithCommas } from "@/util/formatNumberWithCommas";
+import useFormStore from "@/stores/coBuyingFormStore";
 
 export default function DevideByQuantityForm() {
-  const { formData, setFormData } = useFormStore();
+  const { formData } = useFormStore();
   const { totalPrice, totalQuantity, ownerQuantity } = formData;
 
-  useEffect(() => {
-    if (totalQuantity && totalPrice) {
-      const unitPrice = totalPrice / totalQuantity;
-      setFormData({
-        unitPrice,
-      });
-    }
-  }, [totalPrice, totalQuantity]);
+  let unitPrice;
+  if (totalPrice && totalQuantity) {
+    unitPrice = totalPrice / totalQuantity;
+  }
 
   return (
     <>
@@ -41,9 +36,9 @@ export default function DevideByQuantityForm() {
           {/* 내구매량 * 상품 총액 / 상품 총 수량 */}
           <p className="text-tiny text-default-600">내 부담액</p>
           <p className="text-tiny text-primary-600">
-            {ownerQuantity && formData.unitPrice
-              ? formatNumberWithCommas(formData.unitPrice * ownerQuantity)
-              : '-'}
+            {ownerQuantity && unitPrice
+              ? formatNumberWithCommas(unitPrice * ownerQuantity)
+              : "-"}
           </p>
         </div>
         <p className="text-tiny text-default-400">+</p>
@@ -53,11 +48,9 @@ export default function DevideByQuantityForm() {
             신청자 총 부담액
           </p>
           <p className="text-tiny text-primary-600">
-            {totalPrice && formData.unitPrice && ownerQuantity
-              ? formatNumberWithCommas(
-                  totalPrice - formData.unitPrice * ownerQuantity
-                )
-              : '-'}
+            {totalPrice && unitPrice && ownerQuantity
+              ? formatNumberWithCommas(totalPrice - unitPrice * ownerQuantity)
+              : "-"}
           </p>
         </div>
         <p className="text-tiny text-default-400">=</p>
@@ -65,7 +58,7 @@ export default function DevideByQuantityForm() {
           {/* 상품총액  */}
           <p className="text-tiny text-default-600 min-w-[100px]">상품 총액</p>
           <p className="text-tiny text-default-600">
-            {totalPrice ? formatNumberWithCommas(totalPrice) : '-'} 원
+            {totalPrice ? formatNumberWithCommas(totalPrice) : "-"} 원
           </p>
         </div>
       </section>
