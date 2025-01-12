@@ -1,5 +1,5 @@
-import ArrowLeft from '@/assets/icons/arrow-left.svg?react';
-import { useNavigate } from 'react-router-dom';
+import ArrowLeft from "@/assets/icons/arrow-left.svg?react";
+import { useNavigate } from "react-router-dom";
 
 interface TitleHeaderProps {
   title?: string;

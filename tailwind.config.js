@@ -73,6 +73,9 @@ export default {
         ".text-tiny": {
           "@apply text-[12px] font-normal leading-normal": "",
         },
+        ".text-tiny-bold": {
+          "@apply text-[12px] font-bold leading-normal": "",
+        },
       });
     },
   ],
