@@ -8,11 +8,9 @@ export interface CobuyingFormData {
   deadline?: string;
   type?: "quantity" | "person";
   totalQuantity?: number;
-  recruitmentNumbers?: number;
-  attendeeQuantity?: number;
   ownerQuantity?: number;
-  attendeePrice?: number;
-  unitPrice?: number;
+  recruitmentNumbers?: number; //모집인원수
+
   ownerName?: string;
   ownerPwd?: string;
 }
