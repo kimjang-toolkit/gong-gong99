@@ -1,18 +1,16 @@
-import { createStore } from 'zustand/vanilla';
-import { useStore } from 'zustand';
+import { createStore } from "zustand/vanilla";
+import { useStore } from "zustand";
 
 export interface CobuyingFormData {
   productName?: string;
   totalPrice?: number;
   productLink?: string;
   deadline?: string;
-  devideType?: 'quantity' | 'person';
+  type?: "quantity" | "person";
   totalQuantity?: number;
-  recruitmentNumbers?: number;
-  attendeeQuantity?: number;
   ownerQuantity?: number;
-  attendeePrice?: number;
-  unitPrice?: number;
+  recruitmentNumbers?: number; //모집인원수
+
   ownerName?: string;
   ownerPwd?: string;
 }
@@ -20,28 +18,28 @@ export interface CobuyingFormData {
 interface FormStore {
   formData: CobuyingFormData;
   setFormData: (formData: Partial<CobuyingFormData>) => void;
-  devideType: 'quantity' | 'person';
-  setDevideType: (devideType: 'quantity' | 'person') => void;
+  type: "quantity" | "person";
+  setType: (type: "quantity" | "person") => void;
 }
 
 const formStore = createStore<FormStore>((set) => ({
   formData: {
-    productName: '',
+    productName: "",
     totalPrice: 0,
-    productLink: '',
-    deadline: '',
-    devideType: 'quantity',
+    productLink: "",
+    deadline: "",
+    type: "quantity",
     totalQuantity: 0,
     recruitmentNumbers: 0,
-    ownerName: '',
-    ownerPwd: '',
+    ownerName: "",
+    ownerPwd: "",
   },
   setFormData: (newData) =>
     set((state) => ({
       formData: { ...state.formData, ...newData },
     })),
-  devideType: 'quantity',
-  setDevideType: (newType) => set({ devideType: newType }),
+  type: "quantity",
+  setType: (newType) => set({ type: newType }),
 }));
 
 const useFormStore = () => useStore(formStore);
