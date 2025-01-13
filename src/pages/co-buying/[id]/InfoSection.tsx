@@ -1,14 +1,14 @@
-import LinkIcon from "@/assets/icons/link.svg?react";
-import ShareIcon from "@/assets/icons/share.svg?react";
+import LinkIcon from '@/assets/icons/link.svg?react';
+import ShareIcon from '@/assets/icons/share.svg?react';
 
 export default function InfoSection() {
-  const type = "quantity";
+  const type = 'quantity';
   return (
     <>
-      <section className="w-full relative flex flex-col border-b-[0.5px] border-zinc-100 pb-3">
+      <section className="w-full relative flex flex-col border-b-[0.5px] border-zinc-100 pb-3 mb-3">
         <p className="text-tiny text-default-600">김철수</p>
         <div className="flex items-center gap-1">
-          <p className="text-body-bold text-black">스파게티 3묶음</p>
+          <p className="text-black text-body-bold">스파게티 3묶음</p>
           <LinkIcon />
         </div>
         <div className="mt-1">
@@ -41,9 +41,11 @@ export default function InfoSection() {
           </div>
         </div>
       </section>
-      <p className="text-tiny-bold mb-1.5">알리는 말</p>
+      <p className="text-tiny-bold mb-1.5">안내 메시지</p>
       <section>
-        <div className="rounded-lg bg-zinc-50  p-2.5">알리는말 예시 </div>
+        <div className="rounded-lg text-caption bg-zinc-50  p-2.5">
+          알리는말 예시
+        </div>
       </section>
     </>
   );
