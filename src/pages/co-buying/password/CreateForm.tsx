@@ -7,6 +7,7 @@ export default function CreateForm() {
     <>
       <Input
         label="이름"
+        type="text"
         name="ownerName"
         variant="underlined"
         pattern={'^[a-zA-Z0-9가-힣\\s]{2,8}$'}
