@@ -14,7 +14,7 @@ export default function DetailPage() {
         }
         onBackPress={() => navigate('co-buying/create')}
       />
-      <InfoSection />
+      <InfoSection type="person" />
       <BottomButton label="신청하기" />
     </DefaultLayout>
   );

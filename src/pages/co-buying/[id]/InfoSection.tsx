@@ -1,8 +1,11 @@
 import LinkIcon from '@/assets/icons/link.svg?react';
 import ShareIcon from '@/assets/icons/share.svg?react';
 
-export default function InfoSection() {
-  const type = 'quantity';
+interface InfoSectionProps {
+  type: 'quantity' | 'person';
+}
+
+export default function InfoSection({ type }: InfoSectionProps) {
   return (
     <>
       <section className="w-full relative flex flex-col border-b-[0.5px] border-zinc-100 pb-3 mb-3">
@@ -36,9 +39,17 @@ export default function InfoSection() {
             <p className="text-caption">30개</p>
           </div>
           <div className="flex justify-between">
-            <p className="text-caption">남은 수량</p>
+            <p className="text-caption">
+              {type === 'person' ? '인 당 구매량' : '남은 수량'}
+            </p>
             <p className="text-caption text-primary-400">10개</p>
           </div>
+          {type === 'person' && (
+            <div className="flex justify-between">
+              <p className="text-caption">모집 인원</p>
+              <p className="text-caption text-primary-400">8 / 10 명</p>
+            </div>
+          )}
         </div>
       </section>
       <p className="text-tiny-bold mb-1.5">안내 메시지</p>
