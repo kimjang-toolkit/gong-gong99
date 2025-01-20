@@ -56,7 +56,7 @@ export default {
           "@apply text-[20px] font-bold leading-7": "",
         },
         ".text-h3-bold": {
-          "@apply text-[18px] font-bold leading-normal": "",
+          "@apply text-[18px] font-semibold leading-normal": "",
         },
         ".text-body": {
           "@apply text-[16px] font-normal leading-normal": "",
