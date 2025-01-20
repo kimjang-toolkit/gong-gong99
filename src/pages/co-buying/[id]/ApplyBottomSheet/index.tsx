@@ -1,5 +1,6 @@
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import useOutsideClick from '@/hooks/useOutsideClick';
 import { Sheet } from 'react-modal-sheet';
 
 interface ApplyBottomSheetProps {
@@ -13,13 +14,17 @@ export default function ApplyBottomSheet({
   isOpen,
   setIsOpen,
 }: ApplyBottomSheetProps) {
+
+  const sheetRef= useOutsideClick(()=>{setIsOpen(false)})
+
   return (
     <Sheet
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       detent="content-height"
+      disableScrollLocking={true}
     >
-      <Sheet.Container>
+      <Sheet.Container ref={sheetRef}>
         <Sheet.Header />
         <Sheet.Content>
           <form className="px-4 mb-5">
