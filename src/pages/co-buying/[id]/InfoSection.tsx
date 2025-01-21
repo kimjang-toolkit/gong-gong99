@@ -1,11 +1,13 @@
 import LinkIcon from '@/assets/icons/link.svg?react';
 import ShareIcon from '@/assets/icons/share.svg?react';
+import useWebShare from '@/hooks/useWebShare';
 
 interface InfoSectionProps {
   type: 'quantity' | 'person';
 }
 
 export default function InfoSection({ type }: InfoSectionProps) {
+  const { share } = useWebShare();
   return (
     <>
       <section className="relative flex flex-col w-full pb-3 mb-4">
@@ -19,7 +21,9 @@ export default function InfoSection({ type }: InfoSectionProps) {
             11/25(월) 오후 7시 마감
           </p>
         </div>
-        <ShareIcon className="absolute right-0" />
+        <button className="absolute right-0" onClick={() => share()}>
+          <ShareIcon />
+        </button>
       </section>
 
       <p className="text-caption text-default-600 mb-1.5">기본정보</p>
