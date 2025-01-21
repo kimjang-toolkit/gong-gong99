@@ -6,12 +6,14 @@ import CheckForm from '@/pages/co-buying/password/CheckForm';
 import CreateForm from '@/pages/co-buying/password/CreateForm';
 import useFormStore from '@/stores/coBuyingFormStore';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const createFormText = ['공구글 게시를 위해', '기본정보', '공구 열기'];
 const checkFormText = ['공구글 관리를 위해', '비밀번호', '다음'];
 
 export default function PasswordPage() {
+  const navigate = useNavigate();
+
   const { formData } = useFormStore();
   const { formRef, isDisabled } = useFormValidation();
 
@@ -38,6 +40,8 @@ export default function PasswordPage() {
     // 비밀번호 확인페이지
     else {
       console.log(data);
+      //비밀번호 확인로직
+      navigate(`/co-buying/${id}/management`);
     }
   };
 
