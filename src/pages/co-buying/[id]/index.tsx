@@ -4,17 +4,28 @@ import DefaultLayout from '@/components/Layouts/DefaultLayout';
 import ApplyBottomSheet from '@/pages/co-buying/[id]/ApplyBottomSheet';
 import InfoSection from '@/pages/co-buying/[id]/InfoSection';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function DetailPage() {
   const navigate = useNavigate();
+  // const { id } = useParams();
   const [isApplyingFormOpen, setIsApplyingFormOpen] = useState(false);
+
+  const handleManageButton = () => {
+    // 관리하기 비밀번호 페이지
+    navigate('password');
+  };
   return (
     <>
       <DefaultLayout>
         <RightButtonHeader
           rightElement={
-            <p className="text-caption-bold text-primary-400">관리하기</p>
+            <button
+              className="text-caption-bold text-primary-400"
+              onClick={handleManageButton}
+            >
+              관리하기
+            </button>
           }
           onBackPress={() => navigate('co-buying/create')}
         />
