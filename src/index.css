@@ -9,7 +9,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: #262626;
   background-color: #f4f4f5;
 
   font-synthesis: none;
@@ -104,4 +104,11 @@ input:-webkit-autofill:active {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+}
+
+.react-modal-sheet-container {
+  /* custom styles */
+  border-top-left-radius: 16px !important;
+  border-top-right-radius: 16px !important;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 16px !important;
 }

@@ -16,5 +16,5 @@ export default function useOutsideClick(
     };
   }, [callback]);
 
-  return ref;
+  return ref as React.RefObject<HTMLDivElement>;
 }

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { InputHTMLAttributes, useState, forwardRef } from 'react';
+import { InputHTMLAttributes, useState, forwardRef, useEffect } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -31,21 +31,21 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const [inputError, setInputError] = useState<string | undefined>(undefined);
   const [inputValue, setInputValue] = useState(defaultValue ?? null);
 
+  useEffect(() => {
+    console.log('inputValue', inputValue);
+  }, [inputValue]);
   const defaultHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    setInputValue(() => value);
     if (value === '' || (pattern && new RegExp(pattern).test(value))) {
       setInputError(undefined);
     }
-    setInputValue(value);
-
     if (handleChange) {
       handleChange(e);
     }
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    console.log('Input validity:', e.target.validity);
-
+  const handleBlur = () => {
     if (
       required &&
       (inputValue === null || inputValue === undefined || inputValue === '')
