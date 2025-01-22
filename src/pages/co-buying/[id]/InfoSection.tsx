@@ -10,7 +10,7 @@ export default function InfoSection({ type }: InfoSectionProps) {
   const { share } = useWebShare();
   return (
     <>
-      <section className="relative flex flex-col w-full pb-3 mb-4">
+      <section className="relative flex flex-col w-full pb-3 mb-4 ">
         <p className="text-caption text-default-500">김철수</p>
         <div className="flex items-center gap-1">
           <p className="text-black text-h3-bold">스파게티 3묶음</p>
@@ -21,7 +21,10 @@ export default function InfoSection({ type }: InfoSectionProps) {
             11/25(월) 오후 7시 마감
           </p>
         </div>
-        <button className="absolute right-0" onClick={() => share()}>
+        <button
+          className="absolute right-0"
+          onClick={() => share('00상품 공구해요', '저렴하고 맛있는 스파게티')}
+        >
           <ShareIcon />
         </button>
       </section>
