@@ -21,6 +21,13 @@ export default function AttendeeBottomSheet({
     setIsOpen(false);
   });
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('submit');
+    setIsOpen(false);
+    // mutate 시, 캐시 업데이트를 해주어서 새로고침 없이 데이터를 바꾸도록 처리
+  };
+
   return (
     <Sheet
       isOpen={isOpen}
@@ -31,7 +38,7 @@ export default function AttendeeBottomSheet({
       <Sheet.Container ref={sheetRef}>
         <Sheet.Header />
         <Sheet.Content>
-          <form className="px-4 mb-5">
+          <form className="px-4 mb-5" onSubmit={handleSubmit}>
             <header className="w-full mb-5 text-left text-body-bold">
               공구 신청
             </header>
@@ -55,10 +62,10 @@ export default function AttendeeBottomSheet({
             </section>
             <section className="flex justify-end w-full">
               <Button
+                type="submit"
                 className=""
                 label="신청하기"
                 size="small"
-                onClick={() => {}}
               />
             </section>
           </form>
