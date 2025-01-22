@@ -1,21 +1,29 @@
 import Button from '@/components/Button';
+import StepperButton from '@/components/Button/StepperButton';
 import Input from '@/components/Input';
 import useOutsideClick from '@/hooks/useOutsideClick';
+import { useState } from 'react';
 import { Sheet } from 'react-modal-sheet';
 
 interface ApplyBottomSheetProps {
-  type: 'attendee' | 'quantity';
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  data: {
+    remainQuantity: number; // 남은 수량
+    unitPrice: number; // 단가
+  };
 }
 
-export default function ApplyBottomSheet({
-  type,
+export default function QuantityBottomSheet({
   isOpen,
   setIsOpen,
+  data,
 }: ApplyBottomSheetProps) {
+  const sheetRef = useOutsideClick(() => {
+    setIsOpen(false);
+  });
 
-  const sheetRef= useOutsideClick(()=>{setIsOpen(false)})
+  const [quantity, setQuantity] = useState(1); // 구매 수량
 
   return (
     <Sheet
@@ -38,9 +46,16 @@ export default function ApplyBottomSheet({
               variant="bordered"
             />
             <section className="flex justify-between p-4 mt-4 mb-5 border rounded-xl border-default-200">
-              <div> 바뀔곳</div>
-              <div className="">
-                <p className="text-tiny text-default-700">총 금액</p>
+              <div className="flex flex-col">
+                <p className="mb-1 text-tiny text-default-700">구매 수량</p>
+                <StepperButton
+                  maxValue={data.remainQuantity}
+                  value={quantity}
+                  onChange={setQuantity}
+                />
+              </div>
+              <div className="flex flex-col items-end">
+                <p className="mb-1 text-tiny text-default-700">총 금액</p>
                 <p className="text-body-bold text-primary-400">9,000원</p>
               </div>
             </section>
@@ -55,6 +70,7 @@ export default function ApplyBottomSheet({
           </form>
         </Sheet.Content>
       </Sheet.Container>
+      <Sheet.Backdrop />
     </Sheet>
   );
 }

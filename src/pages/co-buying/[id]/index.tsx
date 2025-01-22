@@ -1,7 +1,8 @@
 import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
-import ApplyBottomSheet from '@/pages/co-buying/[id]/ApplyBottomSheet';
+import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBottomSheet';
+import QuantityBottomSheet from '@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet';
 import InfoSection from '@/pages/co-buying/[id]/InfoSection';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -15,6 +16,8 @@ export default function DetailPage() {
     // 관리하기 비밀번호 페이지
     navigate('password');
   };
+
+  const type = 'attendee';
   return (
     <>
       <DefaultLayout>
@@ -29,7 +32,7 @@ export default function DetailPage() {
           }
           onBackPress={() => navigate('co-buying/create')}
         />
-        <InfoSection type="person" />
+        <InfoSection type={type} />
         <BottomButton
           label="신청하기"
           onClick={() => {
@@ -38,11 +41,27 @@ export default function DetailPage() {
           }}
         />
       </DefaultLayout>
-      <ApplyBottomSheet
-        type="attendee"
-        isOpen={isApplyingFormOpen}
-        setIsOpen={setIsApplyingFormOpen}
-      />
+
+      {type === 'attendee' && (
+        <AttendeeBottomSheet
+          isOpen={isApplyingFormOpen}
+          setIsOpen={setIsApplyingFormOpen}
+          data={{
+            quantity: 3,
+            totalPrice: 9000,
+          }}
+        />
+      )}
+      {type === 'quantity' && (
+        <QuantityBottomSheet
+          isOpen={isApplyingFormOpen}
+          setIsOpen={setIsApplyingFormOpen}
+          data={{
+            remainQuantity: 3,
+            unitPrice: 3000,
+          }}
+        />
+      )}
     </>
   );
 }
