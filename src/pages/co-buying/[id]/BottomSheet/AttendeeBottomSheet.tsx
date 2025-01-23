@@ -38,8 +38,11 @@ export default function AttendeeBottomSheet({
       <Sheet.Container ref={sheetRef}>
         <Sheet.Header />
         <Sheet.Content>
-          <form className="px-4 mb-5" onSubmit={handleSubmit}>
-            <header className="w-full mb-5 text-left text-body-bold">
+          <form
+            className="flex flex-col gap-4 px-4 mb-8"
+            onSubmit={handleSubmit}
+          >
+            <header className="w-full text-left text-body-bold">
               공구 신청
             </header>
             <Input
@@ -48,25 +51,20 @@ export default function AttendeeBottomSheet({
               placeholder="이름을 입력해주세요."
               variant="bordered"
             />
-            <section className="flex justify-between p-4 mt-4 mb-5 border rounded-xl border-default-200">
-              <div className="flex flex-col">
-                <p className="text-tiny text-default-700">구매 수량</p>
-                <p className="text-body-bold ">{data.quantity}개</p>
-              </div>
-              <div className="flex flex-col items-end">
-                <p className="text-tiny text-default-700">총 금액</p>
-                <p className="text-body-bold text-primary-400">
-                  {data.totalPrice}원
-                </p>
-              </div>
+            <section className="flex justify-between p-4 border rounded-xl border-default-200">
+              <p className="mb-1 text-caption text-default-600">구매 수량</p>
+              <p className="text-body-bold"> {data.quantity} 개</p>
             </section>
-            <section className="flex justify-end w-full">
-              <Button
-                type="submit"
-                className=""
-                label="신청하기"
-                size="small"
-              />
+            <section className="flex items-start justify-between px-1">
+              <p className="flex py-1 text-tiny text-default-700">
+                <p className="text-primary-400">{data.quantity}</p>개 구매액
+              </p>
+              <p className="text-body-bold text-primary-400">
+                {data.totalPrice}원
+              </p>
+            </section>
+            <section className="flex justify-end w-full mt-1">
+              <Button type="submit" label="신청하기" size="small" />
             </section>
           </form>
         </Sheet.Content>
