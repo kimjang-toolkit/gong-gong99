@@ -1,11 +1,11 @@
 import BaseLayout from '@/components/Layouts/BaseLayout';
-import CreatePage from '@/pages/co-buying/create';
+import CreatePage from '@/pages/co-buying/create/page';
 import DetailPage from '@/pages/co-buying/[id]';
 import ManagementPage from '@/pages/co-buying/[id]/management';
-import PasswordPage from '@/pages/co-buying/password';
-import ErrorPage from '@/pages/error-page';
+import ErrorPage from '@/pages/error-page/page';
 import HomePage from '@/pages/home';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import PasswordPage from '@/pages/co-buying/password/page';
 
 function App() {
   const router = createBrowserRouter([
