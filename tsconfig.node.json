@@ -15,7 +15,11 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@domain/*": ["./kimjang-toolkit-gong-gong99-api-interface/src/domain/*"],
+      "@interface/*": [
+        "./kimjang-toolkit-gong-gong99-api-interface/src/interface/*"
+      ]
     },
     /* Linting */
     "strict": true,
