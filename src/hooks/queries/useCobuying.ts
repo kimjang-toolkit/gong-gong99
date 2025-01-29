@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { cobuyingService } from '@/services/cobuying';
 
 export const QUERY_KEYS = {
@@ -8,10 +8,30 @@ export const QUERY_KEYS = {
   },
 } as const;
 
+// 공구글 목록 무한스크롤
 export function useCobuyingList() {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: QUERY_KEYS.COBUYING.LIST,
-    queryFn: () => cobuyingService.getList(),
+    queryFn: ({
+      pageParam,
+    }: {
+      pageParam: { id: string; createdAt: string; ownerName: string };
+    }) =>
+      cobuyingService.getListPage(
+        pageParam.id,
+        pageParam.createdAt,
+        pageParam.ownerName
+      ),
+    getNextPageParam: (lastPage) => {
+      return lastPage.lastEvaluatedKey
+        ? {
+            id: lastPage.lastEvaluatedKey.id,
+            createdAt: lastPage.lastEvaluatedKey.createdAt,
+            ownerName: lastPage.lastEvaluatedKey.ownerName,
+          }
+        : undefined;
+    },
+    initialPageParam: { id: '', createdAt: '', ownerName: '' },
   });
 }
 
@@ -20,4 +40,4 @@ export function useCobuyingDetail(id: string) {
     queryKey: QUERY_KEYS.COBUYING.DETAIL(id),
     queryFn: () => cobuyingService.getDetail(id),
   });
-} 
+}

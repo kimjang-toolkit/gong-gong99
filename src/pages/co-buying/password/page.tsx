@@ -1,6 +1,6 @@
 import BottomButton from '@/components/Button/BottomButton';
 import TitleHeader from '@/components/Header/TitleHeader';
-import DefaultLayout from '@/components/Layouts/DefaultLayout';
+import DefaultLayout from '@/layouts/DefaultLayout';
 import useFormValidation from '@/hooks/useFormButtonValidation';
 import CheckForm from '@/pages/co-buying/password/CheckForm';
 import CreateForm from '@/pages/co-buying/password/CreateForm';

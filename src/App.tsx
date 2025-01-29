@@ -1,4 +1,4 @@
-import BaseLayout from '@/components/Layouts/BaseLayout';
+import BaseLayout from '@/layouts/BaseLayout';
 import CreatePage from '@/pages/co-buying/create/page';
 import ErrorPage from '@/pages/error-page/page';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';

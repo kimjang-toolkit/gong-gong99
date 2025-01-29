@@ -1,10 +1,9 @@
+// API 엔드포인트 상수 관리
 export const ENDPOINTS = {
   COBUYING: {
-    LIST: '/co-buying',
+    PAGE: '/co-buying/page',
     DETAIL: (id: string) => `/co-buying/${id}`,
     CREATE: '/co-buying',
-  },
-  USER: {
-    PROFILE: '/user/profile',
+    PWD_CHECK: (id: string) => `/co-buying/auth/${id}`,
   },
 } as const;

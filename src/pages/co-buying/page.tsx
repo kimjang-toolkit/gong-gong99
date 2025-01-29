@@ -1,4 +1,4 @@
-import DefaultLayout from '@/components/Layouts/DefaultLayout';
+import DefaultLayout from '@/layouts/DefaultLayout';
 import Navbar from '@/components/Navbar';
 import ListSection from '@/pages/co-buying/ListSection';
 
