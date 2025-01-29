@@ -2,7 +2,7 @@ function DefaultLayout({ children }: { children: React.ReactNode[] }) {
   const [header, content, footer] = children;
   return (
     <>
-      <header className="fixed z-[99] top-0 w-full max-w-[500px]">
+      <header className="fixed z-[10] top-0 w-full max-w-[500px]">
         {header}
       </header>
       <main className="px-5 bg-white pt-[60px] pb-[110px] h-full overflow-y-auto no-scrollbar">
