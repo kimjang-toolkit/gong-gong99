@@ -6,7 +6,8 @@ import {
 } from '@interface/cobuying';
 import { DivideType } from '@domain/cobuying';
 import Alert from '@/components/Alert';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Button from '@/components/Button';
 const mockData = [
   {
     id: '1',
@@ -56,6 +57,7 @@ const mockData = [
     coBuyingStatus: 1,
     createdAt: '2025-01-27',
     deadline: '2025-01-27',
+      // 스크롤이 발생하면 버튼 숨기기
     totalPrice: 100000,
     type: DivideType.quantity,
     totalAttendeeQuantity: 10,
@@ -91,9 +93,39 @@ const mockData = [
 
 export default function ListSection() {
   const [showAlert, setShowAlert] = useState(true);
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
+  let scrollTimeout: NodeJS.Timeout;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsButtonVisible(false);
+
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+
+      scrollTimeout = setTimeout(() => {
+        setIsButtonVisible(true);
+      }, 500);
+    };
+
+    const scrollContainer = document.getElementById('app-main');
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (scrollContainer) {
+        scrollContainer.removeEventListener('scroll', handleScroll);
+      }
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+    };
+  }, []);
 
   return (
-    <div>
+    <>
       <Banner />
       {mockData.map((item, index) => (
         <>
@@ -106,6 +138,15 @@ export default function ListSection() {
           )}
         </>
       ))}
+      {isButtonVisible && (
+        <div className="fixed right-5 bottom-20 ">
+          <Button
+            label="+ 공구글"
+            size="small"
+            className="rounded-[20px] shadow-md"
+          />
+        </div>
+      )}
       {showAlert && (
         <Alert
           status="success"
@@ -113,6 +154,6 @@ export default function ListSection() {
           setIsOpen={() => setShowAlert(false)}
         />
       )}
-    </div>
+    </>
   );
 }
