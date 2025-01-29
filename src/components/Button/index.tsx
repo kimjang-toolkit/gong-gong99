@@ -3,8 +3,9 @@ import { cn } from '@/lib/utils';
 interface ButtonProps {
   label: string;
   size: 'small' | 'large';
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
+  type?: 'button' | 'submit';
 }
 
 export default function Button({
@@ -12,9 +13,11 @@ export default function Button({
   size,
   onClick,
   className,
+  type,
 }: ButtonProps) {
   return (
     <button
+      type={type}
       className={cn(
         'rounded-[10px] bg-primary-300',
         size === 'small'

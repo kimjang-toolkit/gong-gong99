@@ -1,11 +1,11 @@
 import BaseLayout from '@/components/Layouts/BaseLayout';
-import CreatePage from '@/pages/co-buying/create';
-import DetailPage from '@/pages/co-buying/[id]';
-import ManagementPage from '@/pages/co-buying/[id]/management';
-import PasswordPage from '@/pages/co-buying/password';
-import ErrorPage from '@/pages/error-page';
-import HomePage from '@/pages/home';
+import CreatePage from '@/pages/co-buying/create/page';
+import ErrorPage from '@/pages/error-page/page';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import PasswordPage from '@/pages/co-buying/password/page';
+import DetailPage from '@/pages/co-buying/[id]/page';
+import ManagementPage from '@/pages/co-buying/[id]/management/page';
+import CoBuyingPage from '@/pages/co-buying/page';
 
 function App() {
   const router = createBrowserRouter([
@@ -38,7 +38,7 @@ function App() {
       // 공구글 리스트페이지
       path: '/co-buying',
       children: [
-        { index: true, element: <HomePage /> },
+        { index: true, element: <CoBuyingPage /> },
         { path: ':id', element: <DetailPage /> }, // 공구글 상세페이지
         { path: ':id/management', element: <ManagementPage /> }, // 공구글 관리페이지 , 추후 loader 추가 또는 private router씌우기
         { path: ':id?/password', element: <PasswordPage /> },

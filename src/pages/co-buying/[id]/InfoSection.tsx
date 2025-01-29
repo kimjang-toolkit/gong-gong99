@@ -3,7 +3,7 @@ import ShareIcon from '@/assets/icons/share.svg?react';
 import useWebShare from '@/hooks/useWebShare';
 
 interface InfoSectionProps {
-  type: 'quantity' | 'person';
+  type: 'quantity' | 'attendee';
 }
 
 export default function InfoSection({ type }: InfoSectionProps) {
@@ -49,11 +49,11 @@ export default function InfoSection({ type }: InfoSectionProps) {
           </div>
           <div className="flex justify-between">
             <p className="text-caption">
-              {type === 'person' ? '인 당 구매량' : '남은 수량'}
+              {type === 'attendee' ? '인 당 구매량' : '남은 수량'}
             </p>
             <p className="text-caption text-primary-400">10개</p>
           </div>
-          {type === 'person' && (
+          {type === 'attendee' && (
             <div className="flex justify-between">
               <p className="text-caption">모집 인원</p>
               <p className="text-caption text-primary-400">8 / 10 명</p>
