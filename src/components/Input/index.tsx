@@ -31,12 +31,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const [inputError, setInputError] = useState<string | undefined>(undefined);
   const [inputValue, setInputValue] = useState(defaultValue ?? null);
 
-  useEffect(() => {
-    console.log('inputValue', inputValue);
-  }, [inputValue]);
+  useEffect(() => {}, [inputValue]);
   const defaultHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setInputValue(() => value);
+    setInputValue(value);
     if (value === '' || (pattern && new RegExp(pattern).test(value))) {
       setInputError(undefined);
     }
