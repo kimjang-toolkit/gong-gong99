@@ -32,7 +32,7 @@ export default function PasswordPage() {
     // 비밀번호 생성페이지
     if (isCreateMode) {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_SERVER_URL}co-buying`,
+        `${import.meta.env.VITE_API_SERVER_URL}/co-buying`,
         { ...formData, ...data }
       );
       console.log(response);

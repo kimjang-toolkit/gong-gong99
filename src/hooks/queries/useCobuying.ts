@@ -15,7 +15,11 @@ export function useCobuyingList() {
     queryFn: ({
       pageParam,
     }: {
-      pageParam: { id?: string; createdAt?: string; ownerName?: string };
+      pageParam: {
+        id: string;
+        createdAt: string;
+        ownerName: string;
+      };
     }) =>
       cobuyingService.getListPage(
         pageParam.id,
@@ -31,7 +35,7 @@ export function useCobuyingList() {
           }
         : undefined;
     },
-    initialPageParam: {},
+    initialPageParam: { id: '', createdAt: '', ownerName: '' },
     maxPages: 10,
   });
 }
