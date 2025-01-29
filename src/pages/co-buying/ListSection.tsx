@@ -57,7 +57,6 @@ const mockData = [
     coBuyingStatus: 1,
     createdAt: '2025-01-27',
     deadline: '2025-01-27',
-      // 스크롤이 발생하면 버튼 숨기기
     totalPrice: 100000,
     type: DivideType.quantity,
     totalAttendeeQuantity: 10,
@@ -143,7 +142,7 @@ export default function ListSection() {
           <Button
             label="+ 공구글"
             size="small"
-            className="rounded-[20px] shadow-md"
+            className="rounded-[20px] shadow-md active:brightness-90"
           />
         </div>
       )}
