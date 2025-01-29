@@ -6,9 +6,10 @@ import {
 } from '@interface/cobuying';
 import { DivideType } from '@domain/cobuying';
 import Alert from '@/components/Alert';
-import { useState, useEffect } from 'react';
-import Button from '@/components/Button';
-const mockData = [
+import { useState } from 'react';
+import { useCobuyingList } from '@/hooks/queries/useCobuying';
+import CreateButton from '@/pages/co-buying/CreateButton';
+export const mockData = [
   {
     id: '1',
     ownerName: '찬솔',
@@ -91,37 +92,9 @@ const mockData = [
 ];
 
 export default function ListSection() {
+  const { data, isLoading, fetchNextPage, hasNextPage } = useCobuyingList();
+
   const [showAlert, setShowAlert] = useState(true);
-  const [isButtonVisible, setIsButtonVisible] = useState(true);
-  let scrollTimeout: NodeJS.Timeout;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsButtonVisible(false);
-
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
-
-      scrollTimeout = setTimeout(() => {
-        setIsButtonVisible(true);
-      }, 500);
-    };
-
-    const scrollContainer = document.getElementById('app-main');
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
-    };
-  }, []);
 
   return (
     <>
@@ -137,15 +110,7 @@ export default function ListSection() {
           )}
         </>
       ))}
-      {isButtonVisible && (
-        <div className="fixed right-5 bottom-20 ">
-          <Button
-            label="+ 공구글"
-            size="small"
-            className="rounded-[20px] shadow-md active:brightness-90"
-          />
-        </div>
-      )}
+      <CreateButton />
       {showAlert && (
         <Alert
           status="success"
