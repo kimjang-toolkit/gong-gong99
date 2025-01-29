@@ -1,8 +1,10 @@
 import Button from '@/components/Button';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateButton() {
   const [isButtonVisible, setIsButtonVisible] = useState(true);
+  const navigate = useNavigate();
   let scrollTimeout: NodeJS.Timeout;
 
   useEffect(() => {
@@ -36,6 +38,9 @@ export default function CreateButton() {
     isButtonVisible && (
       <div className="absolute right-5 bottom-20 ">
         <Button
+          onClick={() => {
+            navigate('/co-buying/create');
+          }}
           label="+ 공구글"
           size="small"
           className="rounded-[20px] shadow-md active:brightness-90"
