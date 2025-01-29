@@ -5,6 +5,8 @@ import {
   QuantityCoBuyingSummary,
 } from '@interface/cobuying';
 import { DivideType } from '@domain/cobuying';
+import Alert from '@/components/Alert';
+import { useState } from 'react';
 const mockData = [
   {
     id: '1',
@@ -88,6 +90,8 @@ const mockData = [
 ];
 
 export default function ListSection() {
+  const [showAlert, setShowAlert] = useState(true);
+
   return (
     <div>
       <Banner />
@@ -102,6 +106,13 @@ export default function ListSection() {
           )}
         </>
       ))}
+      {showAlert && (
+        <Alert
+          status="success"
+          label="신청이 완료되었습니다."
+          setIsOpen={() => setShowAlert(false)}
+        />
+      )}
     </div>
   );
 }
