@@ -5,6 +5,7 @@ import {
   QuantityCoBuyingSummary,
 } from '@interface/cobuying';
 import { DivideType } from '@domain/cobuying';
+import Alert from '@/components/Alert';
 const mockData = [
   {
     id: '1',
@@ -102,6 +103,7 @@ export default function ListSection() {
           )}
         </>
       ))}
+      <Alert status="success" label="신청이 완료되었습니다." />
     </div>
   );
 }
