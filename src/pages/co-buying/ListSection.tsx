@@ -10,7 +10,7 @@ import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate } from 'react-router-dom';
 
 export default function ListSection() {
-  const { data, isLoading, fetchNextPage, hasNextPage } = useCobuyingList();
+  const { data, fetchNextPage, hasNextPage } = useCobuyingList();
 
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
@@ -44,10 +44,7 @@ export default function ListSection() {
           </div>
         ))
       )}
-      <div
-        ref={loadMoreRef}
-        style={{ height: '1px', backgroundColor: 'red' }}
-      />
+      <div ref={loadMoreRef} style={{ height: '3px' }} />
       <CreateButton />
     </>
   );
