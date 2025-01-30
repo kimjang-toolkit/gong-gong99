@@ -9,6 +9,7 @@ import DevideTypeSection from '@/pages/co-buying/create/DevideTypeSection';
 import { useNavigate } from 'react-router-dom';
 import useFormValidation from '@/hooks/useFormButtonValidation';
 import useFormStore from '@/stores/coBuyingFormStore';
+import { DivideType } from '@domain/cobuying';
 
 function CreatePage() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ function CreatePage() {
     navigate('/co-buying/password');
   };
 
+  // 폼 간에 상태 변경을 공유하기 위해 필요
   const handleFormBlur = (e: React.FormEvent<HTMLFormElement>) => {
     const formEntries = new FormData(e.currentTarget);
     const data = Object.fromEntries(formEntries);
@@ -45,8 +47,8 @@ function CreatePage() {
         <DevideTypeSection />
 
         {/* 3. 공구 나눔방식 선택에 따라 수량으로 나누기 폼/ 인원으로 나누기 폼 */}
-        {type === 'quantity' && <DevideByQuantityForm />}
-        {type === 'person' && <DevideByAttendeeForm />}
+        {type === DivideType.quantity && <DevideByQuantityForm />}
+        {type === DivideType.attendee && <DevideByAttendeeForm />}
 
         {/* 4. 알리는 말 */}
         <section className="flex flex-col gap-2">
