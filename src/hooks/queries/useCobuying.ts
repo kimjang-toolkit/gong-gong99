@@ -40,9 +40,9 @@ export function useCobuyingList() {
   });
 }
 
-export function useCobuyingDetail(id: string) {
+export function useCobuyingDetail(id: string, ownerName: string) {
   return useQuery({
     queryKey: QUERY_KEYS.COBUYING.DETAIL(id),
-    queryFn: () => cobuyingService.getDetail(id),
+    queryFn: () => cobuyingService.getDetail(id, ownerName),
   });
 }
