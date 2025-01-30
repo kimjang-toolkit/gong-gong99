@@ -4,115 +4,48 @@ import {
   AttendeeCoBuyingSummary,
   QuantityCoBuyingSummary,
 } from '@interface/cobuying';
-import { DivideType } from '@domain/cobuying';
-import Alert from '@/components/Alert';
-import { useState } from 'react';
-const mockData = [
-  {
-    id: '1',
-    ownerName: '찬솔',
-    productName: '상품명',
-    totalQuantity: 10,
-    coBuyingStatus: 1,
-    createdAt: '2025-01-27',
-    deadline: '2025-01-27',
-    totalPrice: 100000,
-    type: DivideType.attendee,
-    attendeeCount: 10,
-    targetAttendeeCount: 10,
-    perAttendeePrice: 10000,
-  },
-  {
-    id: '2',
-    ownerName: '찬솔',
-    productName: '맛있는 만두 3묶음',
-    totalQuantity: 10,
-    coBuyingStatus: 1,
-    createdAt: '2025-01-27',
-    deadline: '2025-01-27',
-    totalPrice: 100000,
-    type: DivideType.quantity,
-    totalAttendeeQuantity: 10,
-    unitPrice: 10000,
-  },
-  {
-    id: '2',
-    ownerName: '찬솔',
-    productName: '맛있는 만두 3묶음',
-    totalQuantity: 10,
-    coBuyingStatus: 1,
-    createdAt: '2025-01-27',
-    deadline: '2025-01-27',
-    totalPrice: 100000,
-    type: DivideType.quantity,
-    totalAttendeeQuantity: 10,
-    unitPrice: 10000,
-  },
-  {
-    id: '2',
-    ownerName: '찬솔',
-    productName: '맛있는 만두 3묶음',
-    totalQuantity: 10,
-    coBuyingStatus: 1,
-    createdAt: '2025-01-27',
-    deadline: '2025-01-27',
-    totalPrice: 100000,
-    type: DivideType.quantity,
-    totalAttendeeQuantity: 10,
-    unitPrice: 10000,
-  },
-  {
-    id: '2',
-    ownerName: '찬솔',
-    productName: '맛있는 만두 3묶음',
-    totalQuantity: 10,
-    coBuyingStatus: 1,
-    createdAt: '2025-01-27',
-    deadline: '2025-01-27',
-    totalPrice: 100000,
-    type: DivideType.quantity,
-    totalAttendeeQuantity: 10,
-    unitPrice: 10000,
-  },
-  {
-    id: '2',
-    ownerName: '찬솔',
-    productName: '맛있는 만두 3묶음',
-    totalQuantity: 10,
-    coBuyingStatus: 1,
-    createdAt: '2025-01-27',
-    deadline: '2025-01-27',
-    totalPrice: 100000,
-    type: DivideType.quantity,
-    totalAttendeeQuantity: 10,
-    unitPrice: 10000,
-  },
-];
+import { useEffect, useRef } from 'react';
+import { useCobuyingList } from '@/hooks/queries/useCobuying';
+import CreateButton from '@/pages/co-buying/CreateButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function ListSection() {
-  const [showAlert, setShowAlert] = useState(true);
+  const { data, fetchNextPage, hasNextPage } = useCobuyingList();
+
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loadMoreRef.current) {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      });
+      observer.observe(loadMoreRef.current);
+
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, [fetchNextPage, hasNextPage]);
 
   return (
-    <div>
+    <>
       <Banner />
-      {mockData.map((item, index) => (
-        <>
-          <CobuyingCard
-            key={item.id}
-            item={item as AttendeeCoBuyingSummary | QuantityCoBuyingSummary}
-          />
-          {index < mockData.length - 1 && (
+      {data?.pages?.map((page) =>
+        page.coBuyingList.map((item) => (
+          <div key={item.id} onClick={() => navigate(`/co-buying/${item.id}`)}>
+            <CobuyingCard
+              item={item as AttendeeCoBuyingSummary | QuantityCoBuyingSummary}
+            />
             <hr className="border-b-1 border-default-100" />
-          )}
-        </>
-      ))}
-      {showAlert && (
-        <Alert
-          status="success"
-          label="신청이 완료되었습니다."
-          setIsOpen={() => setShowAlert(false)}
-        />
+          </div>
+        ))
       )}
-    </div>
+      <div ref={loadMoreRef} style={{ height: '3px' }} />
+      <CreateButton />
+    </>
   );
 }

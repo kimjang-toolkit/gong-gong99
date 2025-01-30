@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { InputHTMLAttributes, useState, forwardRef, useEffect } from 'react';
+import { InputHTMLAttributes, useState, forwardRef } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;

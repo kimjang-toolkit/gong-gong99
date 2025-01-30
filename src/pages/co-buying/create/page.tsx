@@ -1,6 +1,6 @@
 import BottomButton from '@/components/Button/BottomButton';
 import TitleHeader from '@/components/Header/TitleHeader';
-import DefaultLayout from '@/components/Layouts/DefaultLayout';
+import DefaultLayout from '@/layouts/DefaultLayout';
 import CommonForm from '@/pages/co-buying/create/CommonForm';
 import DevideByQuantityForm from '@/pages/co-buying/create/DevideByQuantityForm';
 import DevideByAttendeeForm from '@/pages/co-buying/create/DevideByAttendeeForm';
