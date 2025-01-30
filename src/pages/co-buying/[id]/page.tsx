@@ -6,14 +6,18 @@ import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBott
 import QuantityBottomSheet from '@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet';
 import InfoSection from '@/pages/co-buying/[id]/InfoSection';
 import { DivideType } from '@domain/cobuying';
+import { CoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 export default function DetailPage() {
   const navigate = useNavigate();
   const { id } = useParams();
-
-  const { isLoading, data } = useCobuyingDetail(id!);
+  const [searchParams] = useSearchParams();
+  const { isLoading, data } = useCobuyingDetail(
+    id!,
+    searchParams.get('ownerName')!
+  );
 
   const [isApplyingFormOpen, setIsApplyingFormOpen] = useState(false);
 
@@ -21,8 +25,6 @@ export default function DetailPage() {
     // 관리하기 비밀번호 페이지
     navigate('password');
   };
-
-  if (isLoading) return <div>Loading...</div>;
 
   return (
     <>
@@ -38,7 +40,11 @@ export default function DetailPage() {
             </button>
           }
         />
-        <InfoSection type={DivideType.attendee} />
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <InfoSection data={data as CoBuyingDetail} />
+        )}
         <BottomButton
           label="신청하기"
           onClick={() => {

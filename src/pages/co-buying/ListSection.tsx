@@ -36,7 +36,12 @@ export default function ListSection() {
       <Banner />
       {data?.pages?.map((page) =>
         page.coBuyingList.map((item) => (
-          <div key={item.id} onClick={() => navigate(`/co-buying/${item.id}`)}>
+          <div
+            key={item.id}
+            onClick={() =>
+              navigate(`/co-buying/${item.id}?ownerName=${item.ownerName}`)
+            }
+          >
             <CobuyingCard
               item={item as AttendeeCoBuyingSummary | QuantityCoBuyingSummary}
             />
