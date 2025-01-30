@@ -1,31 +1,50 @@
-import { nextui } from '@nextui-org/react';
-
-const primary = {
-  50: '#e2f2ff',
-  100: '#baddff',
-  200: '#8ac8ff',
-  500: '#008fff',
-  600: '#077fff',
-  700: '#226cff', // 주로 사용하고 싶은 primary 색상
-  800: '#2c58ec',
-  900: '#3532cc',
-};
-
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './index.html',
-    './src/**/*.{js,ts,jsx,tsx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
         sans: ['Pretendard', 'sans-serif'],
       },
-      color: {
-        primary: { ...primary },
+      colors: {
+        black: '#262626',
+        primary: {
+          50: '#E6F1FE',
+          200: '#99C7FB',
+          300: '#66AAF9',
+          400: '#338EF7',
+          500: '#006FEE',
+          600: '#005BC4',
+          700: '#004493',
+          800: '#002E62',
+        },
+        default: {
+          50: '#fafafa',
+          100: '#f4f4f5',
+          200: '#e4e4e7',
+          300: '#d4d4d8',
+          400: '#a1a1aa',
+          500: '#71717a',
+          600: '#52525b',
+          700: '#3f3f46',
+          800: '#27272a',
+          900: '#18181b',
+        },
       },
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translate(-50%, -100%)' },
+          '100%': { transform: 'translate(-50%, 0)' }
+        },
+        slideOut: {
+          '0%': { transform: 'translate(-50%, 0)' },
+          '100%': { transform: 'translate(-50%, 100%)' }
+        }
+      },
+      animation: {
+        slideIn: 'slideIn 0.3s ease-out forwards',
+        slideOut: 'slideOut 0.3s ease-out forwards'
+      }
     },
     screens: {
       sm: '600px',
@@ -37,22 +56,6 @@ export default {
   },
   darkMode: 'class',
   plugins: [
-    nextui({
-      addCommonColors: false,
-      themes: {
-        light: {
-          colors: {
-            primary: {
-              ...primary,
-              DEFAULT: primary[700],
-            },
-            default: {
-              DEFAULT: '#717171',
-            },
-          },
-        },
-      },
-    }),
     ({ addUtilities }) => {
       addUtilities({
         '.default-box': {
@@ -61,78 +64,32 @@ export default {
         '.shadow-top': {
           boxShadow: '0 -8px 20px 0 rgba(0, 0, 0, 0.05)',
         },
-        // 타이포그래피
-        '.text-h1': {
-          fontSize: '2.25rem',
-          fontWeight: '600',
-          lineHeight: '3.5625rem',
-          letterSpacing: '-1.08px',
-        },
         '.text-h2': {
-          fontSize: '1.875rem',
-          fontWeight: '400',
-          lineHeight: '3rem',
-          letterSpacing: '-0.75px',
+          '@apply text-[20px] font-medium leading-7': '',
         },
         '.text-h2-bold': {
-          fontSize: '1.875rem',
-          fontWeight: '600',
-          lineHeight: '3rem',
-          letterSpacing: '-0.9px',
-        },
-        '.text-h3': {
-          fontSize: '1.5rem',
-          fontWeight: '600',
-          lineHeight: '2.25rem',
-          letterSpacing: '-0.72px',
+          '@apply text-[20px] font-bold leading-7': '',
         },
         '.text-h3-bold': {
-          fontSize: ' 1.5rem',
-          fontWeight: '600',
-          lineHeight: ' 2.25rem',
-          letterSpacing: '-0.9px',
+          '@apply text-[18px] font-semibold leading-normal': '',
         },
-        '.text-subhead1': {
-          fontSize: ' 1.125rem',
-          fontWeight: '600',
-          lineHeight: '1.6875rem',
-          letterSpacing: '-0.36px',
+        '.text-body': {
+          '@apply text-[16px] font-normal leading-normal': '',
         },
-        '.text-body1-bold': {
-          fontSize: '1rem',
-          fontWeight: '600',
-          lineHeight: '1.5rem',
-          letterSpacing: '-0.32px',
-        },
-        '.text-body1': {
-          fontSize: '1rem',
-          fontWeight: '400',
-          lineHeight: '1.5rem',
-          letterSpacing: '-0.24px',
-        },
-        '.text-body2': {
-          fontSize: '0.875rem',
-          fontWeight: '400',
-          lineHeight: '1.3125rem',
-          letterSpacing: '-0.28px',
-        },
-        '.text-body2-bold': {
-          fontSize: '0.875rem',
-          fontWeight: '600',
-          lineHeight: '1.3125rem',
-          letterSpacing: '-0.28px',
+        '.text-body-bold': {
+          '@apply text-[16px] font-semibold leading-normal': '',
         },
         '.text-caption': {
-          fontSize: '0.75rem',
-          fontWeight: '400',
-          lineHeight: '1.125rem',
-          letterSpacing: '-0.24px',
+          '@apply text-[14px] font-medium leading-normal': '',
         },
         '.text-caption-bold': {
-          fontSize: '0.75rem',
-          fontWeight: '600',
-          lineHeight: '1.3125rem',
-          letterSpacing: '-0.24px',
+          '@apply text-[14px] font-semibold leading-normal': '',
+        },
+        '.text-tiny': {
+          '@apply text-[12px] font-normal leading-normal': '',
+        },
+        '.text-tiny-bold': {
+          '@apply text-[12px] font-bold leading-normal': '',
         },
       });
     },
