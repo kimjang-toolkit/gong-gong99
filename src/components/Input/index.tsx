@@ -31,7 +31,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   const [inputError, setInputError] = useState<string | undefined>(undefined);
   const [inputValue, setInputValue] = useState(defaultValue ?? null);
 
-  useEffect(() => {}, [inputValue]);
   const defaultHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setInputValue(value);
@@ -42,7 +41,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       handleChange(e);
     }
   };
-
   const handleBlur = () => {
     if (
       required &&

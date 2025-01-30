@@ -24,10 +24,12 @@ export default function DevideTypeSection() {
       <p className="pl-0.5 mb-1 text-caption text-default-600">공구나눔 방식</p>
       <div className="flex gap-4">
         <button
-          id="quantity"
+          id={DivideType.quantity}
           className={cn(
             'text-center text-body rounded-lg h-[62px] flex-1 shadow-sm',
-            type === 'quantity' ? selectedTypeClass : unselectedTypeClass
+            type === DivideType.quantity
+              ? selectedTypeClass
+              : unselectedTypeClass
           )}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
             handleDevideTypeChange(e)
@@ -36,7 +38,7 @@ export default function DevideTypeSection() {
           수량으로 나누기
         </button>
         <button
-          id="person"
+          id={DivideType.attendee}
           className={cn(
             'text-center  text-body rounded-lg h-[62px] flex-1 shadow-sm',
             type === DivideType.attendee

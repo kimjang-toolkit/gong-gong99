@@ -23,6 +23,7 @@ function CreatePage() {
     navigate('/co-buying/password');
   };
 
+  // 폼 간에 상태 변경을 공유하기 위해 필요
   const handleFormBlur = (e: React.FormEvent<HTMLFormElement>) => {
     const formEntries = new FormData(e.currentTarget);
     const data = Object.fromEntries(formEntries);
