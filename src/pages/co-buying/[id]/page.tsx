@@ -6,7 +6,7 @@ import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBott
 import QuantityBottomSheet from '@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet';
 import InfoSection from '@/pages/co-buying/[id]/InfoSection';
 import { DivideType } from '@domain/cobuying';
-import { CoBuyingDetail } from '@interface/cobuying';
+import { CoBuyingDetail } from 'common-type/src/interface/cobuying';
 import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 

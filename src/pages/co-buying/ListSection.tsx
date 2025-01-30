@@ -3,7 +3,7 @@ import Banner from '@/pages/co-buying/Banner';
 import {
   AttendeeCoBuyingSummary,
   QuantityCoBuyingSummary,
-} from '@interface/cobuying';
+} from 'common-type/src/interface/cobuying';
 import { useEffect, useRef } from 'react';
 import { useCobuyingList } from '@/hooks/queries/useCobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';

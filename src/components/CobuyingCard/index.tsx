@@ -3,7 +3,7 @@ import { DivideType } from '@domain/cobuying';
 import {
   AttendeeCoBuyingSummary,
   QuantityCoBuyingSummary,
-} from '@interface/cobuying';
+} from 'common-type/src/interface/cobuying';
 
 export default function CobuyingCard({
   item,
