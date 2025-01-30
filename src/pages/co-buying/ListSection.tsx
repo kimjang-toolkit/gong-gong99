@@ -8,12 +8,14 @@ import Alert from '@/components/Alert';
 import { useState, useRef, useEffect } from 'react';
 import { useCobuyingList } from '@/hooks/queries/useCobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
-
-
+import { useNavigate } from 'react-router-dom';
 
 export default function ListSection() {
   const { data, isLoading, fetchNextPage, hasNextPage } = useCobuyingList();
+
   const [showAlert, setShowAlert] = useState(true);
+
+  const navigate = useNavigate();
   
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -49,9 +51,9 @@ export default function ListSection() {
   return (
     <>
       <Banner />
-      {data?.pages.map((page) =>
+      {data?.pages?.map((page) =>
         page.coBuyingList.map((item) => (
-          <div key={item.id}>
+          <div key={item.id} onClick={() => navigate(`/co-buying/${item.id}`)}>
             <CobuyingCard
               item={item as AttendeeCoBuyingSummary | QuantityCoBuyingSummary}
             />

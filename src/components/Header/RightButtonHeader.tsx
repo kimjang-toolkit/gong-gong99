@@ -3,17 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 interface RightButtonHeaderProps {
   rightElement: React.ReactNode;
-  onBackPress?: () => void;
+  backUrl?: string;
 }
 
 export default function RightButtonHeader({
   rightElement,
-  onBackPress,
+  backUrl,
 }: RightButtonHeaderProps) {
   const navigate = useNavigate();
   const handleBackPress = () => {
-    if (onBackPress) {
-      onBackPress();
+    if (backUrl) {
+      navigate(backUrl);
     } else {
       navigate(-1);
     }

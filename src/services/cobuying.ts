@@ -4,17 +4,22 @@ import { axiosInstance } from '@/api/axios';
 import { ENDPOINTS } from '@/api/endpoints';
 
 export const cobuyingService = {
-  getListPage: (
+  getListPage: async (
     id: string,
     createdAt: string,
     ownerName: string
-  ): Promise<CoBuyingPageingRes> =>
-    axiosInstance.get(ENDPOINTS.COBUYING.PAGE, {
+  ): Promise<CoBuyingPageingRes> => {
+    const response = await axiosInstance.get(ENDPOINTS.COBUYING.PAGE, {
       params: {
         ...(id !== '' && { id }),
         ...(createdAt !== '' && { createdAt }),
         ...(ownerName !== '' && { ownerName }),
       },
-    }),
-  getDetail: (id: string) => axiosInstance.get(ENDPOINTS.COBUYING.DETAIL(id)),
+    });
+    return response.data;
+  },
+  getDetail: async (id: string) => {
+    const response = await axiosInstance.get(ENDPOINTS.COBUYING.DETAIL(id));
+    return response.data;
+  },
 };

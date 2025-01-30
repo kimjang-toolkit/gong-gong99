@@ -3,6 +3,7 @@ import RightButtonHeader from '@/components/Header/RightButtonHeader';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import InfoSection from '@/pages/co-buying/[id]/InfoSection';
 import ApplyListSection from '@/pages/co-buying/[id]/management/ApplyListSection';
+import { DivideType } from '@domain/cobuying';
 
 export default function ManagementPage() {
   return (
@@ -15,7 +16,7 @@ export default function ManagementPage() {
         }
       />
       <>
-        <InfoSection type="person" />
+        <InfoSection type={DivideType.attendee} />
         <ApplyListSection />
       </>
       <BottomButton label="신청 마감하기" />

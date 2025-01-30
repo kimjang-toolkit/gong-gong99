@@ -1,15 +1,20 @@
 import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
+import { useCobuyingDetail } from '@/hooks/queries/useCobuying';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBottomSheet';
 import QuantityBottomSheet from '@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet';
 import InfoSection from '@/pages/co-buying/[id]/InfoSection';
+import { DivideType } from '@domain/cobuying';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export default function DetailPage() {
   const navigate = useNavigate();
-  // const { id } = useParams();
+  const { id } = useParams();
+
+  const { isLoading, data } = useCobuyingDetail(id!);
+
   const [isApplyingFormOpen, setIsApplyingFormOpen] = useState(false);
 
   const handleManageButton = () => {
@@ -17,11 +22,13 @@ export default function DetailPage() {
     navigate('password');
   };
 
-  const type = 'attendee';
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <>
       <DefaultLayout>
         <RightButtonHeader
+          backUrl="/co-buying"
           rightElement={
             <button
               className="text-caption-bold text-primary-400"
@@ -30,9 +37,8 @@ export default function DetailPage() {
               관리하기
             </button>
           }
-          onBackPress={() => navigate('co-buying/create')}
         />
-        <InfoSection type={type} />
+        <InfoSection type={DivideType.attendee} />
         <BottomButton
           label="신청하기"
           onClick={() => {
@@ -42,7 +48,7 @@ export default function DetailPage() {
         />
       </DefaultLayout>
 
-      {type === 'attendee' && (
+      {data?.type === DivideType.attendee && (
         <AttendeeBottomSheet
           isOpen={isApplyingFormOpen}
           setIsOpen={setIsApplyingFormOpen}
@@ -52,7 +58,7 @@ export default function DetailPage() {
           }}
         />
       )}
-      {type === 'quantity' && (
+      {data?.type === DivideType.quantity && (
         <QuantityBottomSheet
           isOpen={isApplyingFormOpen}
           setIsOpen={setIsApplyingFormOpen}

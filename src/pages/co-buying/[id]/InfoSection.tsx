@@ -1,12 +1,9 @@
 import LinkIcon from '@/assets/icons/link.svg?react';
 import ShareIcon from '@/assets/icons/share.svg?react';
 import useWebShare from '@/hooks/useWebShare';
+import { DivideType } from '@domain/cobuying';
 
-interface InfoSectionProps {
-  type: 'quantity' | 'attendee';
-}
-
-export default function InfoSection({ type }: InfoSectionProps) {
+export default function InfoSection({ type }: { type: DivideType }) {
   const { share } = useWebShare();
   return (
     <>

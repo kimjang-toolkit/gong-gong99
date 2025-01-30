@@ -6,6 +6,9 @@ console.log(baseURL);
 export const axiosInstance = axios.create({
   baseURL,
   timeout: 5000,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 // 인터셉터 설정

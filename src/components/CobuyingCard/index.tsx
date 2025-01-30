@@ -26,7 +26,7 @@ export default function CobuyingCard({
   };
 
   return (
-    <article className="flex flex-col py-4">
+    <article className="flex flex-col py-4 active:brightness-90">
       <p className="font-medium text-black">{productName}</p>
       <p className="text-tiny text-default-500">{deadline} 마감</p>
       <div className="flex items-center">
