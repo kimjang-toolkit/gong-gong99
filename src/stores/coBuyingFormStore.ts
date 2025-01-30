@@ -1,12 +1,13 @@
-import { createStore } from "zustand/vanilla";
-import { useStore } from "zustand";
+import { createStore } from 'zustand/vanilla';
+import { useStore } from 'zustand';
+import { DivideType } from '@domain/cobuying';
 
 export interface CobuyingFormData {
   productName?: string;
   totalPrice?: number;
   productLink?: string;
   deadline?: string;
-  type?: "quantity" | "person";
+  type?: DivideType;
   totalQuantity?: number;
   ownerQuantity?: number;
   recruitmentNumbers?: number; //모집인원수
@@ -18,27 +19,27 @@ export interface CobuyingFormData {
 interface FormStore {
   formData: CobuyingFormData;
   setFormData: (formData: Partial<CobuyingFormData>) => void;
-  type: "quantity" | "person";
-  setType: (type: "quantity" | "person") => void;
+  type: DivideType;
+  setType: (type: DivideType) => void;
 }
 
 const formStore = createStore<FormStore>((set) => ({
   formData: {
-    productName: "",
+    productName: '',
     totalPrice: 0,
-    productLink: "",
-    deadline: "",
-    type: "quantity",
+    productLink: '',
+    deadline: '',
+    type: DivideType.attendee,
     totalQuantity: 0,
     recruitmentNumbers: 0,
-    ownerName: "",
-    ownerPwd: "",
+    ownerName: '',
+    ownerPwd: '',
   },
   setFormData: (newData) =>
     set((state) => ({
       formData: { ...state.formData, ...newData },
     })),
-  type: "quantity",
+  type: DivideType.attendee,
   setType: (newType) => set({ type: newType }),
 }));
 
