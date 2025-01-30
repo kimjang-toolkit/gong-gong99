@@ -30,7 +30,7 @@ function CommonForm() {
         name="productLink"
         label="상품 링크 (선택)"
         placeholder="공구할 상품 구매링크를 입력해주세요."
-        pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
+        pattern="^$|^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$"
         patternErrorMessage="올바른 URL 형식이 아닙니다"
         defaultValue={productLink}
       />
