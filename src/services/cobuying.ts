@@ -1,8 +1,8 @@
-import { CoBuyingPageingRes } from 'common-type/src/interface/cobuyingList';
 // API 호출
 import { axiosInstance } from '@/api/axios';
 import { ENDPOINTS } from '@/api/endpoints';
-import { CoBuyingDetail } from 'common-type/src/interface/cobuying';
+import { CoBuyingDetail } from '@interface/cobuying';
+import { CoBuyingPageingRes } from '@interface/cobuyingList';
 
 export const cobuyingService = {
   getListPage: async (

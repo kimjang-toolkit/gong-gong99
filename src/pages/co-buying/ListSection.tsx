@@ -1,13 +1,12 @@
 import CobuyingCard from '@/components/CobuyingCard';
 import Banner from '@/pages/co-buying/Banner';
-import {
-  AttendeeCoBuyingSummary,
-  QuantityCoBuyingSummary,
-} from 'common-type/src/interface/cobuying';
+
 import { useEffect, useRef } from 'react';
 import { useCobuyingList } from '@/hooks/queries/useCobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate } from 'react-router-dom';
+import { QuantityCoBuyingSummary } from '@interface/cobuying';
+import { AttendeeCoBuyingSummary } from '@interface/cobuying';
 
 export default function ListSection() {
   const { data, fetchNextPage, hasNextPage } = useCobuyingList();

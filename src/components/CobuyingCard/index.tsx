@@ -1,9 +1,7 @@
 import { formatNumberWithCommas } from '@/util/formatNumberWithCommas';
 import { DivideType } from '@domain/cobuying';
-import {
-  AttendeeCoBuyingSummary,
-  QuantityCoBuyingSummary,
-} from 'common-type/src/interface/cobuying';
+import { QuantityCoBuyingSummary } from '@interface/cobuying';
+import { AttendeeCoBuyingSummary } from '@interface/cobuying';
 
 export default function CobuyingCard({
   item,

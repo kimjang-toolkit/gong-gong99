@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { cobuyingService } from '@/services/cobuying';
-import { CreatedAtKey } from 'common-type/src/interface/cobuying';
+import { CreatedAtKey } from '@interface/cobuying';
 
 export const QUERY_KEYS = {
   COBUYING: {
