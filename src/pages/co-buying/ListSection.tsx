@@ -4,8 +4,7 @@ import {
   AttendeeCoBuyingSummary,
   QuantityCoBuyingSummary,
 } from '@interface/cobuying';
-import Alert from '@/components/Alert';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useCobuyingList } from '@/hooks/queries/useCobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate } from 'react-router-dom';
@@ -13,40 +12,24 @@ import { useNavigate } from 'react-router-dom';
 export default function ListSection() {
   const { data, isLoading, fetchNextPage, hasNextPage } = useCobuyingList();
 
-  const [showAlert, setShowAlert] = useState(true);
-
-  const navigate = useNavigate();
-  
-  const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    if (observerRef.current) observerRef.current.disconnect();
+  const navigate = useNavigate();
 
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage) {
+  useEffect(() => {
+    if (loadMoreRef.current) {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && hasNextPage) {
           fetchNextPage();
         }
-      },
-      {
-        root: document.getElementById('app-main'),
-        rootMargin: '100px',
-      }
-    );
+      });
+      observer.observe(loadMoreRef.current);
 
-    if (loadMoreRef.current) {
-      observerRef.current.observe(loadMoreRef.current);
+      return () => {
+        observer.disconnect();
+      };
     }
-
-    return () => {
-      if (observerRef.current) observerRef.current.disconnect();
-    };
-  }, [hasNextPage, fetchNextPage]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  }, [fetchNextPage, hasNextPage]);
 
   return (
     <>
@@ -61,15 +44,11 @@ export default function ListSection() {
           </div>
         ))
       )}
-      <div ref={loadMoreRef} style={{ height: '1px' }} />
+      <div
+        ref={loadMoreRef}
+        style={{ height: '1px', backgroundColor: 'red' }}
+      />
       <CreateButton />
-      {showAlert && (
-        <Alert
-          status="success"
-          label="신청이 완료되었습니다."
-          setIsOpen={() => setShowAlert(false)}
-        />
-      )}
     </>
   );
 }
