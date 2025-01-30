@@ -7,13 +7,13 @@ import { CoBuyingDetail } from '@interface/cobuying';
 export const cobuyingService = {
   getListPage: async (
     id: string,
-    createdAt: string,
+    createdAtId: string,
     ownerName: string
   ): Promise<CoBuyingPageingRes> => {
     const response = await axiosInstance.get(ENDPOINTS.COBUYING.PAGE, {
       params: {
         ...(id !== '' && { id }),
-        ...(createdAt !== '' && { createdAt }),
+        ...(createdAtId !== '' && { createdAtId }),
         ...(ownerName !== '' && { ownerName }),
       },
     });

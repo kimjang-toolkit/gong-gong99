@@ -17,25 +17,25 @@ export function useCobuyingList() {
     }: {
       pageParam: {
         id: string;
-        createdAt: string;
+        createdAtId: string;
         ownerName: string;
       };
     }) =>
       cobuyingService.getListPage(
         pageParam.id,
-        pageParam.createdAt,
+        pageParam.createdAtId,
         pageParam.ownerName
       ),
     getNextPageParam: (lastPage) => {
       return lastPage.lastEvaluatedKey
         ? {
             id: lastPage.lastEvaluatedKey.id,
-            createdAt: lastPage.lastEvaluatedKey.createdAt,
+            createdAtId: lastPage.lastEvaluatedKey.createdAtId,
             ownerName: lastPage.lastEvaluatedKey.ownerName,
           }
         : undefined;
     },
-    initialPageParam: { id: '', createdAt: '', ownerName: '' },
+    initialPageParam: { id: '', createdAtId: '', ownerName: '' },
     maxPages: 10,
   });
 }
