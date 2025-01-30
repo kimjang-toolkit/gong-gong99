@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { cobuyingService } from '@/services/cobuying';
+import { CreatedAtKey } from 'common-type/src/interface/cobuying';
 
 export const QUERY_KEYS = {
   COBUYING: {
@@ -12,15 +13,7 @@ export const QUERY_KEYS = {
 export function useCobuyingList() {
   return useInfiniteQuery({
     queryKey: QUERY_KEYS.COBUYING.LIST,
-    queryFn: ({
-      pageParam,
-    }: {
-      pageParam: {
-        id: string;
-        createdAtId: string;
-        ownerName: string;
-      };
-    }) =>
+    queryFn: ({ pageParam }: { pageParam: CreatedAtKey }) =>
       cobuyingService.getListPage(
         pageParam.id,
         pageParam.createdAtId,

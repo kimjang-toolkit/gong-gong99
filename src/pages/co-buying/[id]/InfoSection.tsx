@@ -2,7 +2,7 @@ import LinkIcon from '@/assets/icons/link.svg?react';
 import ShareIcon from '@/assets/icons/share.svg?react';
 import useWebShare from '@/hooks/useWebShare';
 import { DivideType } from '@domain/cobuying';
-import { CoBuyingDetail } from '@interface/cobuying';
+import { CoBuyingDetail } from 'common-type/src/interface/cobuying';
 
 export default function InfoSection({ data }: { data: CoBuyingDetail }) {
   const { share } = useWebShare();
