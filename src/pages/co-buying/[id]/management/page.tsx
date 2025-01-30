@@ -16,7 +16,7 @@ export default function ManagementPage() {
         }
       />
       <>
-        <InfoSection type={DivideType.attendee} />
+        {/* <InfoSection type={DivideType.attendee} /> */}
         <ApplyListSection />
       </>
       <BottomButton label="신청 마감하기" />

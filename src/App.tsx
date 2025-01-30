@@ -1,7 +1,11 @@
 import BaseLayout from '@/layouts/BaseLayout';
 import CreatePage from '@/pages/co-buying/create/page';
 import ErrorPage from '@/pages/error-page/page';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from 'react-router-dom';
 import PasswordPage from '@/pages/co-buying/password/page';
 import DetailPage from '@/pages/co-buying/[id]/page';
 import ManagementPage from '@/pages/co-buying/[id]/management/page';
@@ -11,7 +15,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <div>Hello World</div>,
+      element: <Navigate to="/co-buying" replace />,
       errorElement: <ErrorPage />,
       // children: [
       //   {

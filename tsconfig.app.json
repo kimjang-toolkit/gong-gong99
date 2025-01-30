@@ -30,5 +30,5 @@
     "noFallthroughCasesInSwitch": true,
     "composite": true
   },
-  "include": ["src"]
+  "include": ["src", "kimjang-toolkit-gong-gong99-api-interface/src"]
 }
