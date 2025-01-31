@@ -8,7 +8,8 @@
   "compilerOptions": {
     "types": ["vite-plugin-svgr/client"],
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "lib": ["ES2020","ES2023", "DOM", "DOM.Iterable","ESNext"],
   },
   "include": ["svg.d.ts"]
 }
