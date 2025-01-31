@@ -15,10 +15,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@domain/*": ["./kimjang-toolkit-gong-gong99-api-interface/src/domain/*"],
-      "@interface/*": [
-        "./kimjang-toolkit-gong-gong99-api-interface/src/interface/*"
-      ]
+      "@domain/*": ["./common-type/src/domain/*"],
+      "@interface/*": ["./common-type/src/interface/*"]
     },
     /* Linting */
     "strict": true,
