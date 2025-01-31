@@ -69,7 +69,7 @@ export default function QuantityBottomSheet({
               </p>
               <p className="text-body-bold text-primary-400">9,000원</p>
             </section>
-            <section className="flex justify-end w-full mt-1">
+            <section className="flex justify-end w-full mt-1 active:brightness-90">
               <Button type="submit" label="신청하기" size="small" />
             </section>
           </form>

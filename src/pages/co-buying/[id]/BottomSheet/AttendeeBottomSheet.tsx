@@ -63,7 +63,7 @@ export default function AttendeeBottomSheet({
                 {data.totalPrice}원
               </p>
             </section>
-            <section className="flex justify-end w-full mt-1">
+            <section className="flex justify-end w-full mt-1 active:brightness-90">
               <Button type="submit" label="신청하기" size="small" />
             </section>
           </form>
