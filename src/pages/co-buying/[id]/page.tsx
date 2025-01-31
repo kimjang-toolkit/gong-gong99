@@ -14,6 +14,7 @@ export default function DetailPage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [searchParams] = useSearchParams();
+
   const { isLoading, data } = useCobuyingDetail(
     id!,
     searchParams.get('ownerName')!

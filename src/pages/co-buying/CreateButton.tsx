@@ -6,6 +6,7 @@ export default function CreateButton() {
   const [isButtonVisible, setIsButtonVisible] = useState(true);
   const navigate = useNavigate();
   let scrollTimeout: NodeJS.Timeout;
+  const SCROLL_DELAY = 300;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +18,7 @@ export default function CreateButton() {
 
       scrollTimeout = setTimeout(() => {
         setIsButtonVisible(true);
-      }, 500);
+      }, SCROLL_DELAY);
     };
 
     const scrollContainer = document.getElementById('app-main');
