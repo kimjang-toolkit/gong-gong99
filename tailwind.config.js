@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const {nextui} = require("@nextui-org/react");
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}',
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -12,6 +9,7 @@ export default {
       colors: {
         black: '#262626',
         primary: {
+          50: '#E6F1FE',
           200: '#99C7FB',
           300: '#66AAF9',
           400: '#338EF7',
@@ -33,6 +31,20 @@ export default {
           900: '#18181b',
         },
       },
+      keyframes: {
+        slideIn: {
+          '0%': { transform: 'translate(-50%, -100%)' },
+          '100%': { transform: 'translate(-50%, 0)' }
+        },
+        slideOut: {
+          '0%': { transform: 'translate(-50%, 0)' },
+          '100%': { transform: 'translate(-50%, 100%)' }
+        }
+      },
+      animation: {
+        slideIn: 'slideIn 0.3s ease-out forwards',
+        slideOut: 'slideOut 0.3s ease-out forwards'
+      }
     },
     screens: {
       sm: '600px',
@@ -44,8 +56,6 @@ export default {
   },
   darkMode: 'class',
   plugins: [
-    nextui()
-    ,
     ({ addUtilities }) => {
       addUtilities({
         '.default-box': {
@@ -57,14 +67,29 @@ export default {
         '.text-h2': {
           '@apply text-[20px] font-medium leading-7': '',
         },
+        '.text-h2-bold': {
+          '@apply text-[20px] font-bold leading-7': '',
+        },
         '.text-h3-bold': {
-          '@apply text-[18px] font-bold leading-normal': '',
+          '@apply text-[18px] font-semibold leading-normal': '',
         },
         '.text-body': {
           '@apply text-[16px] font-normal leading-normal': '',
         },
+        '.text-body-bold': {
+          '@apply text-[16px] font-semibold leading-normal': '',
+        },
         '.text-caption': {
-          '@apply text-[14px] font-normal leading-normal': '',
+          '@apply text-[14px] font-medium leading-normal': '',
+        },
+        '.text-caption-bold': {
+          '@apply text-[14px] font-semibold leading-normal': '',
+        },
+        '.text-tiny': {
+          '@apply text-[12px] font-normal leading-normal': '',
+        },
+        '.text-tiny-bold': {
+          '@apply text-[12px] font-bold leading-normal': '',
         },
       });
     },

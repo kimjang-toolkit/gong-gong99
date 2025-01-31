@@ -1,8 +1,8 @@
-import ArrowLeft from '@/assets/icons/arrow-left.svg?react';
-import { useNavigate } from 'react-router-dom';
+import ArrowLeft from "@/assets/icons/arrow-left.svg?react";
+import { useNavigate } from "react-router-dom";
 
 interface TitleHeaderProps {
-  title: string;
+  title?: string;
   onBackPress?: () => void;
 }
 
@@ -17,7 +17,7 @@ function TitleHeader({ title, onBackPress }: TitleHeaderProps) {
   };
 
   return (
-    <div className=" py-4 flex items-center pl-4 text-black text-h3-bold pr-[34px] w-full">
+    <div className=" py-4 flex items-center pl-4 text-black text-h3-bold pr-[34px] w-full bg-white">
       <ArrowLeft
         stroke="#262626"
         width={18}

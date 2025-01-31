@@ -9,24 +9,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          submodules: true
+          token: ${{ secrets.GIT_TOKEN }}
 
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20.9
       # 환경변수 설정
-      # - name: Set environment variables
-      #   run: |
-      #     echo "VITE_APP_AWS_DEV_SERVER_API=${{ secrets.VITE_APP_AWS_DEV_SERVER_API }}" >> .env.production
-      #     echo "VITE_SERVER_DEV_API_URL=${{ secrets.DEV_SERVER_API  }}" >> .env.production
-      #     echo "VITE_NAVER_MAP_CLIENT_ID=${{ secrets.VITE_NAVER_MAP_CLIENT_ID }}" >> .env.production
-      #     echo "VITE_ROLE= user" >> .env.production
+      - name: Set environment variables
+        run: |
+          echo "VITE_API_SERVER_URL=${{ secrets.DEV_API_SERVER_URL}}" >> .env.production
       # 노드 모듈 캐싱. package-lock.json 파일 변경 시 캐시를 무효화하고 다시 생성
       - name: Cache node modules
         uses: actions/cache@v3
         with:
           path: ./node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('workhow/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 

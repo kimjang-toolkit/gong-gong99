@@ -9,6 +9,18 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@domain': fileURLToPath(
+        new URL(
+          './kimjang-toolkit-gong-gong99-api-interface/src/domain',
+          import.meta.url
+        )
+      ),
+      '@interface': fileURLToPath(
+        new URL(
+          './kimjang-toolkit-gong-gong99-api-interface/src/interface',
+          import.meta.url
+        )
+      ),
     },
   },
 });
