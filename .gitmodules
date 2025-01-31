@@ -1,3 +1,6 @@
 [submodule "kimjang-toolkit-gong-gong99-api-interface"]
 	path = kimjang-toolkit-gong-gong99-api-interface
 	url = https://github.com/kimjang-toolkit/kimjang-toolkit-gong-gong99-api-interface.git
+[submodule "common-type"]
+	path = common-type
+	url = https://github.com/kimjang-toolkit/kimjang-toolkit-gong-gong99-api-interface.git
