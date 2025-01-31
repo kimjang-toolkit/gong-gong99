@@ -42,8 +42,8 @@ export default function CreateButton() {
             navigate('/co-buying/create');
           }}
           label="+ 공구글"
-          size="small"
-          className="rounded-[20px] shadow-md active:brightness-90"
+          size="large"
+          className="rounded-[28px] shadow-md active:brightness-90"
         />
       </div>
     )
