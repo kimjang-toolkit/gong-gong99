@@ -46,8 +46,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       required &&
       (inputValue === null || inputValue === undefined || inputValue === '')
     ) {
+      console.log('inputValue 왜', inputValue);
+
       setInputError('필수 입력항목입니다.');
     } else if (pattern && !new RegExp(pattern).test(String(inputValue))) {
+      console.log('패턴');
       setInputError(patternErrorMessage);
     } else {
       setInputError(undefined);
