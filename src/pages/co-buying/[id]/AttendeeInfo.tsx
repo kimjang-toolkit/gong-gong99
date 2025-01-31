@@ -1,6 +1,10 @@
-import { CoBuyingDetail } from '@interface/cobuying';
+import { AttendeeCoBuyingDetail } from '@interface/cobuying';
 
-export default function AttendeeInfo({ data }: { data: CoBuyingDetail }) {
+export default function AttendeeInfo({
+  data,
+}: {
+  data: AttendeeCoBuyingDetail;
+}) {
   return (
     <div className="rounded-lg bg-zinc-50 flex flex-col p-2.5 gap-2.5">
       <div className="flex justify-between">
@@ -23,4 +27,4 @@ export default function AttendeeInfo({ data }: { data: CoBuyingDetail }) {
       </div>
     </div>
   );
-} 
+}

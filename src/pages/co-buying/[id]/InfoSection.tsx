@@ -11,7 +11,7 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
 
   return (
     <>
-      <section className="relative flex flex-col w-full pb-3 mb-4 ">
+      <section className="relative flex flex-col w-full pb-3 my-4">
         <p className="text-caption text-default-500">{data.ownerName}</p>
         <p className="text-black text-h3-bold">{data.productName}</p>
         <div className="mt-1">
@@ -20,7 +20,7 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
           </p>
         </div>
         <button
-          className="absolute right-0"
+          className="absolute top-0 right-0 px-2 py-2 rounded-full bg-primary-50 active:brightness-90"
           onClick={() =>
             share(
               `${data.productName} 공구해요`,
@@ -28,7 +28,7 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
             )
           }
         >
-          <ShareIcon />
+          <ShareIcon className="w-4 h-4 pl-[1px]" />
         </button>
       </section>
 
