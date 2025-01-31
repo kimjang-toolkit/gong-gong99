@@ -5,10 +5,8 @@ import { useEffect, useRef } from 'react';
 import { useCobuyingList } from '@/hooks/queries/useCobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate } from 'react-router-dom';
-import {
-  QuantityCoBuyingSummary,
-  AttendeeCoBuyingSummary,
-} from '@interface/cobuying';
+import { QuantityCoBuyingSummary } from '@interface/cobuying';
+import { AttendeeCoBuyingSummary } from '@interface/cobuying';
 
 export default function ListSection() {
   const { data, fetchNextPage, hasNextPage } = useCobuyingList();
@@ -36,21 +34,19 @@ export default function ListSection() {
     <>
       <Banner />
       {data?.pages?.map((page) =>
-        page.coBuyingList.map(
-          (item: AttendeeCoBuyingSummary | QuantityCoBuyingSummary) => (
-            <div
-              key={item.id}
-              onClick={() =>
-                navigate(`/co-buying/${item.id}?ownerName=${item.ownerName}`)
-              }
-            >
-              <CobuyingCard
-                item={item as AttendeeCoBuyingSummary | QuantityCoBuyingSummary}
-              />
-              <hr className="border-b-1 border-default-100" />
-            </div>
-          )
-        )
+        page.coBuyingList.map((item) => (
+          <div
+            key={item.id}
+            onClick={() =>
+              navigate(`/co-buying/${item.id}?ownerName=${item.ownerName}`)
+            }
+          >
+            <CobuyingCard
+              item={item as AttendeeCoBuyingSummary | QuantityCoBuyingSummary}
+            />
+            <hr className="border-b-1 border-default-100" />
+          </div>
+        ))
       )}
       <div ref={loadMoreRef} style={{ height: '3px' }} />
       <CreateButton />
