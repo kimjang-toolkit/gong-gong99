@@ -57,7 +57,7 @@ function CreatePage() {
             <textarea
               name="noticeMessage"
               placeholder="신청자에게 안내할 내용을 자유롭게 입력해주세요."
-              className="w-full text-black border-none focus:outline-none"
+              className="w-full text-black bg-white border-none focus:outline-none"
               maxLength={200}
             />
           </div>
