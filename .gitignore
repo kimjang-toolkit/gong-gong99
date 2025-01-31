@@ -46,6 +46,9 @@ lerna-debug.log*
 *.sln
 *.sw?
 
+# 패키지 잠금 파일
+package-lock.json
+
 # TypeScript
 *.tsbuildinfo
 
