@@ -59,20 +59,14 @@ export default function DetailPage() {
         <AttendeeBottomSheet
           isOpen={isApplyingFormOpen}
           setIsOpen={setIsApplyingFormOpen}
-          data={{
-            quantity: 3,
-            totalPrice: 9000,
-          }}
+          data={data}
         />
       )}
       {data?.type === DivideType.quantity && (
         <QuantityBottomSheet
           isOpen={isApplyingFormOpen}
           setIsOpen={setIsApplyingFormOpen}
-          data={{
-            remainQuantity: 3,
-            unitPrice: 3000,
-          }}
+          data={data}
         />
       )}
     </>

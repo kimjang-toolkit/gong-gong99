@@ -24,7 +24,6 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
           onClick={() =>
             share(
               `${data.productName} 공구해요`,
-              `${data.productName} 공구해요`
             )
           }
         >
