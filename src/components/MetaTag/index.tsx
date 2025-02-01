@@ -8,7 +8,7 @@ interface MetaTagProps {
 }
 
 const DOMAIN = 'https://dgga8vlwyu5nm.cloudfront.net';
-const DEFAULT_IMAGE_URL = '/images/OGImage.png';
+const DEFAULT_IMAGE_URL = '/img/OGImage.png';
 
 export default function MetaTag({
   title = '공공구구: 이웃들과 쉽빠 공구하자',

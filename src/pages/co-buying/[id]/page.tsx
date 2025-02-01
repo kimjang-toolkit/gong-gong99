@@ -1,5 +1,6 @@
 import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
+import MetaTag from '@/components/MetaTag/index';
 import { useCobuyingDetail } from '@/hooks/queries/useCobuying';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBottomSheet';
@@ -29,6 +30,11 @@ export default function DetailPage() {
 
   return (
     <>
+      <MetaTag
+        title={`${data?.productName} 공구해요`}
+        description={`${data?.memo} `}
+        url={`/co-buying/${id}?ownerName=${data?.ownerName}`}
+      />
       <DefaultLayout>
         <RightButtonHeader
           backUrl="/co-buying"
