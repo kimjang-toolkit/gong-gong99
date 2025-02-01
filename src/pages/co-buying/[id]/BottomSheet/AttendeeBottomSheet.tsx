@@ -21,14 +21,14 @@ export default function AttendeeBottomSheet({
     setIsOpen(false);
   });
 
-  const { mutate } = useApplyCobuying(data.id);
+  const { mutateAsync } = useApplyCobuying(data.id);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const attendeeName = formData.get('attendeeName') as string;
     try {
-      await mutate({
+      await mutateAsync({
         coBuyingId: data.id,
         ownerName: data.ownerName,
         attendeeName: attendeeName,
@@ -37,10 +37,8 @@ export default function AttendeeBottomSheet({
       });
       setIsOpen(false);
     } catch (error) {
-      console.log(error);
+      console.log('신청실패했어요', error);
     }
-
-    // mutate 시, 캐시 업데이트를 해주어서 새로고침 없이 데이터를 바꾸도록 처리
   };
 
   const attendeeQuantity = data.totalQuantity / data.targetAttendeeCount;

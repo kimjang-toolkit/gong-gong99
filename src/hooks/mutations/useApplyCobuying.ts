@@ -18,15 +18,14 @@ export default function useApplyCobuying(id: string) {
       });
       showAlert({
         status: 'success',
-        label: '신청이 완료되었습니다.',
+        label: '신청을 완료했어요.',
       });
     },
-    onError: (error) => {
+    onError: () => {
       showAlert({
         status: 'fail',
-        label: '신청에 실패했습니다.',
+        label: '신청에 실패했어요.',
       });
-      throw error;
     },
   });
 }
