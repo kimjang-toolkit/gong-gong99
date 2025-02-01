@@ -1,7 +1,6 @@
 // API 호출
 import { axiosInstance } from '@/api/axios';
 import { ENDPOINTS } from '@/api/endpoints';
-import { ApplicationReq } from '@interface/application';
 import { CoBuyingDetail } from '@interface/cobuying';
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
 
@@ -24,10 +23,6 @@ export const cobuyingService = {
     const response = await axiosInstance.get(ENDPOINTS.COBUYING.DETAIL(id), {
       params: { ownerName },
     });
-    return response.data;
-  },
-  postApply: async (body: ApplicationReq) => {
-    const response = await axiosInstance.post(ENDPOINTS.COBUYING.APPLY, body);
     return response.data;
   },
 };

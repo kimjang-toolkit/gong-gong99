@@ -15,7 +15,6 @@ export default function DetailPage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-
   const { isLoading, data } = useCobuyingDetail(
     id!,
     searchParams.get('ownerName')!
@@ -65,14 +64,20 @@ export default function DetailPage() {
         <AttendeeBottomSheet
           isOpen={isApplyingFormOpen}
           setIsOpen={setIsApplyingFormOpen}
-          data={data}
+          data={{
+            quantity: 3,
+            totalPrice: 9000,
+          }}
         />
       )}
       {data?.type === DivideType.quantity && (
         <QuantityBottomSheet
           isOpen={isApplyingFormOpen}
           setIsOpen={setIsApplyingFormOpen}
-          data={data}
+          data={{
+            remainQuantity: 3,
+            unitPrice: 3000,
+          }}
         />
       )}
     </>

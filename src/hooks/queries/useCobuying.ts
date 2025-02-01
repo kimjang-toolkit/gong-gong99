@@ -33,7 +33,6 @@ export function useCobuyingList() {
   });
 }
 
-// 공구글 상세 조회
 export function useCobuyingDetail(id: string, ownerName: string) {
   return useQuery({
     queryKey: QUERY_KEYS.COBUYING.DETAIL(id),

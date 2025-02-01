@@ -19,10 +19,10 @@ export default function Button({
     <button
       type={type}
       className={cn(
-        ' bg-primary-300',
+        'rounded-[10px] bg-primary-300',
         size === 'small'
-          ? 'rounded-[10px] px-4 py-2 text-caption-bold'
-          : 'rounded-2xl px-5 py-3 text-body-bold',
+          ? 'px-4 py-2 text-caption-bold'
+          : 'px-10 py-3 text-body-bold',
         className
       )}
       onClick={onClick}

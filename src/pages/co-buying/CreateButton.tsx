@@ -6,7 +6,6 @@ export default function CreateButton() {
   const [isButtonVisible, setIsButtonVisible] = useState(true);
   const navigate = useNavigate();
   let scrollTimeout: NodeJS.Timeout;
-  const SCROLL_DELAY = 300;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,7 +17,7 @@ export default function CreateButton() {
 
       scrollTimeout = setTimeout(() => {
         setIsButtonVisible(true);
-      }, SCROLL_DELAY);
+      }, 500);
     };
 
     const scrollContainer = document.getElementById('app-main');
@@ -43,8 +42,8 @@ export default function CreateButton() {
             navigate('/co-buying/create');
           }}
           label="+ 공구글"
-          size="large"
-          className="rounded-[28px] shadow-md active:brightness-90"
+          size="small"
+          className="rounded-[20px] shadow-md active:brightness-90"
         />
       </div>
     )
