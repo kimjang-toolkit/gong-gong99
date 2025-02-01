@@ -7,7 +7,7 @@ interface MetaTagProps {
   url?: string;
 }
 
-const DOMAIN = 'https://dgga8vlwyu5nm.cloudfront.net';
+const DOMAIN = 'https://gonggong99.store';
 const DEFAULT_IMAGE_URL = '/img/OGImage.png';
 
 export default function MetaTag({
