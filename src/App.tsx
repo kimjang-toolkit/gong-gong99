@@ -10,7 +10,6 @@ import PasswordPage from '@/pages/co-buying/password/page';
 import DetailPage from '@/pages/co-buying/[id]/page';
 import ManagementPage from '@/pages/co-buying/[id]/management/page';
 import CoBuyingPage from '@/pages/co-buying/page';
-import MetaTag from '@/components/MetaTag/index';
 
 function App() {
   const router = createBrowserRouter([
@@ -55,7 +54,6 @@ function App() {
 
   return (
     <BaseLayout>
-      <MetaTag title="공공구구: 이웃들과 쉽빠 공구하자" />
       <RouterProvider router={router} />
     </BaseLayout>
   );
