@@ -10,7 +10,6 @@ import PasswordPage from '@/pages/co-buying/password/page';
 import DetailPage from '@/pages/co-buying/[id]/page';
 import ManagementPage from '@/pages/co-buying/[id]/management/page';
 import CoBuyingPage from '@/pages/co-buying/page';
-import MetaTag from '@/components/MetaTag/index';
 
 function App() {
   const router = createBrowserRouter([
@@ -55,7 +54,6 @@ function App() {
 
   return (
     <BaseLayout>
-      <MetaTag />
       <RouterProvider router={router} />
     </BaseLayout>
   );
