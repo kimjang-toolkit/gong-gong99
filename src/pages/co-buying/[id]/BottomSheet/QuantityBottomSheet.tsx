@@ -2,16 +2,14 @@ import Button from '@/components/Button';
 import StepperButton from '@/components/Button/StepperButton';
 import Input from '@/components/Input';
 import useOutsideClick from '@/hooks/useOutsideClick';
+import { QuantityCoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';
 import { Sheet } from 'react-modal-sheet';
 
 interface ApplyBottomSheetProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  data: {
-    remainQuantity: number; // 남은 수량
-    unitPrice: number; // 단가
-  };
+  data: QuantityCoBuyingDetail;
 }
 
 export default function QuantityBottomSheet({
@@ -67,7 +65,9 @@ export default function QuantityBottomSheet({
               <p className="flex py-1 text-tiny text-default-700">
                 <p className="text-primary-400">{quantity}</p>개 구매액
               </p>
-              <p className="text-body-bold text-primary-400">9,000원</p>
+              <p className="text-body-bold text-primary-400">
+                {quantity * data.unitPrice}
+              </p>
             </section>
             <section className="flex justify-end w-full mt-1 active:brightness-90">
               <Button type="submit" label="신청하기" size="small" />

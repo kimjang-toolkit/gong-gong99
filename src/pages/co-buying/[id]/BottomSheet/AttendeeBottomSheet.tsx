@@ -1,15 +1,13 @@
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import useOutsideClick from '@/hooks/useOutsideClick';
+import { AttendeeCoBuyingDetail } from '@interface/cobuying';
 import { Sheet } from 'react-modal-sheet';
 
 interface ApplyBottomSheetProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  data: {
-    quantity: number; // 인 당 구매수량
-    totalPrice: number;
-  };
+  data: AttendeeCoBuyingDetail;
 }
 
 export default function AttendeeBottomSheet({
@@ -27,6 +25,8 @@ export default function AttendeeBottomSheet({
     setIsOpen(false);
     // mutate 시, 캐시 업데이트를 해주어서 새로고침 없이 데이터를 바꾸도록 처리
   };
+
+  const attendeeQuantity = data.totalQuantity / data.targetAttendeeCount;
 
   return (
     <Sheet
@@ -53,14 +53,14 @@ export default function AttendeeBottomSheet({
             />
             <section className="flex justify-between p-4 border rounded-xl border-default-200">
               <p className="mb-1 text-caption text-default-600">구매 수량</p>
-              <p className="text-body-bold"> {data.quantity} 개</p>
+              <p className="text-body-bold">{attendeeQuantity} 개</p>
             </section>
             <section className="flex items-start justify-between px-1">
               <p className="flex py-1 text-tiny text-default-700">
-                <p className="text-primary-400">{data.quantity}</p>개 구매액
+                <p className="text-primary-400">{attendeeQuantity}</p>개 구매액
               </p>
               <p className="text-body-bold text-primary-400">
-                {data.totalPrice}원
+                {data.perAttendeePrice}원
               </p>
             </section>
             <section className="flex justify-end w-full mt-1 active:brightness-90">
