@@ -2,10 +2,13 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { cobuyingService } from '@/services/cobuying';
 import { QUERY_KEYS } from '@/hooks/queries/useCobuying';
 import { ApplicationReq } from '@interface/application';
+import useAlertStore from '@/stores/alertStore';
 
 // 공구 신청
 export default function useApplyCobuying(id: string) {
   const queryClient = useQueryClient(); // returns the current QueryClient instance.
+  // 신청 후 알림창 띄우기
+  const { showAlert } = useAlertStore();
 
   return useMutation({
     mutationFn: (body: ApplicationReq) => cobuyingService.postApply(body),
@@ -13,10 +16,17 @@ export default function useApplyCobuying(id: string) {
       queryClient.invalidateQueries({
         queryKey: QUERY_KEYS.COBUYING.DETAIL(id),
       });
+      showAlert({
+        status: 'success',
+        label: '신청이 완료되었습니다.',
+      });
     },
     onError: (error) => {
-      console.log(error);
-      // 에러처리 및 alert 컴포넌트 띄우기
+      showAlert({
+        status: 'fail',
+        label: '신청에 실패했습니다.',
+      });
+      throw error;
     },
   });
 }

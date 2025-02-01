@@ -1,5 +1,6 @@
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+import useApplyCobuying from '@/hooks/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { AttendeeCoBuyingDetail } from '@interface/cobuying';
 import { Sheet } from 'react-modal-sheet';
@@ -10,6 +11,7 @@ interface ApplyBottomSheetProps {
   data: AttendeeCoBuyingDetail;
 }
 
+// 인원으로 나누는 공구 신청 모달
 export default function AttendeeBottomSheet({
   isOpen,
   setIsOpen,
@@ -19,10 +21,25 @@ export default function AttendeeBottomSheet({
     setIsOpen(false);
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const { mutate } = useApplyCobuying(data.id);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('submit');
-    setIsOpen(false);
+    const formData = new FormData(e.target as HTMLFormElement);
+    const attendeeName = formData.get('attendeeName') as string;
+    try {
+      await mutate({
+        coBuyingId: data.id,
+        ownerName: data.ownerName,
+        attendeeName: attendeeName,
+        attendeeQuantity,
+        attendeePrice: data.perAttendeePrice,
+      });
+      setIsOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+
     // mutate 시, 캐시 업데이트를 해주어서 새로고침 없이 데이터를 바꾸도록 처리
   };
 
