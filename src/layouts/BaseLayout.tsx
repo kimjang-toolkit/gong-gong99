@@ -1,3 +1,4 @@
+import AlertProvider from '@/providers/alertProvider';
 import ModalProvider from '@/providers/modalProvider';
 
 const BaseLayout = ({ children }: { children: React.ReactNode }) => {
@@ -12,6 +13,7 @@ const BaseLayout = ({ children }: { children: React.ReactNode }) => {
       <main className="relative h-svh w-full max-w-[500px] shadow-xl lg:min-w-[500px]">
         {children}
         <ModalProvider />
+        <AlertProvider />
       </main>
     </div>
   );

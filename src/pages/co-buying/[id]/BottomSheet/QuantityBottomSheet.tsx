@@ -1,17 +1,16 @@
 import Button from '@/components/Button';
 import StepperButton from '@/components/Button/StepperButton';
 import Input from '@/components/Input';
+import useApplyCobuying from '@/hooks/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
+import { QuantityCoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';
 import { Sheet } from 'react-modal-sheet';
 
 interface ApplyBottomSheetProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
-  data: {
-    remainQuantity: number; // 남은 수량
-    unitPrice: number; // 단가
-  };
+  data: QuantityCoBuyingDetail;
 }
 
 export default function QuantityBottomSheet({
@@ -24,12 +23,29 @@ export default function QuantityBottomSheet({
   });
 
   const [quantity, setQuantity] = useState(1); // 구매 수량
+  const totalPrice = quantity * data.unitPrice; // 총 구매 금액
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const { mutateAsync } = useApplyCobuying(data.id);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('submit');
+    const formData = new FormData(e.target as HTMLFormElement);
+    const attendeeName = formData.get('attendeeName') as string;
+    try {
+      await mutateAsync({
+        coBuyingId: data.id,
+        ownerName: data.ownerName,
+        attendeeName: attendeeName,
+        attendeeQuantity: quantity,
+        attendeePrice: totalPrice,
+      });
+      setIsOpen(false);
+      setQuantity(1);
+    } catch (error) {
+      console.log('신청실패했어요', error);
+    }
+
     setIsOpen(false);
-    // mutate 시, 캐시 업데이트를 해주어서 새로고침 없이 데이터를 바꾸도록 처리
   };
 
   return (
@@ -67,9 +83,11 @@ export default function QuantityBottomSheet({
               <p className="flex py-1 text-tiny text-default-700">
                 <p className="text-primary-400">{quantity}</p>개 구매액
               </p>
-              <p className="text-body-bold text-primary-400">9,000원</p>
+              <p className="text-body-bold text-primary-400">
+                {totalPrice.toLocaleString()}원
+              </p>
             </section>
-            <section className="flex justify-end w-full mt-1">
+            <section className="flex justify-end w-full mt-1 active:brightness-90">
               <Button type="submit" label="신청하기" size="small" />
             </section>
           </form>

@@ -4,6 +4,7 @@ export const ENDPOINTS = {
     PAGE: '/co-buying/page',
     DETAIL: (id: string) => `/co-buying/${id}`,
     CREATE: '/co-buying',
+    APPLY: '/co-buying/applications',
     PWD_CHECK: (id: string) => `/co-buying/auth/${id}`,
   },
 } as const;
