@@ -55,7 +55,7 @@ function App() {
 
   return (
     <BaseLayout>
-      <MetaTag title="공공구구: 이웃들과 쉽빠 공구하자" />
+      <MetaTag />
       <RouterProvider router={router} />
     </BaseLayout>
   );
