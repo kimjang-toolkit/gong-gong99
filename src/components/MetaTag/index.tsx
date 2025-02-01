@@ -7,23 +7,38 @@ interface MetaTagProps {
   url?: string;
 }
 
-const DOMAIN = 'https://gonggong99.store';
+const DOMAIN = 'https://gonggong99.store/';
 const DEFAULT_IMAGE_URL = '/img/OGImage.png';
+const DEFAULT_TITLE = '공공구구: 이웃들과 쉽빠 공구하자';
+const DEFAULT_DESCRIPTION = '눌러서 공구글 보러가기';
 
 export default function MetaTag({
-  title = '공공구구: 이웃들과 쉽빠 공구하자',
-  description = '눌러서 공구글 보러가기',
-  imageUrl = DEFAULT_IMAGE_URL,
+  title,
+  description,
+  imageUrl,
   url,
 }: MetaTagProps) {
   const fullUrl = url ? `${DOMAIN}${url}` : DOMAIN;
   return (
     <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      {imageUrl && <meta property="og:image" content={imageUrl} />}
+      <title>{title ? title : DEFAULT_TITLE}</title>
+      <meta
+        name="description"
+        content={description ? description : DEFAULT_DESCRIPTION}
+      />
+
+      <meta name="type" content="website" />
+      <meta property="og:title" content={title ? title : DEFAULT_TITLE} />
+      <meta
+        property="og:description"
+        content={description ? description : DEFAULT_DESCRIPTION}
+      />
+      {imageUrl && (
+        <meta
+          property="og:image"
+          content={imageUrl ? imageUrl : DEFAULT_IMAGE_URL}
+        />
+      )}
       <meta property="og:url" content={fullUrl} />
     </Helmet>
   );
