@@ -2,9 +2,9 @@ import BottomButton from '@/components/Button/BottomButton';
 import TitleHeader from '@/components/Header/TitleHeader';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import CommonForm from '@/pages/co-buying/create/CommonForm';
-import DevideByQuantityForm from '@/pages/co-buying/create/DevideByQuantityForm';
-import DevideByAttendeeForm from '@/pages/co-buying/create/DevideByAttendeeForm';
-import DevideTypeSection from '@/pages/co-buying/create/DevideTypeSection';
+import DivideByQuantityForm from '@/pages/co-buying/create/DivideByQuantityForm';
+import DivideByAttendeeForm from '@/pages/co-buying/create/DivideByAttendeeForm';
+import DivideTypeSection from '@/pages/co-buying/create/DivideTypeSection';
 
 import { useNavigate } from 'react-router-dom';
 import useFormValidation from '@/hooks/useFormButtonValidation';
@@ -44,11 +44,11 @@ function CreatePage() {
         <CommonForm />
 
         {/* 2. 공구 나눔방식 선택 */}
-        <DevideTypeSection />
+        <DivideTypeSection />
 
         {/* 3. 공구 나눔방식 선택에 따라 수량으로 나누기 폼/ 인원으로 나누기 폼 */}
-        {type === DivideType.quantity && <DevideByQuantityForm />}
-        {type === DivideType.attendee && <DevideByAttendeeForm />}
+        {type === DivideType.quantity && <DivideByQuantityForm />}
+        {type === DivideType.attendee && <DivideByAttendeeForm />}
 
         {/* 4. 알리는 말 */}
         <section className="flex flex-col gap-2">
@@ -57,7 +57,7 @@ function CreatePage() {
             <textarea
               name="noticeMessage"
               placeholder="신청자에게 안내할 내용을 자유롭게 입력해주세요."
-              className="w-full text-black border-none focus:outline-none"
+              className="w-full text-black bg-white border-none focus:outline-none"
               maxLength={200}
             />
           </div>

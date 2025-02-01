@@ -2,20 +2,20 @@ import { cn } from '@/lib/utils';
 import useFormStore from '@/stores/coBuyingFormStore';
 import { DivideType } from '@domain/cobuying';
 
-export default function DevideTypeSection() {
+export default function DivideTypeSection() {
   const { type, setType } = useFormStore();
 
   // 공구방식 선택에 따른 CSS
   const selectedTypeClass = 'bg-primary-300 text-white';
   const unselectedTypeClass = 'bg-default-300 text-default-600';
 
-  const devideTypeDescription: Record<DivideType, string> = {
+  const divideTypeDescription: Record<DivideType, string> = {
     [DivideType.quantity]: '참여자들이 필요한 수량만큼 선택할 수 있도록 해요.',
     [DivideType.attendee]:
       '참여인원 수대로 금액 및 상품수량을 균등하게 나눠요.',
   };
 
-  const handleDevideTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDivideTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setType(e.currentTarget.id as DivideType);
   };
@@ -32,7 +32,7 @@ export default function DevideTypeSection() {
               : unselectedTypeClass
           )}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-            handleDevideTypeChange(e)
+            handleDivideTypeChange(e)
           }
         >
           수량으로 나누기
@@ -46,14 +46,14 @@ export default function DevideTypeSection() {
               : unselectedTypeClass
           )}
           onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-            handleDevideTypeChange(e)
+            handleDivideTypeChange(e)
           }
         >
           인원으로 나누기
         </button>
       </div>
       <p className="mt-1 text-tiny text-default-500">
-        * {devideTypeDescription[type]}
+        * {divideTypeDescription[type]}
       </p>
     </section>
   );

@@ -1,50 +1,51 @@
-# React + TypeScript + Vite
+# 프로젝트 이름
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+공공구구
 
-Currently, two official plugins are available:
+## 설치 방법
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Git 저장소 클론**
 
-## Expanding the ESLint configuration
+   ```bash
+   git clone https://github.com/kimjang-toolkit/gong-gong99.git
+   cd gong-gong99
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- 서브 모듈 클론 : 반드시 `common-type` 폴더명으로 클론하기
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+   git submodule add https://github.com/kimjang-toolkit/kimjang-toolkit-gong-gong99-api-interface.git common-type
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. **필요한 패키지 설치**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+   - Node.js 환경에서:
+     ```bash
+     npm install
+     ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+3. **환경 변수 설정**
+   - `.env` 파일을 생성하고 필요한 환경 변수를 설정
+   - ```
+     VITE_API_SERVER_URL=서버 api
+     ```
+
+## 프로그램 실행 방법
+
+1. **개발 서버 실행**
+
+   ```bash
+   npm run dev
+   ```
+
+2. **웹 브라우저 실행**
+   - 브라우저를 열고 `http://localhost:5173` (또는 설정한 포트)로 이동합니다.
+
+## github 사용법
+
+1. 이 저장소를 포크합니다.
+2. 새로운 브랜치를 생성합니다. (`git checkout -b feat/#이슈번호/새로운기능`)
+3. 변경 사항을 커밋합니다. (`git commit -m '새로운 기능 추가'`)
+4. 브랜치에 푸시합니다. (`git push origin feat/#이슈번호/새로운기능`)
+5. pr
