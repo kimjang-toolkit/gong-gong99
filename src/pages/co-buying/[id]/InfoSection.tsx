@@ -66,9 +66,9 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
           {data.memo}
         </div>
       </section>
-      <section className="flex justify-end gap-2">
+      <section className="flex justify-end gap-2.5">
         <button
-          className="px-2 py-2 rounded-full bg-primary-50 active:brightness-90"
+          className="px-2.5 py-2.5 rounded-full bg-primary-50 active:brightness-90"
           onClick={() => share(`${data.productName} 공구해요`)}
         >
           <ShareIcon className="w-4 h-4 pl-[1px]" />
