@@ -2,13 +2,13 @@ import KakaoIcon from '@/assets/icons/kakao.svg?react';
 
 interface KakaoShareButtonProps {
   title: string;
-  url: string;
+  endpoint: string;
   description: string;
 }
 
 export default function KakaoShareButton({
   title,
-  url,
+  endpoint,
   description,
 }: KakaoShareButtonProps) {
   const handleShare = () => {
@@ -17,7 +17,7 @@ export default function KakaoShareButton({
       templateArgs: {
         title,
         description: description,
-        url: url,
+        endpoint: endpoint,
       },
     });
   };

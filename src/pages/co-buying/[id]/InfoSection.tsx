@@ -75,8 +75,12 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
         </button>
         <KakaoShareButton
           title={data.productName}
-          url={`${window.location.origin}/co-buying/${data.id}?ownerName=${data.ownerName}`}
-          description={data.memo || ''}
+          endpoint={`co-buying/${data.id}?ownerName=${data.ownerName}`}
+          description={`${data.ownerName}님이 올리신 공구! ${
+            type === DivideType.attendee
+              ? `인당 ${data.perAttendeePrice.toLocaleString()}원`
+              : `개당 ${data.unitPrice.toLocaleString()}원`
+          } !!`}
         />
       </section>
     </>
