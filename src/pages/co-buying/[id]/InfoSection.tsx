@@ -1,9 +1,10 @@
-import ShareIcon from '@/assets/icons/share.svg?react';
+import ShareIcon from '@/assets/icons/link.svg?react';
 import useWebShare from '@/hooks/useWebShare';
 import { DivideType } from '@domain/cobuying';
 import { CoBuyingDetail } from '@interface/cobuying';
 import AttendeeInfo from './AttendeeInfo';
 import UnitInfo from './UnitInfo';
+import KakaoShareButton from '@/components/KakaoShareButton';
 
 export default function InfoSection({ data }: { data: CoBuyingDetail }) {
   const { share } = useWebShare();
@@ -11,7 +12,7 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
 
   return (
     <>
-      <section className="relative flex flex-col w-full pb-3 my-4">
+      <section className="flex flex-col w-full pb-3 my-4">
         <p className="text-caption text-default-500">{data.ownerName}</p>
         <p className="text-black text-h3-bold">{data.productName}</p>
         <div className="mt-1">
@@ -19,16 +20,6 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
             {`${data.deadline} 마감`}
           </p>
         </div>
-        <button
-          className="absolute top-0 right-0 px-2 py-2 rounded-full bg-primary-50 active:brightness-90"
-          onClick={() =>
-            share(
-              `${data.productName} 공구해요`,
-            )
-          }
-        >
-          <ShareIcon className="w-4 h-4 pl-[1px]" />
-        </button>
       </section>
 
       <p className="text-caption text-default-600 mb-1.5">기본정보</p>
@@ -74,6 +65,23 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
         <div className="rounded-lg text-caption bg-zinc-50  p-2.5">
           {data.memo}
         </div>
+      </section>
+      <section className="flex justify-end gap-2.5">
+        <button
+          className="px-2.5 py-2.5 rounded-full bg-primary-50 active:brightness-90"
+          onClick={() => share(`${data.productName} 공구해요`)}
+        >
+          <ShareIcon className="w-4 h-4 pl-[1px]" />
+        </button>
+        <KakaoShareButton
+          title={data.productName}
+          endpoint={`co-buying/${data.id}?ownerName=${data.ownerName}`}
+          description={`${data.ownerName}님이 올리신 공구! ${
+            type === DivideType.attendee
+              ? `인당 ${data.perAttendeePrice.toLocaleString()}원`
+              : `개당 ${data.unitPrice.toLocaleString()}원`
+          } !!`}
+        />
       </section>
     </>
   );

@@ -10,8 +10,11 @@ import PasswordPage from '@/pages/co-buying/password/page';
 import DetailPage from '@/pages/co-buying/[id]/page';
 import ManagementPage from '@/pages/co-buying/[id]/management/page';
 import CoBuyingPage from '@/pages/co-buying/page';
+import { useKakaoInit } from '@/hooks/useKakaoInit';
 
 function App() {
+  useKakaoInit(); // 카카오 초기화
+
   const router = createBrowserRouter([
     {
       path: '/',
