@@ -21,6 +21,7 @@ jobs:
       - name: Set environment variables
         run: |
           echo "VITE_API_SERVER_URL=${{ secrets.DEV_API_SERVER_URL}}" >> .env.production
+          echo "VITE_APP_KAKAO_KEY=${{ secrets.VITE_APP_KAKAO_KEY }}" >> .env.production
       # 노드 모듈 캐싱. package-lock.json 파일 변경 시 캐시를 무효화하고 다시 생성
       - name: Cache node modules
         uses: actions/cache@v3
