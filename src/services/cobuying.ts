@@ -33,12 +33,12 @@ export const cobuyingService = {
   },
   pwdCheck: async (id: string, body: UserAuthReq) => {
     const response = await axiosInstance.post(
-      ENDPOINTS.COBUYING.PWD_CHECK(id),
+      ENDPOINTS.AUTH.PWD_CHECK(id),
       body
     );
     const token = response.headers['authorization'].split(' ')[1];
     sessionStorage.setItem('token', token);
-    
+
     return response.status;
   },
 };
