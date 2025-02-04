@@ -37,6 +37,7 @@ export default function PasswordPage() {
       );
       console.log(response);
     }
+    
     // 비밀번호 확인페이지
     else {
       console.log(data);
