@@ -11,6 +11,7 @@ import DetailPage from '@/pages/co-buying/[id]/page';
 import ManagementPage from '@/pages/co-buying/[id]/management/page';
 import CoBuyingPage from '@/pages/co-buying/page';
 import { useKakaoInit } from '@/hooks/useKakaoInit';
+import ProtectedRoute from '@/routes/ProtectedRoute';
 
 function App() {
   useKakaoInit(); // 카카오 초기화
@@ -47,10 +48,17 @@ function App() {
       children: [
         { index: true, element: <CoBuyingPage /> },
         { path: ':id', element: <DetailPage /> }, // 공구글 상세페이지
-        { path: ':id/management', element: <ManagementPage /> }, // 공구글 관리페이지 , 추후 loader 추가 또는 private router씌우기
         { path: ':id?/password', element: <PasswordPage /> },
         { path: 'create', element: <CreatePage /> }, // 공구글 작성페이지
         // 비밀번호를 작성하는 페이지를 라우터로 관리해야할까? 상태관리는?
+      ],
+    },
+    {
+      path: '/cobuying:id/management',
+      element: <ProtectedRoute />,
+      children: [
+        { index: true, element: <ManagementPage /> }, // 공구글 관리페이지
+        // {index:'edit', element:<EditPage/>}
       ],
     },
   ]);
