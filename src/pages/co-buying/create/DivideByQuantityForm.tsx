@@ -1,5 +1,4 @@
 import Input from '@/components/Input/index';
-import { formatNumberWithCommas } from '@/util/formatNumberWithCommas';
 import useFormStore from '@/stores/coBuyingFormStore';
 
 export default function DivideByQuantityForm() {
@@ -36,9 +35,7 @@ export default function DivideByQuantityForm() {
           {/* 내구매량 * 상품 총액 / 상품 총 수량 */}
           <p className="text-tiny text-default-600">내 부담액</p>
           <p className="text-tiny text-primary-600">
-            {ownerQuantity && unitPrice
-              ? formatNumberWithCommas(unitPrice * ownerQuantity)
-              : '-'}
+            {ownerQuantity && unitPrice ? unitPrice * ownerQuantity : '-'}
           </p>
         </div>
         <p className="text-tiny text-default-400">+</p>
@@ -49,7 +46,7 @@ export default function DivideByQuantityForm() {
           </p>
           <p className="text-tiny text-primary-600">
             {totalPrice && unitPrice && ownerQuantity
-              ? formatNumberWithCommas(totalPrice - unitPrice * ownerQuantity)
+              ? totalPrice - unitPrice * ownerQuantity
               : '-'}
           </p>
         </div>
@@ -58,7 +55,7 @@ export default function DivideByQuantityForm() {
           {/* 상품총액  */}
           <p className="text-tiny text-default-600 min-w-[100px]">상품 총액</p>
           <p className="text-tiny text-default-600">
-            {totalPrice ? formatNumberWithCommas(totalPrice) : '-'} 원
+            {totalPrice ? totalPrice.toLocaleString() : '-'} 원
           </p>
         </div>
       </section>

@@ -1,4 +1,3 @@
-import { formatNumberWithCommas } from '@/util/formatNumberWithCommas';
 import { DivideType } from '@domain/cobuying';
 import { QuantityCoBuyingSummary } from '@interface/cobuying';
 import { AttendeeCoBuyingSummary } from '@interface/cobuying';
@@ -16,10 +15,10 @@ export default function CobuyingCard({
 
   const perPrice = () => {
     if (type === DivideType.attendee) {
-      return `인 당 ${formatNumberWithCommas(perAttendeePrice)}원`;
+      return `인 당 ${perAttendeePrice.toLocaleString()}원`;
     }
     if (type === DivideType.quantity) {
-      return `개 당 ${formatNumberWithCommas(unitPrice)}원`;
+      return `개 당 ${unitPrice.toLocaleString()}원`;
     }
   };
 
@@ -28,7 +27,7 @@ export default function CobuyingCard({
       <p className="font-medium text-black">{productName}</p>
       <p className="text-tiny text-default-500">{deadline} 마감</p>
       <div className="flex items-center">
-        <p className="mr-1 text-body-bold">{`${formatNumberWithCommas(totalPrice)}원`}</p>
+        <p className="mr-1 text-body-bold">{`${totalPrice.toLocaleString()}원`}</p>
         <p className="text-caption text-default-700">{`(${perPrice()})`}</p>
       </div>
       <div className="flex *:text-tiny *:text-default-600 [&>p:nth-child(2)]:text-primary-500 self-end mt-1">

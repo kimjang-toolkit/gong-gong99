@@ -1,24 +1,7 @@
-import { formatNumberWithCommas } from '@/util/formatNumberWithCommas';
+import { CoBuyingDetail } from '@interface/cobuying';
 
-export default function ApplyListSection() {
-  const mock = [
-    {
-      attendeeName: '조승효',
-      appliedQuantity: 3,
-      attendeePrice: 10000,
-    },
-    {
-      attendeeName: '오찬솔솔',
-      appliedQuantity: 3,
-      attendeePrice: 1000000,
-    },
-    {
-      attendeeName: '오찬솔',
-      appliedQuantity: 3,
-      attendeePrice: 10000,
-    },
-  ];
-
+export default function ApplyListSection({ data }: { data: CoBuyingDetail }) {
+  const { attendeeList } = data;
   return (
     <>
       <p className="text-caption text-default-500 mb-1.5">신청 현황</p>
@@ -31,12 +14,12 @@ export default function ApplyListSection() {
           </tr>
         </thead>
         <tbody>
-          {mock.map((data) => (
+          {attendeeList?.map((attendee) => (
             <tr className="*:py-1.5 *:text-center *:text-caption">
-              <td className="min-w-[30%]">{data.attendeeName}</td>
-              <td>{data.appliedQuantity}</td>
+              <td className="min-w-[30%]">{attendee.attendeeName}</td>
+              <td>{attendee.appliedQuantity}</td>
               <td className="min-w-[45%]">
-                {formatNumberWithCommas(data.attendeePrice)}원
+                {attendee.attendeePrice.toLocaleString()}원
               </td>
             </tr>
           ))}
