@@ -30,21 +30,24 @@ export default {
           800: '#27272a',
           900: '#18181b',
         },
+        system: {
+          error: '#FF5151',
+        },
       },
       keyframes: {
         slideIn: {
           '0%': { transform: 'translate(-50%, -100%)' },
-          '100%': { transform: 'translate(-50%, 0)' }
+          '100%': { transform: 'translate(-50%, 0)' },
         },
         slideOut: {
           '0%': { transform: 'translate(-50%, 0)' },
-          '100%': { transform: 'translate(-50%, 100%)' }
-        }
+          '100%': { transform: 'translate(-50%, 100%)' },
+        },
       },
       animation: {
         slideIn: 'slideIn 0.3s ease-out forwards',
-        slideOut: 'slideOut 0.3s ease-out forwards'
-      }
+        slideOut: 'slideOut 0.3s ease-out forwards',
+      },
     },
     screens: {
       sm: '600px',

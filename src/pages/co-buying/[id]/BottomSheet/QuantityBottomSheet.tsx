@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
 import StepperButton from '@/components/Button/StepperButton';
-import Input from '@/components/Input';
+import Input from '@/components/Input/legacy';
 import useApplyCobuying from '@/hooks/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { QuantityCoBuyingDetail } from '@interface/cobuying';

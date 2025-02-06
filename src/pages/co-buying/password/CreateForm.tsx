@@ -1,4 +1,4 @@
-import Input from '@/components/Input';
+import Input from '@/components/Input/legacy';
 import { useState } from 'react';
 
 export default function CreateForm() {

@@ -1,5 +1,5 @@
 import Button from '@/components/Button';
-import Input from '@/components/Input';
+import Input from '@/components/Input/legacy';
 import useApplyCobuying from '@/hooks/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { AttendeeCoBuyingDetail } from '@interface/cobuying';

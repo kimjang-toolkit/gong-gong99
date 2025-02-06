@@ -1,4 +1,4 @@
-import Input from '@/components/Input/index';
+import Input from '@/components/Input/legacy';
 import useFormStore from '@/stores/coBuyingFormStore';
 
 export default function DivideByAttendeeForm() {
