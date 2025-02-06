@@ -1,5 +1,5 @@
 import FormButton from '@/components/Form/FormButton';
-import FormErrorMessage from '@/components/Form/FormErrorMessage';
+import FormInput from '@/components/Form/FormInput';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Children, createElement, isValidElement } from 'react';
@@ -56,9 +56,8 @@ function Form<T extends FieldValues>({
   );
 }
 
-// Form.Input = FormInput;
+Form.Input = FormInput;
 // Form.Selector = FormSelector;
-Form.ErrorMessage = FormErrorMessage;
 Form.Button = FormButton;
 
 export default Form;

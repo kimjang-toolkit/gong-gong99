@@ -1,5 +1,6 @@
 import { InputContext } from '@/components/Input/context';
 import InputClearButton from '@/components/Input/InputClearButton';
+import InputDescription from '@/components/Input/InputDescription';
 import InputField from '@/components/Input/InputField';
 import InputLabel from '@/components/Input/InputLabel';
 import InputSuffix from '@/components/Input/InputSuffix';
@@ -9,6 +10,7 @@ import { ReactNode } from 'react';
 export interface InputProps {
   children: ReactNode;
   value: string;
+  description?: string;
   variant?: 'bordered' | 'underlined';
   setValue: (value: string) => void;
   className?: string;
@@ -18,10 +20,11 @@ export default function InputWrapper({
   value,
   setValue,
   variant = 'bordered',
+  description,
   className,
 }: InputProps) {
   return (
-    <InputContext.Provider value={{ value, setValue, variant }}>
+    <InputContext.Provider value={{ value, setValue, variant, description }}>
       <div
         className={cn(
           'relative w-full flex items-center ',
@@ -42,3 +45,4 @@ InputWrapper.Field = InputField;
 InputWrapper.Label = InputLabel;
 InputWrapper.Suffix = InputSuffix;
 InputWrapper.ClearButton = InputClearButton;
+InputWrapper.Description = InputDescription;
