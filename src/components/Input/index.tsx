@@ -6,7 +6,7 @@ import InputSuffix from '@/components/Input/InputSuffix';
 import { cn } from '@/lib/utils';
 import { ReactNode } from 'react';
 
-interface InputProps {
+export interface InputProps {
   children: ReactNode;
   value: string;
   variant?: 'bordered' | 'underlined';
