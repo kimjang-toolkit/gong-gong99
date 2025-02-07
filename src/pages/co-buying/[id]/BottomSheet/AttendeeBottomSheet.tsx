@@ -1,9 +1,10 @@
 import Button from '@/components/Button';
-import Input from '@/components/Input/legacy';
 import useApplyCobuying from '@/services/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { AttendeeCoBuyingDetail } from '@interface/cobuying';
 import { Sheet } from 'react-modal-sheet';
+import Input from '@/components/Input';
+import { useState } from 'react';
 
 interface ApplyBottomSheetProps {
   isOpen: boolean;
@@ -21,12 +22,10 @@ export default function AttendeeBottomSheet({
     setIsOpen(false);
   });
 
+  const [attendeeName, setAttendeeName] = useState('');
   const { mutateAsync } = useApplyCobuying(data.id);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const attendeeName = formData.get('attendeeName') as string;
+  const handleSubmit = async () => {
     try {
       await mutateAsync({
         coBuyingId: data.id,
@@ -53,19 +52,19 @@ export default function AttendeeBottomSheet({
       <Sheet.Container ref={sheetRef}>
         <Sheet.Header />
         <Sheet.Content>
-          <form
-            className="flex flex-col gap-4 px-4 mb-8"
-            onSubmit={handleSubmit}
-          >
+          <div className="flex flex-col gap-4 px-4 mb-8">
             <header className="w-full text-left text-body-bold">
               공구 신청
             </header>
             <Input
-              name="attendeeName"
-              label="이름"
-              placeholder="이름을 입력해주세요."
+              value={attendeeName}
+              setValue={(value) => setAttendeeName(value)}
               variant="bordered"
-            />
+            >
+              <Input.Label>이름</Input.Label>
+              <Input.Field />
+            </Input>
+
             <section className="flex justify-between p-4 border rounded-xl border-default-200">
               <p className="mb-1 text-caption text-default-600">구매 수량</p>
               <p className="text-body-bold">{attendeeQuantity} 개</p>
@@ -79,9 +78,14 @@ export default function AttendeeBottomSheet({
               </p>
             </section>
             <section className="flex justify-end w-full mt-1 active:brightness-90">
-              <Button type="submit" label="신청하기" size="small" />
+              <Button
+                type="submit"
+                label="신청하기"
+                size="small"
+                onClick={handleSubmit}
+              />
             </section>
-          </form>
+          </div>
         </Sheet.Content>
       </Sheet.Container>
       <Sheet.Backdrop />

@@ -1,4 +1,3 @@
-import Input from '@/components/Input/legacy';
 import useFormStore from '@/stores/coBuyingFormStore';
 
 function CommonForm() {
@@ -6,7 +5,7 @@ function CommonForm() {
   const { productName, totalPrice, productLink, deadline } = formData;
   return (
     <>
-      <Input
+      {/* <Input
         id="productName"
         name="productName"
         label="상품 이름"
@@ -41,13 +40,8 @@ function CommonForm() {
         label="신청 마감일"
         type="date"
         defaultValue={deadline}
-        // leftIcon={
-        //   <div className="mb-1">
-        //     <CalandarIcon width={15} height={15} fill="#a1a1aa" />
-        //   </div>
-        // }
         min={new Date().toISOString().split('T')[0]}
-      />
+      /> */}
     </>
   );
 }

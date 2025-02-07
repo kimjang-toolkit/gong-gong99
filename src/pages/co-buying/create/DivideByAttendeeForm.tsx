@@ -1,4 +1,4 @@
-import Input from '@/components/Input/legacy';
+import Input from '@/components/Input';
 import useFormStore from '@/stores/coBuyingFormStore';
 
 export default function DivideByAttendeeForm() {
@@ -6,7 +6,7 @@ export default function DivideByAttendeeForm() {
   const { totalQuantity, recruitmentNumbers } = formData;
   return (
     <>
-      <Input
+      {/* <Input
         id="totalQuantity"
         name="totalQuantity"
         label="상품 총 수량"
@@ -23,7 +23,7 @@ export default function DivideByAttendeeForm() {
         required
         defaultValue={recruitmentNumbers}
         placeholder="모집할 인원을 입력해주세요."
-      />
+      /> */}
       <section className="flex items-center w-full gap-2">
         <div className="flex justify-between px-4 py-3 rounded-lg shadow-sm items-justify min-w-[130px] flex-1 bg-zinc-50">
           {/* 인당 구매량 */}

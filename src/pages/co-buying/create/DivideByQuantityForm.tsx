@@ -1,6 +1,5 @@
-import Input from '@/components/Input/legacy';
 import useFormStore from '@/stores/coBuyingFormStore';
-
+import Input from '@/components/Input';
 export default function DivideByQuantityForm() {
   const { formData } = useFormStore();
   const { totalPrice, totalQuantity, ownerQuantity } = formData;
@@ -12,7 +11,7 @@ export default function DivideByQuantityForm() {
 
   return (
     <>
-      <Input
+      {/* <Input
         id="totalQuantity"
         name="totalQuantity"
         label="상품 총 수량"
@@ -29,7 +28,7 @@ export default function DivideByQuantityForm() {
         type="number"
         required
         defaultValue={ownerQuantity}
-      />
+      /> */}
       <section className="flex items-center py-3 text-center rounded-lg shadow-sm justify-evenly bg-zinc-50 ">
         <div className="flex flex-col gap-2.5 min-w-[90px]">
           {/* 내구매량 * 상품 총액 / 상품 총 수량 */}

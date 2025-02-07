@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useCobuyingList } from '@/services/queries/useCobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate } from 'react-router-dom';
-import { CoBuyingDetail } from '@interface/cobuying';
+import { CoBuyingSummary } from '@interface/cobuying';
 
 export default function ListSection() {
   const { data, fetchNextPage, hasNextPage } = useCobuyingList();
@@ -49,7 +49,7 @@ export default function ListSection() {
               navigate(`/co-buying/${item.id}?ownerName=${item.ownerName}`)
             }
           >
-            <CobuyingCard data={item as CoBuyingDetail} />
+            <CobuyingCard data={item as CoBuyingSummary} />
             <hr className="border-b-1 border-default-100" />
           </div>
         ))

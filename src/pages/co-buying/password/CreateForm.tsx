@@ -1,11 +1,11 @@
-import Input from '@/components/Input/legacy';
+import Input from '@/components/Input';
 import { useState } from 'react';
 
 export default function CreateForm() {
   const [password, setPassword] = useState('');
   return (
     <>
-      <Input
+      {/* <Input
         label="이름"
         type="text"
         name="ownerName"
@@ -31,7 +31,7 @@ export default function CreateForm() {
         patternErrorMessage="비밀번호가 일치하지 않습니다"
         required
         pattern={`^${password}$`}
-      />
+      /> */}
     </>
   );
 }

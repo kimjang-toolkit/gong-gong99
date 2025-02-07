@@ -1,17 +1,17 @@
 import { DivideType } from '@domain/cobuying';
-import { CoBuyingDetail } from '@interface/cobuying';
-import AttendeeCoBuyingCard from './AttendeeCoBuyingCard';
-import QuantityCoBuyingCard from './QuantityCoBuyingCard';
+import AttendeeCobuyingCard from './AttendeeCoBuyingCard';
+import QuantityCobuyingCard from './QuantityCoBuyingCard';
+import { CoBuyingSummary } from '@interface/cobuying';
 
 interface CoBuyingCardProps {
-  data: CoBuyingDetail;
+  data: CoBuyingSummary;
 }
 
 export default function CoBuyingCard({ data }: CoBuyingCardProps) {
   if (data.type === DivideType.attendee) {
-    return <AttendeeCoBuyingCard data={data} />;
+    return <AttendeeCobuyingCard item={data} />;
   } else if (data.type === DivideType.quantity) {
-    return <QuantityCoBuyingCard data={data} />;
+    return <QuantityCobuyingCard item={data} />;
   } else {
     return null; // 혹시 모를 다른 타입에 대한 처리
   }

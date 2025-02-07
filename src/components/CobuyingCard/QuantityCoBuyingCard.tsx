@@ -1,24 +1,31 @@
-import { QuantityCoBuyingDetail } from '@interface/cobuying';
+import { QuantityCoBuyingSummary } from '@interface/cobuying';
 
-export default function QuantityCoBuyingCard({ data }: { data: QuantityCoBuyingDetail }) {
+const QuantityCobuyingCard = ({ item }: { item: QuantityCoBuyingSummary }) => {
+  const {
+    productName,
+    deadline,
+    totalPrice,
+    totalQuantity,
+    totalAttendeeQuantity,
+    unitPrice,
+  } = item;
+
+  const perPrice = `개 당 ${unitPrice.toLocaleString()}원`;
+
   return (
-    <div className="rounded-lg bg-zinc-50 flex flex-col p-2.5 gap-2.5">
-      <div className="flex justify-between">
-        <p className="text-caption">상품명</p>
-        <p className="text-caption">{data.productName}</p>
+    <article className="flex flex-col py-4 bg-white active:brightness-95">
+      <p className="font-medium text-black">{productName}</p>
+      <p className="text-tiny text-default-500">{deadline} 마감</p>
+      <div className="flex items-center">
+        <p className="mr-1 text-body-bold">{`${totalPrice.toLocaleString()}원`}</p>
+        <p className="text-caption text-default-700">{`(${perPrice})`}</p>
       </div>
-      <div className="flex justify-between">
-        <p className="text-caption">개 당 가격</p>
-        <p className="text-caption text-primary-400">
-          {`${data.unitPrice.toLocaleString()}원`}
-        </p>
+      <div className="flex *:text-tiny *:text-default-600 [&>p:nth-child(2)]:text-primary-500 self-end mt-1">
+        <p className="mr-1">신청 수량</p>
+        <p>{totalAttendeeQuantity}</p>
+        <p>{`/${totalQuantity}개`}</p>
       </div>
-      <div className="flex justify-between">
-        <p className="text-caption">구매 가능 수량</p>
-        <p className="text-caption text-primary-400">
-          {`${data.remainQuantity.toLocaleString()}개`}
-        </p>
-      </div>
-    </div>
+    </article>
   );
-} 
+};
+export default QuantityCobuyingCard;
