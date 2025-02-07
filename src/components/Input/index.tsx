@@ -15,7 +15,7 @@ export interface InputProps {
   setValue: (value: string) => void;
   className?: string;
 }
-export default function InputWrapper({
+export default function Input({
   children,
   value,
   setValue,
@@ -41,8 +41,8 @@ export default function InputWrapper({
   );
 }
 
-InputWrapper.Field = InputField;
-InputWrapper.Label = InputLabel;
-InputWrapper.Suffix = InputSuffix;
-InputWrapper.ClearButton = InputClearButton;
-InputWrapper.Description = InputDescription;
+Input.Field = InputField;
+Input.Label = InputLabel;
+Input.Suffix = InputSuffix;
+Input.ClearButton = InputClearButton;
+Input.Description = InputDescription;

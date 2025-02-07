@@ -1,7 +1,7 @@
 import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
 import { useCobuyingDetail } from '@/services/queries/useCobuying';
-import DefaultLayout from '@/layouts/DefaultLayout';
+import HeaderLayout from '@/layouts/HeaderLayout';
 import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBottomSheet';
 import QuantityBottomSheet from '@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet';
 import InfoSection from '@/pages/co-buying/[id]/InfoSection';
@@ -29,7 +29,7 @@ export default function DetailPage() {
 
   return (
     <>
-      <DefaultLayout>
+      <HeaderLayout>
         <RightButtonHeader
           backUrl="/co-buying"
           rightElement={
@@ -53,7 +53,7 @@ export default function DetailPage() {
             console.log('open bottom sheet');
           }}
         />
-      </DefaultLayout>
+      </HeaderLayout>
 
       {data?.type === DivideType.attendee && (
         <AttendeeBottomSheet

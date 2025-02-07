@@ -1,6 +1,6 @@
 import BottomButton from '@/components/Button/BottomButton';
 import TitleHeader from '@/components/Header/TitleHeader';
-import DefaultLayout from '@/layouts/DefaultLayout';
+import HeaderLayout from '@/layouts/HeaderLayout';
 import useFormValidation from '@/hooks/useFormButtonValidation';
 import CheckForm from '@/pages/co-buying/password/CheckForm';
 import CreateForm from '@/pages/co-buying/password/CreateForm';
@@ -50,7 +50,7 @@ export default function PasswordPage() {
   };
 
   return (
-    <DefaultLayout>
+    <HeaderLayout>
       <TitleHeader />
       <>
         <section className="flex flex-col w-full gap-1 text-black h-[90px] justify-center">
@@ -75,6 +75,6 @@ export default function PasswordPage() {
         label={isCreateMode ? createFormText[2] : checkFormText[2]}
         disabled={isDisabled}
       />
-    </DefaultLayout>
+    </HeaderLayout>
   );
 }
