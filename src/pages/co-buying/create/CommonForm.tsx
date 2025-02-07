@@ -16,7 +16,7 @@ function CommonForm({ setFormData, setType, type }: CommonFormProps) {
         productName: '',
         totalPrice: 0,
         productLink: '',
-        deadline: new Date(),
+        deadline: '',
       }}
       schema={commonFormSchema}
       onSubmit={setFormData}
@@ -39,7 +39,11 @@ function CommonForm({ setFormData, setType, type }: CommonFormProps) {
       </Form.Input>
       <Form.Input name="deadline">
         <Input.Label>신청 마감일</Input.Label>
-        <Input.Field placeholder="신청 마감일을 입력해주세요." type="date" />
+        <Input.Field
+          min={new Date().toISOString().split('T')[0]}
+          placeholder="신청 마감일을 입력해주세요."
+          type="date"
+        />
         <Input.Description />
       </Form.Input>
       <Form.Button>// 공구나눔방식 버튼.</Form.Button>
