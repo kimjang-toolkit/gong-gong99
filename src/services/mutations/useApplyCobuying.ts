@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { cobuyingService } from '@/services/cobuying';
-import { QUERY_KEYS } from '@/hooks/queries/useCobuying';
+import { QUERY_KEYS } from '@/services/queries/useCobuying';
 import { ApplicationReq } from '@interface/application';
 import useAlertStore from '@/stores/alertStore';
 

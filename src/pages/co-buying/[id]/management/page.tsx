@@ -1,6 +1,6 @@
 import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
-import { useCobuyingDetail } from '@/hooks/queries/useCobuying';
+import { useCobuyingDetail } from '@/services/queries/useCobuying';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import InfoSection from '@/pages/co-buying/[id]/InfoSection';
 // import InfoSection from '@/pages/co-buying/[id]/InfoSection';
