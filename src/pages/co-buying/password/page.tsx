@@ -49,14 +49,14 @@ export default function PasswordPage() {
       <TitleHeader />
       <>
         <section className="flex flex-col w-full gap-1 text-black h-[90px] justify-center">
-          <p className="text-h2">
+          <p className="typo-h2">
             {isCreateMode ? createFormText[0] : checkFormText[0]}
           </p>
           <div className="flex items-center">
-            <p className="text-h2-bold">
+            <p className="typo-h2-bold">
               {isCreateMode ? createFormText[1] : checkFormText[1]}
             </p>
-            <p className="text-h2">를 입력해주세요.</p>
+            <p className="typo-h2">를 입력해주세요.</p>
           </div>
         </section>
         {/* <form className="flex flex-col gap-4 mt-3" ref={formRef}>

@@ -16,7 +16,7 @@ export default function InputField({ className, ...props }: InputFieldProps) {
       spellCheck={false}
       onChange={(e) => setValue(e.target.value)}
       className={cn(
-        'text-body text-black w-full focus:outline-none  bg-transparent',
+        'typo-body text-black w-full focus:outline-none  bg-transparent',
         className
       )}
     />

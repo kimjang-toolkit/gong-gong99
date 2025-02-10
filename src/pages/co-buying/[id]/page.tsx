@@ -34,7 +34,7 @@ export default function DetailPage() {
           backUrl="/co-buying"
           rightElement={
             <button
-              className="text-caption-bold text-primary-400"
+              className="typo-caption-bold text-primary-400"
               onClick={handleManageButton}
             >
               관리하기

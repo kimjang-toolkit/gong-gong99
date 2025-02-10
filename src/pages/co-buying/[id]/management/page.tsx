@@ -22,7 +22,7 @@ export default function ManagementPage() {
     <HeaderLayout>
       <RightButtonHeader
         rightElement={
-          <button className="text-caption-bold text-primary-400">
+          <button className="typo-caption-bold text-primary-400">
             수정하기
           </button>
         }

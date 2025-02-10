@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const commonFormSchema = z.object({
+const formSchema = z.object({
   productName: z
     .string()
     .min(4, { message: '상품 이름은 최소 4자 이상이어야 합니다.' })
@@ -17,7 +17,15 @@ const commonFormSchema = z.object({
     }),
   productLink: z.string().url({ message: '유효한 상품 링크를 입력해주세요.' }),
   deadline: z.string(),
+  type: z.enum(['quantity', 'attendee']),
+  totalQuantity: z.number().min(1, { message: '수량을 입력해주세요.' }),
+  ownerQuantity: z.number().min(1, { message: '수량을 입력해주세요.' }),
+  targetAttendeeCount: z.number().min(1, { message: '인원을 입력해주세요.' }),
+  memo: z.string().optional(),
+  ownerPassword: z
+    .string()
+    .min(6, { message: '비밀번호는 최소 6자 이상이어야 합니다.' }),
 });
 
-export type CommonFormSchema = z.infer<typeof commonFormSchema>;
-export { commonFormSchema };
+export type FormSchema = z.infer<typeof formSchema>;
+export { formSchema };

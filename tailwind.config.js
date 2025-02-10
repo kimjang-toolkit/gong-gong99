@@ -67,31 +67,31 @@ export default {
         '.shadow-top': {
           boxShadow: '0 -8px 20px 0 rgba(0, 0, 0, 0.05)',
         },
-        '.text-h2': {
+        '.typo-h2': {
           '@apply text-[20px] font-medium leading-7': '',
         },
-        '.text-h2-bold': {
+        '.typo-h2-bold': {
           '@apply text-[20px] font-bold leading-7': '',
         },
-        '.text-h3-bold': {
+        '.typo-h3-bold': {
           '@apply text-[18px] font-semibold leading-normal': '',
         },
-        '.text-body': {
+        '.typo-body': {
           '@apply text-[16px] font-normal leading-normal': '',
         },
-        '.text-body-bold': {
+        '.typo-body-bold': {
           '@apply text-[16px] font-semibold leading-normal': '',
         },
-        '.text-caption': {
+        '.typo-caption': {
           '@apply text-[14px] font-medium leading-normal': '',
         },
-        '.text-caption-bold': {
+        '.typo-caption-bold': {
           '@apply text-[14px] font-semibold leading-normal': '',
         },
-        '.text-tiny': {
+        '.typo-tiny': {
           '@apply text-[12px] font-normal leading-normal': '',
         },
-        '.text-tiny-bold': {
+        '.typo-tiny-bold': {
           '@apply text-[12px] font-bold leading-normal': '',
         },
       });

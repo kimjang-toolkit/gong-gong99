@@ -53,7 +53,7 @@ export default function AttendeeBottomSheet({
         <Sheet.Header />
         <Sheet.Content>
           <div className="flex flex-col gap-4 px-4 mb-8">
-            <header className="w-full text-left text-body-bold">
+            <header className="w-full text-left typo-body-bold">
               공구 신청
             </header>
             <Input
@@ -66,14 +66,14 @@ export default function AttendeeBottomSheet({
             </Input>
 
             <section className="flex justify-between p-4 border rounded-xl border-default-200">
-              <p className="mb-1 text-caption text-default-600">구매 수량</p>
-              <p className="text-body-bold">{attendeeQuantity} 개</p>
+              <p className="mb-1 typo-caption text-default-600">구매 수량</p>
+              <p className="typo-body-bold">{attendeeQuantity} 개</p>
             </section>
             <section className="flex items-start justify-between px-1">
-              <p className="flex py-1 text-tiny text-default-700">
+              <p className="flex py-1 typo-tiny text-default-700">
                 <p className="text-primary-400">{attendeeQuantity}</p>개 구매액
               </p>
-              <p className="text-body-bold text-primary-400">
+              <p className="typo-body-bold text-primary-400">
                 {data.perAttendeePrice}원
               </p>
             </section>
