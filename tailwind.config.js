@@ -83,7 +83,7 @@ export default {
           '@apply text-[16px] font-semibold leading-normal': '',
         },
         '.typo-caption': {
-          '@apply text-[14px] font-medium leading-normal': '',
+          '@apply text-[14px] font-normal leading-normal': '',
         },
         '.typo-caption-bold': {
           '@apply text-[14px] font-semibold leading-normal': '',

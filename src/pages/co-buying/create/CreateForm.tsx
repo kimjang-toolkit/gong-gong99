@@ -1,6 +1,8 @@
 import Form from '@/components/Form';
 import Input from '@/components/Input';
+import AttendeeCalcBox from '@/pages/co-buying/create/AttendeeCalcBox';
 import DivideTypeSection from '@/pages/co-buying/create/DivideTypeButton';
+import QuantityCalcBox from '@/pages/co-buying/create/QuantityCalcBox';
 import { formSchema, FormSchema } from '@/util/zod/cobuying-create';
 import { DivideType } from '@domain/cobuying';
 import { useState } from 'react';
@@ -10,7 +12,7 @@ interface CreateFormProps {
   formData: FormSchema;
 }
 export default function CreateForm({ setFormData, formData }: CreateFormProps) {
-  const [type, setType] = useState<DivideType>(formData.type);
+  const [type, setType] = useState(formData.type);
 
   return (
     <Form defaultValues={formData} schema={formSchema} onSubmit={setFormData}>
@@ -21,7 +23,7 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
       </Form.Input>
       <Form.Input name="totalPrice">
         <Input.Label>상품 총액</Input.Label>
-        <Input.Field placeholder="상품 총액을 입력해주세요." />
+        <Input.Field placeholder="상품 총액을 입력해주세요." type="number" />
         <Input.Suffix>원</Input.Suffix>
         <Input.Description />
       </Form.Input>
@@ -39,7 +41,7 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
         />
         <Input.Description />
       </Form.Input>
-      <DivideTypeSection type={type} setType={setType} />
+      <DivideTypeSection type={type as DivideType} setType={setType} />
       <Form.Input name="totalQuantity">
         <Input.Label>상품 전체 수량</Input.Label>
         <Input.Field
@@ -68,6 +70,20 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
           />
           <Input.Description />
         </Form.Input>
+      )}
+      {type === DivideType.quantity && (
+        <QuantityCalcBox
+          totalPrice={formData.totalPrice}
+          totalQuantity={formData.totalQuantity}
+          ownerQuantity={formData.ownerQuantity}
+        />
+      )}
+      {type === DivideType.attendee && (
+        <AttendeeCalcBox
+          totalPrice={formData.totalPrice}
+          totalQuantity={formData.totalQuantity}
+          targetAttendeeCount={formData.targetAttendeeCount}
+        />
       )}
       <section className="flex flex-col gap-2">
         <div className="w-full h-24 border rounded-xl px-3 py-1.5 border-default-200">

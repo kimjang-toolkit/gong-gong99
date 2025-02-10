@@ -1,6 +1,13 @@
-export default function DivideByQuantityCalcBox() {
-  const { formData } = useFormStore();
-  const { totalPrice, totalQuantity, ownerQuantity } = formData;
+interface QuantityCalcBoxProps {
+  totalPrice: number;
+  totalQuantity: number;
+  ownerQuantity: number;
+}
+export default function QuantityCalcBox({
+  totalPrice,
+  totalQuantity,
+  ownerQuantity,
+}: QuantityCalcBoxProps) {
   let unitPrice;
   if (totalPrice && totalQuantity) {
     unitPrice = totalPrice / totalQuantity;

@@ -10,7 +10,7 @@ export default function InputLabel({ children, className }: InputLabelProps) {
   return (
     <label
       className={cn(
-        'absolute top-1 [&>*]:text-caption text-default-600',
+        'absolute top-1 [&>*]:typo-caption text-default-500',
         className
       )}
     >

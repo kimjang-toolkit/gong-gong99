@@ -37,7 +37,7 @@ function Form<T extends FieldValues>({
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={cn('space-y-5', className)}
+        className={cn('space-y-6', className)}
       >
         {Children.map(children, (child) => {
           if (isValidElement(child)) {
