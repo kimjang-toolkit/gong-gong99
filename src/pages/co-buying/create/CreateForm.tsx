@@ -1,3 +1,4 @@
+import BottomButton from '@/components/Button/BottomButton';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
 import AttendeeCalcBox from '@/pages/co-buying/create/AttendeeCalcBox';
@@ -14,8 +15,14 @@ interface CreateFormProps {
 export default function CreateForm({ setFormData, formData }: CreateFormProps) {
   const [type, setType] = useState(formData.type);
 
+  const handleSubmit = (data: FormSchema) => {
+    console.log(data);
+    // 비밀번호 띄우기
+    // 데이터 저장
+    setFormData({ ...formData, ...data });
+  };
   return (
-    <Form defaultValues={formData} schema={formSchema} onSubmit={setFormData}>
+    <Form defaultValues={formData} schema={formSchema} onSubmit={handleSubmit}>
       <Form.Input name="productName">
         <Input.Label>상품 이름</Input.Label>
         <Input.Field placeholder="상품 이름을 입력해주세요. (4~100자)" />
@@ -75,14 +82,14 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
         <QuantityCalcBox
           totalPrice={formData.totalPrice}
           totalQuantity={formData.totalQuantity}
-          ownerQuantity={formData.ownerQuantity}
+          ownerQuantity={formData.ownerQuantity ?? 0}
         />
       )}
       {type === DivideType.attendee && (
         <AttendeeCalcBox
           totalPrice={formData.totalPrice}
           totalQuantity={formData.totalQuantity}
-          targetAttendeeCount={formData.targetAttendeeCount}
+          targetAttendeeCount={formData.targetAttendeeCount ?? 0}
         />
       )}
       <section className="flex flex-col gap-2">
@@ -96,6 +103,9 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
           />
         </div>
       </section>
+      <Form.Button className="ml-[-20px]">
+        <BottomButton label="다음" />
+      </Form.Button>
     </Form>
   );
 }
