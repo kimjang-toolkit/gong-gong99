@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { InputContext } from '@/components/Input/context';
 import InputClearButton from '@/components/Input/InputClearButton';
 import InputDescription from '@/components/Input/InputDescription';
@@ -9,10 +10,10 @@ import { ReactNode } from 'react';
 
 export interface InputProps {
   children: ReactNode;
-  value: string;
+  value: any;
   description?: string;
   variant?: 'bordered' | 'underlined';
-  setValue: (value: string) => void;
+  setValue: (value: any) => void;
   className?: string;
 }
 export default function Input({

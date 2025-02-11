@@ -17,14 +17,16 @@ function CreatePage() {
     totalQuantity: 0,
     ownerQuantity: 0,
     targetAttendeeCount: 0,
-    ownerPassword: '',
     memo: '',
   });
 
   return (
     <HeaderLayout>
       <TitleHeader title="공구글 작성" />
-      <CreateForm setFormData={setFormData} formData={formData} />
+      <CreateForm
+        setFormData={(data) => setFormData(data as typeof formData)}
+        formData={formData}
+      />
     </HeaderLayout>
   );
 }

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useContext } from 'react';
 
 export interface InputContextProps {
-  value: string;
-  setValue: (value: string) => void;
+  value: any;
+  setValue: (value: any) => void;
   variant: 'bordered' | 'underlined';
   description?: string;
 }

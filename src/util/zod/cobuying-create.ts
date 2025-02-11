@@ -16,10 +16,7 @@ const formSchema = z
         }
         return num;
       }),
-    productLink: z
-      .string()
-      .url({ message: '유효한 상품 링크를 입력해주세요.' })
-      .optional(),
+    productLink: z.string().optional(),
     deadline: z.string(),
     type: z.enum(['quantity', 'attendee']),
     totalQuantity: z.coerce
@@ -34,43 +31,29 @@ const formSchema = z
       }),
     ownerQuantity: z.coerce
       .number()
-      .min(1, { message: '수량을 입력해주세요.' })
-      .transform((val) => {
-        const num = Number(val);
-        if (isNaN(num) || num <= 0) {
-          throw new Error('수량은 양수여야 합니다.');
-        }
-        return num;
-      })
-      .optional(),
+      .optional()
+      .transform((val) => (val === undefined ? undefined : val)), // undefined 그대로 유지
     targetAttendeeCount: z.coerce
       .number()
-      .min(1, { message: '인원을 입력해주세요.' })
-      .transform((val) => {
-        const num = Number(val);
-        if (isNaN(num) || num <= 0) {
-          throw new Error('인원은 양수여야 합니다.');
-        }
-        return num;
-      })
-      .optional(),
+      .optional()
+      .transform((val) => (val === undefined ? undefined : val)), // undefined 그대로 유지
     memo: z.string().optional(),
   })
-  .refine(
-    (data) => {
-      if (data.type === 'quantity' && !data.ownerQuantity) {
-        return false; // ownerQuantity가 필수
-      }
-      if (data.type === 'attendee' && !data.targetAttendeeCount) {
-        return false; // targetAttendeeCount가 필수
-      }
-      return true; // 조건을 만족하는 경우
-    },
-    {
-      message: '조건에 따라 필수 입력 사항이 누락되었습니다.',
-      path: ['ownerQuantity', 'targetAttendeeCount'], // 에러 경로 설정
+  .refine((data) => {
+    if (
+      data.type === 'quantity' &&
+      (data.ownerQuantity === undefined || data.ownerQuantity < 1)
+    ) {
+      return false;
     }
-  );
+    if (
+      data.type === 'attendee' &&
+      (data.targetAttendeeCount === undefined || data.targetAttendeeCount < 1)
+    ) {
+      return false;
+    }
+    return true;
+  });
 
 export type FormSchema = z.infer<typeof formSchema>;
 export { formSchema };

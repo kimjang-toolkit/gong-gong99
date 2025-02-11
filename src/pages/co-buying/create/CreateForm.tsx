@@ -36,7 +36,7 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
       </Form.Input>
       <Form.Input name="productLink">
         <Input.Label>상품 링크</Input.Label>
-        <Input.Field placeholder="상품 링크를 입력해주세요." />
+        <Input.Field type="url" placeholder="상품 링크를 입력해주세요." />
         <Input.Description />
       </Form.Input>
       <Form.Input name="deadline">
@@ -49,6 +49,7 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
         <Input.Description />
       </Form.Input>
       <DivideTypeSection type={type as DivideType} setType={setType} />
+      <Form.SyncState name="type" value={type} />
       <Form.Input name="totalQuantity">
         <Input.Label>상품 전체 수량</Input.Label>
         <Input.Field
