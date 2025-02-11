@@ -10,7 +10,6 @@ export default function FormButton({
 }) {
   const { formState } = useFormContext();
   const isDisabled = !formState.isValid;
-  console.log('formState', formState);
   return (
     <button
       type="submit"
