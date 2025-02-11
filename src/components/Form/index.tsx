@@ -3,7 +3,7 @@ import FormInput from '@/components/Form/FormInput';
 import SyncState from '@/components/Form/FormSyncState';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Children, createElement, isValidElement } from 'react';
+import { Children, createElement, isValidElement, useEffect } from 'react';
 import {
   DefaultValues,
   FieldValues,
@@ -17,6 +17,7 @@ interface FormProps<T> {
   schema: ZodSchema<T>;
   children: React.ReactNode;
   onSubmit: (data: T) => void;
+  onChange?: (data: T) => void;
   className?: string;
 }
 
@@ -25,6 +26,7 @@ function Form<T extends FieldValues>({
   schema,
   children,
   onSubmit,
+  onChange,
   className,
 }: FormProps<T>) {
   const methods = useForm<T>({
@@ -32,7 +34,14 @@ function Form<T extends FieldValues>({
     resolver: zodResolver(schema),
     mode: 'onChange',
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, watch } = methods;
+
+  useEffect(() => {
+    if (onChange) {
+      const subscription = watch((data) => onChange(data as T));
+      return () => subscription.unsubscribe();
+    }
+  }, [watch, onChange]);
 
   return (
     <FormProvider {...methods}>

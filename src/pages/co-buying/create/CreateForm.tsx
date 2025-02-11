@@ -22,7 +22,12 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
     setFormData({ ...formData, ...data });
   };
   return (
-    <Form defaultValues={formData} schema={formSchema} onSubmit={handleSubmit}>
+    <Form
+      defaultValues={formData}
+      schema={formSchema}
+      onChange={(data) => setFormData(data as FormSchema)}
+      onSubmit={handleSubmit}
+    >
       <Form.Input name="productName">
         <Input.Label>상품 이름</Input.Label>
         <Input.Field placeholder="상품 이름을 입력해주세요. (4~100자)" />
