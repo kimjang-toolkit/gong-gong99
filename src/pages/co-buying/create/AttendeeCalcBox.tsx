@@ -1,15 +1,19 @@
 interface AttendeeCalcBoxProps {
-  totalPrice: number;
-  totalQuantity: number;
-  targetAttendeeCount: number;
+  totalPrice?: number;
+  totalQuantity?: number;
+  targetAttendeeCount?: number;
 }
 export default function AttendeeCalcBox({
   totalQuantity,
   totalPrice,
   targetAttendeeCount,
 }: AttendeeCalcBoxProps) {
-  const perQuantity = totalQuantity / targetAttendeeCount;
-  const perPrice = totalPrice / targetAttendeeCount;
+  let perQuantity = '-';
+  let perPrice = '-';
+  if (totalPrice && totalQuantity && targetAttendeeCount) {
+    perQuantity = (totalQuantity / targetAttendeeCount).toFixed(1);
+    perPrice = (totalPrice / targetAttendeeCount).toFixed(1);
+  }
 
   return (
     <section className="flex items-center w-full gap-2">

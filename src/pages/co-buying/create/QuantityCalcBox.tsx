@@ -10,7 +10,7 @@ export default function QuantityCalcBox({
 }: QuantityCalcBoxProps) {
   let unitPrice;
   if (totalPrice && totalQuantity) {
-    unitPrice = totalPrice / totalQuantity;
+    unitPrice = Math.floor(totalPrice / totalQuantity);
   }
 
   return (

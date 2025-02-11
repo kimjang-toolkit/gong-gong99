@@ -64,6 +64,7 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
         />
         <Input.Description />
       </Form.Input>
+
       {type === DivideType.quantity && (
         <Form.Input name="ownerQuantity">
           <Input.Label>내 구매 수량</Input.Label>
@@ -95,7 +96,7 @@ export default function CreateForm({ setFormData, formData }: CreateFormProps) {
         <AttendeeCalcBox
           totalPrice={formData.totalPrice}
           totalQuantity={formData.totalQuantity}
-          targetAttendeeCount={formData.targetAttendeeCount ?? 0}
+          targetAttendeeCount={formData.targetAttendeeCount}
         />
       )}
       <section className="flex flex-col gap-2">
