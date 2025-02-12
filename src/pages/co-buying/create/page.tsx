@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import TitleHeader from '@/components/Header/TitleHeader';
 import HeaderLayout from '@/layouts/HeaderLayout';
@@ -9,8 +8,10 @@ import CreateForm from '@/pages/co-buying/create/CreateForm';
 import PasswordForm from '@/pages/co-buying/create/PasswordForm';
 import { PasswordSchema } from '@/util/zod/cobuying-create';
 import { useNavigate } from 'react-router-dom';
+import { useCreateCobuying } from '@/services/mutations/useCreateCobuying';
 function CreatePage() {
   const navigate = useNavigate();
+  const { mutateAsync } = useCreateCobuying();
 
   const [formData, setFormData] = useState({
     type: DivideType.quantity,
@@ -31,10 +32,18 @@ function CreatePage() {
     setStep(step + 1);
   };
 
-  const handleSubmit = (data: PasswordSchema) => {
+  const handleSubmit = async (data: PasswordSchema) => {
+    console.log('data', data);
     const { ownerPasswordConfirm, ...exceptPasswordConfirm } = data;
-    setFormData((prev: any) => ({ ...prev, ...exceptPasswordConfirm }));
-    console.log(formData);
+    try {
+      const response = await mutateAsync({
+        ...formData,
+        ...exceptPasswordConfirm,
+      });
+      navigate(`/co-buying/${response.id}?ownerName=${data.ownerName}`);
+    } catch (error) {
+      console.error(error);
+    }
   };
   const handleBackButton = () => {
     if (step === 1) {

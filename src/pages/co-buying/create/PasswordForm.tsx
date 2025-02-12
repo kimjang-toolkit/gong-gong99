@@ -29,6 +29,7 @@ export default function PasswordForm({
         <Form.Input name="ownerName">
           <Input.Label>이름</Input.Label>
           <Input.Field placeholder="이름을 입력해주세요." />
+          <Input.ClearButton />
           <Input.Description />
         </Form.Input>
         <Form.Input name="ownerPassword">
