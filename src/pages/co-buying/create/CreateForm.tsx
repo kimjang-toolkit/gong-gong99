@@ -113,7 +113,7 @@ export default function CreateForm({
           />
         </div>
       </section>
-      <Form.Button className="ml-[-20px]">
+      <Form.Button>
         <BottomButton label="다음" />
       </Form.Button>
     </Form>

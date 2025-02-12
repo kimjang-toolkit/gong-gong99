@@ -42,7 +42,7 @@ export default function PasswordForm({
           <Input.Field type="password" placeholder="비밀번호를 입력해주세요." />
           <Input.Description />
         </Form.Input>
-        <Form.Button className="ml-[-20px]">
+        <Form.Button>
           <BottomButton label="공구 열기" />
         </Form.Button>
       </Form>

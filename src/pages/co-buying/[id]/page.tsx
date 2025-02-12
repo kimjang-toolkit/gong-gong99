@@ -41,18 +41,20 @@ export default function DetailPage() {
             </button>
           }
         />
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <InfoSection data={data as CoBuyingDetail} />
-        )}
-        <BottomButton
-          label="신청하기"
-          onClick={() => {
-            setIsApplyingFormOpen(true);
-            console.log('open bottom sheet');
-          }}
-        />
+        <>
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <InfoSection data={data as CoBuyingDetail} />
+          )}
+          <BottomButton
+            label="신청하기"
+            onClick={() => {
+              setIsApplyingFormOpen(true);
+              console.log('open bottom sheet');
+            }}
+          />
+        </>
       </HeaderLayout>
 
       {data?.type === DivideType.attendee && (
