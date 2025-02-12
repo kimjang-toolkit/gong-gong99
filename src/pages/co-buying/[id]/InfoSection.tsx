@@ -60,12 +60,17 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
           <UnitInfo data={data} />
         )}
       </section>
-      <p className="typo-caption text-default-600 mb-1.5">안내 메시지</p>
-      <section className="mb-7">
-        <div className="rounded-lg typo-caption bg-zinc-50  p-2.5">
-          {data.memo}
-        </div>
-      </section>
+      {data.memo && (
+        <>
+          <p className="typo-caption text-default-600 mb-1.5">안내 메시지</p>
+
+          <section className="mb-7">
+            <div className="rounded-lg typo-caption bg-zinc-50  p-2.5">
+              {data.memo}
+            </div>
+          </section>
+        </>
+      )}
       <section className="flex justify-end gap-2.5">
         <button
           className="px-2.5 py-2.5 rounded-full bg-primary-50 active:brightness-90"
