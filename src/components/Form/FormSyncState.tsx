@@ -17,7 +17,7 @@ export default function SyncState<T extends FieldValues>({
   const { setValue } = useFormContext<T>();
 
   useEffect(() => {
-    setValue(name as Path<T>, value);
+    setValue(name as Path<T>, value, { shouldValidate: true });
   }, [name, value, setValue]);
 
   return null;

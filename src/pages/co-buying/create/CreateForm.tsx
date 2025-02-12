@@ -11,15 +11,18 @@ import { useState } from 'react';
 interface CreateFormProps {
   setFormData: (formData: FormSchema) => void;
   formData: FormSchema;
+  handleNextStep: () => void;
 }
-export default function CreateForm({ setFormData, formData }: CreateFormProps) {
+export default function CreateForm({
+  setFormData,
+  formData,
+  handleNextStep,
+}: CreateFormProps) {
   const [type, setType] = useState(formData.type);
 
   const handleSubmit = (data: FormSchema) => {
-    console.log(data);
-    // 비밀번호 띄우기
-    // 데이터 저장
     setFormData({ ...formData, ...data });
+    handleNextStep();
   };
   return (
     <Form

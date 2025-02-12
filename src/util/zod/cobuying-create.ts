@@ -57,3 +57,26 @@ const formSchema = z
 
 export type FormSchema = z.infer<typeof formSchema>;
 export { formSchema };
+
+const passwordSchema = z
+  .object({
+    ownerName: z.string().min(1, { message: '이름을 입력해주세요.' }),
+    ownerPassword: z
+      .string()
+      .min(4, { message: '비밀번호는 최소 4자 이상이어야 합니다.' }),
+    ownerPasswordConfirm: z
+      .string()
+      .min(4, { message: '비밀번호를 다시 한번 입력해주세요.' }),
+  })
+  .refine(
+    (data) => {
+      if (data.ownerPassword !== data.ownerPasswordConfirm) {
+        return false;
+      }
+      return true;
+    },
+    { message: '비밀번호가 일치하지 않습니다.' }
+  );
+
+export type PasswordSchema = z.infer<typeof passwordSchema>;
+export { passwordSchema };
