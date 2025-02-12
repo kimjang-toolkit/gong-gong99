@@ -48,7 +48,15 @@ export const cobuyingService = {
       ENDPOINTS.AUTH.PWD_CHECK(id),
       body
     );
-    const token = response.headers['authorization'].split(' ')[1];
+    const token = '';
+    if (
+      response &&
+      response.headers &&
+      typeof response.headers.get === 'function'
+    ) {
+      const headerValue = response.headers.get('X-Amzn-Remapped-Authorization');
+      console.log('headerValue', headerValue);
+    }
     sessionStorage.setItem('token', token);
 
     return response.status;

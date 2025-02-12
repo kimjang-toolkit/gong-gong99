@@ -24,7 +24,7 @@ export default function DetailPage() {
 
   const handleManageButton = () => {
     // 관리하기 비밀번호 페이지
-    navigate(`/password/${searchParams.get('ownerName')}`);
+    navigate(`password/?ownerName=${searchParams.get('ownerName')}`);
   };
 
   return (
