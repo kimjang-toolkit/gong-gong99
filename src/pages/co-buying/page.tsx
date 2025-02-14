@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar';
 import HeaderLayout from '@/layouts/HeaderLayout';
-import ListSection from '@/pages/co-buying/ListSection';
+import ListSection from '@/pages/co-buying/list-section';
 
 export default function CoBuyingPage() {
   return (

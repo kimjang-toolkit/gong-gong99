@@ -19,18 +19,10 @@ export default function PasswordPage() {
   const [ownerPassword, setOwnerPassword] = useState('');
 
   const handleSubmit = async () => {
-    // 비밀번호 확인 로직
-    try {
-      const response = await mutateAsync({
-        ownerName,
-        ownerPassword: ownerPassword,
-      });
-      console.log(response);
-      if (response === 200) {
-        navigate(`/co-buying/${id}/management?ownerName=${ownerName}`);
-      }
-    } catch (error) {
-      console.error(error);
+    const success = await mutateAsync({ ownerName, ownerPassword });
+
+    if (success) {
+      navigate(`/co-buying/${id}/management?ownerName=${ownerName}`);
     }
   };
 

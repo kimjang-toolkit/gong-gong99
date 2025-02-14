@@ -4,7 +4,7 @@ import { useCobuyingDetail } from '@/services/queries/cobuying';
 import HeaderLayout from '@/layouts/HeaderLayout';
 import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBottomSheet';
 import QuantityBottomSheet from '@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet';
-import InfoSection from '@/pages/co-buying/[id]/InfoSection';
+import InfoSection from '@/pages/co-buying/[id]/info-section';
 import { DivideType } from '@domain/cobuying';
 import { CoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';

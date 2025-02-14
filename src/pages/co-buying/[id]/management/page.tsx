@@ -1,9 +1,9 @@
 import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
 import { useCobuyingDetail } from '@/services/queries/cobuying';
-import InfoSection from '@/pages/co-buying/[id]/InfoSection';
+import InfoSection from '@/pages/co-buying/[id]/info-section';
 // import InfoSection from '@/pages/co-buying/[id]/InfoSection';
-import ApplyListSection from '@/pages/co-buying/[id]/management/ApplyListSection';
+import ApplyListSection from '@/pages/co-buying/[id]/management/applyList-section';
 import { CoBuyingDetail } from '@interface/cobuying';
 import { useParams, useSearchParams } from 'react-router-dom';
 import HeaderLayout from '@/layouts/HeaderLayout';
@@ -31,9 +31,11 @@ export default function ManagementPage() {
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          <InfoSection data={data as CoBuyingDetail} />
+          <>
+            <InfoSection data={data as CoBuyingDetail} />
+            <ApplyListSection data={data as CoBuyingDetail} />
+          </>
         )}
-        <ApplyListSection />
       </>
       <BottomButton label="신청 마감하기" />
     </HeaderLayout>

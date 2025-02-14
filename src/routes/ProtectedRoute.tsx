@@ -1,11 +1,11 @@
-import useAuth from '@/hooks/useAuth';
+import useAuthStore from '@/stores/authStore';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export default function ProtectedRoute() {
-  const { isAuthenticated } = useAuth();
+  const { token } = useAuthStore();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/cobuying" />;
+  if (!token) {
+    return <Navigate to="/co-buying" replace={true} />;
   }
 
   return <Outlet />;
