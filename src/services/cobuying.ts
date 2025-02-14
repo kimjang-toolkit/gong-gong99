@@ -1,12 +1,24 @@
 // API 호출
 import { axiosInstance } from '@/api/axios';
 import { ENDPOINTS } from '@/api/endpoints';
+import { DivideType } from '@domain/cobuying';
 import { ApplicationReq } from '@interface/application';
 import { UserAuthReq } from '@interface/auth';
-import { CoBuyingDetail } from '@interface/cobuying';
+import {
+  CoBuyingCreateReq,
+  CoBuyingDetail,
+  CoBuyingSummary,
+} from '@interface/cobuying';
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
 
 export const cobuyingService = {
+  postCreate: async (
+    body: CoBuyingCreateReq<DivideType>
+  ): Promise<CoBuyingSummary> => {
+    const response = await axiosInstance.post(ENDPOINTS.COBUYING.CREATE, body);
+    return response.data;
+  },
+
   getListPage: async (
     id: string,
     createdAtId: string,
@@ -36,7 +48,15 @@ export const cobuyingService = {
       ENDPOINTS.AUTH.PWD_CHECK(id),
       body
     );
-    const token = response.headers['authorization'].split(' ')[1];
+    const token = '';
+    if (
+      response &&
+      response.headers &&
+      typeof response.headers.get === 'function'
+    ) {
+      const headerValue = response.headers.get('X-Amzn-Remapped-Authorization');
+      console.log('headerValue', headerValue);
+    }
     sessionStorage.setItem('token', token);
 
     return response.status;

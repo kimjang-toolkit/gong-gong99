@@ -1,10 +1,15 @@
 import { cn } from '@/lib/utils';
-import useFormStore from '@/stores/coBuyingFormStore';
 import { DivideType } from '@domain/cobuying';
 
-export default function DivideTypeSection() {
-  const { type, setType } = useFormStore();
+interface DivideTypeSectionProps {
+  type: DivideType;
+  setType: (type: DivideType) => void;
+}
 
+export default function DivideTypeSection({
+  type,
+  setType,
+}: DivideTypeSectionProps) {
   // 공구방식 선택에 따른 CSS
   const selectedTypeClass = 'bg-primary-300 text-white';
   const unselectedTypeClass = 'bg-default-300 text-default-600';
@@ -21,12 +26,12 @@ export default function DivideTypeSection() {
   };
   return (
     <section>
-      <p className="pl-0.5 mb-1 text-caption text-default-600">공구나눔 방식</p>
+      <p className="pl-0.5 mb-1 typo-caption text-default-600">공구나눔 방식</p>
       <div className="flex gap-4">
         <button
           id={DivideType.quantity}
           className={cn(
-            'text-center text-body rounded-lg h-[62px] flex-1 shadow-sm',
+            'text-center typo-body rounded-lg h-[62px] flex-1 shadow-sm',
             type === DivideType.quantity
               ? selectedTypeClass
               : unselectedTypeClass
@@ -40,7 +45,7 @@ export default function DivideTypeSection() {
         <button
           id={DivideType.attendee}
           className={cn(
-            'text-center  text-body rounded-lg h-[62px] flex-1 shadow-sm',
+            'text-center  typo-body rounded-lg h-[62px] flex-1 shadow-sm',
             type === DivideType.attendee
               ? selectedTypeClass
               : unselectedTypeClass
@@ -52,7 +57,7 @@ export default function DivideTypeSection() {
           인원으로 나누기
         </button>
       </div>
-      <p className="mt-1 text-tiny text-default-500">
+      <p className="mt-1 typo-tiny text-default-500">
         * {divideTypeDescription[type]}
       </p>
     </section>

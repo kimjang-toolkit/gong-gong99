@@ -12,6 +12,7 @@ import ManagementPage from '@/pages/co-buying/[id]/management/page';
 import CoBuyingPage from '@/pages/co-buying/page';
 import { useKakaoInit } from '@/hooks/useKakaoInit';
 import ProtectedRoute from '@/routes/ProtectedRoute';
+import RefPage from '@/pages/ref';
 
 function App() {
   useKakaoInit(); // 카카오 초기화
@@ -60,6 +61,10 @@ function App() {
         { index: true, element: <ManagementPage /> }, // 공구글 관리페이지
         // {index:'edit', element:<EditPage/>}
       ],
+    },
+    {
+      path: '/ref',
+      element: <RefPage />,
     },
   ]);
 
