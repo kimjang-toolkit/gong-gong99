@@ -1,10 +1,10 @@
 import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
-import { useCobuyingDetail } from '@/hooks/queries/useCobuying';
-import DefaultLayout from '@/layouts/DefaultLayout';
+import { useCobuyingDetail } from '@/api/queries/cobuying';
+import HeaderLayout from '@/layouts/HeaderLayout';
 import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBottomSheet';
 import QuantityBottomSheet from '@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet';
-import InfoSection from '@/pages/co-buying/[id]/InfoSection';
+import InfoSection from '@/pages/co-buying/[id]/info-section';
 import { DivideType } from '@domain/cobuying';
 import { CoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';
@@ -24,36 +24,38 @@ export default function DetailPage() {
 
   const handleManageButton = () => {
     // 관리하기 비밀번호 페이지
-    navigate('password');
+    navigate(`password/?ownerName=${searchParams.get('ownerName')}`);
   };
 
   return (
     <>
-      <DefaultLayout>
+      <HeaderLayout>
         <RightButtonHeader
           backUrl="/co-buying"
           rightElement={
             <button
-              className="text-caption-bold text-primary-400"
+              className="typo-caption-bold text-primary-400"
               onClick={handleManageButton}
             >
               관리하기
             </button>
           }
         />
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <InfoSection data={data as CoBuyingDetail} />
-        )}
-        <BottomButton
-          label="신청하기"
-          onClick={() => {
-            setIsApplyingFormOpen(true);
-            console.log('open bottom sheet');
-          }}
-        />
-      </DefaultLayout>
+        <>
+          {isLoading ? (
+            <div>Loading...</div>
+          ) : (
+            <InfoSection data={data as CoBuyingDetail} />
+          )}
+          <BottomButton
+            label="신청하기"
+            onClick={() => {
+              setIsApplyingFormOpen(true);
+              console.log('open bottom sheet');
+            }}
+          />
+        </>
+      </HeaderLayout>
 
       {data?.type === DivideType.attendee && (
         <AttendeeBottomSheet

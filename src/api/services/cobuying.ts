@@ -1,11 +1,25 @@
 // API 호출
 import { axiosInstance } from '@/api/axios';
 import { ENDPOINTS } from '@/api/endpoints';
+import { DivideType } from '@domain/cobuying';
 import { ApplicationReq } from '@interface/application';
-import { CoBuyingDetail } from '@interface/cobuying';
+import { UserAuthReq } from '@interface/auth';
+import {
+  CoBuyingCreateReq,
+  CoBuyingDetail,
+  CoBuyingSummary,
+} from '@interface/cobuying';
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
+import { AxiosError } from 'axios';
 
 export const cobuyingService = {
+  postCreate: async (
+    body: CoBuyingCreateReq<DivideType>
+  ): Promise<CoBuyingSummary> => {
+    const response = await axiosInstance.post(ENDPOINTS.COBUYING.CREATE, body);
+    return response.data;
+  },
+
   getListPage: async (
     id: string,
     createdAtId: string,
@@ -29,5 +43,21 @@ export const cobuyingService = {
   postApply: async (body: ApplicationReq) => {
     const response = await axiosInstance.post(ENDPOINTS.COBUYING.APPLY, body);
     return response.data;
+  },
+  pwdCheck: async (id: string, body: UserAuthReq) => {
+    try {
+      const response = await axiosInstance.post(
+        ENDPOINTS.AUTH.PWD_CHECK(id),
+        body
+      );
+
+      const token = response.headers['x-amzn-remapped-authorization'];
+      return { success: true, token };
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.status === 401) {
+        return { success: false };
+      }
+      throw error; // 기타 에러는 그대로 throw
+    }
   },
 };

@@ -1,102 +1,49 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { InputContext } from '@/components/Input/context';
+import InputClearButton from '@/components/Input/InputClearButton';
+import InputDescription from '@/components/Input/InputDescription';
+import InputField from '@/components/Input/InputField';
+import InputLabel from '@/components/Input/InputLabel';
+import InputSuffix from '@/components/Input/InputSuffix';
 import { cn } from '@/lib/utils';
-import { InputHTMLAttributes, useState, forwardRef } from 'react';
+import { ReactNode } from 'react';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
-  type?: string;
-  placeholder?: string;
-  pattern?: string;
-  patternErrorMessage?: string;
-  defaultValue?: string | number;
+export interface InputProps {
+  children: ReactNode;
+  value: any;
+  description?: string;
   variant?: 'bordered' | 'underlined';
-  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setValue: (value: any) => void;
+  className?: string;
 }
-
-const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  {
-    className,
-    label,
-    type,
-    placeholder,
-    pattern,
-    patternErrorMessage,
-    defaultValue,
-    required,
-    variant = 'bordered',
-    handleChange,
-    ...props
-  }: InputProps,
-  ref
-) {
-  const [inputError, setInputError] = useState<string | undefined>(undefined);
-  const [inputValue, setInputValue] = useState(defaultValue ?? null);
-
-  const defaultHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setInputValue(value);
-    if (value === '' || (pattern && new RegExp(pattern).test(value))) {
-      setInputError(undefined);
-    }
-    if (handleChange) {
-      handleChange(e);
-    }
-  };
-  const handleBlur = () => {
-    if (
-      required &&
-      (inputValue === null || inputValue === undefined || inputValue === '')
-    ) {
-      console.log('inputValue 왜', inputValue);
-
-      setInputError('필수 입력항목입니다.');
-    } else if (pattern && !new RegExp(pattern).test(String(inputValue))) {
-      console.log('패턴');
-      setInputError(patternErrorMessage);
-    } else {
-      setInputError(undefined);
-    }
-  };
-
+export default function Input({
+  children,
+  value,
+  setValue,
+  variant = 'bordered',
+  description,
+  className,
+}: InputProps) {
   return (
-    <div className="flex flex-col gap-0.5">
+    <InputContext.Provider value={{ value, setValue, variant, description }}>
       <div
         className={cn(
-          'flex flex-col py-1.5',
-          variant === 'bordered'
-            ? 'border rounded-xl px-3 '
-            : 'border-b px-0.5',
-          'border-default-200',
-          inputError
-            ? 'focus-within:border-red-400'
-            : 'focus-within:border-primary-200',
+          'relative w-full flex items-center ',
+          variant === 'bordered' &&
+            'border border-gray-300 rounded-xl px-2.5 pt-[26px] pb-[5px] focus-within:border-primary-200 focus-within:ring-1.5 focus-within:ring-primary-200',
+          variant === 'underlined' &&
+            'border-b border-gray-300  pt-[26px] pb-2 focus-within:border-primary-200 focus-within:ring-1.5 focus-within:ring-primary-200',
           className
         )}
       >
-        <label className="text-caption text-default-600">{label}</label>
-        <input
-          ref={ref}
-          autoComplete="off"
-          spellCheck={false}
-          type={type}
-          placeholder={placeholder}
-          pattern={pattern}
-          required={required}
-          className={cn('text-body text-black focus:outline-none bg-white')}
-          onChange={defaultHandleChange}
-          onBlur={handleBlur}
-          value={inputValue || ''}
-          {...props}
-        />
+        {children}
       </div>
-      {inputError && (
-        <span
-          className={`${variant === 'underlined' ? 'pl-0.5' : 'pl-2'} text-red-400 text-tiny`}
-        >
-          {inputError}
-        </span>
-      )}
-    </div>
+    </InputContext.Provider>
   );
-});
+}
 
-export default Input;
+Input.Field = InputField;
+Input.Label = InputLabel;
+Input.Suffix = InputSuffix;
+Input.ClearButton = InputClearButton;
+Input.Description = InputDescription;

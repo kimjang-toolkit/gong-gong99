@@ -1,5 +1,5 @@
-function DefaultLayout({ children }: { children: React.ReactNode[] }) {
-  const [header, content, footer] = children;
+function HeaderLayout({ children }: { children: React.ReactNode[] }) {
+  const [header, content] = children;
   return (
     <>
       <header className="fixed z-[10] top-0 w-full max-w-[500px]">
@@ -11,9 +11,8 @@ function DefaultLayout({ children }: { children: React.ReactNode[] }) {
       >
         {content}
       </main>
-      <footer className="fixed bottom-0 w-full max-w-[500px]">{footer}</footer>
     </>
   );
 }
 
-export default DefaultLayout;
+export default HeaderLayout;
