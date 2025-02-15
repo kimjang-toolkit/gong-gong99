@@ -1,4 +1,5 @@
-import { authService } from '@/services/auth';
+import { authService } from '@/api/services/auth';
+import useAuthStore from '@/stores/authStore';
 import axios from 'axios';
 
 // axios 인스턴스 및 인터셉터 설정
@@ -20,7 +21,7 @@ export const privateAxiosInstance = axios.create({
 
 // 요청 인터셉터: 요청할 때마다 최신 accessToken을 동적으로 설정
 privateAxiosInstance.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem('token');
+  const token = useAuthStore.getState().token;
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -35,14 +36,14 @@ privateAxiosInstance.interceptors.response.use(
       try {
         const newAccessToken = await authService.refreshToken();
         if (newAccessToken) {
-          sessionStorage.setItem('token', newAccessToken); // 최신 토큰 저장
+          useAuthStore.getState().setToken(newAccessToken); // 최신 토큰 저장
           error.config.headers.Authorization = `Bearer ${newAccessToken}`;
           return privateAxiosInstance.request(error.config);
         }
       } catch (error) {
         console.error('리프레시 토큰 갱신 실패!!', error);
         // 로그아웃 및 리다이렉트 시키기
-        sessionStorage.removeItem('token');
+        useAuthStore.getState().setToken('');
         // window.location.href = '/login';
       }
     }

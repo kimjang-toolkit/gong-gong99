@@ -2,7 +2,7 @@ import BottomButton from '@/components/Button/BottomButton';
 import TitleHeader from '@/components/Header/TitleHeader';
 import Input from '@/components/Input';
 import HeaderLayout from '@/layouts/HeaderLayout';
-import usePwdCobuying from '@/services/mutations/usePwdCobuying';
+import usePwdCobuying from '@/api/mutations/usePwdCobuying';
 import { useState } from 'react';
 
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
@@ -19,18 +19,10 @@ export default function PasswordPage() {
   const [ownerPassword, setOwnerPassword] = useState('');
 
   const handleSubmit = async () => {
-    // 비밀번호 확인 로직
-    try {
-      const response = await mutateAsync({
-        ownerName,
-        ownerPassword: ownerPassword,
-      });
-      console.log(response);
-      if (response === 200) {
-        navigate(`/co-buying/${id}/management?ownerName=${ownerName}`);
-      }
-    } catch (error) {
-      console.error(error);
+    const success = await mutateAsync({ ownerName, ownerPassword });
+
+    if (success) {
+      navigate(`/co-buying/${id}/management?ownerName=${ownerName}`);
     }
   };
 

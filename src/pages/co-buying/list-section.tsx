@@ -1,7 +1,7 @@
 import CobuyingCard from '@/components/CobuyingCard';
 
 import { useEffect, useRef } from 'react';
-import { useCobuyingList } from '@/services/queries/cobuying';
+import { useCobuyingList } from '@/api/queries/cobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate } from 'react-router-dom';
 import { CoBuyingSummary } from '@interface/cobuying';

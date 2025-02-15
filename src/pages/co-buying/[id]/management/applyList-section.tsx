@@ -1,6 +1,7 @@
 import { CoBuyingDetail } from '@interface/cobuying';
 
 export default function ApplyListSection({ data }: { data: CoBuyingDetail }) {
+  console.log('data', data);
   const { attendeeList } = data;
   return (
     <>

@@ -1,11 +1,17 @@
-import useAuth from '@/hooks/useAuth';
+import useAlertStore from '@/stores/alertStore';
+import useAuthStore from '@/stores/authStore';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export default function ProtectedRoute() {
-  const { isAuthenticated } = useAuth();
+  const { token } = useAuthStore();
+  const { showAlert } = useAlertStore();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/cobuying" />;
+  if (!token) {
+    showAlert({
+      status: 'fail',
+      label: '인증이 필요합니다.',
+    });
+    return <Navigate to="/co-buying" replace={true} />;
   }
 
   return <Outlet />;

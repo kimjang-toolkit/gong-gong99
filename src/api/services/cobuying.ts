@@ -10,6 +10,7 @@ import {
   CoBuyingSummary,
 } from '@interface/cobuying';
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
+import { AxiosError } from 'axios';
 
 export const cobuyingService = {
   postCreate: async (
@@ -44,21 +45,19 @@ export const cobuyingService = {
     return response.data;
   },
   pwdCheck: async (id: string, body: UserAuthReq) => {
-    const response = await axiosInstance.post(
-      ENDPOINTS.AUTH.PWD_CHECK(id),
-      body
-    );
-    const token = '';
-    if (
-      response &&
-      response.headers &&
-      typeof response.headers.get === 'function'
-    ) {
-      const headerValue = response.headers.get('X-Amzn-Remapped-Authorization');
-      console.log('headerValue', headerValue);
-    }
-    sessionStorage.setItem('token', token);
+    try {
+      const response = await axiosInstance.post(
+        ENDPOINTS.AUTH.PWD_CHECK(id),
+        body
+      );
 
-    return response.status;
+      const token = response.headers['x-amzn-remapped-authorization'];
+      return { success: true, token };
+    } catch (error) {
+      if (error instanceof AxiosError && error.response?.status === 401) {
+        return { success: false };
+      }
+      throw error; // 기타 에러는 그대로 throw
+    }
   },
 };

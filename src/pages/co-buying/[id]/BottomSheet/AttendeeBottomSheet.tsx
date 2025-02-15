@@ -1,5 +1,5 @@
 import Button from '@/components/Button';
-import useApplyCobuying from '@/services/mutations/useApplyCobuying';
+import useApplyCobuying from '@/api/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { AttendeeCoBuyingDetail } from '@interface/cobuying';
 import { Sheet } from 'react-modal-sheet';
