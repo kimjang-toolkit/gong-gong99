@@ -1,6 +1,6 @@
 import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
-import { useCobuyingDetail } from '@/services/queries/cobuying';
+import { useCobuyingDetail } from '@/api/queries/cobuying';
 import InfoSection from '@/pages/co-buying/[id]/info-section';
 // import InfoSection from '@/pages/co-buying/[id]/InfoSection';
 import ApplyListSection from '@/pages/co-buying/[id]/management/applyList-section';

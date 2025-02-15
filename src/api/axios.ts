@@ -1,4 +1,4 @@
-import { authService } from '@/services/auth';
+import { authService } from '@/api/services/auth';
 import useAuthStore from '@/stores/authStore';
 import axios from 'axios';
 

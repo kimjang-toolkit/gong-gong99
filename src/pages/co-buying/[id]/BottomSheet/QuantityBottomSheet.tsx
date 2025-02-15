@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
 import StepperButton from '@/components/Button/StepperButton';
-import useApplyCobuying from '@/services/mutations/useApplyCobuying';
+import useApplyCobuying from '@/api/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { QuantityCoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';

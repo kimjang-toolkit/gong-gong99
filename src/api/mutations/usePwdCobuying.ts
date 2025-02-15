@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { cobuyingService } from '@/services/cobuying';
+import { cobuyingService } from '@/api/services/cobuying';
 import useAuthStore from '@/stores/authStore';
 import useAlertStore from '@/stores/alertStore';
 import { UserAuthReq } from '@interface/auth';

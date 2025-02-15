@@ -2,7 +2,7 @@ import BottomButton from '@/components/Button/BottomButton';
 import TitleHeader from '@/components/Header/TitleHeader';
 import Input from '@/components/Input';
 import HeaderLayout from '@/layouts/HeaderLayout';
-import usePwdCobuying from '@/services/mutations/usePwdCobuying';
+import usePwdCobuying from '@/api/mutations/usePwdCobuying';
 import { useState } from 'react';
 
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
