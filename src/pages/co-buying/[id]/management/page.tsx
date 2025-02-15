@@ -31,10 +31,10 @@ export default function ManagementPage() {
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          <>
+          <div className="flex flex-col gap-2">
             <InfoSection data={data as CoBuyingDetail} />
             <ApplyListSection data={data as CoBuyingDetail} />
-          </>
+          </div>
         )}
       </>
       <BottomButton label="신청 마감하기" />
