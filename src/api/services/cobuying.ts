@@ -51,7 +51,7 @@ export const cobuyingService = {
         body
       );
 
-      const token = response.headers['x-amzn-remapped-authorization'];
+      const token = response.headers['authorization'];
       return { success: true, token };
     } catch (error) {
       if (error instanceof AxiosError && error.response?.status === 401) {
