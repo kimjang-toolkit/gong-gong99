@@ -8,6 +8,7 @@ export const baseURL = import.meta.env.VITE_API_SERVER_URL;
 export const axiosInstance = axios.create({
   baseURL,
   timeout: 5000,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
