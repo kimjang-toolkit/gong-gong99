@@ -10,7 +10,6 @@ import {
   CoBuyingSummary,
 } from '@interface/cobuying';
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
-import { AxiosError } from 'axios';
 
 export const cobuyingService = {
   postCreate: async (
@@ -45,19 +44,11 @@ export const cobuyingService = {
     return response.data;
   },
   pwdCheck: async (id: string, body: UserAuthReq) => {
-    try {
-      const response = await axiosInstance.post(
-        ENDPOINTS.AUTH.PWD_CHECK(id),
-        body
-      );
-
-      const token = response.headers['authorization'];
-      return { success: true, token };
-    } catch (error) {
-      if (error instanceof AxiosError && error.response?.status === 401) {
-        return { success: false };
-      }
-      throw error; // 기타 에러는 그대로 throw
-    }
+    const response = await axiosInstance.post(
+      ENDPOINTS.AUTH.PWD_CHECK(id),
+      body,
+      { withCredentials: true }
+    );
+    return response;
   },
 };
