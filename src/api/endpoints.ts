@@ -9,6 +9,6 @@ export const ENDPOINTS = {
   },
   AUTH: {
     PWD_CHECK: (id: string) => `/co-buying/auth/${id}`,
-    REFRESH_TOKEN: '/auth/refresh',
+    REFRESH_TOKEN: '/refresh',
   },
 } as const;
