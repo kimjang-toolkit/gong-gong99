@@ -46,8 +46,7 @@ export const cobuyingService = {
   pwdCheck: async (id: string, body: UserAuthReq) => {
     const response = await axiosInstance.post(
       ENDPOINTS.AUTH.PWD_CHECK(id),
-      body,
-      { withCredentials: true }
+      body
     );
     return response;
   },

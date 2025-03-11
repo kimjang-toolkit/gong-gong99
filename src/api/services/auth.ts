@@ -5,9 +5,7 @@ import useAuthStore from '@/stores/authStore';
 export const authService = {
   refreshToken: async () => {
     try {
-      const response = await axiosInstance.get(ENDPOINTS.AUTH.REFRESH_TOKEN, {
-        withCredentials: true,
-      });
+      const response = await axiosInstance.get(ENDPOINTS.AUTH.REFRESH_TOKEN);
       const newToken = response.headers['authorization'].split(' ')[1];
       useAuthStore.getState().setToken(newToken);
       useAuthStore.getState().setOwnerName(response.data.ownerName);
