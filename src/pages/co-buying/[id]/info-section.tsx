@@ -71,7 +71,7 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
           </section>
         </>
       )}
-      <section className="flex justify-end gap-2.5">
+      <section className="flex justify-end gap-2.5 ">
         <button
           className="px-2.5 py-2.5 rounded-full bg-primary-50 active:brightness-90"
           onClick={() => share(`${data.productName} 공구해요`)}

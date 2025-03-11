@@ -14,16 +14,19 @@ export default function PasswordPage() {
   const ownerName = searchParams.get('ownerName')!;
   const id = useParams().id!;
 
-  const { mutateAsync } = usePwdCobuying(id);
+  const { mutate } = usePwdCobuying(id);
 
   const [ownerPassword, setOwnerPassword] = useState('');
 
-  const handleSubmit = async () => {
-    const success = await mutateAsync({ ownerName, ownerPassword });
-
-    if (success) {
-      navigate(`/co-buying/${id}/management?ownerName=${ownerName}`);
-    }
+  const handleSubmit = () => {
+    mutate(
+      { ownerName, ownerPassword },
+      {
+        onSuccess: () => {
+          navigate(`/co-buying/${id}/management?ownerName=${ownerName}`);
+        },
+      }
+    );
   };
 
   return (

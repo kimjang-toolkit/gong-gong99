@@ -16,7 +16,10 @@ export default function ApplyListSection({ data }: { data: CoBuyingDetail }) {
         </thead>
         <tbody>
           {attendeeList?.map((attendee) => (
-            <tr className="*:py-1.5 *:text-center *:typo-caption">
+            <tr
+              key={attendee.attendeeName}
+              className="*:py-1.5 *:text-center *:typo-caption"
+            >
               <td className="min-w-[30%]">{attendee.attendeeName}</td>
               <td>{attendee.appliedQuantity}</td>
               <td className="min-w-[45%]">

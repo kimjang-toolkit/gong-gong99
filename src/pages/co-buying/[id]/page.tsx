@@ -23,8 +23,8 @@ export default function DetailPage() {
   const [isApplyingFormOpen, setIsApplyingFormOpen] = useState(false);
 
   const handleManageButton = () => {
-    // 관리하기 비밀번호 페이지
-    navigate(`password/?ownerName=${searchParams.get('ownerName')}`);
+    // 관리하기 페이지
+    navigate(`management?ownerName=${searchParams.get('ownerName')}`);
   };
 
   return (
