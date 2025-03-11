@@ -36,7 +36,6 @@ privateAxiosInstance.interceptors.response.use(
       try {
         const newAccessToken = await authService.refreshToken();
         if (newAccessToken) {
-          useAuthStore.getState().setToken(newAccessToken); // 최신 토큰 저장
           error.config.headers.Authorization = `Bearer ${newAccessToken}`;
           return privateAxiosInstance.request(error.config);
         }
