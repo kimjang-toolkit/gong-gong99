@@ -58,8 +58,9 @@ function App() {
         const url = new URL(request.url);
         const ownerName = url.searchParams.get('ownerName');
         const accessToken = useAuthStore.getState().token;
+        const name = useAuthStore.getState().ownerName;
 
-        if (accessToken) {
+        if (accessToken && name === ownerName) {
           return null;
         } else {
           return redirect(
