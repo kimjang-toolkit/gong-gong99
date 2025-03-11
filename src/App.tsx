@@ -22,12 +22,9 @@ function App() {
   useKakaoInit(); // 카카오 초기화
 
   useEffect(() => {
-    // 첫로그인시 리프레시 토큰 갱신
+    // 첫로그인 시 리프레시 토큰 갱신
     const refreshTokens = async () => {
-      const newToken = await authService.refreshToken();
-      if (newToken) {
-        useAuthStore.getState().setToken(newToken);
-      }
+      await authService.refreshToken();
     };
     refreshTokens();
   }, []);
