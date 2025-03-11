@@ -2,6 +2,7 @@
 import { axiosInstance } from '@/api/axios';
 import { ENDPOINTS } from '@/api/endpoints';
 import { ApplicationReq } from '@interface/application';
+import { UserAuthReq } from '@interface/auth';
 import { CoBuyingDetail } from '@interface/cobuying';
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
 
@@ -29,5 +30,12 @@ export const cobuyingService = {
   postApply: async (body: ApplicationReq) => {
     const response = await axiosInstance.post(ENDPOINTS.COBUYING.APPLY, body);
     return response.data;
+  },
+  pwdCheck: async (id: string, body: UserAuthReq) => {
+    const response = await axiosInstance.post(
+      ENDPOINTS.COBUYING.PWD_CHECK(id),
+      body
+    );
+    return response;
   },
 };
