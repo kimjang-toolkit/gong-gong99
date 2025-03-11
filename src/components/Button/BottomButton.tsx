@@ -8,7 +8,7 @@ interface BottomButtonProps
 function BottomButton({ label, onClick, ...props }: BottomButtonProps) {
   return (
     <button
-      className="w-full py-4 text-center text-h3-bold text-default-50 bg-primary-300 disabled:bg-default-300 disabled:text-white"
+      className="fixed h-[66px] bottom-0 ml-[-20px] max-w-[500px] w-full py-4 text-center text-h3-bold text-default-50 bg-primary-300 disabled:bg-default-300 disabled:text-white"
       onClick={onClick}
       {...props}
     >

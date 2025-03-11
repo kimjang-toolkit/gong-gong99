@@ -30,21 +30,24 @@ export default {
           800: '#27272a',
           900: '#18181b',
         },
+        system: {
+          error: '#FF5151',
+        },
       },
       keyframes: {
         slideIn: {
           '0%': { transform: 'translate(-50%, -100%)' },
-          '100%': { transform: 'translate(-50%, 0)' }
+          '100%': { transform: 'translate(-50%, 0)' },
         },
         slideOut: {
           '0%': { transform: 'translate(-50%, 0)' },
-          '100%': { transform: 'translate(-50%, 100%)' }
-        }
+          '100%': { transform: 'translate(-50%, 100%)' },
+        },
       },
       animation: {
         slideIn: 'slideIn 0.3s ease-out forwards',
-        slideOut: 'slideOut 0.3s ease-out forwards'
-      }
+        slideOut: 'slideOut 0.3s ease-out forwards',
+      },
     },
     screens: {
       sm: '600px',
@@ -64,31 +67,31 @@ export default {
         '.shadow-top': {
           boxShadow: '0 -8px 20px 0 rgba(0, 0, 0, 0.05)',
         },
-        '.text-h2': {
+        '.typo-h2': {
           '@apply text-[20px] font-medium leading-7': '',
         },
-        '.text-h2-bold': {
+        '.typo-h2-bold': {
           '@apply text-[20px] font-bold leading-7': '',
         },
-        '.text-h3-bold': {
+        '.typo-h3-bold': {
           '@apply text-[18px] font-semibold leading-normal': '',
         },
-        '.text-body': {
+        '.typo-body': {
           '@apply text-[16px] font-normal leading-normal': '',
         },
-        '.text-body-bold': {
+        '.typo-body-bold': {
           '@apply text-[16px] font-semibold leading-normal': '',
         },
-        '.text-caption': {
-          '@apply text-[14px] font-medium leading-normal': '',
+        '.typo-caption': {
+          '@apply text-[14px] font-normal leading-normal': '',
         },
-        '.text-caption-bold': {
+        '.typo-caption-bold': {
           '@apply text-[14px] font-semibold leading-normal': '',
         },
-        '.text-tiny': {
+        '.typo-tiny': {
           '@apply text-[12px] font-normal leading-normal': '',
         },
-        '.text-tiny-bold': {
+        '.typo-tiny-bold': {
           '@apply text-[12px] font-bold leading-normal': '',
         },
       });

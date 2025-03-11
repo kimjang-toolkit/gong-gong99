@@ -1,12 +1,24 @@
 // API 호출
 import { axiosInstance } from '@/api/axios';
 import { ENDPOINTS } from '@/api/endpoints';
+import { DivideType } from '@domain/cobuying';
 import { ApplicationReq } from '@interface/application';
 import { UserAuthReq } from '@interface/auth';
-import { CoBuyingDetail } from '@interface/cobuying';
+import {
+  CoBuyingCreateReq,
+  CoBuyingDetail,
+  CoBuyingSummary,
+} from '@interface/cobuying';
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
 
 export const cobuyingService = {
+  postCreate: async (
+    body: CoBuyingCreateReq<DivideType>
+  ): Promise<CoBuyingSummary> => {
+    const response = await axiosInstance.post(ENDPOINTS.COBUYING.CREATE, body);
+    return response.data;
+  },
+
   getListPage: async (
     id: string,
     createdAtId: string,
@@ -33,7 +45,7 @@ export const cobuyingService = {
   },
   pwdCheck: async (id: string, body: UserAuthReq) => {
     const response = await axiosInstance.post(
-      ENDPOINTS.COBUYING.PWD_CHECK(id),
+      ENDPOINTS.AUTH.PWD_CHECK(id),
       body
     );
     return response;

@@ -1,76 +1,56 @@
 import BottomButton from '@/components/Button/BottomButton';
 import TitleHeader from '@/components/Header/TitleHeader';
-import DefaultLayout from '@/layouts/DefaultLayout';
-import useFormValidation from '@/hooks/useFormButtonValidation';
-import CheckForm from '@/pages/co-buying/password/CheckForm';
-import CreateForm from '@/pages/co-buying/password/CreateForm';
-import useFormStore from '@/stores/coBuyingFormStore';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import Input from '@/components/Input';
+import HeaderLayout from '@/layouts/HeaderLayout';
+import usePwdCobuying from '@/api/mutations/usePwdCobuying';
+import { useState } from 'react';
 
-const createFormText = ['공구글 게시를 위해', '기본정보', '공구 열기'];
-const checkFormText = ['공구글 관리를 위해', '비밀번호', '다음'];
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 export default function PasswordPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  const { formData } = useFormStore();
-  const { formRef, isDisabled } = useFormValidation();
+  const ownerName = searchParams.get('ownerName')!;
+  const id = useParams().id!;
 
-  // pathparam으로 id가져오기
-  const { id } = useParams();
-  //id가 없다면 공구글 생성을 위한 비밀번호 입력페이지
-  const isCreateMode = !id;
+  const { mutate } = usePwdCobuying(id);
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (!formRef.current) return;
+  const [ownerPassword, setOwnerPassword] = useState('');
 
-    const formEntries = new FormData(formRef.current);
-    const data = Object.fromEntries(formEntries);
-
-    // 비밀번호 생성페이지
-    if (isCreateMode) {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_SERVER_URL}/co-buying`,
-        { ...formData, ...data }
-      );
-      console.log(response);
-    }
-    // 비밀번호 확인페이지
-    else {
-      console.log(data);
-      //비밀번호 확인로직
-      navigate(`/co-buying/${id}/management`);
-    }
+  const handleSubmit = () => {
+    mutate(
+      { ownerName, ownerPassword },
+      {
+        onSuccess: () => {
+          navigate(`/co-buying/${id}/management?ownerName=${ownerName}`);
+        },
+      }
+    );
   };
 
   return (
-    <DefaultLayout>
+    <HeaderLayout>
       <TitleHeader />
       <>
-        <section className="flex flex-col w-full gap-1 text-black h-[90px] justify-center">
-          <p className="text-h2">
-            {isCreateMode ? createFormText[0] : checkFormText[0]}
-          </p>
+        <section className="flex flex-col w-full gap-1 mb-4 text-black h-[90px] justify-center">
+          <p className="typo-h2">공구글 관리를 위해</p>
           <div className="flex items-center">
-            <p className="text-h2-bold">
-              {isCreateMode ? createFormText[1] : checkFormText[1]}
-            </p>
-            <p className="text-h2">를 입력해주세요.</p>
+            <p className="typo-h2-bold">비밀번호</p>
+            <p className="typo-h2">를 입력해주세요.</p>
           </div>
         </section>
-        <form className="flex flex-col gap-4 mt-3" ref={formRef}>
-          {isCreateMode ? <CreateForm /> : <CheckForm />}
-        </form>
+        <Input value={ownerPassword} setValue={setOwnerPassword}>
+          <Input.Label>비밀번호</Input.Label>
+          <Input.Field type="password" />
+        </Input>
+        <BottomButton
+          type="button"
+          onClick={handleSubmit}
+          label="확인"
+          disabled={!ownerPassword}
+        />
       </>
-
-      <BottomButton
-        type="button"
-        onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
-        label={isCreateMode ? createFormText[2] : checkFormText[2]}
-        disabled={isDisabled}
-      />
-    </DefaultLayout>
+    </HeaderLayout>
   );
 }

@@ -1,75 +1,74 @@
-import BottomButton from '@/components/Button/BottomButton';
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import TitleHeader from '@/components/Header/TitleHeader';
-import DefaultLayout from '@/layouts/DefaultLayout';
-import CommonForm from '@/pages/co-buying/create/CommonForm';
-import DivideByQuantityForm from '@/pages/co-buying/create/DivideByQuantityForm';
-import DivideByAttendeeForm from '@/pages/co-buying/create/DivideByAttendeeForm';
-import DivideTypeSection from '@/pages/co-buying/create/DivideTypeSection';
+import HeaderLayout from '@/layouts/HeaderLayout';
 
-import { useNavigate } from 'react-router-dom';
-import useFormValidation from '@/hooks/useFormButtonValidation';
-import useFormStore from '@/stores/coBuyingFormStore';
 import { DivideType } from '@domain/cobuying';
-
+import { useState } from 'react';
+import CreateForm from '@/pages/co-buying/create/CreateForm';
+import PasswordForm from '@/pages/co-buying/create/PasswordForm';
+import { PasswordSchema } from '@/util/zod/cobuying-create';
+import { useNavigate } from 'react-router-dom';
+import { useCreateCobuying } from '@/api/mutations/useCreateCobuying';
 function CreatePage() {
   const navigate = useNavigate();
+  const { mutateAsync } = useCreateCobuying();
 
-  const { formRef, isDisabled } = useFormValidation();
-  const { setFormData, type } = useFormStore();
+  const [formData, setFormData] = useState({
+    type: DivideType.quantity,
+    productName: '',
+    totalPrice: 0,
+    productLink: '',
+    deadline: '',
+    totalQuantity: 0,
+    ownerQuantity: 0,
+    targetAttendeeCount: 0,
+    memo: '',
+    ownerPassword: '',
+    ownerName: '',
+  });
+  const [step, setStep] = useState(1);
 
-  // 다음 버튼 핸들러
-  const handleNextClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    navigate('/co-buying/password');
+  const handleNextStep = () => {
+    setStep(step + 1);
   };
 
-  // 폼 간에 상태 변경을 공유하기 위해 필요
-  const handleFormBlur = (e: React.FormEvent<HTMLFormElement>) => {
-    const formEntries = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formEntries);
-
-    setFormData(data);
+  const handleSubmit = async (data: PasswordSchema) => {
+    console.log('data', data);
+    const { ownerPasswordConfirm, ...exceptPasswordConfirm } = data;
+    try {
+      const response = await mutateAsync({
+        ...formData,
+        ...exceptPasswordConfirm,
+      });
+      navigate(`/co-buying/${response.id}?ownerName=${data.ownerName}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleBackButton = () => {
+    if (step === 1) {
+      navigate(-1);
+    } else {
+      setStep(step - 1);
+    }
   };
 
   return (
-    <DefaultLayout>
-      <TitleHeader title="공구글 작성" />
-
-      <form
-        ref={formRef}
-        onBlur={handleFormBlur}
-        className="flex flex-col gap-4"
-      >
-        {/* 1.상품 기본정보 폼 */}
-        <CommonForm />
-
-        {/* 2. 공구 나눔방식 선택 */}
-        <DivideTypeSection />
-
-        {/* 3. 공구 나눔방식 선택에 따라 수량으로 나누기 폼/ 인원으로 나누기 폼 */}
-        {type === DivideType.quantity && <DivideByQuantityForm />}
-        {type === DivideType.attendee && <DivideByAttendeeForm />}
-
-        {/* 4. 알리는 말 */}
-        <section className="flex flex-col gap-2">
-          <div className="w-full h-24 border rounded-xl px-3 py-1.5 border-default-200">
-            <label className="text-caption text-default-600">안내 메시지</label>
-            <textarea
-              name="noticeMessage"
-              placeholder="신청자에게 안내할 내용을 자유롭게 입력해주세요."
-              className="w-full text-black bg-white border-none focus:outline-none"
-              maxLength={200}
-            />
-          </div>
-        </section>
-      </form>
-      <BottomButton
-        type="button"
-        label="다음"
-        onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleNextClick(e)}
-        disabled={isDisabled}
+    <HeaderLayout>
+      <TitleHeader
+        onBackPress={handleBackButton}
+        title={step === 1 ? '공구글 작성' : ''}
       />
-    </DefaultLayout>
+      {step === 1 ? (
+        <CreateForm
+          setFormData={(data) => setFormData(data as typeof formData)}
+          formData={formData}
+          handleNextStep={handleNextStep}
+        />
+      ) : (
+        <PasswordForm handleSubmit={handleSubmit} />
+      )}
+    </HeaderLayout>
   );
 }
 

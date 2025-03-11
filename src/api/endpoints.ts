@@ -5,6 +5,10 @@ export const ENDPOINTS = {
     DETAIL: (id: string) => `/co-buying/${id}`,
     CREATE: '/co-buying',
     APPLY: '/co-buying/applications',
+    CHANGE_STATUS: (id: string) => `/co-buying/${id}/status`,
+  },
+  AUTH: {
     PWD_CHECK: (id: string) => `/co-buying/auth/${id}`,
+    REFRESH_TOKEN: '/refresh',
   },
 } as const;

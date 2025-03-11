@@ -1,15 +1,17 @@
-import DefaultLayout from '@/layouts/DefaultLayout';
 import Navbar from '@/components/Navbar';
-import ListSection from '@/pages/co-buying/ListSection';
+import HeaderLayout from '@/layouts/HeaderLayout';
+import ListSection from '@/pages/co-buying/list-section';
 
 export default function CoBuyingPage() {
   return (
-    <DefaultLayout>
-      <div className="items-center w-full py-4 text-center text-black bg-white text-h3-bold">
+    <HeaderLayout>
+      <div className="items-center w-full py-4 text-center text-black bg-white typo-h3-bold">
         공구글
       </div>
-      <ListSection />
-      <Navbar />
-    </DefaultLayout>
+      <>
+        <ListSection />
+        <Navbar />
+      </>
+    </HeaderLayout>
   );
 }
