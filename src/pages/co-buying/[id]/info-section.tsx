@@ -5,6 +5,7 @@ import { CoBuyingDetail } from '@interface/cobuying';
 import AttendeeInfo from './AttendeeInfo';
 import UnitInfo from './UnitInfo';
 import KakaoShareButton from '@/components/KakaoShareButton';
+import defaultProfile from '@/assets/img/default-img.png';
 
 export default function InfoSection({ data }: { data: CoBuyingDetail }) {
   const { share } = useWebShare();
@@ -12,11 +13,20 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
 
   return (
     <>
-      <section className="flex flex-col w-full pb-3 my-4">
-        <p className="typo-caption text-default-500">{data.ownerName}</p>
-        <p className="text-black typo-h3-bold">{data.productName}</p>
-        <div className="mt-1">
-          <p className="typo-caption text-default-600">
+      <section className="flex w-full gap-2 mb-4">
+        <img
+          src={data.imageUrl || defaultProfile}
+          alt="주문자 이미지"
+          className="object-cover aspect-square"
+        />
+        <div className="flex flex-col">
+          <p className="typo-tiny text-default-500 max-w-[113px]">
+            {data.ownerName}
+          </p>
+          <p className="text-black typo-body-bold line-clamp-2">
+            {data.productName}
+          </p>
+          <p className="whitespace-nowrap typo-tiny text-default-600">
             {`${data.deadline} 마감`}
           </p>
         </div>
