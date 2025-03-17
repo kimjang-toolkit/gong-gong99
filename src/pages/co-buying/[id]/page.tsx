@@ -9,6 +9,7 @@ import { DivideType } from '@domain/cobuying';
 import { CoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import ImageSection from '@/pages/co-buying/[id]/image-section';
 
 export default function DetailPage() {
   const navigate = useNavigate();
@@ -45,7 +46,10 @@ export default function DetailPage() {
           {isLoading ? (
             <div>Loading...</div>
           ) : (
-            <InfoSection data={data as CoBuyingDetail} />
+            <>
+              <ImageSection data={data as CoBuyingDetail} />
+              <InfoSection data={data as CoBuyingDetail} />
+            </>
           )}
           <BottomButton
             label="신청하기"

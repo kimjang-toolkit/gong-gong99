@@ -17,7 +17,7 @@ function TitleHeader({ title, onBackPress }: TitleHeaderProps) {
   };
 
   return (
-    <div className="h-[53px] py-4 flex items-center pl-4 text-black typo-h3-bold pr-[34px] w-full bg-white">
+    <div className="h-[56px] py-4 flex items-center pl-4 text-black typo-h3-bold pr-[34px] w-full bg-white">
       <ArrowLeft
         stroke="#262626"
         width={18}
