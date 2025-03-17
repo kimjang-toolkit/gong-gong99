@@ -1,33 +1,20 @@
-import ShareIcon from '@/assets/icons/link.svg?react';
-import useWebShare from '@/hooks/useWebShare';
 import { DivideType } from '@domain/cobuying';
 import { CoBuyingDetail } from '@interface/cobuying';
 import AttendeeInfo from './AttendeeInfo';
 import UnitInfo from './UnitInfo';
-import KakaoShareButton from '@/components/KakaoShareButton';
-import defaultProfile from '@/assets/img/default-img.png';
 
 export default function InfoSection({ data }: { data: CoBuyingDetail }) {
-  const { share } = useWebShare();
   const { type } = data;
 
   return (
     <>
       <section className="flex w-full gap-2 mb-4">
-        <img
-          src={data.imageUrl || defaultProfile}
-          alt="주문자 이미지"
-          className="object-cover aspect-square"
-        />
         <div className="flex flex-col">
           <p className="typo-tiny text-default-500 max-w-[113px]">
             {data.ownerName}
           </p>
           <p className="text-black typo-body-bold line-clamp-2">
             {data.productName}
-          </p>
-          <p className="whitespace-nowrap typo-tiny text-default-600">
-            {`${data.deadline} 마감`}
           </p>
         </div>
       </section>
@@ -51,18 +38,6 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
               }원`}
             </p>
           </div>
-          {data.productLink && (
-            <div className="flex justify-between">
-              <p className="typo-caption">자세히 보기</p>
-              <a
-                href={data.productLink}
-                target="_blank" // 새 탭에서 열기
-                className="underline typo-caption text-default-500 max-w-[178px] truncate"
-              >
-                {data.productLink}
-              </a>
-            </div>
-          )}
         </div>
         {type === DivideType.attendee ? (
           <AttendeeInfo data={data} />
@@ -81,23 +56,6 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
           </section>
         </>
       )}
-      <section className="flex justify-end gap-2.5 ">
-        <button
-          className="px-2.5 py-2.5 rounded-full bg-primary-50 active:brightness-90"
-          onClick={() => share(`${data.productName} 공구해요`)}
-        >
-          <ShareIcon className="w-4 h-4 pl-[1px]" />
-        </button>
-        <KakaoShareButton
-          title={data.productName}
-          endpoint={`co-buying/${data.id}?ownerName=${data.ownerName}`}
-          description={`${data.ownerName}님이 올리신 공구! ${
-            type === DivideType.attendee
-              ? `인당 ${data.perAttendeePrice.toLocaleString()}원`
-              : `개당 ${data.unitPrice.toLocaleString()}원`
-          } !!`}
-        />
-      </section>
     </>
   );
 }
