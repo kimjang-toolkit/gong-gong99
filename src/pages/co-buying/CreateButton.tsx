@@ -37,7 +37,7 @@ export default function CreateButton() {
   }, []);
   return (
     isButtonVisible && (
-      <div className="absolute right-5 bottom-20 ">
+      <div className="absolute right-5 bottom-12 ">
         <Button
           onClick={() => {
             navigate('/co-buying/create');
