@@ -30,17 +30,6 @@ export default function ListSection() {
 
   return (
     <>
-      <div className="flex w-full p-4 bg-primary-50 ">
-        <div className="flex flex-col w-full">
-          <p className="typo-caption text-default-600">
-            이웃들과 야무지게 구매해요.
-          </p>
-          <p className="typo-h2-bold text-primary-400">
-            함께 저렴하게, 공공구구!
-          </p>
-        </div>
-        <img src="/img/마스코트.png" className="h-auto max-w-[85px] " />
-      </div>
       {data?.pages?.map((page) =>
         page.coBuyingList.map((item) => (
           <div
