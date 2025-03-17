@@ -1,61 +1,70 @@
 import { DivideType } from '@domain/cobuying';
 import { CoBuyingDetail } from '@interface/cobuying';
-import AttendeeInfo from './AttendeeInfo';
-import UnitInfo from './UnitInfo';
 
 export default function InfoSection({ data }: { data: CoBuyingDetail }) {
   const { type } = data;
 
+  const boxStyle =
+    'rounded-lg typo-caption bg-default-50 px-3 py-2 *:typo-caption';
+
+  const availableQuantity =
+    type === DivideType.attendee
+      ? (data.totalQuantity / data.targetAttendeeCount).toLocaleString()
+      : data.remainQuantity.toLocaleString();
+
   return (
-    <>
-      <section className="flex w-full gap-2 mb-4">
-        <div className="flex flex-col">
-          <p className="typo-tiny text-default-500 max-w-[113px]">
-            {data.ownerName}
+    <section className="mt-4">
+      <article>
+        <p className="w-full typo-tiny text-default-500">{data.ownerName}</p>
+        <p className="text-black typo-body line-clamp-2">{data.productName}</p>
+        <div className="flex gap-2 mt-2">
+          <p className="typo-body-bold">{`${data.totalPrice.toLocaleString()}원`}</p>
+          <p className="typo-body-bold">
+            {type === DivideType.attendee ? '(인당' : '(개당'}
           </p>
-          <p className="text-black typo-body-bold line-clamp-2">
-            {data.productName}
+          <p className="typo-body-bold text-default-700">
+            {`${
+              type === DivideType.attendee
+                ? data.perAttendeePrice.toLocaleString()
+                : data.unitPrice.toLocaleString()
+            }원)`}
           </p>
         </div>
-      </section>
-
-      <p className="typo-caption text-default-600 mb-1.5">기본정보</p>
-      <section className="flex flex-col gap-3 mb-7">
-        <div className="rounded-lg bg-zinc-50 flex flex-col p-2.5 gap-2.5">
-          <div className="flex justify-between">
-            <p className="typo-caption">상품가격</p>
-            <p className="typo-caption">{`${data.totalPrice.toLocaleString()}원`}</p>
-          </div>
-          <div className="flex justify-between">
-            <p className="typo-caption">
-              {type === DivideType.attendee ? '인 당 가격' : '개 당 가격'}
-            </p>
-            <p className="typo-caption text-primary-400">
-              {`${
-                type === DivideType.attendee
-                  ? data.perAttendeePrice.toLocaleString()
-                  : data.unitPrice.toLocaleString()
-              }원`}
-            </p>
-          </div>
+      </article>
+      <article
+        className={`${boxStyle} mt-4 flex justify-center items-center gap-2`}
+      >
+        <div className="flex gap-1">
+          <p className="text-default-500">구매가능</p>
+          <p className="text-primary-500">{`${availableQuantity}개`}</p>
         </div>
-        {type === DivideType.attendee ? (
-          <AttendeeInfo data={data} />
-        ) : (
-          <UnitInfo data={data} />
-        )}
-      </section>
+        <div className="w-[1px] h-2.5 bg-layout-divider"></div>
+        <div className="flex gap-1">
+          <p className="text-default-500">전체</p>
+          <p className="text-default-700">{`${data.totalQuantity.toLocaleString()}개`}</p>
+        </div>
+      </article>
+      <article
+        className={`${boxStyle} mt-4 flex flex-col px-3 py-2 justify-center gap-2`}
+      >
+        <div className="flex gap-2">
+          <p className="text-default-500">시간</p>
+          <p className="text-default-700">2025.01.25 08:00PM</p>
+        </div>
+        <div className="flex gap-2">
+          <p className="text-default-500">장소</p>
+          <p className="text-default-700">엘레이터 앞</p>
+        </div>
+      </article>
       {data.memo && (
-        <>
-          <p className="typo-caption text-default-600 mb-1.5">안내 메시지</p>
+        <article className="mt-4">
+          <p className="typo-caption text-default-500 mb-1.5">안내 메시지</p>
 
-          <section className="mb-7">
-            <div className="rounded-lg typo-caption bg-zinc-50  p-2.5">
-              {data.memo}
-            </div>
+          <section className={`${boxStyle} px-3 py-2 text-default-700`}>
+            {data.memo}
           </section>
-        </>
+        </article>
       )}
-    </>
+    </section>
   );
 }
