@@ -11,9 +11,9 @@ export default function CoBuyingPage() {
       <>
         <Tab
           tabs={[
-            { label: '모집중', value: 'applying' },
-            { label: '나눔중', value: 'sharing' },
-            { label: '나눔완료', value: 'sharing-completed' },
+            { label: '모집중', value: '1' },
+            { label: '나눔중', value: '2' },
+            { label: '나눔완료', value: '3' },
           ]}
         />
         <ListSection />
