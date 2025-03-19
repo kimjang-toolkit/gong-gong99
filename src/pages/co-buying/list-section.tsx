@@ -5,7 +5,6 @@ import { useCobuyingList } from '@/api/queries/cobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CoBuyingSummary } from '@interface/cobuying';
-import HorizontalDatePicker from '@/components/DatePicker/HorizontalDatePicker';
 import DatePicker from '@/components/DatePicker';
 
 export default function ListSection() {

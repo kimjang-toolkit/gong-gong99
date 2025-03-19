@@ -61,6 +61,7 @@ export default {
   },
   darkMode: 'class',
   plugins: [
+    require('tailwind-scrollbar-hide'), 
     ({ addUtilities }) => {
       addUtilities({
         '.header-height': {

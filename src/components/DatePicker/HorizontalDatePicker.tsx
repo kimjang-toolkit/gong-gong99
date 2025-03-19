@@ -10,7 +10,7 @@ export default function HorizontalDatePicker() {
   const [dates, setDates] = useState<Date[]>(() => {
     const today = new Date();
     return Array.from(
-      { length: 10 },
+      { length: 12 },
       (_, index) =>
         new Date(today.getFullYear(), today.getMonth(), today.getDate() + index)
     );
@@ -18,62 +18,60 @@ export default function HorizontalDatePicker() {
 
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // 추가 요청 중인지 확인하는 상태
 
+  // ✅ 무한 스크롤 감지 로직 (최적화)
   useEffect(() => {
-    if (!loadMoreRef.current) {
-      console.log('⚠️ loadMoreRef가 감지되지 않음');
-      return;
-    }
-
-    console.log('✅ Observer 등록', loadMoreRef.current);
+    if (!loadMoreRef.current || isLoading) return;
 
     if (observer.current) observer.current.disconnect();
 
     observer.current = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          console.log('📅 Load more dates');
-          setTimeout(() => {
-            setDates((prevDates) => {
-              const lastDate = prevDates[prevDates.length - 1];
-              const newDates = Array.from(
-                { length: 10 },
-                (_, index) =>
-                  new Date(
-                    lastDate.getFullYear(),
-                    lastDate.getMonth(),
-                    lastDate.getDate() + index + 1
-                  )
-              );
-              return [...prevDates, ...newDates];
-            });
-          }, 200);
+        if (entry.isIntersecting && !isLoading) {
+          setIsLoading(true); //  새로운 데이터 추가 중이므로 로딩 상태 변경
+
+          setDates((prevDates) => {
+            const lastDate = prevDates[prevDates.length - 1];
+            const newDates = Array.from(
+              { length: 12 },
+              (_, index) =>
+                new Date(
+                  lastDate.getFullYear(),
+                  lastDate.getMonth(),
+                  lastDate.getDate() + index + 1
+                )
+            );
+            return [...prevDates, ...newDates];
+          });
+          setIsLoading(false);
         }
       },
-      { threshold: 0.5 } // ✅ 감지 범위를 높여서 동작하도록 설정
+      {
+        root: null, // 뷰포트 기준 감지
+        rootMargin: '50px', // 조금 더 스크롤이 내려간 후 감지
+        threshold: 1,
+      }
     );
 
     observer.current.observe(loadMoreRef.current);
 
     return () => observer.current?.disconnect();
-  }, [dates.length]); // ✅ dates.length 변경될 때마다 다시 실행
+  }, [dates.length, isLoading]);
 
   return (
-    <section className="overflow-x-auto w-72">
-      <div className="flex items-center gap-5">
+    <section className="relative w-full overflow-x-auto scroll-smooth scroll-snap-x snap-mandatory scrollbar-hide">
+      <div className="flex items-center gap-5 w-max">
         {dates.map((date) => (
           <DateItem
             key={date.toISOString()}
             date={date}
             isToday={date.toDateString() === new Date().toDateString()}
             isSelected={selectedDate?.toDateString() === date.toDateString()}
-            onClick={() => {
-              setSelectedDate?.(new Date(date));
-            }}
+            onClick={() => setSelectedDate?.(new Date(date))}
           />
         ))}
-        {/* ✅ 감지 가능하도록 크기 조정 */}
-        <div ref={loadMoreRef} className="w-10 h-10 bg-transparent" />{' '}
+        <div ref={loadMoreRef} className="w-10 h-24 bg-transparent" />
       </div>
     </section>
   );
@@ -90,13 +88,11 @@ const DateItem = ({
   isSelected: boolean;
   onClick: () => void;
 }) => {
-  console.log(`🔹 DateItem: ${date.toDateString()}, isSelected: ${isSelected}`);
-
   return (
     <div
       onClick={onClick}
       className={cn(
-        'flex flex-col items-center justify-center *:typo-caption cursor-pointer rounded-lg transition-colors duration-200',
+        'flex flex-col items-center justify-center scrollbar-hide cursor-pointer rounded-lg transition-colors duration-200',
         isToday ? 'text-primary-500 font-bold' : 'text-default-900'
       )}
     >
