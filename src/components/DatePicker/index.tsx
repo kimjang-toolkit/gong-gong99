@@ -1,6 +1,7 @@
 import HorizontalDatePicker from '@/components/DatePicker/HorizontalDatePicker';
 import { DatePickerContext } from './context';
 import { useState } from 'react';
+import TimePicker from '@/components/DatePicker/TimePicker';
 
 function DatePicker() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -25,6 +26,7 @@ function DatePicker() {
       }}
     >
       <HorizontalDatePicker />
+      <TimePicker />
     </DatePickerContext.Provider>
   );
 }

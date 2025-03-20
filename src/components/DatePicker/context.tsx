@@ -17,7 +17,16 @@ export interface DatePickerContextProps {
   setIsOpen: (isOpen: boolean) => void;
 }
 
-export const DatePickerContext = createContext<DatePickerContextProps | null>(
-  null
-);
+export const DatePickerContext = createContext<DatePickerContextProps>({
+  selectedDate: new Date(),
+  setSelectedDate: () => {},
+  hour: 12,
+  setHour: () => {},
+  minute: 0,
+  setMinute: () => {},
+  meridiem: '오전',
+  setMeridiem: () => {},
+  isOpen: false,
+  setIsOpen: () => {},
+});
 export const useDatePickerContext = () => useContext(DatePickerContext);
