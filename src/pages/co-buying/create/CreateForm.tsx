@@ -47,15 +47,6 @@ export default function CreateForm({
         <Input.Field type="url" placeholder="상품 링크를 입력해주세요." />
         <Input.Description />
       </Form.Input>
-      <Form.Input name="deadline">
-        <Input.Label>신청 마감일</Input.Label>
-        <Input.Field
-          min={new Date().toISOString().split('T')[0]}
-          placeholder="신청 마감일을 입력해주세요."
-          type="date"
-        />
-        <Input.Description />
-      </Form.Input>
       <DivideTypeSection type={type as DivideType} setType={setType} />
       <Form.SyncState name="type" value={type} />
       <Form.Input name="totalQuantity">

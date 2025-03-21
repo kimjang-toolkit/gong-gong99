@@ -17,7 +17,6 @@ const formSchema = z
         return num;
       }),
     productLink: z.string().optional(),
-    deadline: z.string(),
     type: z.enum(['quantity', 'attendee']),
     totalQuantity: z.coerce
       .number()
