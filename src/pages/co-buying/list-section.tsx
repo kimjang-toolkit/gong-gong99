@@ -22,7 +22,6 @@ export default function ListSection() {
 
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (loadMoreRef.current) {
       const observer = new IntersectionObserver(([entry]) => {
