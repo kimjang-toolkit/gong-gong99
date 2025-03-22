@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
-
 import { useDatePickerContext } from '@/components/DatePicker/context';
 
 const TimePicker = () => {
-  const context = useDatePickerContext();
-  const { hour, minute, meridiem, setHour, setMinute, setMeridiem } = context;
+  const { hour, minute, meridiem, setHour, setMinute, setMeridiem } =
+    useDatePickerContext();
 
   const hours = Array.from({ length: 12 }, (_, i) =>
     (i + 1).toString().padStart(2, '0')
@@ -15,25 +14,28 @@ const TimePicker = () => {
   const periods = ['오전', '오후'];
 
   return (
-    <div className="p-4 py-10 mx-auto bg-white rounded-lg shadow-md">
-      <div className="relative flex justify-center ">
-        {/* ✅ 선택된 값 강조용 iOS 스타일 중앙선 */}
-        <div className="absolute left-0 w-full h-9 translate-y-12 border-y-[0.5px] border-[#CCCCCC] pointer-events-none" />
-
+    <div className="p-4 py-5 mx-auto bg-white rounded-lg shadow-md">
+      <div className="relative flex justify-center gap-4">
+        {/* 중앙선 */}
+        <div className="absolute top-1/2 -translate-y-1/2 w-full h-[40px] border-y border-neutral-300 pointer-events-none z-20" />
         <WheelPicker
           time={hours}
-          selectedTime={hour.toString()}
-          setTime={setHour}
+          selectedTime={hour.toString().padStart(2, '0')}
+          setTime={(val) => setHour(Number(val))}
         />
         <WheelPicker
           time={minutes}
-          selectedTime={minute.toString()}
-          setTime={setMinute}
+          selectedTime={minute.toString().padStart(2, '0')}
+          setTime={(val) => setMinute(Number(val))}
         />
         <WheelPicker
           time={periods}
           selectedTime={meridiem}
-          setTime={setMeridiem}
+          setTime={(val) => {
+            if (val === '오전' || val === '오후') {
+              setMeridiem(val);
+            }
+          }}
         />
       </div>
     </div>
@@ -45,76 +47,70 @@ export default TimePicker;
 interface WheelPickerProps {
   time: string[];
   selectedTime: string;
-  setTime: (time: string) => void;
+  setTime: (val: string) => void;
 }
 
+const ITEM_HEIGHT = 40;
+const VISIBLE_COUNT = 5;
+
 const WheelPicker = ({ time, selectedTime, setTime }: WheelPickerProps) => {
-  const timeRef = useRef<HTMLDivElement>(null);
-  const ITEM_HEIGHT = 44; // ✅ 숫자 한 칸 높이 (기본값)
-  const VISIBLE_ITEMS = 3; // ✅ 한 번에 보여질 아이템 개수 (위아래 여백 고려)
-  const PADDING_HEIGHT = ((VISIBLE_ITEMS - 1) * ITEM_HEIGHT) / 2; // ✅ 위아래 패딩 자동 조정
+  const ref = useRef<HTMLDivElement>(null);
+  const padding = (ITEM_HEIGHT * (VISIBLE_COUNT - 1)) / 2;
 
   useEffect(() => {
+    const index = time.findIndex((t) => t === selectedTime);
+    if (index !== -1 && ref.current) {
+      ref.current.scrollTo({
+        top: index * ITEM_HEIGHT,
+        behavior: 'smooth',
+      });
+    }
+  }, [selectedTime]);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
     const handleScroll = () => {
-      if (!timeRef.current) return;
-
-      const scrollTop = timeRef.current.scrollTop;
-      const index = Math.round(scrollTop / ITEM_HEIGHT); // ✅ 중앙 정렬
-
-      if (time[index] !== undefined) {
+      const index = Math.round(el.scrollTop / ITEM_HEIGHT);
+      if (time[index]) {
         setTime(time[index]);
       }
     };
 
-    const refCurrent = timeRef.current;
-    if (refCurrent) {
-      refCurrent.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (refCurrent) {
-        refCurrent.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [selectedTime]);
-
-  useEffect(() => {
-    if (timeRef.current) {
-      const index = time.findIndex((item) => item === selectedTime);
-      if (index !== -1) {
-        timeRef.current.scrollTo({
-          top: index * ITEM_HEIGHT,
-          behavior: 'smooth',
-        });
-      }
-    }
-  }, [selectedTime]);
+    el.addEventListener('scroll', handleScroll);
+    return () => el.removeEventListener('scroll', handleScroll);
+  }, [time, setTime]);
 
   return (
-    <div className="relative w-16 h-[132px]">
-      {' '}
-      {/* ✅ 동적으로 높이 조정 */}
+    <div className="relative w-16 h-[200px] overflow-hidden">
       <div
-        ref={timeRef}
-        className="relative z-10 h-full overflow-auto scrollbar-hide snap-y snap-mandatory overscroll-contain"
+        ref={ref}
+        className="h-full overflow-y-scroll scrollbar-hide snap-y snap-mandatory"
+        style={{
+          scrollSnapType: 'y mandatory',
+          paddingTop: `${padding}px`,
+          paddingBottom: `${padding}px`,
+        }}
       >
-        <div className={`h-[${PADDING_HEIGHT}px]`} /> {/* ✅ 상단 패딩 추가 */}
-        {time.map((t, index) => (
+        {time.map((t, i) => (
           <div
-            key={index}
-            className="py-2 text-xl text-center cursor-pointer snap-center"
+            key={i}
+            className={`h-[${ITEM_HEIGHT}px] flex items-center justify-center snap-center cursor-pointer`}
             onClick={() => setTime(t)}
           >
             <p
-              className={`${selectedTime === t ? 'text-neutral-800 font-medium text-[23px]' : 'text-neutral-300'}`}
+              className={
+                selectedTime === t
+                  ? 'text-[23px] text-neutral-900 font-semibold'
+                  : 'text-[18px] text-neutral-300'
+              }
             >
               {t}
             </p>
           </div>
         ))}
-        <div className={`h-[${PADDING_HEIGHT}px]`} /> {/* ✅ 하단 패딩 추가 */}
       </div>
-      {/* ✅ 중앙선 (iOS 스타일) */}
     </div>
   );
 };
