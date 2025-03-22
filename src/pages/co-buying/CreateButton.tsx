@@ -40,7 +40,7 @@ export default function CreateButton() {
       <div className="absolute right-5 bottom-12 ">
         <Button
           onClick={() => {
-            navigate('/co-buying/create');
+            navigate('/co-buying/img-extract');
           }}
           label="+ 공구글"
           size="large"

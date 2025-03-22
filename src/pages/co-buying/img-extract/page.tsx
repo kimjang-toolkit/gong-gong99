@@ -9,7 +9,7 @@ export default function ImgExtractPage() {
     <HeaderLayout>
       <TitleHeader />
       <>
-        <section className="flex flex-col w-full gap-1 mb-4 text-black h-[90px] justify-center">
+        <section className="flex flex-col w-full gap-1  text-black h-[90px] justify-center">
           <p className="typo-h2">공구글 자동 작성을 위해</p>
           <div className="flex items-center">
             <p className="typo-h2-bold">상품 캡쳐 이미지</p>

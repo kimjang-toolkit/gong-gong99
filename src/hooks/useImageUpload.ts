@@ -1,4 +1,6 @@
+import { useExtractProduct } from '@/api/mutations/useExtractProduct';
 import { useState } from 'react';
+import { Buffer } from 'buffer';
 
 type ImageFile = {
   imageFile: File; // 업로드할 이미지 파일
@@ -6,6 +8,7 @@ type ImageFile = {
 };
 
 export function useImageUpload() {
+  const { mutate } = useExtractProduct();
   const [image, setImage] = useState<ImageFile | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,24 +19,31 @@ export function useImageUpload() {
     }
   };
 
-  const handleUploadImage = async (): Promise<void> => {
+  const handleUploadImageAndExtract = async (): Promise<void> => {
     if (!image) return;
-    const formData = new FormData();
-    formData.append('image', image.imageFile);
-    // try{
     setIsLoading(true);
-    //   const response = await axios.post('/api/upload', formData);
-    //   console.log(response);
-    // } catch (error) {
-    //   console.error('이미지 업로드 실패', error);
-    // }
-    setIsLoading(false);
+
+    // File을 ArrayBuffer로 변환
+    const arrayBuffer = await image.imageFile.arrayBuffer();
+    // base64로 인코딩
+    const buffer = Buffer.from(arrayBuffer);
+    const imgBase64 = buffer.toString('base64');
+
+    mutate(
+      { imgType: image.imageFile.type, imgBase64 },
+      {
+        onSuccess: (response) => {
+          setIsLoading(false);
+          return response;
+        },
+      }
+    );
   };
 
   return {
     image,
     handleImageChange,
-    handleUploadImage,
+    handleUploadImageAndExtract,
     isLoading,
   };
 }

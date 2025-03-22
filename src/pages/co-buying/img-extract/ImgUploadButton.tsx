@@ -3,7 +3,7 @@ import { useImageUpload } from '@/hooks/useImageUpload';
 import { useRef } from 'react';
 
 export default function ImgUploadButton() {
-  const { image, handleImageChange, handleUploadImage, isLoading } =
+  const { image, handleImageChange, handleUploadImageAndExtract, isLoading } =
     useImageUpload();
   const imgInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -12,20 +12,24 @@ export default function ImgUploadButton() {
   };
 
   const handleSubmit = () => {
-    handleUploadImage();
-    // 이미지 업로드 성공 시 생성페이지로 이동
+    const response = handleUploadImageAndExtract();
+    console.log(response);
   };
 
   return (
     <>
-      <section className="flex flex-col gap-2">
+      <section className="flex flex-col gap-2 ">
         <button
           type="button"
           className="w-full h-[100px] rounded-lg bg-gray-100"
           onClick={handleSelectImage}
         >
           {image?.previewImage ? (
-            <img src={image.previewImage} alt="이미지 미리보기" />
+            <img
+              className=" object-cover aspect-[3/4]"
+              src={image.previewImage}
+              alt="이미지 미리보기"
+            />
           ) : (
             <p>이미지를 선택해주세요.</p>
           )}

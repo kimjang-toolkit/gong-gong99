@@ -17,6 +17,7 @@ import RefPage from '@/pages/ref';
 import useAuthStore from '@/stores/authStore';
 import { useEffect } from 'react';
 import { authService } from '@/api/services/auth';
+import ImgExtractPage from '@/pages/co-buying/img-extract/page';
 
 function App() {
   useKakaoInit(); // 카카오 초기화
@@ -48,6 +49,10 @@ function App() {
           path: ':id/password',
           element: <PasswordPage />,
         }, // 관리하기 페이지 들어가기 전 비밀번호
+        {
+          path: 'img-extract',
+          element: <ImgExtractPage />,
+        },
         { path: 'create', element: <CreatePage /> }, // 공구글 작성페이지
       ],
     },

@@ -12,6 +12,13 @@ import {
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
 
 export const cobuyingService = {
+  postImgExtract: async (body: { imgType: string; imgBase64: string }) => {
+    const response = await axiosInstance.post(
+      ENDPOINTS.COBUYING.IMG_EXTRACT,
+      body
+    );
+    return response.data;
+  },
   postCreate: async (
     body: CoBuyingCreateReq<DivideType>
   ): Promise<CoBuyingSummary> => {
