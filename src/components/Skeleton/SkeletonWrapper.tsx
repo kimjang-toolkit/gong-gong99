@@ -1,17 +1,18 @@
+// components/Skeleton/SkeletonWrapper.tsx
 import { useEffect, useState } from 'react';
 
 type SkeletonWrapperProps = {
   isLoading: boolean;
-  fallback: React.ReactNode;
-  children: React.ReactNode;
-  minDelay?: number;
+  fallback: React.ReactNode; // 스켈레톤 컴포넌트
+  children: React.ReactNode; // 실제 콘텐츠
+  minDelay?: number; // 최소 로딩 시간 (ms)
 };
 
 const SkeletonWrapper = ({
   isLoading,
   fallback,
   children,
-  minDelay = 400,
+  minDelay = 350,
 }: SkeletonWrapperProps) => {
   const [showSkeleton, setShowSkeleton] = useState(true);
 
@@ -29,27 +30,7 @@ const SkeletonWrapper = ({
     return () => clearTimeout(timeout);
   }, [isLoading, minDelay]);
 
-  return (
-    <div className="relative">
-      {/* Skeleton Layer */}
-      <div
-        className={`transition-opacity duration-300 absolute top-0 left-0 w-full ${
-          showSkeleton ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {fallback}
-      </div>
-
-      {/* Content Layer */}
-      <div
-        className={`transition-opacity duration-300 ${
-          showSkeleton ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
-      >
-        {children}
-      </div>
-    </div>
-  );
+  return <>{showSkeleton ? fallback : children}</>;
 };
 
 export default SkeletonWrapper;
