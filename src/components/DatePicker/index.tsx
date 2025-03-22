@@ -46,10 +46,12 @@ function DatePicker({
         setMeridiem,
       }}
     >
-      <Input value={value} setValue={setValue}>
-        <Input.Label>나눔시간</Input.Label>
-        <Input.Field />
-      </Input>
+      <div onClick={() => setIsOpen(true)}>
+        <Input value={value} setValue={setValue}>
+          <Input.Label>나눔시간</Input.Label>
+          <Input.Field type="button" className="text-left" />
+        </Input>
+      </div>
       <Sheet
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
