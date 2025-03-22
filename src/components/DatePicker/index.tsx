@@ -59,7 +59,7 @@ function DatePicker({
       >
         <Sheet.Container ref={sheetRef}>
           <Sheet.Header />
-          <Sheet.Content>
+          <Sheet.Content disableDrag>
             <div className="flex flex-col ">
               <header className="w-full px-4 text-left typo-body-bold">
                 {selectedDate.toLocaleDateString('ko-KR', {
