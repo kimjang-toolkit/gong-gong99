@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useDatePickerContext } from '@/components/DatePicker/context';
+import { cn } from '@/lib/utils';
 
-const TimePicker = () => {
+const TimePicker = ({ className }: { className?: string }) => {
   const { hour, minute, meridiem, setHour, setMinute, setMeridiem } =
     useDatePickerContext();
 
@@ -14,7 +15,7 @@ const TimePicker = () => {
   const periods = ['오전', '오후'];
 
   return (
-    <div className="p-4 py-5 mx-auto bg-white rounded-lg shadow-md">
+    <div className={cn('py-3', className)}>
       <div className="relative flex justify-center gap-4">
         {/* 중앙선 */}
         <div className="absolute top-1/2 -translate-y-1/2 w-full h-[40px] border-y border-neutral-300 pointer-events-none z-20" />
@@ -67,15 +68,26 @@ const WheelPicker = ({ time, selectedTime, setTime }: WheelPickerProps) => {
     }
   }, [selectedTime]);
 
+  let timeout: NodeJS.Timeout;
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     const handleScroll = () => {
-      const index = Math.round(el.scrollTop / ITEM_HEIGHT);
-      if (time[index]) {
-        setTime(time[index]);
-      }
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        const index = Math.round(el.scrollTop / ITEM_HEIGHT);
+        const alignedTop = index * ITEM_HEIGHT;
+
+        el.scrollTo({
+          top: alignedTop,
+          behavior: 'smooth', // ✅ 부드럽게 정렬
+        });
+
+        if (time[index]) {
+          setTime(time[index]);
+        }
+      }, 80); // ✅ 디바운싱 타이밍 조정
     };
 
     el.addEventListener('scroll', handleScroll);

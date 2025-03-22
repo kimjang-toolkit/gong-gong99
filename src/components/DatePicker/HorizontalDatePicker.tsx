@@ -2,7 +2,11 @@ import { cn } from '@/lib/utils';
 import { useDatePickerContext } from './context';
 import { useEffect, useRef, useState } from 'react';
 
-export default function HorizontalDatePicker() {
+export default function HorizontalDatePicker({
+  className,
+}: {
+  className?: string;
+}) {
   const context = useDatePickerContext();
   const selectedDate = context?.selectedDate;
   const setSelectedDate = context?.setSelectedDate;
@@ -60,8 +64,13 @@ export default function HorizontalDatePicker() {
   }, [dates.length, isLoading]);
 
   return (
-    <section className="relative w-full overflow-x-auto scroll-smooth scroll-snap-x snap-mandatory scrollbar-hide">
-      <div className="flex items-center gap-5 w-max">
+    <section
+      className={cn(
+        'relative w-full overflow-x-auto scroll-smooth scroll-snap-x snap-mandatory scrollbar-hide',
+        className
+      )}
+    >
+      <div className="flex items-center gap-5 ">
         {dates.map((date) => (
           <DateItem
             key={date.toISOString()}
@@ -71,7 +80,7 @@ export default function HorizontalDatePicker() {
             onClick={() => setSelectedDate?.(new Date(date))}
           />
         ))}
-        <div ref={loadMoreRef} className="w-10 h-24 bg-transparent" />
+        <div ref={loadMoreRef} className="w-10 bg-transparent h-[52px]" />
       </div>
     </section>
   );

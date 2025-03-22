@@ -12,9 +12,6 @@ export interface DatePickerContextProps {
 
   meridiem: '오전' | '오후';
   setMeridiem: (meridiem: '오전' | '오후') => void;
-
-  isOpen: boolean; // 모달 열기 여부
-  setIsOpen: (isOpen: boolean) => void;
 }
 
 export const DatePickerContext = createContext<DatePickerContextProps>({
@@ -26,7 +23,5 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
   setMinute: () => {},
   meridiem: '오전',
   setMeridiem: () => {},
-  isOpen: false,
-  setIsOpen: () => {},
 });
 export const useDatePickerContext = () => useContext(DatePickerContext);

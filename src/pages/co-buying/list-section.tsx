@@ -5,7 +5,6 @@ import { useCobuyingList } from '@/api/queries/cobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CoBuyingSummary } from '@interface/cobuying';
-import DatePicker from '@/components/DatePicker';
 
 export default function ListSection() {
   const { data, fetchNextPage, hasNextPage } = useCobuyingList();
@@ -23,7 +22,6 @@ export default function ListSection() {
 
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (loadMoreRef.current) {
       const observer = new IntersectionObserver(([entry]) => {
@@ -55,7 +53,6 @@ export default function ListSection() {
         ))
       )}
       <div ref={loadMoreRef} style={{ height: '3px' }} />
-      <DatePicker />
       <CreateButton />
     </>
   );
