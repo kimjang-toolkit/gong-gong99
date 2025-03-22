@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  mode: 'jit',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -60,6 +61,7 @@ export default {
   },
   darkMode: 'class',
   plugins: [
+    require('tailwind-scrollbar-hide'), 
     ({ addUtilities }) => {
       addUtilities({
         '.header-height': {

@@ -5,9 +5,11 @@ import { useCobuyingList } from '@/api/queries/cobuying';
 import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CoBuyingSummary } from '@interface/cobuying';
+import SkeletonWrapper from '@/components/Skeleton/SkeletonWrapper';
+import List from '@/components/Skeleton/\bshared/List';
 
 export default function ListSection() {
-  const { data, fetchNextPage, hasNextPage } = useCobuyingList();
+  const { isLoading, data, fetchNextPage, hasNextPage } = useCobuyingList();
   const [searchParams] = useSearchParams();
   const tab = parseInt(searchParams.get('tab') || '1');
 
@@ -22,7 +24,6 @@ export default function ListSection() {
 
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (loadMoreRef.current) {
       const observer = new IntersectionObserver(([entry]) => {
@@ -39,7 +40,10 @@ export default function ListSection() {
   }, [fetchNextPage, hasNextPage]);
 
   return (
-    <>
+    <SkeletonWrapper
+      isLoading={isLoading}
+      fallback={<List className="mt-5 space-y-10" count={5} />}
+    >
       {filteredPage?.map((page) =>
         page.coBuyingList.map((item) => (
           <div
@@ -55,6 +59,6 @@ export default function ListSection() {
       )}
       <div ref={loadMoreRef} style={{ height: '3px' }} />
       <CreateButton />
-    </>
+    </SkeletonWrapper>
   );
 }
