@@ -7,7 +7,7 @@ function HeaderLayout({ children }: { children: React.ReactNode[] }) {
       </header>
       <main
         id="app-main"
-        className="px-5 bg-white pt-[60px] pb-[110px] h-full overflow-y-auto  no-scrollbar"
+        className="px-5 bg-white pt-[56px] pb-[110px] h-full overflow-y-auto  no-scrollbar"
       >
         {content}
       </main>

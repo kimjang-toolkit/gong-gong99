@@ -22,8 +22,8 @@ export default function KakaoShareButton({
     });
   };
   return (
-    <button onClick={handleShare} className=" active:brightness-90">
-      <KakaoIcon />
+    <button onClick={handleShare} className="w-8 h-8 active:brightness-90">
+      <KakaoIcon className="w-full h-full" />
     </button>
   );
 }

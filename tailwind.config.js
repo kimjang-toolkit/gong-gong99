@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  mode: 'jit',
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -8,6 +9,7 @@ export default {
       },
       colors: {
         black: '#262626',
+        'layout-divider': 'rgba(17, 17, 17, 0.15)',
         primary: {
           50: '#E6F1FE',
           200: '#99C7FB',
@@ -59,8 +61,12 @@ export default {
   },
   darkMode: 'class',
   plugins: [
+    require('tailwind-scrollbar-hide'), 
     ({ addUtilities }) => {
       addUtilities({
+        '.header-height': {
+          '@apply h-[56px]': '',
+        },
         '.default-box': {
           '@apply p-4 bg-white rounded-[10px]': '',
         },
