@@ -12,7 +12,6 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import ImageSection from '@/pages/co-buying/[id]/image-section';
 import ImageSectionSkeleton from '@/components/Skeleton/ImageSection';
 import SkeletonWrapper from '@/components/Skeleton/SkeletonWrapper';
-import InfoSectionSkeleton from '@/components/Skeleton/InfoSection';
 import FormSectionSkeleton from '@/components/Skeleton/FormSection';
 
 export default function DetailPage() {
