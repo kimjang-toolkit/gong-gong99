@@ -48,6 +48,7 @@ export default function DetailPage() {
         <>
           <SkeletonWrapper
             isLoading={isLoading}
+            shouldRenderChildren={!!data}
             fallback={
               <>
                 <ImageSectionSkeleton />

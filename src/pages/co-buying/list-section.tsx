@@ -42,6 +42,7 @@ export default function ListSection() {
   return (
     <SkeletonWrapper
       isLoading={isLoading}
+      shouldRenderChildren={!!data}
       fallback={<List className="mt-5 space-y-10" count={5} />}
     >
       {filteredPage?.map((page) =>
