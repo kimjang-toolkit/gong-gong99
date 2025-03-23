@@ -6,6 +6,7 @@ export const ENDPOINTS = {
     CREATE: '/co-buying',
     APPLY: '/co-buying/applications',
     CHANGE_STATUS: (id: string) => `/co-buying/${id}/status`,
+    IMG_EXTRACT: '/product/extract',
   },
   AUTH: {
     PWD_CHECK: (id: string) => `/co-buying/auth/${id}`,

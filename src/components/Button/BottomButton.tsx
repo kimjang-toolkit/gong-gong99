@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface BottomButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
+  label: string | React.ReactNode;
   onClick?: (e: any) => void;
 }
 
