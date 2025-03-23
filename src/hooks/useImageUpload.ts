@@ -8,7 +8,7 @@ type ImageFile = {
 };
 
 export function useImageUpload() {
-  const { mutate } = useExtractProduct();
+  const { mutateAsync } = useExtractProduct();
   const [image, setImage] = useState<ImageFile | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,25 +19,28 @@ export function useImageUpload() {
     }
   };
 
-  const handleUploadImageAndExtract = async (): Promise<void> => {
-    if (!image) return;
+  // 이미지 업로드 및 추출 요청
+  const handleUploadImageAndExtract = async () => {
+    if (!image) return null;
     setIsLoading(true);
 
-    // File을 ArrayBuffer로 변환
-    const arrayBuffer = await image.imageFile.arrayBuffer();
-    // base64로 인코딩
-    const buffer = Buffer.from(arrayBuffer);
-    const imgBase64 = buffer.toString('base64');
+    try {
+      const arrayBuffer = await image.imageFile.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+      const imgBase64 = buffer.toString('base64');
 
-    mutate(
-      { imgType: image.imageFile.type, imgBase64 },
-      {
-        onSuccess: (response) => {
-          setIsLoading(false);
-          return response;
-        },
-      }
-    );
+      const response = await mutateAsync({
+        imgType: image.imageFile.type,
+        imgBase64,
+      });
+
+      return response;
+    } catch (error) {
+      console.error(error);
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {

@@ -1,8 +1,10 @@
 import BottomButton from '@/components/Button/BottomButton';
 import { useImageUpload } from '@/hooks/useImageUpload';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ImgUploadButton() {
+  const navigate = useNavigate();
   const { image, handleImageChange, handleUploadImageAndExtract, isLoading } =
     useImageUpload();
   const imgInputRef = useRef<HTMLInputElement | null>(null);
@@ -11,9 +13,16 @@ export default function ImgUploadButton() {
     imgInputRef.current?.click();
   };
 
-  const handleSubmit = () => {
-    const response = handleUploadImageAndExtract();
-    console.log(response);
+  const handleSubmit = async () => {
+    const response = await handleUploadImageAndExtract();
+
+    if (response) {
+      navigate('/co-buying/create', {
+        state: {
+          extractedProduct: response,
+        },
+      });
+    }
   };
 
   return (
