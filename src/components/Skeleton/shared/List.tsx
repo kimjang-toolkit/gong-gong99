@@ -1,4 +1,4 @@
-import Rect from '@/components/Skeleton/\bshared/Rect';
+import Rect from '@/components/Skeleton/shared/Rect';
 import TextLine from './TextLine';
 
 type ListProps = {

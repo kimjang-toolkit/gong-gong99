@@ -20,7 +20,7 @@ import { authService } from '@/api/services/auth';
 import ImgExtractPage from '@/pages/co-buying/img-extract/page';
 
 function App() {
-  useKakaoInit(); // 카카오 초기화
+  // useKakaoInit(); // 카카오 초기화
 
   useEffect(() => {
     // 첫로그인 시 리프레시 토큰 갱신
