@@ -1,9 +1,9 @@
 import BottomButton from '@/components/Button/BottomButton';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
-import AttendeeCalcBox from '@/pages/co-buying/create/AttendeeCalcBox';
+import AttendeeForm from '@/pages/co-buying/create/AttendeeForm';
 import DivideTypeSection from '@/pages/co-buying/create/DivideTypeButton';
-import QuantityCalcBox from '@/pages/co-buying/create/QuantityCalcBox';
+import QuantityForm from '@/pages/co-buying/create/QuantityForm';
 import { formSchema, FormSchema } from '@/util/zod/cobuying-create';
 import { DivideType } from '@domain/cobuying';
 import { useState } from 'react';
@@ -59,40 +59,9 @@ export default function CreateForm({
         <Input.Description />
       </Form.Input>
 
-      {type === DivideType.quantity && (
-        <Form.Input name="ownerQuantity">
-          <Input.Label>내 구매 수량</Input.Label>
-          <Input.Field
-            type="number"
-            placeholder="구매하실 수량을 입력해주세요."
-          />
-          <Input.Description />
-        </Form.Input>
-      )}
-      {type === DivideType.attendee && (
-        <Form.Input name="targetAttendeeCount">
-          <Input.Label>모집 인원 수</Input.Label>
-          <Input.Field
-            type="number"
-            placeholder="신청받을 인원 수를 입력해주세요."
-          />
-          <Input.Description />
-        </Form.Input>
-      )}
-      {type === DivideType.quantity && (
-        <QuantityCalcBox
-          totalPrice={formData.totalPrice}
-          totalQuantity={formData.totalQuantity}
-          ownerQuantity={formData.ownerQuantity ?? 0}
-        />
-      )}
-      {type === DivideType.attendee && (
-        <AttendeeCalcBox
-          totalPrice={formData.totalPrice}
-          totalQuantity={formData.totalQuantity}
-          targetAttendeeCount={formData.targetAttendeeCount}
-        />
-      )}
+      {type === DivideType.quantity && <QuantityForm formData={formData} />}
+      {type === DivideType.attendee && <AttendeeForm formData={formData} />}
+
       <section className="flex flex-col gap-2">
         <div className="w-full h-24 border rounded-xl px-3 py-1.5 border-default-200">
           <label className="typo-caption text-default-600">안내 메시지</label>

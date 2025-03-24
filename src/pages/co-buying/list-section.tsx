@@ -18,7 +18,7 @@ export default function ListSection() {
       ...page,
       coBuyingList: page.coBuyingList.filter(
         (item) => Number(item.coBuyingStatus) == tab
-      ),
+      ),  
     }))
     .filter((page) => page.coBuyingList.length > 0);
 

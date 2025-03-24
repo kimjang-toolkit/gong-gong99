@@ -18,7 +18,6 @@ function CreatePage() {
     productName: '',
     totalPrice: 0,
     productLink: '',
-    deadline: '',
     totalQuantity: 0,
     ownerQuantity: 0,
     targetAttendeeCount: 0,
