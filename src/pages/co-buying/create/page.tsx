@@ -9,6 +9,7 @@ import PasswordForm from '@/pages/co-buying/create/PasswordForm';
 import { PasswordSchema } from '@/util/zod/cobuying-create';
 import { useNavigate } from 'react-router-dom';
 import { useCreateCobuying } from '@/api/mutations/useCreateCobuying';
+import { m } from 'motion/react';
 function CreatePage() {
   const navigate = useNavigate();
   const { mutateAsync } = useCreateCobuying();
@@ -17,11 +18,16 @@ function CreatePage() {
     type: DivideType.quantity,
     productName: '',
     totalPrice: 0,
-    productLink: '',
     totalQuantity: 0,
-    ownerQuantity: 0,
+    productLink: '',
     targetAttendeeCount: 0,
     memo: '',
+    ownerOptions: [],
+    itemOptions: [],
+    sharingDateTime: '',
+    sharingLocation: '',
+    originalImageUrl: '', // 원본 이미지 url
+    thumbnailImageUrl: '', // 썸네일 이미지 url
     ownerPassword: '',
     ownerName: '',
   });
@@ -32,13 +38,13 @@ function CreatePage() {
   };
 
   const handleSubmit = async (data: PasswordSchema) => {
-    console.log('data', data);
     const { ownerPasswordConfirm, ...exceptPasswordConfirm } = data;
     try {
       const response = await mutateAsync({
         ...formData,
         ...exceptPasswordConfirm,
       });
+      // 상세페이지로 이동
       navigate(`/co-buying/${response.id}?ownerName=${data.ownerName}`);
     } catch (error) {
       console.error(error);

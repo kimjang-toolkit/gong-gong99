@@ -1,14 +1,12 @@
 import AddButton from '@/components/Option/AddButton';
-import { OptionContext } from '@/components/Option/context';
+import { OptionContext, OptionContextProps } from '@/components/Option/context';
 import DeleteButton from '@/components/Option/DeleteButton';
 import OptionLabel from '@/components/Option/OptionLabel';
 import StepperButton from '@/components/Option/Stepper';
 import { cn } from '@/lib/utils';
 import { ReactNode } from 'react';
 
-export interface OptionProps {
-  options: { name: string; quantity: number; remainQuantity: number }[];
-  setOptions: (options: { name: string; quantity: number }[]) => void;
+export interface OptionProps extends OptionContextProps {
   children: ReactNode;
   className?: string;
 }

@@ -40,7 +40,7 @@ export default function StepperButton({
     }
   };
   return (
-    <div className="flex items-center justify-center w-[86px] border border-default-300 rounded-sm *:px-1 *:py-1 *:w-full *:typo-caption *:text-default-700">
+    <div className="flex items-center justify-center w-[86px] border border-default-300 rounded-[4px] *:px-1 *:py-1 *:w-full *:typo-caption *:text-default-700">
       <button onClick={handleDecrease}>-</button>
       <input
         className="text-center bg-white rounded-none border-x border-default-300"

@@ -49,15 +49,6 @@ export default function CreateForm({
       </Form.Input>
       <DivideTypeSection type={type as DivideType} setType={setType} />
       <Form.SyncState name="type" value={type} />
-      <Form.Input name="totalQuantity">
-        <Input.Label>상품 전체 수량</Input.Label>
-        <Input.Field
-          type="number"
-          placeholder="상품 전체 수량을 입력해주세요."
-          min={1}
-        />
-        <Input.Description />
-      </Form.Input>
 
       {type === DivideType.quantity && <QuantityForm formData={formData} />}
       {type === DivideType.attendee && <AttendeeForm formData={formData} />}

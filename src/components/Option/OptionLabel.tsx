@@ -1,3 +1,5 @@
+import { useOptionContext } from '@/components/Option/context';
+
 export default function OptionLabel({
   label,
   className,
@@ -5,7 +7,20 @@ export default function OptionLabel({
   label: string;
   className?: string;
 }) {
+  const { setOptions, options } = useOptionContext();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newLabel = e.target.value;
+    const updatedOptions = options.map((option) =>
+      option.name === label ? { ...option, name: newLabel } : option
+    );
+    setOptions(updatedOptions);
+  };
+
   return (
-    <div className={`typo-caption text-default-600 ${className}`}>{label}</div>
+    <input
+      className={`typo-caption text-default-600 w-full mr-2 ${className}`}
+      value={label}
+      onChange={handleChange}
+    />
   );
 }

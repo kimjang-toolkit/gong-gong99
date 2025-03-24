@@ -12,7 +12,10 @@ export default function AddButton({
   return (
     <button
       onClick={() =>
-        setOptions([...options, { name: '', quantity: defaultQuantity }])
+        setOptions([
+          ...options,
+          { name: '작성해주세요', quantity: defaultQuantity },
+        ])
       }
       className={cn(
         'w-full h-9 typo-caption text-default-600 text-center border border-default-200 rounded-xl ',
