@@ -1,8 +1,10 @@
 import { createContext, useContext } from 'react';
 
 export interface OptionContextProps {
-  options: { name: string; quantity: number }[];
-  setOptions: (options: { name: string; quantity: number }[]) => void;
+  options: { name: string; quantity: number; remainQuantity?: number }[];
+  setOptions: (
+    options: { name: string; quantity: number; remainQuantity?: number }[]
+  ) => void;
   maxValue: number;
 }
 
