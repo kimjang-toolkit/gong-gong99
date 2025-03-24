@@ -1,6 +1,6 @@
 // /components/Skeleton/ImageSection/index.tsx
 
-import Rect from '@/components/Skeleton/\bshared/Rect';
+import Rect from '@/components/Skeleton/shared/Rect';
 
 const ImageSectionSkeleton = () => {
   return (
