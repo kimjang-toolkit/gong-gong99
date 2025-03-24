@@ -3,20 +3,19 @@ import { useOptionContext } from '@/components/Option/context';
 interface StepperButtonProps {
   name: string;
   quantity: number;
+  remainQuantity: number;
 }
 
-export default function StepperButton({ name, quantity }: StepperButtonProps) {
-  const { options, setOptions, maxValue } = useOptionContext();
-
-  const curMaxValue =
-    maxValue -
-    options.reduce((acc, option) => {
-      return (acc += option.quantity);
-    }, 0);
+export default function StepperButton({
+  name,
+  quantity,
+  remainQuantity,
+}: StepperButtonProps) {
+  const { options, setOptions } = useOptionContext();
 
   const handleIncrease = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (quantity < curMaxValue) {
+    if (quantity < remainQuantity) {
       setOptions(
         options.map((option) => {
           if (option.name === name) {
