@@ -1,12 +1,11 @@
 import { useOptionContext } from '@/components/Option/context';
 
-export default function OptionLabel({
-  label,
-  className,
-}: {
+interface OptionLabelProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   className?: string;
-}) {
+}
+
+export default function OptionLabel({ label, className }: OptionLabelProps) {
   const { setOptions, options } = useOptionContext();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newLabel = e.target.value;

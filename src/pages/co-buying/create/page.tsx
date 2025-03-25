@@ -7,17 +7,18 @@ import { useState } from 'react';
 import CreateForm from '@/pages/co-buying/create/CreateForm';
 import PasswordForm from '@/pages/co-buying/create/PasswordForm';
 import { PasswordSchema } from '@/util/zod/cobuying-create';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCreateCobuying } from '@/api/mutations/useCreateCobuying';
-import { m } from 'motion/react';
 function CreatePage() {
   const navigate = useNavigate();
+  const { extractedProduct } = useLocation().state;
+  console.log('추출된데이터', extractedProduct);
   const { mutateAsync } = useCreateCobuying();
 
   const [formData, setFormData] = useState({
     type: DivideType.quantity,
     productName: '',
-    totalPrice: 0,
+    totalPrice: extractedProduct.price,
     totalQuantity: 0,
     productLink: '',
     targetAttendeeCount: 0,
@@ -30,6 +31,7 @@ function CreatePage() {
     thumbnailImageUrl: '', // 썸네일 이미지 url
     ownerPassword: '',
     ownerName: '',
+    ...extractedProduct, // 이미지 분석으로 받아온 데이터가 있다면 자동채움
   });
   const [step, setStep] = useState(1);
 

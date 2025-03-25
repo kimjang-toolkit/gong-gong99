@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Form from '@/components/Form';
-import Input from '@/components/Input';
 import Option from '@/components/Option';
 import QuantityCalcBox from '@/pages/co-buying/create/QuantityForm/QuantityCalcBox';
 import { ItemOptionBase } from '@domain/product';
@@ -9,22 +8,33 @@ import { useState } from 'react';
 export default function QuantityForm({ formData }: { formData: any }) {
   // ownerOptions
   // itemOptions
-  const [itemOptions, setItemOptions] = useState<ItemOptionBase[]>([
-    { name: '상품 옵션 1', quantity: 3 },
-    { name: '상품 옵션 2', quantity: 0 },
-  ]);
-  const [ownerOptions, setOwnerOptions] = useState<ItemOptionBase[]>([]);
+  const [itemOptions, setItemOptions] = useState<ItemOptionBase[]>(
+    formData.itemOptions.length === 0
+      ? [{ name: '공구상품 이름', quantity: 0 }]
+      : formData.itemOptions
+  );
+  const [ownerOptions, setOwnerOptions] =
+    useState<ItemOptionBase[]>(itemOptions);
+
+  const handleItemOptionChange = (options: ItemOptionBase[]) => {
+    setItemOptions(options);
+    setOwnerOptions(options);
+  };
   return (
     <>
       <section className="flex flex-col gap-2">
         <p className="typo-caption text-default-600">상품 옵션</p>
+        <Form.SyncState name="itemOptions" value={itemOptions} />
         <Option
           options={itemOptions}
-          setOptions={setItemOptions}
+          setOptions={handleItemOptionChange}
           className="gap-3 px-3 py-2"
         >
           {itemOptions.map((option) => (
-            <div className="flex items-center justify-between">
+            <div
+              className="flex items-center justify-between"
+              key={option.name}
+            >
               <Option.Label label={option.name} />
               <div className="flex items-center gap-2">
                 <Option.Stepper
@@ -37,6 +47,32 @@ export default function QuantityForm({ formData }: { formData: any }) {
             </div>
           ))}
           <Option.AddButton defaultQuantity={1} />
+        </Option>
+      </section>
+      <section className="flex flex-col gap-2">
+        <p className="typo-caption text-default-600">내 구매 옵션</p>
+        <Form.SyncState name="ownerOptions" value={ownerOptions} />
+        <Option
+          options={ownerOptions}
+          setOptions={setOwnerOptions}
+          className="gap-3 px-3 py-2"
+        >
+          {ownerOptions.map((option) => (
+            <div
+              className="flex items-center justify-between"
+              key={option.name}
+            >
+              <Option.Label label={option.name} disabled />
+              <Option.Stepper
+                name={option.name}
+                quantity={option.quantity}
+                remainQuantity={
+                  itemOptions.find((item) => item.name === option.name)
+                    ?.quantity ?? 0
+                }
+              />
+            </div>
+          ))}
         </Option>
       </section>
       <QuantityCalcBox
