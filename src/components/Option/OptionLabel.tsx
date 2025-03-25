@@ -1,16 +1,21 @@
 import { useOptionContext } from '@/components/Option/context';
 
 interface OptionLabelProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  optionId: number;
   className?: string;
+  placeholder?: string;
 }
 
-export default function OptionLabel({ label, className }: OptionLabelProps) {
+export default function OptionLabel({
+  optionId,
+  className,
+  placeholder,
+}: OptionLabelProps) {
   const { setOptions, options } = useOptionContext();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newLabel = e.target.value;
     const updatedOptions = options.map((option) =>
-      option.name === label ? { ...option, name: newLabel } : option
+      option.optionId === optionId ? { ...option, name: newLabel } : option
     );
     setOptions(updatedOptions);
   };
@@ -18,7 +23,8 @@ export default function OptionLabel({ label, className }: OptionLabelProps) {
   return (
     <input
       className={`typo-caption text-default-600 w-full mr-2 ${className}`}
-      value={label}
+      placeholder={placeholder}
+      value={options.find((option) => option.optionId === optionId)?.name}
       onChange={handleChange}
     />
   );

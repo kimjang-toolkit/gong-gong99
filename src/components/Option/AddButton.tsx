@@ -14,7 +14,7 @@ export default function AddButton({
       onClick={() =>
         setOptions([
           ...options,
-          { name: '작성해주세요', quantity: defaultQuantity },
+          { optionId: options.length + 1, name: '', quantity: defaultQuantity },
         ])
       }
       className={cn(

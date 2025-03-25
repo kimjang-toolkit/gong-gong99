@@ -11,14 +11,37 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useCreateCobuying } from '@/api/mutations/useCreateCobuying';
 function CreatePage() {
   const navigate = useNavigate();
-  const { extractedProduct } = useLocation().state;
-  console.log('추출된데이터', extractedProduct);
+  // const { extractedProduct } = useLocation().state;
+  // const {
+  //   itemVariants,
+  //   thumbnailImageUrl,
+  //   originalImageUrl,
+  //   price,
+  //   productName,
+  // } = extractedProduct;
   const { mutateAsync } = useCreateCobuying();
 
+  // const [formData, setFormData] = useState({
+  //   type: DivideType.quantity,
+  //   productName,
+  //   totalPrice: price,
+  //   totalQuantity: 0,
+  //   productLink: '',
+  //   targetAttendeeCount: 0,
+  //   memo: '',
+  //   ownerOptions: itemVariants,
+  //   itemOptions: itemVariants,
+  //   sharingDateTime: '',
+  //   sharingLocation: '',
+  //   originalImageUrl, // 원본 이미지 url
+  //   thumbnailImageUrl, // 썸네일 이미지 url
+  //   ownerPassword: '',
+  //   ownerName: '',
+  // });
   const [formData, setFormData] = useState({
     type: DivideType.quantity,
     productName: '',
-    totalPrice: extractedProduct.price,
+    totalPrice: 0,
     totalQuantity: 0,
     productLink: '',
     targetAttendeeCount: 0,
@@ -31,7 +54,6 @@ function CreatePage() {
     thumbnailImageUrl: '', // 썸네일 이미지 url
     ownerPassword: '',
     ownerName: '',
-    ...extractedProduct, // 이미지 분석으로 받아온 데이터가 있다면 자동채움
   });
   const [step, setStep] = useState(1);
 

@@ -1,13 +1,13 @@
 import { useOptionContext } from '@/components/Option/context';
 
 interface StepperButtonProps {
-  name: string;
+  optionId: number;
   quantity: number;
   remainQuantity: number;
 }
 
 export default function StepperButton({
-  name,
+  optionId,
   quantity,
   remainQuantity,
 }: StepperButtonProps) {
@@ -18,7 +18,7 @@ export default function StepperButton({
     if (quantity < remainQuantity) {
       setOptions(
         options.map((option) => {
-          if (option.name === name) {
+          if (option.optionId === optionId) {
             return { ...option, quantity: quantity + 1 };
           }
           return option;
@@ -31,7 +31,7 @@ export default function StepperButton({
     if (quantity > 0) {
       setOptions(
         options.map((option) => {
-          if (option.name === name) {
+          if (option.optionId === optionId) {
             return { ...option, quantity: quantity - 1 };
           }
           return option;
@@ -49,7 +49,7 @@ export default function StepperButton({
         onChange={(e) => {
           setOptions(
             options.map((option) => {
-              if (option.name === name) {
+              if (option.optionId === optionId) {
                 return { ...option, quantity: Number(e.target.value) };
               }
               return option;

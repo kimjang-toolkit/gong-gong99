@@ -1,9 +1,19 @@
 import { createContext, useContext } from 'react';
 
 export interface OptionContextProps {
-  options: { name: string; quantity: number; remainQuantity?: number }[];
+  options: {
+    optionId: number;
+    name: string;
+    quantity: number;
+    remainQuantity?: number;
+  }[];
   setOptions: (
-    options: { name: string; quantity: number; remainQuantity?: number }[]
+    options: {
+      optionId: number;
+      name: string;
+      quantity: number;
+      remainQuantity?: number;
+    }[]
   ) => void;
 }
 
