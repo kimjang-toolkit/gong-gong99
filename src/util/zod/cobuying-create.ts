@@ -16,7 +16,6 @@ const baseSchema = z.object({
       return num;
     }),
   productLink: z.string().optional(),
-  memo: z.string().optional(),
 });
 
 const quantitySchema = baseSchema.extend({
@@ -66,6 +65,14 @@ const attendeeSchema = baseSchema.extend({
 const formSchema = z.union([quantitySchema, attendeeSchema]);
 export type FormSchema = z.infer<typeof formSchema>;
 export { formSchema };
+
+const commitmentSchema = z.object({
+  sharingDateTime: z.string().min(1, { message: '나눔일정을 입력해주세요.' }),
+  sharingLocation: z.string().min(1, { message: '나눔장소를 입력해주세요.' }),
+  memo: z.string().optional(),
+});
+export type CommitmentSchema = z.infer<typeof commitmentSchema>;
+export { commitmentSchema };
 
 const passwordSchema = z
   .object({

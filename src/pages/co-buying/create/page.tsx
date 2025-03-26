@@ -9,6 +9,7 @@ import PasswordForm from '@/pages/co-buying/create/PasswordForm';
 import { FormSchema, PasswordSchema } from '@/util/zod/cobuying-create';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCreateCobuying } from '@/api/mutations/useCreateCobuying';
+import CommitmentForm from '@/pages/co-buying/create/CommitmentForm';
 function CreatePage() {
   const navigate = useNavigate();
   // const { extractedProduct } = useLocation().state;
@@ -88,15 +89,15 @@ function CreatePage() {
         onBackPress={handleBackButton}
         title={step === 1 ? '공구글 작성' : ''}
       />
-      {step === 1 ? (
+      {step === 1 && (
         <CreateForm
           setFormData={(data) => setFormData(data as typeof formData)}
           formData={formData}
           handleNextStep={handleNextStep}
         />
-      ) : (
-        <PasswordForm handleSubmit={handleSubmit} />
       )}
+      {step === 2 && <CommitmentForm />}
+      {step === 3 && <PasswordForm handleSubmit={handleSubmit} />}
     </HeaderLayout>
   );
 }
