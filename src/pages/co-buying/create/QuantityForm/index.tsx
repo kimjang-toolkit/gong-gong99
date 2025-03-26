@@ -88,11 +88,14 @@ export default function QuantityForm({ formData }: { formData: any }) {
       </section>
       <QuantityCalcBox
         totalPrice={formData.totalPrice}
-        totalQuantity={formData.itemOptions.reduce(
-          (acc: number, curr: ItemOptionBase) => acc + curr.quantity,
+        totalQuantity={itemOptions.reduce(
+          (acc: number, curr: FormItemOption) => acc + curr.quantity,
           0
         )}
-        ownerQuantity={formData.ownerQuantity ?? 0}
+        ownerQuantity={ownerOptions.reduce(
+          (acc: number, curr: FormItemOption) => acc + curr.quantity,
+          0
+        )}
       />
     </>
   );
