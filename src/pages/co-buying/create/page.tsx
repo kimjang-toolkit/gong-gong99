@@ -89,21 +89,23 @@ function CreatePage() {
         onBackPress={handleBackButton}
         title={step === 1 ? '공구글 작성' : ''}
       />
-      {step === 1 && (
-        <CreateForm
-          setFormData={(data) => setFormData(data as typeof formData)}
-          formData={formData}
-          handleNextStep={handleNextStep}
-        />
-      )}
-      {step === 2 && (
-        <CommitmentForm
-          handleNext={handleNextStep}
-          formData={formData}
-          setFormData={setFormData}
-        />
-      )}
-      {step === 3 && <PasswordForm handleSubmit={handleSubmit} />}
+      <>
+        {step === 1 && (
+          <CreateForm
+            setFormData={(data) => setFormData(data as typeof formData)}
+            formData={formData}
+            handleNextStep={handleNextStep}
+          />
+        )}
+        {step === 2 && (
+          <CommitmentForm
+            handleNext={handleNextStep}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        )}
+        {step === 3 && <PasswordForm handleSubmit={handleSubmit} />}
+      </>
     </HeaderLayout>
   );
 }

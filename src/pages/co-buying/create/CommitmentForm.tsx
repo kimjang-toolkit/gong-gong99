@@ -3,10 +3,7 @@ import BottomButton from '@/components/Button/BottomButton';
 import DatePicker from '@/components/DatePicker';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
-import {
-  CommitmentSchema,
-  commitmentSchema,
-} from '@/util/zod/cobuying-create';
+import { CommitmentSchema, commitmentSchema } from '@/util/zod/cobuying-create';
 import { useState } from 'react';
 
 interface CommitmentFormProps {
@@ -21,7 +18,6 @@ export default function CommitmentForm({
   setFormData,
 }: CommitmentFormProps) {
   const [date, setDate] = useState(formData?.sharingDateTime);
-
   const handleSubmit = (data: CommitmentSchema) => {
     setFormData?.({ ...formData, ...data });
     handleNext();
