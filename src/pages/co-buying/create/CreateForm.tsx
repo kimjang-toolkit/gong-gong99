@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BottomButton from '@/components/Button/BottomButton';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
@@ -9,8 +10,8 @@ import { DivideType } from '@domain/cobuying';
 import { useState } from 'react';
 
 interface CreateFormProps {
-  setFormData: (formData: FormSchema) => void;
-  formData: FormSchema;
+  setFormData: (formData: any) => void;
+  formData: any;
   handleNextStep: () => void;
 }
 export default function CreateForm({

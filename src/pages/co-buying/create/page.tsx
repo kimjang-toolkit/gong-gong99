@@ -96,7 +96,13 @@ function CreatePage() {
           handleNextStep={handleNextStep}
         />
       )}
-      {step === 2 && <CommitmentForm />}
+      {step === 2 && (
+        <CommitmentForm
+          handleNext={handleNextStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      )}
       {step === 3 && <PasswordForm handleSubmit={handleSubmit} />}
     </HeaderLayout>
   );

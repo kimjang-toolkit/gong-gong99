@@ -1,17 +1,26 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import BottomButton from '@/components/Button/BottomButton';
 import DatePicker from '@/components/DatePicker';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
-import { CommitmentSchema, commitmentSchema, FormSchema } from '@/util/zod/cobuying-create';
+import {
+  CommitmentSchema,
+  commitmentSchema,
+} from '@/util/zod/cobuying-create';
 import { useState } from 'react';
 
 interface CommitmentFormProps {
-  handleNext:()=>void
-  formData? : FormSchema
-  setFormData?: (data: FormSchema) => void;
+  handleNext: () => void;
+  formData?: any;
+  setFormData?: (data: any) => void;
 }
 
-export default function CommitmentForm({ handleNext, formData, setFormData }: CommitmentFormProps) {
-  const [date, setDate] = useState('');
+export default function CommitmentForm({
+  handleNext,
+  formData,
+  setFormData,
+}: CommitmentFormProps) {
+  const [date, setDate] = useState(formData?.sharingDateTime);
 
   const handleSubmit = (data: CommitmentSchema) => {
     setFormData?.({ ...formData, ...data });
@@ -29,9 +38,9 @@ export default function CommitmentForm({ handleNext, formData, setFormData }: Co
       <Form
         schema={commitmentSchema}
         defaultValues={{
-          sharingDateTime: '',
-          sharingLocation: '',
-          memo: '',
+          sharingDateTime: date,
+          sharingLocation: formData?.sharingLocation,
+          memo: formData?.memo,
         }}
         onSubmit={handleSubmit}
       >
@@ -54,6 +63,9 @@ export default function CommitmentForm({ handleNext, formData, setFormData }: Co
             />
           </div>
         </section>
+        <Form.Button>
+          <BottomButton label="약속 잡기" />
+        </Form.Button>
       </Form>
     </>
   );
