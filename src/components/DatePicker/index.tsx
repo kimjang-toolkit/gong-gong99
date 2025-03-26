@@ -15,10 +15,28 @@ function DatePicker({
   value: string;
   setValue: (value: string) => void;
 }) {
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [hour, setHour] = useState<number>(12);
-  const [minute, setMinute] = useState<number>(0);
-  const [meridiem, setMeridiem] = useState<'오전' | '오후'>('오전');
+  // value 형식이 yyyy/mm/dd hh:mm 인지 확인
+  const parseDateTime = (value: string) => {
+    if (!value) return null;
+    const [date, time] = value.split(' ');
+    const [hour, minute] = time.split(':').map(Number);
+    return { date: new Date(date), hour, minute };
+  };
+
+  const parsedValue = parseDateTime(value);
+  
+  const [selectedDate, setSelectedDate] = useState<Date>(
+    parsedValue?.date || new Date()
+  );
+  const [hour, setHour] = useState<number>(
+    parsedValue?.hour || 12
+  );
+  const [minute, setMinute] = useState<number>(
+    parsedValue?.minute || 0
+  );
+  const [meridiem, setMeridiem] = useState<'오전' | '오후'>(
+    parsedValue?.hour ? (parsedValue.hour > 12 ? '오후' : '오전') : '오전'
+  );
 
   const [isOpen, setIsOpen] = useState(false);
   const sheetRef = useOutsideClick(() => {

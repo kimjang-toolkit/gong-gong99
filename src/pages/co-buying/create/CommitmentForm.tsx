@@ -17,7 +17,7 @@ export default function CommitmentForm({
   formData,
   setFormData,
 }: CommitmentFormProps) {
-  const [date, setDate] = useState(formData?.sharingDateTime);
+  const [date, setDate] = useState('2024/01/01 09:00');
   const handleSubmit = (data: CommitmentSchema) => {
     setFormData?.({ ...formData, ...data });
     handleNext();
@@ -45,7 +45,6 @@ export default function CommitmentForm({
         <Form.Input name="sharingLocation">
           <Input.Label>나눔 장소</Input.Label>
           <Input.Field placeholder="나눔 장소를 입력해주세요." />
-          <Input.ClearButton />
           <Input.Description />
         </Form.Input>
         <section className="flex flex-col gap-2">
