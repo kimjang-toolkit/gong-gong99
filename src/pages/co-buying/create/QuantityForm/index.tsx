@@ -18,7 +18,7 @@ export default function QuantityForm({ formData }: { formData: any }) {
 
   const handleItemOptionChange = (options: ItemOptionBase[]) => {
     setItemOptions(options);
-    setOwnerOptions(options);
+    setOwnerOptions(options.map((option) => ({ ...option, quantity: 0 })));
   };
   return (
     <>
@@ -26,23 +26,26 @@ export default function QuantityForm({ formData }: { formData: any }) {
         <p className="typo-caption text-default-600">상품 옵션</p>
         <Form.SyncState name="itemOptions" value={itemOptions} />
         <Option
-          options={itemOptions}
+          options={itemOptions.map((option, index) => ({
+            ...option,
+            optionId: index,
+          }))}
           setOptions={handleItemOptionChange}
           className="gap-3 px-3 py-2"
         >
-          {itemOptions.map((option) => (
+          {itemOptions.map((option, index) => (
             <div
               className="flex items-center justify-between"
               key={option.name}
             >
-              <Option.Label label={option.name} />
+              <Option.Label placeholder="옵션 이름 입력" optionId={index} />
               <div className="flex items-center gap-2">
                 <Option.Stepper
-                  name={option.name}
+                  optionId={index}
                   quantity={option.quantity}
                   remainQuantity={999}
                 />
-                <Option.DeleteButton name={option.name} />
+                <Option.DeleteButton optionId={index} />
               </div>
             </div>
           ))}
@@ -53,18 +56,25 @@ export default function QuantityForm({ formData }: { formData: any }) {
         <p className="typo-caption text-default-600">내 구매 옵션</p>
         <Form.SyncState name="ownerOptions" value={ownerOptions} />
         <Option
-          options={ownerOptions}
+          options={ownerOptions.map((option, index) => ({
+            ...option,
+            optionId: index,
+          }))}
           setOptions={setOwnerOptions}
           className="gap-3 px-3 py-2"
         >
-          {ownerOptions.map((option) => (
+          {ownerOptions.map((option, index) => (
             <div
               className="flex items-center justify-between"
               key={option.name}
             >
-              <Option.Label label={option.name} disabled />
+              <Option.Label
+                placeholder="옵션 이름 입력"
+                optionId={index}
+                disabled
+              />
               <Option.Stepper
-                name={option.name}
+                optionId={index}
                 quantity={option.quantity}
                 remainQuantity={
                   itemOptions.find((item) => item.name === option.name)

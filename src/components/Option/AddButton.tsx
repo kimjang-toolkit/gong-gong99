@@ -11,6 +11,7 @@ export default function AddButton({
   const { options, setOptions } = useOptionContext();
   return (
     <button
+      type="button"
       onClick={() =>
         setOptions([
           ...options,

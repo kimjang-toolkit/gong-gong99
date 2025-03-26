@@ -5,6 +5,7 @@ export default function DeleteButton({ optionId }: { optionId: number }) {
   const { options, setOptions } = useOptionContext();
   return (
     <button
+      type="button"
       onClick={() => {
         if (options.length > 1) {
           setOptions(options.filter((option) => option.optionId !== optionId));
