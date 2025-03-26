@@ -38,6 +38,7 @@ export default function QuantityForm({ formData }: { formData: any }) {
               key={option.name}
             >
               <Option.Label
+                className="flex-1"
                 placeholder="옵션 이름 입력"
                 optionId={option.optionId}
               />
@@ -64,10 +65,11 @@ export default function QuantityForm({ formData }: { formData: any }) {
         >
           {ownerOptions.map((option) => (
             <div
-              className="flex items-center justify-between"
+              className="flex items-center justify-between w-full"
               key={option.name}
             >
               <Option.Label
+                className="flex-1"
                 placeholder="옵션 이름 입력"
                 optionId={option.optionId}
                 disabled

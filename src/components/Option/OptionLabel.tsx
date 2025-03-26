@@ -27,7 +27,7 @@ export default function OptionLabel({
 
   return (
     <input
-      className={`typo-caption text-default-600 w-full mr-2 ${className} disabled:bg-transparent`}
+      className={`typo-caption text-default-600 mr-2 ${className} disabled:bg-transparent`}
       placeholder={placeholder}
       value={inputValue}
       onChange={(e) => setInputValue(e.target.value)}
