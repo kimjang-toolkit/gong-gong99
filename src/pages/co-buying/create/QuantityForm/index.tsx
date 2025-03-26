@@ -5,18 +5,20 @@ import QuantityCalcBox from '@/pages/co-buying/create/QuantityForm/QuantityCalcB
 import { ItemOptionBase } from '@domain/product';
 import { useState } from 'react';
 
+type FormItemOption = ItemOptionBase & { optionId: number };
+
 export default function QuantityForm({ formData }: { formData: any }) {
   // ownerOptions
   // itemOptions
-  const [itemOptions, setItemOptions] = useState<ItemOptionBase[]>(
+  const [itemOptions, setItemOptions] = useState<FormItemOption[]>(
     formData.itemOptions.length === 0
-      ? [{ name: '공구상품 이름', quantity: 0 }]
+      ? [{ name: '공구상품 이름', quantity: 0, optionId: 0 }]
       : formData.itemOptions
   );
   const [ownerOptions, setOwnerOptions] =
-    useState<ItemOptionBase[]>(itemOptions);
+    useState<FormItemOption[]>(itemOptions);
 
-  const handleItemOptionChange = (options: ItemOptionBase[]) => {
+  const handleItemOptionChange = (options: FormItemOption[]) => {
     setItemOptions(options);
     setOwnerOptions(options.map((option) => ({ ...option, quantity: 0 })));
   };
@@ -26,26 +28,26 @@ export default function QuantityForm({ formData }: { formData: any }) {
         <p className="typo-caption text-default-600">상품 옵션</p>
         <Form.SyncState name="itemOptions" value={itemOptions} />
         <Option
-          options={itemOptions.map((option, index) => ({
-            ...option,
-            optionId: index,
-          }))}
+          options={itemOptions}
           setOptions={handleItemOptionChange}
           className="gap-3 px-3 py-2"
         >
-          {itemOptions.map((option, index) => (
+          {itemOptions.map((option) => (
             <div
               className="flex items-center justify-between"
               key={option.name}
             >
-              <Option.Label placeholder="옵션 이름 입력" optionId={index} />
+              <Option.Label
+                placeholder="옵션 이름 입력"
+                optionId={option.optionId}
+              />
               <div className="flex items-center gap-2">
                 <Option.Stepper
-                  optionId={index}
+                  optionId={option.optionId}
                   quantity={option.quantity}
                   remainQuantity={999}
                 />
-                <Option.DeleteButton optionId={index} />
+                <Option.DeleteButton optionId={option.optionId} />
               </div>
             </div>
           ))}
@@ -56,28 +58,25 @@ export default function QuantityForm({ formData }: { formData: any }) {
         <p className="typo-caption text-default-600">내 구매 옵션</p>
         <Form.SyncState name="ownerOptions" value={ownerOptions} />
         <Option
-          options={ownerOptions.map((option, index) => ({
-            ...option,
-            optionId: index,
-          }))}
+          options={ownerOptions}
           setOptions={setOwnerOptions}
           className="gap-3 px-3 py-2"
         >
-          {ownerOptions.map((option, index) => (
+          {ownerOptions.map((option) => (
             <div
               className="flex items-center justify-between"
               key={option.name}
             >
               <Option.Label
                 placeholder="옵션 이름 입력"
-                optionId={index}
+                optionId={option.optionId}
                 disabled
               />
               <Option.Stepper
-                optionId={index}
+                optionId={option.optionId}
                 quantity={option.quantity}
                 remainQuantity={
-                  itemOptions.find((item) => item.name === option.name)
+                  itemOptions.find((item) => item.optionId === option.optionId)
                     ?.quantity ?? 0
                 }
               />
