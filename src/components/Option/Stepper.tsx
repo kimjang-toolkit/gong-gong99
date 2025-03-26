@@ -1,12 +1,13 @@
 import { useOptionContext } from '@/components/Option/context';
+import { memo } from 'react';
 
-interface StepperButtonProps {
+export interface StepperButtonProps {
   optionId: number;
   quantity: number;
   remainQuantity: number;
 }
 
-export default function StepperButton({
+function StepperButton({
   optionId,
   quantity,
   remainQuantity,
@@ -45,6 +46,8 @@ export default function StepperButton({
       <input
         className="text-center bg-white rounded-none border-x border-default-300"
         type="number"
+        min={0}
+        max={remainQuantity}
         value={quantity}
         onChange={(e) => {
           setOptions(
@@ -61,3 +64,5 @@ export default function StepperButton({
     </div>
   );
 }
+
+export default memo(StepperButton);

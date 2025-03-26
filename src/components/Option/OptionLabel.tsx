@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { useOptionContext } from '@/components/Option/context';
 
-interface OptionLabelProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface OptionLabelProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   optionId: number;
   className?: string;
   placeholder?: string;
 }
 
-export default function OptionLabel({
+function OptionLabel({
   optionId,
   className,
   placeholder,
@@ -36,3 +37,5 @@ export default function OptionLabel({
     />
   );
 }
+
+export default memo(OptionLabel);

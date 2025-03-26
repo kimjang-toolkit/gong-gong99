@@ -9,13 +9,14 @@ export default function AddButton({
   className?: string;
 }) {
   const { options, setOptions } = useOptionContext();
+  const nextId = Math.max(...options.map((o) => o.optionId), 0) + 1;
   return (
     <button
       type="button"
       onClick={() =>
         setOptions([
           ...options,
-          { optionId: options.length + 1, name: '', quantity: defaultQuantity },
+          { optionId: nextId, name: '', quantity: defaultQuantity },
         ])
       }
       className={cn(
