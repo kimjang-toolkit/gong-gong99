@@ -6,7 +6,7 @@ import { DivideType } from '@domain/cobuying';
 import { useState } from 'react';
 import CreateForm from '@/pages/co-buying/create/CreateForm';
 import PasswordForm from '@/pages/co-buying/create/PasswordForm';
-import { PasswordSchema } from '@/util/zod/cobuying-create';
+import { FormSchema, PasswordSchema } from '@/util/zod/cobuying-create';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCreateCobuying } from '@/api/mutations/useCreateCobuying';
 function CreatePage() {
