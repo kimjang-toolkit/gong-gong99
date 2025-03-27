@@ -17,7 +17,7 @@ export default function CommitmentForm({
   formData,
   setFormData,
 }: CommitmentFormProps) {
-  const [date, setDate] = useState('2024/01/01 09:00');
+  const [date, setDate] = useState('2025/04/01 10:00');
   const handleSubmit = (data: CommitmentSchema) => {
     setFormData?.({ ...formData, ...data });
     handleNext();

@@ -8,8 +8,6 @@ import { useState } from 'react';
 type FormItemOption = ItemOptionBase & { optionId: number };
 
 export default function QuantityForm({ formData }: { formData: any }) {
-  // ownerOptions
-  // itemOptions
   const [itemOptions, setItemOptions] = useState<FormItemOption[]>(
     formData.itemOptions.length === 0
       ? [{ name: '공구상품 이름', quantity: 0, optionId: 0 }]
