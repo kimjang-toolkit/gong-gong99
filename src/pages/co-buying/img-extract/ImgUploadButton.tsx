@@ -2,6 +2,7 @@ import BottomButton from '@/components/Button/BottomButton';
 import { useImageUpload } from '@/hooks/useImageUpload';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import exampleImage from '@/assets/img/extract-img.png';
 
 export default function ImgUploadButton() {
   const navigate = useNavigate();
@@ -27,10 +28,10 @@ export default function ImgUploadButton() {
 
   return (
     <>
-      <section className="flex flex-col gap-2 ">
+      <section className="flex flex-col gap-2 mt-4 ">
         <button
           type="button"
-          className="w-full h-[100px] rounded-lg bg-gray-100"
+          className="w-full rounded-lg bg-primary-50 border border-primary-400 h-[383px]"
           onClick={handleSelectImage}
         >
           {image?.previewImage ? (
@@ -40,7 +41,17 @@ export default function ImgUploadButton() {
               alt="이미지 미리보기"
             />
           ) : (
-            <p>이미지를 선택해주세요.</p>
+            <div className="flex flex-col items-center ">
+              <img
+                src={exampleImage}
+                alt="상품 캡쳐 이미지 예시"
+                className="max-w-[198px]"
+              />
+              <div className="mt-2 text-caption text-primary-800">
+                <p>상품 이미지, 상품 이름, 상품 가격이</p>
+                <p>포함된 캡쳐화면을 업로드해주세요</p>
+              </div>
+            </div>
           )}
         </button>
         <input
