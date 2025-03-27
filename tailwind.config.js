@@ -45,10 +45,15 @@ export default {
           '0%': { transform: 'translate(-50%, 0)' },
           '100%': { transform: 'translate(-50%, 100%)' },
         },
+        scan: {
+          '5%, 60%': { top: '0%' }, // 시작과 끝: 위쪽
+          '35%': { top: '75%' }, // 중간: 아래쪽
+        },
       },
       animation: {
         slideIn: 'slideIn 0.3s ease-out forwards',
         slideOut: 'slideOut 0.3s ease-out forwards',
+        scan: 'scan 2s ease-in-out infinite',
       },
     },
     screens: {

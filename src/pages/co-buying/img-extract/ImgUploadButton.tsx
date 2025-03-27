@@ -28,7 +28,7 @@ export default function ImgUploadButton() {
 
   return (
     <>
-      <section className="flex flex-col gap-2 mt-4 ">
+      <section className="relative flex flex-col gap-2 mt-4 ">
         <button
           type="button"
           className="w-full rounded-lg bg-primary-50 border border-primary-400 h-[383px]"
@@ -61,11 +61,14 @@ export default function ImgUploadButton() {
           hidden
           onChange={handleImageChange}
         />
+        {!isLoading && (
+          <div className="absolute w-full rounded-lg pointer-events-none h-1/4 bg-primary-200/20 backdrop-blur-sm animate-scan" />
+        )}
       </section>
       <BottomButton
         type="button"
         onClick={handleSubmit}
-        label={isLoading ? '업로드중...' : '다음'}
+        label={isLoading ? '분석 중...' : '다음'}
         disabled={isLoading}
       />
     </>
