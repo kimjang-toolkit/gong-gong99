@@ -44,6 +44,7 @@ export default function QuantityBottomSheet({
         attendeeName: attendeeName,
         attendeePrice: totalPrice,
         itemOptions: itemOptions.map((option) => ({
+          optionId: option.optionId,
           name: option.name,
           quantity: option.quantity,
         })),
@@ -80,14 +81,14 @@ export default function QuantityBottomSheet({
               <Input.Field />
             </Input>
 
-            <section className="flex justify-between p-4 border rounded-xl border-default-200">
-              <p className="mb-1 typo-caption text-default-600">구매 수량</p>
+            <section className="flex flex-col gap-2">
+              <p className="typo-caption text-default-600">구매 옵션</p>
               <Option
                 options={itemOptions}
                 setOptions={setItemOptions}
                 className="gap-3 px-3 py-2"
               >
-                {data.itemOptions.map((option) => (
+                {itemOptions.map((option) => (
                   <div
                     className="flex items-center justify-between"
                     key={option.name}
@@ -108,6 +109,7 @@ export default function QuantityBottomSheet({
                 ))}
               </Option>
             </section>
+
             <section className="flex items-start justify-between px-1">
               <p className="flex py-1 typo-tiny text-default-700">
                 <p className="text-primary-400">{quantity}</p>개 구매액
@@ -120,6 +122,12 @@ export default function QuantityBottomSheet({
               <Button
                 type="submit"
                 label="신청하기"
+                disabled={
+                  itemOptions.reduce(
+                    (acc, option) => acc + option.quantity,
+                    0
+                  ) === 0 || attendeeName === ''
+                }
                 size="small"
                 onClick={handleSubmit}
               />
