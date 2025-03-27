@@ -21,7 +21,7 @@ export default function ApplyListSection({ data }: { data: CoBuyingDetail }) {
               className="*:py-1.5 *:text-center *:typo-caption"
             >
               <td className="min-w-[30%]">{attendee.attendeeName}</td>
-              <td>{attendee.appliedQuantity}</td>
+              <td>{attendee.attendeeQuantity}</td>
               <td className="min-w-[45%]">
                 {attendee.attendeePrice.toLocaleString()}원
               </td>
