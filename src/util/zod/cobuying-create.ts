@@ -36,14 +36,8 @@ const quantitySchema = baseSchema.extend({
       quantity: z.number(),
     })
   ),
-  totalQuantity: z
-    .any()
-    .optional()
-    .transform(() => undefined), // 필드 무시
-  targetAttendeeCount: z
-    .any()
-    .optional()
-    .transform(() => undefined), // 필드 무시
+  totalQuantity: z.any().optional(),
+  targetAttendeeCount: z.any().optional(),
 });
 
 const attendeeSchema = baseSchema.extend({
@@ -52,14 +46,8 @@ const attendeeSchema = baseSchema.extend({
     .number()
     .min(1, { message: '참여 인원을 입력해주세요.' }),
   totalQuantity: z.coerce.number().min(1, { message: '수량을 입력해주세요.' }),
-  itemOptions: z
-    .any()
-    .optional()
-    .transform(() => undefined), // 필드 무시
-  ownerOptions: z
-    .any()
-    .optional()
-    .transform(() => undefined), // 필드 무시
+  itemOptions: z.any().optional(),
+  ownerOptions: z.any().optional(),
 });
 
 const formSchema = z.union([quantitySchema, attendeeSchema]);

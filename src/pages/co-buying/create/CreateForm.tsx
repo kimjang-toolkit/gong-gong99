@@ -22,6 +22,7 @@ export default function CreateForm({
   const [type, setType] = useState(formData.type);
 
   const handleSubmit = (data: FormSchema) => {
+    console.log('data in submit', data);
     setFormData({ ...formData, ...data });
     handleNextStep();
   };
