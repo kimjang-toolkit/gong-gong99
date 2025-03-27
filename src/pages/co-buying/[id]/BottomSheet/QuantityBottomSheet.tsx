@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 import useApplyCobuying from '@/api/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { QuantityCoBuyingDetail } from '@interface/cobuying';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Sheet } from 'react-modal-sheet';
 import Input from '@/components/Input';
 import { ItemOption } from '@domain/product';
@@ -26,7 +26,10 @@ export default function QuantityBottomSheet({
   // 옵션 별로 띄워주기 => 어떤 옵션을 구매하는지 보여주어야 함
   const [attendeeName, setAttendeeName] = useState('');
   const [itemOptions, setItemOptions] = useState<ItemOption[]>(
-    data.itemOptions
+    data.itemOptions.map((option, index) => ({
+      ...option,
+      quantity: index === 0 ? 1 : 0,
+    }))
   );
 
   // 신청할땐 remainQuantity 없애고 name과 quantity만 보내기
@@ -36,6 +39,9 @@ export default function QuantityBottomSheet({
 
   const { mutateAsync } = useApplyCobuying(data.id);
 
+  useEffect(() => {
+    console.log('itemOptions', itemOptions);
+  }, [itemOptions]);
   const handleSubmit = async () => {
     try {
       await mutateAsync({
