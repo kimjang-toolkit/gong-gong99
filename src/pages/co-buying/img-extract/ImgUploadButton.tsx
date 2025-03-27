@@ -31,12 +31,12 @@ export default function ImgUploadButton() {
       <section className="relative flex flex-col gap-2 mt-4 ">
         <button
           type="button"
-          className="w-full rounded-lg bg-primary-50 border border-primary-400 h-[383px]"
+          className="w-full rounded-lg bg-primary-50 border border-primary-400 h-[383px] overflow-hidden"
           onClick={handleSelectImage}
         >
           {image?.previewImage ? (
             <img
-              className=" object-cover aspect-[3/4]"
+              className=" object-cover aspect-[3/4] "
               src={image.previewImage}
               alt="이미지 미리보기"
             />
@@ -61,11 +61,8 @@ export default function ImgUploadButton() {
           hidden
           onChange={handleImageChange}
         />
-        {!isLoading && (
-          <div className="absolute w-full pointer-events-none top-8 h-1/5 bg-gradient-to-b animate-scan from-primary-200/60 to-transparent" />
-
-          // <div className="absolute w-full rounded-lg pointer-events-none h-1/5 bg-primary-200/20 backdrop-blur-sm animate-scan" />
-          // <div className="absolute w-full rounded-lg pointer-events-none h-1/5 bg-primary-200/20 backdrop-blur-sm animate-scan" />
+        {isLoading && (
+          <div className="absolute top-0 w-full pointer-events-none h-1/5 bg-gradient-to-b animate-scan from-primary-200/60 to-transparent" />
         )}
       </section>
       <BottomButton
