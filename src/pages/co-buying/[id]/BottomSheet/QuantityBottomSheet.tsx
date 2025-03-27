@@ -1,11 +1,12 @@
 import Button from '@/components/Button';
-import StepperButton from '@/components/Button/StepperButton';
 import useApplyCobuying from '@/api/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { QuantityCoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';
 import { Sheet } from 'react-modal-sheet';
 import Input from '@/components/Input';
+import { ItemOption } from '@domain/product';
+import Option from '@/components/Option';
 
 interface ApplyBottomSheetProps {
   isOpen: boolean;
@@ -22,8 +23,15 @@ export default function QuantityBottomSheet({
     setIsOpen(false);
   });
 
+  // 옵션 별로 띄워주기 => 어떤 옵션을 구매하는지 보여주어야 함
   const [attendeeName, setAttendeeName] = useState('');
-  const [quantity, setQuantity] = useState(1); // 구매 수량
+  const [itemOptions, setItemOptions] = useState<ItemOption[]>(
+    data.itemOptions
+  );
+
+  // 신청할땐 remainQuantity 없애고 name과 quantity만 보내기
+
+  const quantity = itemOptions.reduce((acc, curr) => acc + curr.quantity, 0);
   const totalPrice = quantity * data.unitPrice; // 총 구매 금액
 
   const { mutateAsync } = useApplyCobuying(data.id);
@@ -34,11 +42,14 @@ export default function QuantityBottomSheet({
         coBuyingId: data.id,
         ownerName: data.ownerName,
         attendeeName: attendeeName,
-        attendeeQuantity: quantity,
         attendeePrice: totalPrice,
+        itemOptions: itemOptions.map((option) => ({
+          name: option.name,
+          quantity: option.quantity,
+        })),
       });
       setIsOpen(false);
-      setQuantity(1);
+      setItemOptions([]);
     } catch (error) {
       console.log('신청실패했어요', error);
     }
@@ -71,11 +82,31 @@ export default function QuantityBottomSheet({
 
             <section className="flex justify-between p-4 border rounded-xl border-default-200">
               <p className="mb-1 typo-caption text-default-600">구매 수량</p>
-              <StepperButton
-                maxValue={data.remainQuantity}
-                value={quantity}
-                onChange={setQuantity}
-              />
+              <Option
+                options={itemOptions}
+                setOptions={setItemOptions}
+                className="gap-3 px-3 py-2"
+              >
+                {data.itemOptions.map((option) => (
+                  <div
+                    className="flex items-center justify-between"
+                    key={option.name}
+                  >
+                    <Option.Label
+                      className="flex-1"
+                      placeholder="옵션 이름 입력"
+                      optionId={option.optionId}
+                    />
+                    <div className="flex items-center gap-2">
+                      <Option.Stepper
+                        optionId={option.optionId}
+                        quantity={option.quantity}
+                        remainQuantity={option.remainQuantity}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </Option>
             </section>
             <section className="flex items-start justify-between px-1">
               <p className="flex py-1 typo-tiny text-default-700">

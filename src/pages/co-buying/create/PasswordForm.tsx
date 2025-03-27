@@ -1,16 +1,13 @@
 import BottomButton from '@/components/Button/BottomButton';
-import DatePicker from '@/components/DatePicker';
 import Form from '@/components/Form';
 import Input from '@/components/Input';
 import { PasswordSchema, passwordSchema } from '@/util/zod/cobuying-create';
-import { useState } from 'react';
 
 export default function PasswordForm({
   handleSubmit,
 }: {
   handleSubmit: (data: PasswordSchema) => void;
 }) {
-  const [date, setDate] = useState('');
   return (
     <>
       <section className="flex flex-col w-full gap-1 mb-4 text-black h-[90px] justify-center">
@@ -20,7 +17,6 @@ export default function PasswordForm({
           <p className="typo-h2">를 입력해주세요.</p>
         </div>
       </section>
-      <DatePicker value={date} setValue={setDate} />
       <Form
         schema={passwordSchema}
         defaultValues={{

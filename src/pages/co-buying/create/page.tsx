@@ -64,6 +64,7 @@ function CreatePage() {
 
   const handleSubmit = async (data: PasswordSchema) => {
     const { ownerPasswordConfirm, ...exceptPasswordConfirm } = data;
+    console.log(data);
     try {
       const response = await mutateAsync({
         ...formData,

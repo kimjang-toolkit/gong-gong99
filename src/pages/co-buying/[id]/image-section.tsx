@@ -16,10 +16,10 @@ export default function ImageSection({ data }: { data: CoBuyingDetail }) {
         alt="상품이미지"
         className="w-full rounded-lg aspect-square"
       />
-      <article className="absolute bottom-0 flex items-center w-full gap-2 p-2">
+      <article className="absolute bottom-0 flex items-center justify-between w-full gap-2 p-2">
         <div
           className={`bg-black/20 backdrop-blur-[5px] items-center gap-2 *:text-white *:typo-caption rounded-full px-4 py-2.5 h-10 ${
-            data.productLink ? 'flex' : 'hidden'
+            data.productLink ? 'flex' : 'invisible'
           }`}
         >
           <p>상품 정보:</p>
@@ -31,21 +31,23 @@ export default function ImageSection({ data }: { data: CoBuyingDetail }) {
             {data.productLink}
           </a>
         </div>
-        <button
-          className="px-2.5 py-2.5 rounded-full  w-8 h-8 bg-primary-50 active:brightness-90"
-          onClick={() => share(`${data.productName} 공구해요`)}
-        >
-          <ShareIcon className="pb-1 pr-1" />
-        </button>
-        <KakaoShareButton
-          title={data.productName}
-          endpoint={`co-buying/${data.id}?ownerName=${data.ownerName}`}
-          description={`${data.ownerName}님이 올리신 공구! ${
-            type === DivideType.attendee
-              ? `인당 ${data.perAttendeePrice.toLocaleString()}원`
-              : `개당 ${data.unitPrice.toLocaleString()}원`
-          } !!`}
-        />
+        <div className="flex items-center gap-2">
+          <button
+            className="px-2.5 py-2.5 rounded-full  w-8 h-8 bg-primary-50 active:brightness-90"
+            onClick={() => share(`${data.productName} 공구해요`)}
+          >
+            <ShareIcon className="pb-1 pr-1" />
+          </button>
+          <KakaoShareButton
+            title={data.productName}
+            endpoint={`co-buying/${data.id}?ownerName=${data.ownerName}`}
+            description={`${data.ownerName}님이 올리신 공구! ${
+              type === DivideType.attendee
+                ? `인당 ${data.perAttendeePrice.toLocaleString()}원`
+                : `개당 ${data.unitPrice.toLocaleString()}원`
+            } !!`}
+          />
+        </div>
       </article>
     </section>
   );
