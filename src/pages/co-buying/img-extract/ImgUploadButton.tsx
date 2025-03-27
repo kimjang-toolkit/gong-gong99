@@ -62,7 +62,10 @@ export default function ImgUploadButton() {
           onChange={handleImageChange}
         />
         {!isLoading && (
-          <div className="absolute w-full rounded-lg pointer-events-none h-1/4 bg-primary-200/20 backdrop-blur-sm animate-scan" />
+          <div className="absolute w-full pointer-events-none top-8 h-1/5 bg-gradient-to-b animate-scan from-primary-200/60 to-transparent" />
+
+          // <div className="absolute w-full rounded-lg pointer-events-none h-1/5 bg-primary-200/20 backdrop-blur-sm animate-scan" />
+          // <div className="absolute w-full rounded-lg pointer-events-none h-1/5 bg-primary-200/20 backdrop-blur-sm animate-scan" />
         )}
       </section>
       <BottomButton
