@@ -5,7 +5,7 @@ import { QuantityCoBuyingDetail } from '@interface/cobuying';
 import { useState } from 'react';
 import { Sheet } from 'react-modal-sheet';
 import Input from '@/components/Input';
-import { ItemOption } from '@domain/product';
+import { ItemOptionBase } from '@domain/product';
 import Option from '@/components/Option';
 
 interface ApplyBottomSheetProps {
@@ -25,11 +25,19 @@ export default function QuantityBottomSheet({
 
   // 옵션 별로 띄워주기 => 어떤 옵션을 구매하는지 보여주어야 함
   const [attendeeName, setAttendeeName] = useState('');
-  const [itemOptions, setItemOptions] = useState<ItemOption[]>(
-    data.itemOptions.map((option, index) => ({
-      ...option,
-      quantity: index === 0 ? 1 : 0,
+
+  // 남은 수량을 제외한 사용자 입력 구매옵션
+  const [itemOptions, setItemOptions] = useState<ItemOptionBase[]>(
+    data.itemOptions.map((option) => ({
+      optionId: option.optionId,
+      name: option.name,
+      quantity: 0,
     }))
+  );
+
+  // 남은 수량 배열
+  const remainQuantities = data.itemOptions.map( 
+    (option) => option.remainQuantity
   );
 
   // 신청할땐 remainQuantity 없애고 name과 quantity만 보내기
@@ -91,7 +99,7 @@ export default function QuantityBottomSheet({
                 setOptions={setItemOptions}
                 className="gap-3 px-3 py-2"
               >
-                {itemOptions.map((option) => (
+                {itemOptions.map((option, index) => (
                   <div
                     className="flex items-center justify-between"
                     key={option.name}
@@ -105,7 +113,7 @@ export default function QuantityBottomSheet({
                       <Option.Stepper
                         optionId={option.optionId}
                         quantity={option.quantity}
-                        remainQuantity={option.remainQuantity}
+                        remainQuantity={remainQuantities[index]}
                       />
                     </div>
                   </div>
