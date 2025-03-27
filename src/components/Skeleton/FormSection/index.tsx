@@ -1,4 +1,4 @@
-import TextLine from '@/components/Skeleton/\bshared/TextLine';
+import TextLine from '@/components/Skeleton/shared/TextLine';
 
 function FormSectionSkeleton() {
   return (
