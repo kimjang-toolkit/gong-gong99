@@ -10,9 +10,13 @@ import {
   CoBuyingSummary,
 } from '@interface/cobuying';
 import { CoBuyingPageingRes } from '@interface/cobuyingList';
+import { ProductExtractDto } from '@interface/product';
 
 export const cobuyingService = {
-  postImgExtract: async (body: { imgType: string; imgBase64: string }) => {
+  postImgExtract: async (body: {
+    imgType: string;
+    imgBase64: string;
+  }): Promise<ProductExtractDto> => {
     const response = await axiosInstance.post(
       ENDPOINTS.COBUYING.IMG_EXTRACT,
       body

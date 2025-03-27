@@ -6,7 +6,7 @@ import CreateButton from '@/pages/co-buying/CreateButton';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CoBuyingSummary } from '@interface/cobuying';
 import SkeletonWrapper from '@/components/Skeleton/SkeletonWrapper';
-import List from '@/components/Skeleton/\bshared/List';
+import List from '@/components/Skeleton/shared/List';
 
 export default function ListSection() {
   const { isLoading, data, fetchNextPage, hasNextPage } = useCobuyingList();
@@ -18,7 +18,7 @@ export default function ListSection() {
       ...page,
       coBuyingList: page.coBuyingList.filter(
         (item) => Number(item.coBuyingStatus) == tab
-      ),
+      ),  
     }))
     .filter((page) => page.coBuyingList.length > 0);
 

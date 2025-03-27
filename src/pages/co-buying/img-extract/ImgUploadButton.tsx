@@ -1,8 +1,11 @@
 import BottomButton from '@/components/Button/BottomButton';
 import { useImageUpload } from '@/hooks/useImageUpload';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import exampleImage from '@/assets/img/extract-img.png';
 
 export default function ImgUploadButton() {
+  const navigate = useNavigate();
   const { image, handleImageChange, handleUploadImageAndExtract, isLoading } =
     useImageUpload();
   const imgInputRef = useRef<HTMLInputElement | null>(null);
@@ -11,27 +14,44 @@ export default function ImgUploadButton() {
     imgInputRef.current?.click();
   };
 
-  const handleSubmit = () => {
-    const response = handleUploadImageAndExtract();
-    console.log(response);
+  const handleSubmit = async () => {
+    const response = await handleUploadImageAndExtract();
+
+    if (response) {
+      navigate('/co-buying/create', {
+        state: {
+          extractedProduct: response,
+        },
+      });
+    }
   };
 
   return (
     <>
-      <section className="flex flex-col gap-2 ">
+      <section className="relative flex flex-col gap-2 mt-4 ">
         <button
           type="button"
-          className="w-full h-[100px] rounded-lg bg-gray-100"
+          className="w-full rounded-lg bg-primary-50 border border-primary-400 h-[383px] overflow-hidden"
           onClick={handleSelectImage}
         >
           {image?.previewImage ? (
             <img
-              className=" object-cover aspect-[3/4]"
+              className=" object-cover aspect-[3/4] "
               src={image.previewImage}
               alt="이미지 미리보기"
             />
           ) : (
-            <p>이미지를 선택해주세요.</p>
+            <div className="flex flex-col items-center ">
+              <img
+                src={exampleImage}
+                alt="상품 캡쳐 이미지 예시"
+                className="max-w-[198px]"
+              />
+              <div className="mt-2 text-caption text-primary-800">
+                <p>상품 이미지, 상품 이름, 상품 가격이</p>
+                <p>포함된 캡쳐화면을 업로드해주세요</p>
+              </div>
+            </div>
           )}
         </button>
         <input
@@ -41,11 +61,14 @@ export default function ImgUploadButton() {
           hidden
           onChange={handleImageChange}
         />
+        {isLoading && (
+          <div className="absolute top-0 w-full pointer-events-none h-1/5 bg-gradient-to-b animate-scan from-primary-200/60 to-transparent" />
+        )}
       </section>
       <BottomButton
         type="button"
         onClick={handleSubmit}
-        label={isLoading ? '업로드중...' : '다음'}
+        label={isLoading ? '분석 중...' : '다음'}
         disabled={isLoading}
       />
     </>
