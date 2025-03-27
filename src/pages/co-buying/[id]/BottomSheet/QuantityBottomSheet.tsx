@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 import useApplyCobuying from '@/api/mutations/useApplyCobuying';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import { QuantityCoBuyingDetail } from '@interface/cobuying';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Sheet } from 'react-modal-sheet';
 import Input from '@/components/Input';
 import { ItemOption } from '@domain/product';
@@ -39,9 +39,6 @@ export default function QuantityBottomSheet({
 
   const { mutateAsync } = useApplyCobuying(data.id);
 
-  useEffect(() => {
-    console.log('itemOptions', itemOptions);
-  }, [itemOptions]);
   const handleSubmit = async () => {
     try {
       await mutateAsync({
