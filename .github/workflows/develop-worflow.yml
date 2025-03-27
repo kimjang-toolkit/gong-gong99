@@ -1,0 +1,61 @@
+name: Deploy front to S3 (dev)
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+          token: ${{ secrets.GIT_TOKEN }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.9
+      # 환경변수 설정
+      - name: Set environment variables
+        run: |
+          echo "VITE_API_SERVER_URL=${{ secrets.DEV_API_SERVER_URL}}" >> .env.production
+          echo "VITE_APP_KAKAO_KEY=${{ secrets.VITE_APP_KAKAO_KEY }}" >> .env.production
+      # 노드 모듈 캐싱. package-lock.json 파일 변경 시 캐시를 무효화하고 다시 생성
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      #의존성 설치
+      - name: install dependency
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      # 보안성을 높이기 위해 aws 자격증명을 설정함. -> AWS CLI명령어와 AWS 리소스 접근을 위한 인증.
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ap-northeast-2
+          aws-access-key-id: ${{ secrets.IAM_ACCESSKEY }}
+          aws-secret-access-key: ${{ secrets.IAM_SECRET_KEY }}
+
+      - name: s3 deploy
+        env:
+          BUCKET_NAME: ${{ secrets.DEV_S3_BUCKET_NAME}}
+        run: |
+          aws s3 sync ./dist s3://$BUCKET_NAME
+
+      # 모든 경로 무효화
+      - name: CloudFront Invalidation
+        env:
+          CLOUD_FRONT_ID: ${{ secrets.DEV_CDN_ID}}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id $CLOUD_FRONT_ID --paths "/*"

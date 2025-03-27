@@ -1,0 +1,15 @@
+{
+  "files": [],
+
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "types": ["vite-plugin-svgr/client"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "lib": ["ES2020", "ES2023", "DOM", "DOM.Iterable", "ESNext"]
+  },
+  "include": ["svg.d.ts"]
+}
