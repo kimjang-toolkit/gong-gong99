@@ -4,7 +4,6 @@ import ErrorPage from '@/pages/error-page/page';
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate,
   redirect,
 } from 'react-router-dom';
 import PasswordPage from '@/pages/co-buying/password/page';
@@ -18,6 +17,7 @@ import useAuthStore from '@/stores/authStore';
 import { useEffect } from 'react';
 import { authService } from '@/api/services/auth';
 import ImgExtractPage from '@/pages/co-buying/img-extract/page';
+import Splash from '@/components/Splash';
 
 function App() {
   useKakaoInit(); // 카카오 초기화
@@ -33,7 +33,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Navigate to="/co-buying" replace />,
+      element: <Splash />,
       errorElement: <ErrorPage />,
     },
     {
