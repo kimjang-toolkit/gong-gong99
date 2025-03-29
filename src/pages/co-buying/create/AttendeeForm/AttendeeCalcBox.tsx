@@ -12,15 +12,17 @@ export default function AttendeeCalcBox({
   let perPrice = "-";
   if (totalPrice && totalQuantity && targetAttendeeCount) {
     if (totalQuantity % targetAttendeeCount !== 0) {
-      perQuantity = (totalQuantity / targetAttendeeCount).toFixed(1);
+      perQuantity = (totalQuantity / targetAttendeeCount)
+        .toFixed(1)
+        .toLocaleString();
     } else {
-      perQuantity = (totalQuantity / targetAttendeeCount).toString();
+      perQuantity = (totalQuantity / targetAttendeeCount).toLocaleString();
     }
 
     if (totalPrice % targetAttendeeCount !== 0) {
-      perPrice = (totalPrice / targetAttendeeCount).toFixed(1);
+      perPrice = (totalPrice / targetAttendeeCount).toFixed(1).toLocaleString();
     } else {
-      perPrice = (totalPrice / targetAttendeeCount).toString();
+      perPrice = (totalPrice / targetAttendeeCount).toLocaleString();
     }
   }
 
