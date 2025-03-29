@@ -8,11 +8,20 @@ export default function AttendeeCalcBox({
   totalPrice,
   targetAttendeeCount,
 }: AttendeeCalcBoxProps) {
-  let perQuantity = '-';
-  let perPrice = '-';
+  let perQuantity = "-";
+  let perPrice = "-";
   if (totalPrice && totalQuantity && targetAttendeeCount) {
-    perQuantity = (totalQuantity / targetAttendeeCount).toFixed(1);
-    perPrice = (totalPrice / targetAttendeeCount).toFixed(1);
+    if (totalQuantity % targetAttendeeCount !== 0) {
+      perQuantity = (totalQuantity / targetAttendeeCount).toFixed(1);
+    } else {
+      perQuantity = (totalQuantity / targetAttendeeCount).toString();
+    }
+
+    if (totalPrice % targetAttendeeCount !== 0) {
+      perPrice = (totalPrice / targetAttendeeCount).toFixed(1);
+    } else {
+      perPrice = (totalPrice / targetAttendeeCount).toString();
+    }
   }
 
   return (
