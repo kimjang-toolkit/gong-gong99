@@ -1,5 +1,11 @@
+import {
+  FormattedNumber,
+  isFormattedNumber,
+  toNumber,
+} from "@/types/FormattedNumber";
+
 interface AttendeeCalcBoxProps {
-  totalPrice?: number;
+  totalPrice?: FormattedNumber;
   totalQuantity?: number;
   targetAttendeeCount?: number;
 }
@@ -8,11 +14,30 @@ export default function AttendeeCalcBox({
   totalPrice,
   targetAttendeeCount,
 }: AttendeeCalcBoxProps) {
-  let perQuantity = '-';
-  let perPrice = '-';
-  if (totalPrice && totalQuantity && targetAttendeeCount) {
-    perQuantity = (totalQuantity / targetAttendeeCount).toFixed(1);
-    perPrice = (totalPrice / targetAttendeeCount).toFixed(1);
+  let perQuantity = "-";
+  let perPrice = "-";
+  if (totalQuantity && targetAttendeeCount) {
+    if (totalQuantity % targetAttendeeCount !== 0) {
+      perQuantity = (totalQuantity / targetAttendeeCount)
+        .toFixed(1)
+        .toLocaleString();
+    } else {
+      perQuantity = (totalQuantity / targetAttendeeCount).toLocaleString();
+    }
+
+    if (isFormattedNumber(totalPrice)) {
+      if (toNumber(totalPrice) % targetAttendeeCount !== 0) {
+        perPrice = (toNumber(totalPrice) / targetAttendeeCount)
+          .toFixed(1)
+          .toLocaleString();
+      } else {
+        perPrice = (
+          toNumber(totalPrice) / targetAttendeeCount
+        ).toLocaleString();
+      }
+    } else {
+      perPrice = "0";
+    }
   }
 
   return (
