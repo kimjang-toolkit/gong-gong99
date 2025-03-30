@@ -1,5 +1,11 @@
+import {
+  FormattedNumber,
+  isFormattedNumber,
+  toNumber,
+} from "@/types/FormattedNumber";
+
 interface QuantityCalcBoxProps {
-  totalPrice: number;
+  totalPrice: FormattedNumber;
   totalQuantity: number;
   ownerQuantity: number;
 }
@@ -17,13 +23,18 @@ export default function QuantityCalcBox({
   //   ownerQuantity
   // );
 
-  let unitPrice;
-  let ownerPrice = 0;
-  let expectedTotalAttendeePrice;
-  let expectedTotalPrice;
+  let unitPrice; // 상품 단가
+  let ownerPrice = 0; // 내 부담액
+  let expectedTotalAttendeePrice; // 신청자 총 부담액
+  let expectedTotalPrice; // 상품 총액
   /* 내 부담액 계산 */
-  if (totalPrice && totalQuantity && totalQuantity !== 0) {
-    unitPrice = Math.floor(totalPrice / totalQuantity);
+  if (
+    totalPrice &&
+    isFormattedNumber(totalPrice) &&
+    totalQuantity &&
+    totalQuantity !== 0
+  ) {
+    unitPrice = Math.floor(toNumber(totalPrice) / totalQuantity);
     if (ownerQuantity) {
       ownerPrice = unitPrice * ownerQuantity;
     } else {
@@ -32,15 +43,15 @@ export default function QuantityCalcBox({
   }
 
   /* 신청자 총 부담액 계산 */
-  if (totalPrice) {
-    expectedTotalAttendeePrice = totalPrice - ownerPrice;
+  if (totalPrice && isFormattedNumber(totalPrice)) {
+    expectedTotalAttendeePrice = toNumber(totalPrice) - ownerPrice;
   } else {
     expectedTotalAttendeePrice = 0;
   }
 
   /* 상품 총액 계산 */
-  if (totalPrice) {
-    expectedTotalPrice = totalPrice;
+  if (totalPrice && isFormattedNumber(totalPrice)) {
+    expectedTotalPrice = toNumber(totalPrice);
   } else {
     expectedTotalPrice = 0;
   }

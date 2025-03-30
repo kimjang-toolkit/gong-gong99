@@ -1,5 +1,6 @@
 import { useInputContext } from "@/components/Input/context";
 import { cn } from "@/lib/utils";
+import { formatNumber, isFormattedNumber } from "@/types/FormattedNumber";
 import { InputHTMLAttributes } from "react";
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -7,35 +8,28 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 export default function InputField({ className, ...props }: InputFieldProps) {
   const { value, setValue } = useInputContext();
-  const valueType = typeof value;
+  // useState 사용해서 isValueNumber 상태 관리
+  // const [isValueNumber] = useState(!isNaN(Number(value)));
 
   // console.log("value1 : ", value);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nextValue = e.target.value;
-    if (valueType === "number") {
-      // const numericValue = nextValue.replace(",", "");
-      // console.log("numericValue : ", numericValue);
-      setValue(Number(nextValue));
+    if (isFormattedNumber(nextValue)) {
+      setValue(formatNumber(nextValue));
     } else {
       setValue(nextValue);
     }
   };
 
-  // let displayValue = value;
-
-  // if (valueType === "number") {
-  //   displayValue = value.toLocaleString();
-  // }
-
-  // console.log("value2 : ", displayValue);
-
-  // const displayValue =
-  //   typeof value === "number" ? value.toLocaleString() : value;
+  let displayValue = value;
+  if (isFormattedNumber(value)) {
+    displayValue = formatNumber(value);
+  }
 
   return (
     <input
       {...props}
-      value={value}
+      value={displayValue}
       autoComplete="off"
       spellCheck={false}
       // onChange={(e) => setValue(e.target.value)}
