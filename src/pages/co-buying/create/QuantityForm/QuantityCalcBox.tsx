@@ -34,7 +34,7 @@ export default function QuantityCalcBox({
     totalQuantity &&
     totalQuantity !== 0
   ) {
-    unitPrice = Math.floor(toNumber(totalPrice) / totalQuantity);
+    unitPrice = Math.ceil(toNumber(totalPrice) / totalQuantity);
     if (ownerQuantity) {
       ownerPrice = unitPrice * ownerQuantity;
     } else {
