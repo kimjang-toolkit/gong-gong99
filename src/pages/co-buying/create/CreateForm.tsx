@@ -41,7 +41,7 @@ export default function CreateForm({
       <Form.Input name="totalPrice">
         <Input.Label>상품 총액</Input.Label>
         {/* 숫자 입력 시 쉼표 추가를 위해 string 타입 사용 */}
-        <Input.Field placeholder="상품 총액을 입력해주세요." type="text" />
+        <Input.Field placeholder="상품 총액을 입력해주세요." type="string" />
         <Input.Suffix>원</Input.Suffix>
         <Input.Description />
       </Form.Input>
