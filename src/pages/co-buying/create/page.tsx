@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import TitleHeader from '@/components/Header/TitleHeader';
-import HeaderLayout from '@/layouts/HeaderLayout';
+import TitleHeader from "@/components/Header/TitleHeader";
+import HeaderLayout from "@/layouts/HeaderLayout";
 
-import { DivideType } from '@domain/cobuying';
-import { useEffect, useState } from 'react';
-import CreateForm from '@/pages/co-buying/create/CreateForm';
-import PasswordForm from '@/pages/co-buying/create/PasswordForm';
-import { PasswordSchema } from '@/util/zod/cobuying-create';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useCreateCobuying } from '@/api/mutations/useCreateCobuying';
-import CommitmentForm from '@/pages/co-buying/create/CommitmentForm';
+import { DivideType } from "@domain/cobuying";
+import { useEffect, useState } from "react";
+import CreateForm from "@/pages/co-buying/create/CreateForm";
+import PasswordForm from "@/pages/co-buying/create/PasswordForm";
+import { PasswordSchema } from "@/util/zod/cobuying-create";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useCreateCobuying } from "@/api/mutations/useCreateCobuying";
+import CommitmentForm from "@/pages/co-buying/create/CommitmentForm";
+import { toNumber } from "@/types/FormattedNumber";
 function CreatePage() {
   const navigate = useNavigate();
   const { extractedProduct } = useLocation().state;
@@ -17,20 +18,20 @@ function CreatePage() {
 
   const [formData, setFormData] = useState({
     type: DivideType.quantity,
-    productName: '',
+    productName: "",
     totalPrice: 0,
     totalQuantity: 0,
-    productLink: '',
+    productLink: "",
     targetAttendeeCount: 0,
-    memo: '',
+    memo: "",
     ownerOptions: [],
     itemOptions: [],
-    sharingDateTime: '',
-    sharingLocation: '',
-    originalImageUrl: '', // 원본 이미지 url
-    thumbnailImageUrl: '', // 썸네일 이미지 url
-    ownerPassword: '',
-    ownerName: '',
+    sharingDateTime: "",
+    sharingLocation: "",
+    originalImageUrl: "", // 원본 이미지 url
+    thumbnailImageUrl: "", // 썸네일 이미지 url
+    ownerPassword: "",
+    ownerName: "",
     ...extractedProduct,
   });
   // const [formData, setFormData] = useState({
@@ -62,6 +63,7 @@ function CreatePage() {
   const handleSubmit = async (data: PasswordSchema) => {
     const { ownerPasswordConfirm, ...exceptPasswordConfirm } = data;
     try {
+      formData.totalPrice = toNumber(formData.totalPrice);
       const response = await mutateAsync({
         ...formData,
         ...exceptPasswordConfirm,
@@ -85,7 +87,7 @@ function CreatePage() {
     <HeaderLayout>
       <TitleHeader
         onBackPress={handleBackButton}
-        title={step === 1 ? '공구글 작성' : ''}
+        title={step === 1 ? "공구글 작성" : ""}
       />
       <>
         {step === 1 && (
