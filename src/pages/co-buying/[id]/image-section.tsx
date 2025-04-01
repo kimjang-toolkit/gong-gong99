@@ -1,9 +1,9 @@
-import defaultImage from '@/assets/img/default-img.png';
-import useWebShare from '@/hooks/useWebShare';
-import { CoBuyingDetail } from '@interface/cobuying';
-import KakaoShareButton from '@/components/KakaoShareButton';
-import ShareIcon from '@/assets/icons/link.svg?react';
-import { DivideType } from '@domain/cobuying';
+import defaultImage from "@/assets/img/default-img.png";
+import useWebShare from "@/hooks/useWebShare";
+import { CoBuyingDetail } from "@interface/cobuying";
+import KakaoShareButton from "@/components/KakaoShareButton";
+import ShareIcon from "@/assets/icons/link.svg?react";
+import { DivideType } from "@domain/cobuying";
 
 export default function ImageSection({ data }: { data: CoBuyingDetail }) {
   const { type } = data;
@@ -14,12 +14,12 @@ export default function ImageSection({ data }: { data: CoBuyingDetail }) {
       <img
         src={data.imageUrl ?? defaultImage}
         alt="상품이미지"
-        className="w-full rounded-lg aspect-square"
+        className="w-full rounded-lg object-contain max-h-[460px] max-w-[460px]" //aspect-square"
       />
       <article className="absolute bottom-0 flex items-center justify-between w-full gap-2 p-2">
         <div
           className={`bg-black/20 backdrop-blur-[5px] items-center gap-2 *:text-white *:typo-caption rounded-full px-4 py-2.5 h-10 ${
-            data.productLink ? 'flex' : 'invisible'
+            data.productLink ? "flex" : "invisible"
           }`}
         >
           <p>상품 정보:</p>
