@@ -1,5 +1,6 @@
 import { z } from "zod";
 import {
+  formatNumber,
   FormattedNumber,
   toFormattedNumber,
   toNumber,
@@ -14,11 +15,11 @@ const baseSchema = z.object({
     .string()
     .min(1, { message: "상품 총액을 입력해주세요." })
     .transform((val) => {
-      const num = toFormattedNumber(val);
+      const num: FormattedNumber = toFormattedNumber(val);
       if (isNaN(toNumber(num)) || toNumber(num) <= 0) {
         throw new Error("상품 총액은 양수여야 합니다.");
       }
-      return num as FormattedNumber;
+      return formatNumber(num);
     }),
   productLink: z.string().optional(),
 });
