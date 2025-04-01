@@ -46,7 +46,6 @@ export default function ImageSection({ data }: { data: CoBuyingDetail }) {
                 ? `인당 ${data.perAttendeePrice.toLocaleString()}원`
                 : `개당 ${data.unitPrice.toLocaleString()}원`
             } !!`}
-            productImg={data.imageUrl ?? defaultImage}
           />
         </div>
       </article>
