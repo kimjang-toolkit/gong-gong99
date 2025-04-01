@@ -1,9 +1,9 @@
-import { useInputContext } from '@/components/Input/context';
+import { useInputContext } from "@/components/Input/context";
 
 export default function InputClearButton() {
   const { setValue } = useInputContext();
   return (
-    <button onClick={() => setValue('')}>
+    <button type="button" onClick={() => setValue("")}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"

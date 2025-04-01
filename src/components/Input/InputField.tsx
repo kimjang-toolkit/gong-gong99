@@ -11,7 +11,6 @@ export default function InputField({ className, ...props }: InputFieldProps) {
   // useState 사용해서 isValueNumber 상태 관리
   // const [isValueNumber] = useState(!isNaN(Number(value)));
 
-  // console.log("value1 : ", value);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const nextValue = e.target.value;
     if (isFormattedNumber(nextValue)) {
