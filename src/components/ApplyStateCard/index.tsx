@@ -1,6 +1,10 @@
+import { cn } from '@/lib/utils';
 import { ItemOptionBase } from '@domain/product';
 import { Attendee } from '@domain/user';
 
+/**
+ * 나눔 현황 카드
+ */
 interface ApplyStateCardProps {
   attendeeData: Attendee;
   showCheckbox?: boolean;
@@ -15,20 +19,29 @@ export default function ApplyStateCard({
     (acc, option) => acc + option.quantity,
     0
   );
+
+  const handleCheckClick = () => {};
   return (
-    <section className="flex flex-col p-4 rounded-lg bg-default-200">
+    <section
+      className={cn(
+        'flex flex-col p-4 rounded-lg border border-default-200',
+        attendeeData.attendeeSharingCheckYN
+          ? 'bg-default-200'
+          : 'bg-transparent'
+      )}
+    >
       <header className="flex items-center justify-between">
-        <h3 className="text-default-800 typo-caption">
+        <h3 className="font-medium text-default-800 typo-caption">
           {attendeeData.attendeeName}
         </h3>
         <input
           type="checkbox"
           checked={attendeeData.attendeeSharingCheckYN}
-          onChange={() => {}}
+          onChange={handleCheckClick}
           className={`${showCheckbox ? 'block' : 'hidden'}`}
         />
       </header>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 mt-4">
         {attendeeData.attendeeOptions?.map((option) => (
           <OptionItem
             key={option.optionId}
@@ -36,6 +49,10 @@ export default function ApplyStateCard({
             perPrice={attendeeData.attendeePrice / totalQuantity!}
           />
         ))}
+        <div className="flex justify-between *:font-medium *:typo-caption *:text-default-800">
+          <p>총 결제금액</p>
+          <p>{attendeeData.attendeePrice}원</p>
+        </div>
       </div>
     </section>
   );
@@ -49,11 +66,13 @@ function OptionItem({
   perPrice: number;
 }) {
   return (
-    <div className="flex items-center gap-2">
-      <p className="text-default-800 typo-tiny ">{option.name}</p>
-      <p className="text-default-800 typo-tiny">{option.quantity}개</p>
-      <p className="text-default-800 typo-tiny">
-        {perPrice.toLocaleString()}원OptionItem
+    <div className="flex items-center justify-between gap-2">
+      <p className="flex-1 text-default-800 typo-tiny ">{option.name}</p>
+      <p className="w-10 text-right text-default-800 typo-tiny">
+        {option.quantity}
+      </p>
+      <p className="w-[98px] text-right text-default-800 typo-tiny">
+        {perPrice.toLocaleString()}원
       </p>
     </div>
   );
