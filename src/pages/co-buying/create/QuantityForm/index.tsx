@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Form from '@/components/Form';
-import Option from '@/components/Option';
-import QuantityCalcBox from '@/pages/co-buying/create/QuantityForm/QuantityCalcBox';
-import { ItemOptionBase } from '@domain/product';
-import { useState } from 'react';
+import Form from "@/components/Form";
+import Option from "@/components/Option";
+import QuantityCalcBox from "@/pages/co-buying/create/QuantityForm/QuantityCalcBox";
+import { toFormattedNumber } from "@/types/FormattedNumber";
+import { ItemOptionBase } from "@domain/product";
+import { useState } from "react";
 
 type FormItemOption = ItemOptionBase & { optionId: number };
 
 export default function QuantityForm({ formData }: { formData: any }) {
   const [itemOptions, setItemOptions] = useState<FormItemOption[]>(
     formData.itemOptions.length === 0
-      ? [{ name: '공구상품 이름', quantity: 0, optionId: 0 }]
+      ? [{ name: "공구상품 이름", quantity: 0, optionId: 0 }]
       : formData.itemOptions
   );
   const [ownerOptions, setOwnerOptions] =
@@ -85,7 +86,7 @@ export default function QuantityForm({ formData }: { formData: any }) {
         </Option>
       </section>
       <QuantityCalcBox
-        totalPrice={formData.totalPrice}
+        totalPrice={toFormattedNumber(formData.totalPrice)}
         totalQuantity={itemOptions.reduce(
           (acc: number, curr: FormItemOption) => acc + curr.quantity,
           0

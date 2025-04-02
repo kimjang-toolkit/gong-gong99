@@ -1,5 +1,11 @@
+import {
+  FormattedNumber,
+  isFormattedNumber,
+  toNumber,
+} from "@/types/FormattedNumber";
+
 interface QuantityCalcBoxProps {
-  totalPrice: number;
+  totalPrice: FormattedNumber;
   totalQuantity: number;
   ownerQuantity: number;
 }
@@ -8,9 +14,46 @@ export default function QuantityCalcBox({
   totalQuantity,
   ownerQuantity,
 }: QuantityCalcBoxProps) {
-  let unitPrice;
-  if (totalPrice && totalQuantity) {
-    unitPrice = Math.floor(totalPrice / totalQuantity);
+  // console.log(
+  //   "totalPrice : ",
+  //   totalPrice,
+  //   " totalQuantity : ",
+  //   totalQuantity,
+  //   " ownerQuantity : ",
+  //   ownerQuantity
+  // );
+
+  let unitPrice; // 상품 단가
+  let ownerPrice = 0; // 내 부담액
+  let expectedTotalAttendeePrice; // 신청자 총 부담액
+  let expectedTotalPrice; // 상품 총액
+  /* 내 부담액 계산 */
+  if (
+    totalPrice &&
+    isFormattedNumber(totalPrice) &&
+    totalQuantity &&
+    totalQuantity !== 0
+  ) {
+    unitPrice = Math.ceil(toNumber(totalPrice) / totalQuantity);
+    if (ownerQuantity) {
+      ownerPrice = unitPrice * ownerQuantity;
+    } else {
+      ownerPrice = 0;
+    }
+  }
+
+  /* 신청자 총 부담액 계산 */
+  if (totalPrice && isFormattedNumber(totalPrice)) {
+    expectedTotalAttendeePrice = toNumber(totalPrice) - ownerPrice;
+  } else {
+    expectedTotalAttendeePrice = 0;
+  }
+
+  /* 상품 총액 계산 */
+  if (totalPrice && isFormattedNumber(totalPrice)) {
+    expectedTotalPrice = toNumber(totalPrice);
+  } else {
+    expectedTotalPrice = 0;
   }
 
   return (
@@ -19,7 +62,7 @@ export default function QuantityCalcBox({
         {/* 내구매량 * 상품 총액 / 상품 총 수량 */}
         <p className="typo-tiny text-default-600">내 부담액</p>
         <p className="typo-tiny text-primary-600">
-          {ownerQuantity && unitPrice ? unitPrice * ownerQuantity : '-'}
+          {ownerPrice.toLocaleString()}
         </p>
       </div>
       <p className="typo-tiny text-default-400">+</p>
@@ -29,9 +72,7 @@ export default function QuantityCalcBox({
           신청자 총 부담액
         </p>
         <p className="typo-tiny text-primary-600">
-          {totalPrice && unitPrice && ownerQuantity
-            ? totalPrice - unitPrice * ownerQuantity
-            : '-'}
+          {expectedTotalAttendeePrice.toLocaleString()}
         </p>
       </div>
       <p className="typo-tiny text-default-400">=</p>
@@ -39,7 +80,7 @@ export default function QuantityCalcBox({
         {/* 상품총액  */}
         <p className="typo-tiny text-default-600 min-w-[100px]">상품 총액</p>
         <p className="typo-tiny text-default-600">
-          {totalPrice ? totalPrice.toLocaleString() : '-'} 원
+          {expectedTotalPrice.toLocaleString()}
         </p>
       </div>
     </section>

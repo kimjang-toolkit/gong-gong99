@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import BottomButton from '@/components/Button/BottomButton';
-import Form from '@/components/Form';
-import Input from '@/components/Input';
-import AttendeeForm from '@/pages/co-buying/create/AttendeeForm';
-import DivideTypeSection from '@/pages/co-buying/create/DivideTypeButton';
-import QuantityForm from '@/pages/co-buying/create/QuantityForm';
-import { formSchema, FormSchema } from '@/util/zod/cobuying-create';
-import { DivideType } from '@domain/cobuying';
-import { useState } from 'react';
+import BottomButton from "@/components/Button/BottomButton";
+import Form from "@/components/Form";
+import Input from "@/components/Input";
+import AttendeeForm from "@/pages/co-buying/create/AttendeeForm";
+import DivideTypeSection from "@/pages/co-buying/create/DivideTypeButton";
+import QuantityForm from "@/pages/co-buying/create/QuantityForm";
+import { formSchema, FormSchema } from "@/util/zod/cobuying-create";
+import { DivideType } from "@domain/cobuying";
+import { useState } from "react";
 
 interface CreateFormProps {
   setFormData: (formData: any) => void;
@@ -22,7 +22,7 @@ export default function CreateForm({
   const [type, setType] = useState(formData.type);
 
   const handleSubmit = (data: FormSchema) => {
-    console.log('data in submit', data);
+    console.log("data in submit", data);
     setFormData({ ...formData, ...data });
     handleNextStep();
   };
@@ -40,7 +40,12 @@ export default function CreateForm({
       </Form.Input>
       <Form.Input name="totalPrice">
         <Input.Label>상품 총액</Input.Label>
-        <Input.Field placeholder="상품 총액을 입력해주세요." type="number" />
+        {/* 숫자 입력 시 쉼표 추가를 위해 string 타입 사용 */}
+        <Input.Field
+          placeholder="상품 총액을 입력해주세요."
+          type="string"
+          isFormatted={true}
+        />
         <Input.Suffix>원</Input.Suffix>
         <Input.Description />
       </Form.Input>

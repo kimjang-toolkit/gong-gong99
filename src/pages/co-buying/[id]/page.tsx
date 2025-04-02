@@ -13,6 +13,7 @@ import ImageSection from '@/pages/co-buying/[id]/image-section';
 import ImageSectionSkeleton from '@/components/Skeleton/ImageSection';
 import SkeletonWrapper from '@/components/Skeleton/SkeletonWrapper';
 import FormSectionSkeleton from '@/components/Skeleton/FormSection';
+import ApplyListSection from '@/pages/co-buying/[id]/applyList-section';
 
 export default function DetailPage() {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ export default function DetailPage() {
           >
             <ImageSection data={data as CoBuyingDetail} />
             <InfoSection data={data as CoBuyingDetail} />
+            <ApplyListSection className="mt-4" data={data as CoBuyingDetail} />
           </SkeletonWrapper>
           <BottomButton
             label="신청하기"
