@@ -1,21 +1,28 @@
-import { DivideType } from "@domain/cobuying";
-import AttendeeCobuyingCard from "./AttendeeCoBuyingCard";
-import QuantityCobuyingCard from "./QuantityCoBuyingCard";
-import { CoBuyingSummary } from "@interface/cobuying";
-import defaultProfile from "@/assets/img/default-img.png";
+import { DivideType } from '@domain/cobuying';
+import AttendeeCobuyingCard from './AttendeeCoBuyingCard';
+import QuantityCobuyingCard from './QuantityCoBuyingCard';
+import { CoBuyingSummary } from '@interface/cobuying';
+import defaultProfile from '@/assets/img/default-img.png';
+import { useState } from 'react';
 
 interface CoBuyingCardProps {
   data: CoBuyingSummary;
 }
 
 export default function CoBuyingCard({ data }: CoBuyingCardProps) {
+  const [imgSrc, setImgSrc] = useState(
+    data.imageUrl ? data.imageUrl : defaultProfile
+  );
   return (
     <div className="flex gap-2 py-4">
-      <img
-        src={data.imageUrl ? data.imageUrl : defaultProfile}
-        alt={data.productName}
-        className="w-20 h-20 rounded-[4px] object-cover max-w-[66.9px] max-h-[80px]"
-      />
+      <div className="h-20 min-w-20">
+        <img
+          src={imgSrc}
+          alt={data.productName}
+          onError={() => setImgSrc(defaultProfile)}
+          className="w-full h-full object-cover rounded-[4px]"
+        />
+      </div>
       {data.type === DivideType.attendee ? (
         <AttendeeCobuyingCard item={data} />
       ) : (
