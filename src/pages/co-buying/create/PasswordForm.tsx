@@ -1,7 +1,7 @@
-import BottomButton from '@/components/Button/BottomButton';
-import Form from '@/components/Form';
-import Input from '@/components/Input';
-import { PasswordSchema, passwordSchema } from '@/util/zod/cobuying-create';
+import BottomButton from "@/components/Button/BottomButton";
+import Form from "@/components/Form";
+import Input from "@/components/Input";
+import { PasswordSchema, passwordSchema } from "@/util/zod/cobuying-create";
 
 export default function PasswordForm({
   handleSubmit,
@@ -20,9 +20,9 @@ export default function PasswordForm({
       <Form
         schema={passwordSchema}
         defaultValues={{
-          ownerName: '',
-          ownerPassword: '',
-          ownerPasswordConfirm: '',
+          ownerName: "",
+          ownerPassword: "",
+          ownerPasswordConfirm: "",
         }}
         onSubmit={handleSubmit}
       >

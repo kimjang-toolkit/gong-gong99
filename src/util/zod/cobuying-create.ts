@@ -1,9 +1,5 @@
 import { z } from "zod";
-import {
-  FormattedNumber,
-  toFormattedNumber,
-  toNumber,
-} from "@/types/FormattedNumber";
+import { FormattedNumber, toNumber } from "@/types/FormattedNumber";
 
 const baseSchema = z.object({
   productName: z
@@ -11,10 +7,9 @@ const baseSchema = z.object({
     .min(4, { message: "상품 이름은 최소 4자 이상이어야 합니다." })
     .max(50, { message: "상품 이름은 최대 50자까지 가능합니다." }),
   totalPrice: z
-    .string()
+    .number()
     .min(1, { message: "상품 총액을 입력해주세요." })
-    .transform((val) => {
-      const num = toFormattedNumber(val);
+    .transform((num) => {
       if (isNaN(toNumber(num)) || toNumber(num) <= 0) {
         throw new Error("상품 총액은 양수여야 합니다.");
       }
