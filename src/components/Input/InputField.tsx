@@ -4,17 +4,24 @@ import { formatNumber, isFormattedNumber } from "@/types/FormattedNumber";
 import { InputHTMLAttributes } from "react";
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  isFormatted?: boolean;
   className?: string;
 }
-export default function InputField({ className, ...props }: InputFieldProps) {
+export default function InputField({
+  isFormatted,
+  className,
+  ...props
+}: InputFieldProps) {
   const { value, setValue } = useInputContext();
   // useState 사용해서 isValueNumber 상태 관리
   // const [isValueNumber] = useState(!isNaN(Number(value)));
 
-  // console.log("value1 : ", value);
+  console.log("value1 : ", value);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log("e.target.type : ", e.target.type);
     const nextValue = e.target.value;
-    if (isFormattedNumber(nextValue)) {
+    if (isFormattedNumber(nextValue) && isFormatted) {
       setValue(formatNumber(nextValue));
     } else {
       setValue(nextValue);
@@ -22,7 +29,7 @@ export default function InputField({ className, ...props }: InputFieldProps) {
   };
 
   let displayValue = value;
-  if (isFormattedNumber(value)) {
+  if (isFormattedNumber(value) && isFormatted) {
     displayValue = formatNumber(value);
   }
 
