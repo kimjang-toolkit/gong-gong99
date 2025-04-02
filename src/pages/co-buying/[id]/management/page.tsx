@@ -3,10 +3,10 @@ import RightButtonHeader from '@/components/Header/RightButtonHeader';
 import { useCobuyingDetail } from '@/api/queries/cobuying';
 import InfoSection from '@/pages/co-buying/[id]/info-section';
 // import InfoSection from '@/pages/co-buying/[id]/InfoSection';
-import ApplyListSection from '@/pages/co-buying/[id]/management/applyList-section';
 import { CoBuyingDetail } from '@interface/cobuying';
 import { useParams, useSearchParams } from 'react-router-dom';
 import HeaderLayout from '@/layouts/HeaderLayout';
+import ApplyListSection from '@/pages/co-buying/[id]/applyList-section';
 // import { DivideType } from '@domain/cobuying';
 
 export default function ManagementPage() {
@@ -33,7 +33,7 @@ export default function ManagementPage() {
         ) : (
           <div className="flex flex-col gap-2">
             <InfoSection data={data as CoBuyingDetail} />
-            <ApplyListSection data={data as CoBuyingDetail} />
+            <ApplyListSection data={data as CoBuyingDetail} canEdit />
           </div>
         )}
       </>
