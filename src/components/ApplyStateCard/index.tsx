@@ -1,6 +1,8 @@
+import useSharingCheck from '@/api/mutations/useSharingCheck';
 import { cn } from '@/lib/utils';
 import { ItemOptionBase } from '@domain/product';
 import { Attendee } from '@domain/user';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 /**
  * 나눔 현황 카드
@@ -14,14 +16,21 @@ export default function ApplyStateCard({
   attendeeData,
   showCheckbox = false,
 }: ApplyStateCardProps) {
-  // 총수량
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const ownerName = searchParams.get('ownerName')!;
+
+  const { mutate } = useSharingCheck(id!, ownerName);
   const totalQuantity = attendeeData.attendeeOptions?.reduce(
     (acc, option) => acc + option.quantity,
     0
   );
 
   const handleCheckClick = () => {
-    
+    mutate({
+      sharingCheckYN: !attendeeData.attendeeSharingCheckYN,
+      attendeeName: attendeeData.attendeeName,
+    });
   };
   return (
     <section
@@ -38,6 +47,8 @@ export default function ApplyStateCard({
         </h3>
         <input
           type="checkbox"
+          checked={attendeeData.attendeeSharingCheckYN}
+          onChange={handleCheckClick}
           className={`relative appearance-none w-4 h-4 border-default-300 border-2 rounded-full
               transition-all duration-300
               checked:bg-default-300

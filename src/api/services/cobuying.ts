@@ -61,4 +61,21 @@ export const cobuyingService = {
     );
     return response;
   },
+  putShareCheck: async (
+    id: string,
+    body: {
+      sharingCheckYN: boolean;
+      attendeeName: string;
+    },
+    ownerName: string
+  ) => {
+    const response = await axiosInstance.put(
+      ENDPOINTS.COBUYING.SHARE_CHECK(id),
+      body,
+      {
+        params: { ownerName },
+      }
+    );
+    return response.data;
+  },
 };
