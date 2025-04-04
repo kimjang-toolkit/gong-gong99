@@ -1,5 +1,5 @@
 // API 호출
-import { axiosInstance } from '@/api/axios';
+import { axiosInstance, privateAxiosInstance } from '@/api/axios';
 import { ENDPOINTS } from '@/api/endpoints';
 import { DivideType } from '@domain/cobuying';
 import { ApplicationReq } from '@interface/application';
@@ -60,5 +60,22 @@ export const cobuyingService = {
       body
     );
     return response;
+  },
+  putShareCheck: async (
+    id: string,
+    body: {
+      sharingCheckYN: boolean;
+      attendeeName: string;
+    },
+    ownerName: string
+  ) => {
+    const response = await privateAxiosInstance.put(
+      ENDPOINTS.COBUYING.SHARE_CHECK(id),
+      body,
+      {
+        params: { ownerName },
+      }
+    );
+    return response.data;
   },
 };
