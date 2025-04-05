@@ -1,16 +1,18 @@
+import { CoBuyingDetail } from "@interface/cobuying";
+
 export default function useWebShare() {
-  const share = async (title?: string, text?: string) => {
+  const share = async (data: CoBuyingDetail) => {
     const shareData = {
-      url: window.location.href, // 현재 페이지의 URL
-      title: title,
-      text: text,
+      url: data.previewPageUrl, // 현재 페이지의 URL
+      title: data.productName,
+      text: data.memo ?? "",
     };
 
     try {
       await navigator.share(shareData);
-      console.log('공유 성공');
+      console.log("공유 성공");
     } catch (error) {
-      console.error('공유 실패:', error);
+      console.error("공유 실패:", error);
     }
   };
 
