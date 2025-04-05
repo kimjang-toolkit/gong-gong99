@@ -120,6 +120,14 @@ export default {
             '@apply opacity-0 scale-0': '',
           },
         },
+        '.checked-overlay': {
+          '@apply relative': '',
+          '&::after': {
+            content: '""',
+            '@apply absolute inset-0 bg-default-300 bg-opacity-20 rounded-lg pointer-events-none':
+              '',
+          },
+        },
       });
     },
   ],

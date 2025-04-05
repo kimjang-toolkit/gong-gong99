@@ -39,7 +39,7 @@ export default function ApplyStateCard({
       className={cn(
         'flex flex-col p-4 rounded-lg border border-default-200',
         attendeeData.attendeeSharingCheckYN
-          ? 'bg-default-200'
+          ? 'bg-default-200 checked-overlay '
           : 'bg-transparent'
       )}
     >
