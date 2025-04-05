@@ -26,6 +26,8 @@ export default function ApplyStateCard({
     0
   );
 
+  // attendeeName이 ownerName과 같으면 "공구장" 으로 표기
+  const isOwner = attendeeData.attendeeName === ownerName;
   const handleCheckClick = () => {
     mutate({
       sharingCheckYN: !attendeeData.attendeeSharingCheckYN,
@@ -43,7 +45,7 @@ export default function ApplyStateCard({
     >
       <header className="flex items-center justify-between">
         <h3 className="font-medium text-default-800 typo-caption">
-          {attendeeData.attendeeName}
+          {isOwner ? '공구장' : attendeeData.attendeeName}
         </h3>
         <input
           type="checkbox"
