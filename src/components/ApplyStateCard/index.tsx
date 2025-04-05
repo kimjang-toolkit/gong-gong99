@@ -49,22 +49,7 @@ export default function ApplyStateCard({
           type="checkbox"
           checked={attendeeData.attendeeSharingCheckYN}
           onChange={handleCheckClick}
-          className={`relative appearance-none w-4 h-4 border-default-300 border-2 rounded-full
-              transition-all duration-300
-              checked:bg-default-300
-              checked:after:content-["✔"]
-              checked:after:text-white 
-              checked:after:text-[10px]
-              checked:after:absolute
-              checked:after:top-[-1px]
-              checked:after:left-[2px]
-              after:opacity-0
-              after:scale-0
-              checked:after:opacity-100
-              checked:after:scale-100
-              checked:after:transition-all
-              checked:after:duration-300
-              ${showCheckbox ? 'block' : 'hidden'}`}
+          className={cn('custom-checkbox', showCheckbox ? 'block' : 'hidden')}
         />
       </header>
       <div className="flex flex-col gap-2 mt-4">
