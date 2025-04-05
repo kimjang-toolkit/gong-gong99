@@ -64,7 +64,7 @@ export const cobuyingService = {
   putShareCheck: async (
     id: string,
     body: {
-      sharingCheckYN: boolean;
+      isShared: boolean;
       attendeeName: string;
     },
     ownerName: string
