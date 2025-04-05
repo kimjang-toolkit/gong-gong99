@@ -1,7 +1,7 @@
-import { useInputContext } from "@/components/Input/context";
-import { cn } from "@/lib/utils";
-import { formatNumber, isFormattedNumber } from "@/types/FormattedNumber";
-import { InputHTMLAttributes } from "react";
+import { useInputContext } from '@/components/Input/context';
+import { cn } from '@/lib/utils';
+import { formatNumber, isFormattedNumber } from '@/types/FormattedNumber';
+import { InputHTMLAttributes } from 'react';
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   isFormatted?: boolean;
@@ -16,7 +16,7 @@ export default function InputField({
   // useState 사용해서 isValueNumber 상태 관리
   // const [isValueNumber] = useState(!isNaN(Number(value)));
 
-  console.log("value1 : ", value);
+  console.log('value1 : ', value);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // console.log("e.target.type : ", e.target.type);
@@ -42,7 +42,7 @@ export default function InputField({
       // onChange={(e) => setValue(e.target.value)}
       onChange={handleChange}
       className={cn(
-        "text-body text-black w-full focus:outline-none  bg-transparent",
+        'text-body text-black w-full focus:outline-none bg-transparent ',
         className
       )}
     />
