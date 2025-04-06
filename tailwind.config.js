@@ -105,6 +105,29 @@ export default {
         '.typo-tiny-bold': {
           '@apply text-[12px] font-bold leading-normal': '',
         },
+        '.custom-checkbox': {
+          '@apply relative appearance-none w-4 h-4 border-default-300 border-2 rounded-full transition-all duration-300':
+            '',
+          '&:checked': {
+            '@apply bg-default-300': '',
+            '&::after': {
+              content: '"\\2713"',
+              '@apply text-white text-[10px] absolute top-[-1px] left-[2px] opacity-100 scale-100 transition-all duration-300':
+                '',
+            },
+          },
+          '&::after': {
+            '@apply opacity-0 scale-0': '',
+          },
+        },
+        '.checked-overlay': {
+          '@apply relative': '',
+          '&::after': {
+            content: '""',
+            '@apply absolute inset-0 bg-default-300 bg-opacity-20 rounded-lg pointer-events-none':
+              '',
+          },
+        },
       });
     },
   ],

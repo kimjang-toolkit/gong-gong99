@@ -29,7 +29,11 @@ export default function DetailPage() {
 
   const handleManageButton = () => {
     // 관리하기 페이지
-    navigate(`management?ownerName=${searchParams.get('ownerName')}`);
+    navigate(`management?ownerName=${searchParams.get('ownerName')}`, {
+      state: {
+        data,
+      },
+    });
   };
 
   return (
