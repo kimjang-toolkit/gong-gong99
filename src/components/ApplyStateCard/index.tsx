@@ -1,8 +1,8 @@
-import useSharingCheck from "@/api/mutations/useSharingCheck";
-import { cn } from "@/lib/utils";
-import { ItemOptionBase } from "@domain/product";
-import { Attendee } from "@domain/user";
-import { useParams, useSearchParams } from "react-router-dom";
+import useSharingCheck from '@/api/mutations/useSharingCheck';
+import { cn } from '@/lib/utils';
+import { ItemOptionBase } from '@domain/product';
+import { Attendee } from '@domain/user';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 /**
  * 나눔 현황 카드
@@ -18,7 +18,7 @@ export default function ApplyStateCard({
 }: ApplyStateCardProps) {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const ownerName = searchParams.get("ownerName")!;
+  const ownerName = searchParams.get('ownerName')!;
 
   const { mutate } = useSharingCheck(id!, ownerName);
   const totalQuantity = attendeeData.options?.reduce(
@@ -31,28 +31,28 @@ export default function ApplyStateCard({
   const handleCheckClick = () => {
     mutate({
       isShared: !attendeeData.isShared,
-      name: attendeeData.name,
+      attendeeName: attendeeData.name,
     });
   };
   console.log(attendeeData.isShared);
   return (
     <section
       className={cn(
-        "flex flex-col p-4 rounded-lg border border-default-200",
+        'flex flex-col p-4 rounded-lg border border-default-200',
         attendeeData.isShared
-          ? "bg-default-200 checked-overlay "
-          : "bg-transparent"
+          ? 'bg-default-200 checked-overlay '
+          : 'bg-transparent'
       )}
     >
       <header className="flex items-center justify-between">
         <h3 className="font-medium text-default-800 typo-caption">
-          {isOwner ? "공구장" : attendeeData.name}
+          {isOwner ? '공구장' : attendeeData.name}
         </h3>
         <input
           type="checkbox"
           checked={attendeeData.isShared}
           onChange={handleCheckClick}
-          className={cn("custom-checkbox", showCheckbox ? "block" : "hidden")}
+          className={cn('custom-checkbox', showCheckbox ? 'block' : 'hidden')}
         />
       </header>
       <div className="flex flex-col gap-2 mt-4">
