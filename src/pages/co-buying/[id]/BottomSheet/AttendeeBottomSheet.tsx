@@ -1,10 +1,10 @@
-import Button from '@/components/Button';
-import useApplyCobuying from '@/api/mutations/useApplyCobuying';
-import useOutsideClick from '@/hooks/useOutsideClick';
-import { AttendeeCoBuyingDetail } from '@interface/cobuying';
-import { Sheet } from 'react-modal-sheet';
-import Input from '@/components/Input';
-import { useState } from 'react';
+import Button from "@/components/Button";
+import useApplyCobuying from "@/api/mutations/useApplyCobuying";
+import useOutsideClick from "@/hooks/useOutsideClick";
+import { AttendeeCoBuyingDetail } from "@interface/cobuying";
+import { Sheet } from "react-modal-sheet";
+import Input from "@/components/Input";
+import { useState } from "react";
 
 interface ApplyBottomSheetProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ export default function AttendeeBottomSheet({
     setIsOpen(false);
   });
 
-  const [attendeeName, setAttendeeName] = useState('');
+  const [attendeeName, setAttendeeName] = useState("");
   const { mutateAsync } = useApplyCobuying(data.id);
 
   const handleSubmit = async () => {
@@ -30,13 +30,13 @@ export default function AttendeeBottomSheet({
       await mutateAsync({
         coBuyingId: data.id,
         ownerName: data.ownerName,
-        attendeeName: attendeeName,
-        attendeeQuantity,
-        attendeePrice: data.perAttendeePrice,
+        name: attendeeName,
+        totalQuantity: attendeeQuantity,
+        totalPrice: data.perAttendeePrice,
       });
       setIsOpen(false);
     } catch (error) {
-      console.log('신청실패했어요', error);
+      console.log("신청실패했어요", error);
     }
   };
 
