@@ -14,13 +14,68 @@ export default function QuantityForm({ formData }: { formData: any }) {
       ? [{ name: "공구상품 이름", quantity: 0, optionId: 0 }]
       : formData.itemOptions
   );
-  const [ownerOptions, setOwnerOptions] =
-    useState<FormItemOption[]>(itemOptions);
+  const [ownerOptions, setOwnerOptions] = useState<FormItemOption[]>(
+    itemOptions.map((option) => ({
+      ...option,
+      quantity: 0,
+    }))
+  );
 
-  const handleItemOptionChange = (options: FormItemOption[]) => {
-    setItemOptions(options);
-    setOwnerOptions(options.map((option) => ({ ...option, quantity: 0 })));
+  // ownerOptions를 업데이트하는 함수
+  const updateOwnerOptions = (updatedOptions: FormItemOption[]) => {
+    setOwnerOptions((prevOptions) =>
+      prevOptions.map((prevOption) => {
+        const updatedOption = updatedOptions.find(
+          (updated: FormItemOption) => updated.optionId === prevOption.optionId
+        );
+
+        if (!updatedOption) return prevOption;
+
+        // 수량이 감소한 경우
+        if (prevOption.quantity > updatedOption.quantity) {
+          return {
+            ...prevOption,
+            quantity: updatedOption.quantity,
+          };
+        }
+
+        // 이름이 변경된 경우
+        if (prevOption.name !== updatedOption.name) {
+          return {
+            ...prevOption,
+            name: updatedOption.name,
+            quantity: 0,
+          };
+        }
+
+        return prevOption;
+      })
+    );
   };
+
+  const handleItemOptionChange = (nextOptions: FormItemOption[]) => {
+    setItemOptions(nextOptions);
+
+    // 새로 추가된 옵션 처리
+    const newOptions = findNewOptions(nextOptions, ownerOptions);
+    if (newOptions.length > 0) {
+      setOwnerOptions((prevOptions) => [
+        ...prevOptions,
+        ...newOptions.map((option) => ({
+          optionId: getNextOptionId(itemOptions),
+          name: option.name,
+          quantity: 0,
+        })),
+      ]);
+      return;
+    }
+    // 변경된 옵션 처리
+    const updatedOptions = findUpdatedOptions(nextOptions, itemOptions);
+    if (updatedOptions.length > 0) {
+      updateOwnerOptions(updatedOptions);
+    }
+  };
+
   return (
     <>
       <section className="flex flex-col gap-2">
@@ -99,3 +154,35 @@ export default function QuantityForm({ formData }: { formData: any }) {
     </>
   );
 }
+
+// 새로운 optionId 계산 (기존 최대값 + 1)
+const getNextOptionId = (itemOptions: FormItemOption[]) => {
+  const maxId = Math.max(...itemOptions.map((option) => option.optionId), 0);
+  return maxId + 1;
+};
+
+// 새로운 옵션을 찾는 함수
+const findNewOptions = (
+  nextOptions: FormItemOption[],
+  ownerOptions: FormItemOption[]
+) => {
+  return nextOptions.filter(
+    (option) =>
+      !ownerOptions.find((owner) => owner.optionId === option.optionId)
+  );
+};
+
+// 변경된 옵션을 찾는 함수
+const findUpdatedOptions = (
+  nextOptions: FormItemOption[],
+  itemOptions: FormItemOption[]
+) => {
+  return nextOptions.filter((option: FormItemOption) => {
+    const itemChanged = itemOptions.find(
+      (item) =>
+        item.optionId === option.optionId &&
+        (item.quantity !== option.quantity || item.name !== option.name)
+    );
+    return itemChanged !== undefined;
+  });
+};

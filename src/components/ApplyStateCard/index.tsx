@@ -1,6 +1,8 @@
-import { cn } from '@/lib/utils';
-import { ItemOptionBase } from '@domain/product';
-import { Attendee } from '@domain/user';
+import useSharingCheck from "@/api/mutations/useSharingCheck";
+import { cn } from "@/lib/utils";
+import { ItemOptionBase } from "@domain/product";
+import { Attendee } from "@domain/user";
+import { useParams, useSearchParams } from "react-router-dom";
 
 /**
  * 나눔 현황 카드
@@ -8,65 +10,64 @@ import { Attendee } from '@domain/user';
 interface ApplyStateCardProps {
   attendeeData: Attendee;
   showCheckbox?: boolean;
+  unitPrice?: number;
 }
 
 export default function ApplyStateCard({
   attendeeData,
   showCheckbox = false,
+  unitPrice,
 }: ApplyStateCardProps) {
-  // 총수량
-  const totalQuantity = attendeeData.attendeeOptions?.reduce(
-    (acc, option) => acc + option.quantity,
-    0
-  );
+  const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const ownerName = searchParams.get("ownerName")!;
 
+  const { mutate } = useSharingCheck(id!, ownerName);
+  // const totalQuantity = attendeeData.options?.reduce(
+  //   (acc, option) => acc + option.quantity,
+  //   0
+  // );
+
+  // attendeeName이 ownerName과 같으면 "공구장" 으로 표기
+  const isOwner = attendeeData.name === ownerName;
   const handleCheckClick = () => {
-    
+    mutate({
+      isShared: !attendeeData.isShared,
+      name: attendeeData.name,
+    });
   };
+  console.log(attendeeData.isShared);
   return (
     <section
       className={cn(
-        'flex flex-col p-4 rounded-lg border border-default-200',
-        attendeeData.attendeeSharingCheckYN
-          ? 'bg-default-200'
-          : 'bg-transparent'
+        "flex flex-col p-4 rounded-lg border border-default-200",
+        attendeeData.isShared
+          ? "bg-default-200 checked-overlay "
+          : "bg-transparent"
       )}
     >
       <header className="flex items-center justify-between">
         <h3 className="font-medium text-default-800 typo-caption">
-          {attendeeData.attendeeName}
+          {isOwner ? "공구장" : attendeeData.name}
         </h3>
         <input
           type="checkbox"
-          className={`relative appearance-none w-4 h-4 border-default-300 border-2 rounded-full
-              transition-all duration-300
-              checked:bg-default-300
-              checked:after:content-["✔"]
-              checked:after:text-white 
-              checked:after:text-[10px]
-              checked:after:absolute
-              checked:after:top-[-1px]
-              checked:after:left-[2px]
-              after:opacity-0
-              after:scale-0
-              checked:after:opacity-100
-              checked:after:scale-100
-              checked:after:transition-all
-              checked:after:duration-300
-              ${showCheckbox ? 'block' : 'hidden'}`}
+          checked={attendeeData.isShared}
+          onChange={handleCheckClick}
+          className={cn("custom-checkbox", showCheckbox ? "block" : "hidden")}
         />
       </header>
       <div className="flex flex-col gap-2 mt-4">
-        {attendeeData.attendeeOptions?.map((option) => (
+        {attendeeData.options?.map((option) => (
           <OptionItem
             key={option.optionId}
             option={option}
-            perPrice={attendeeData.attendeePrice / totalQuantity!}
+            perPrice={unitPrice ? unitPrice * option.quantity : 0}
           />
         ))}
         <div className="flex justify-between *:font-medium *:typo-caption *:text-default-800">
           <p>총 결제금액</p>
-          <p>{attendeeData.attendeePrice}원</p>
+          <p>{attendeeData.totalPrice}원</p>
         </div>
       </div>
     </section>

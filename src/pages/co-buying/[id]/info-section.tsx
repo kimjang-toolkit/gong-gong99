@@ -1,16 +1,20 @@
-import { DivideType } from '@domain/cobuying';
-import { CoBuyingDetail } from '@interface/cobuying';
+import { DivideType } from "@domain/cobuying";
+import { CoBuyingDetail } from "@interface/cobuying";
 
 export default function InfoSection({ data }: { data: CoBuyingDetail }) {
   const { type } = data;
 
   const boxStyle =
-    'rounded-lg typo-caption bg-default-50 px-3 py-2 *:typo-caption';
+    "rounded-lg typo-caption bg-default-50 px-3 py-2 *:typo-caption";
 
   const availableQuantity =
     type === DivideType.attendee
-      ? (data.totalQuantity / data.targetAttendeeCount).toLocaleString()
-      : data.remainQuantity.toLocaleString();
+      ? data.totalQuantity && data.targetAttendeeCount
+        ? (data.totalQuantity / data.targetAttendeeCount).toLocaleString()
+        : "0"
+      : data.remainQuantity
+        ? data.remainQuantity.toLocaleString()
+        : "0";
 
   return (
     <section className="mt-4">
@@ -20,7 +24,7 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
         <div className="flex gap-2 mt-2">
           <p className="typo-body-bold">{`${data.totalPrice.toLocaleString()}원`}</p>
           <p className="typo-body-bold">
-            {type === DivideType.attendee ? '(인당' : '(개당'}
+            {type === DivideType.attendee ? "(인당" : "(개당"}
           </p>
           <p className="typo-body-bold text-default-700">
             {`${

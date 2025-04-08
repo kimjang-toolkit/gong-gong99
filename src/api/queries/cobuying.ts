@@ -38,5 +38,7 @@ export function useCobuyingDetail(id: string, ownerName: string) {
   return useQuery({
     queryKey: QUERY_KEYS.COBUYING.DETAIL(id),
     queryFn: () => cobuyingService.getDetail(id, ownerName),
+    staleTime: 0,
+    gcTime: 0,
   });
 }

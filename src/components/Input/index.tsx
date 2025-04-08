@@ -30,9 +30,9 @@ export default function Input({
         className={cn(
           'relative w-full flex items-center ',
           variant === 'bordered' &&
-            'border border-gray-300 rounded-xl px-2.5 pt-[26px] pb-[5px] focus-within:border-primary-200 focus-within:ring-1.5 focus-within:ring-primary-200',
+            'border border-default-200 rounded-xl px-2.5 pt-[26px] pb-[5px] focus-within:border-primary-200 focus-within:ring-1.5 focus-within:ring-primary-200',
           variant === 'underlined' &&
-            'border-b border-gray-300  pt-[26px] pb-2 focus-within:border-primary-200 focus-within:ring-1.5 focus-within:ring-primary-200',
+            'border-b border-default-200 pt-[26px] pb-2 focus-within:border-primary-200 focus-within:ring-1.5 focus-within:ring-primary-200',
           className
         )}
       >

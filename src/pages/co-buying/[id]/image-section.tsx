@@ -33,10 +33,10 @@ export default function ImageSection({ data }: { data: CoBuyingDetail }) {
         </div>
         <div className="flex items-center gap-2">
           <button
-            className="px-2.5 py-2.5 rounded-full  w-8 h-8 bg-primary-50 active:brightness-90"
-            onClick={() => share(`${data.productName} 공구해요`)}
+            className="px-2.5 py-2.5 rounded-full w-8 h-8 bg-blue-50/80 backdrop-blur-sm active:brightness-90 shadow-lg hover:bg-blue-100 transition-colors"
+            onClick={() => share(data)}
           >
-            <ShareIcon className="pb-1 pr-1" />
+            <ShareIcon className="pb-1 pr-1 text-blue-600" />
           </button>
           <KakaoShareButton
             title={data.productName}

@@ -1,16 +1,16 @@
 // API 호출
-import { axiosInstance } from '@/api/axios';
-import { ENDPOINTS } from '@/api/endpoints';
-import { DivideType } from '@domain/cobuying';
-import { ApplicationReq } from '@interface/application';
-import { UserAuthReq } from '@interface/auth';
+import { axiosInstance, privateAxiosInstance } from "@/api/axios";
+import { ENDPOINTS } from "@/api/endpoints";
+import { DivideType } from "@domain/cobuying";
+import { ApplicationReq } from "@interface/application";
+import { UserAuthReq } from "@interface/auth";
 import {
   CoBuyingCreateReq,
   CoBuyingDetail,
   CoBuyingSummary,
-} from '@interface/cobuying';
-import { CoBuyingPageingRes } from '@interface/cobuyingList';
-import { ProductExtractDto } from '@interface/product';
+} from "@interface/cobuying";
+import { CoBuyingPageingRes } from "@interface/cobuyingList";
+import { ProductExtractDto } from "@interface/product";
 
 export const cobuyingService = {
   postImgExtract: async (body: {
@@ -37,9 +37,9 @@ export const cobuyingService = {
   ): Promise<CoBuyingPageingRes> => {
     const response = await axiosInstance.get(ENDPOINTS.COBUYING.PAGE, {
       params: {
-        ...(id !== '' && { id }),
-        ...(createdAtId !== '' && { createdAtId }),
-        ...(ownerName !== '' && { ownerName }),
+        ...(id !== "" && { id }),
+        ...(createdAtId !== "" && { createdAtId }),
+        ...(ownerName !== "" && { ownerName }),
       },
     });
     return response.data;
@@ -60,5 +60,22 @@ export const cobuyingService = {
       body
     );
     return response;
+  },
+  putShareCheck: async (
+    id: string,
+    body: {
+      isShared: boolean;
+      name: string;
+    },
+    ownerName: string
+  ) => {
+    const response = await privateAxiosInstance.put(
+      ENDPOINTS.COBUYING.SHARE_CHECK(id),
+      body,
+      {
+        params: { ownerName },
+      }
+    );
+    return response.data;
   },
 };
