@@ -10,21 +10,23 @@ import { useParams, useSearchParams } from "react-router-dom";
 interface ApplyStateCardProps {
   attendeeData: Attendee;
   showCheckbox?: boolean;
+  unitPrice?: number;
 }
 
 export default function ApplyStateCard({
   attendeeData,
   showCheckbox = false,
+  unitPrice,
 }: ApplyStateCardProps) {
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const ownerName = searchParams.get("ownerName")!;
 
   const { mutate } = useSharingCheck(id!, ownerName);
-  const totalQuantity = attendeeData.options?.reduce(
-    (acc, option) => acc + option.quantity,
-    0
-  );
+  // const totalQuantity = attendeeData.options?.reduce(
+  //   (acc, option) => acc + option.quantity,
+  //   0
+  // );
 
   // attendeeName이 ownerName과 같으면 "공구장" 으로 표기
   const isOwner = attendeeData.name === ownerName;
@@ -60,7 +62,7 @@ export default function ApplyStateCard({
           <OptionItem
             key={option.optionId}
             option={option}
-            perPrice={attendeeData.totalPrice / totalQuantity!}
+            perPrice={unitPrice ? unitPrice * option.quantity : 0}
           />
         ))}
         <div className="flex justify-between *:font-medium *:typo-caption *:text-default-800">
