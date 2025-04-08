@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import BottomButton from '@/components/Button/BottomButton';
-import DatePicker from '@/components/DatePicker';
-import Form from '@/components/Form';
-import Input from '@/components/Input';
-import { getFormatDateTime } from '@/util/getFormatDateTime';
-import { CommitmentSchema, commitmentSchema } from '@/util/zod/cobuying-create';
-import { useState } from 'react';
+import BottomButton from "@/components/Button/BottomButton";
+import DatePicker from "@/components/DatePicker";
+import Form from "@/components/Form";
+import Input from "@/components/Input";
+import { getFormatDateTime } from "@/util/getFormatDateTime";
+import { CommitmentSchema, commitmentSchema } from "@/util/zod/cobuying-create";
+import { useState } from "react";
 
 interface CommitmentFormProps {
   handleNext: () => void;
@@ -23,6 +23,7 @@ export default function CommitmentForm({
   );
   const handleSubmit = (data: CommitmentSchema) => {
     setFormData?.({ ...formData, ...data });
+
     handleNext();
   };
   return (
@@ -50,17 +51,21 @@ export default function CommitmentForm({
           <Input.Field placeholder="나눔 장소를 입력해주세요." />
           <Input.Description />
         </Form.Input>
-        <section className="flex flex-col gap-2">
-          <div className="w-full h-24 border rounded-xl px-3 py-1.5 border-default-200">
+        {/* <section className="flex flex-col gap-2"> */}
+        <Form.Input name="memo">
+          <Input.Label>안내 메시지</Input.Label>
+          <Input.Field placeholder="신청자에게 안내할 내용을 자유롭게 입력해주세요." />
+          <Input.Description />
+          {/* <div className="w-full h-24 border rounded-xl px-3 py-1.5 border-default-200">
             <label className="typo-caption text-default-600">안내 메시지</label>
             <textarea
-              name="memo"
               placeholder="신청자에게 안내할 내용을 자유롭게 입력해주세요."
               className="w-full text-black bg-white border-none focus:outline-none"
               maxLength={200}
             />
-          </div>
-        </section>
+          </div> */}
+        </Form.Input>
+        {/* </section> */}
         <Form.Button>
           <BottomButton label="약속 잡기" />
         </Form.Button>
