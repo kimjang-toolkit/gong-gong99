@@ -1,29 +1,33 @@
-import BottomButton from '@/components/Button/BottomButton';
-import TitleHeader from '@/components/Header/TitleHeader';
-import Input from '@/components/Input';
-import HeaderLayout from '@/layouts/HeaderLayout';
-import usePwdCobuying from '@/api/mutations/usePwdCobuying';
-import { useState } from 'react';
-
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import BottomButton from "@/components/Button/BottomButton";
+import TitleHeader from "@/components/Header/TitleHeader";
+import Input from "@/components/Input";
+import HeaderLayout from "@/layouts/HeaderLayout";
+import usePwdCobuying from "@/api/mutations/usePwdCobuying";
+import { useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useCobuyingDetail } from "@/api/queries/cobuying";
 
 export default function PasswordPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { id } = useParams()!;
+  const ownerName = searchParams.get("ownerName")!;
 
-  const ownerName = searchParams.get('ownerName')!;
-  const id = useParams().id!;
+  const { data: cobuyingData } = useCobuyingDetail(id!, ownerName);
+  const { mutate } = usePwdCobuying(id!);
 
-  const { mutate } = usePwdCobuying(id);
-
-  const [ownerPassword, setOwnerPassword] = useState('');
+  const [ownerPassword, setOwnerPassword] = useState("");
 
   const handleSubmit = () => {
     mutate(
       { ownerName, ownerPassword },
       {
         onSuccess: () => {
-          navigate(`/co-buying/${id}/management?ownerName=${ownerName}`);
+          navigate(`/co-buying/${id}/management?ownerName=${ownerName}`, {
+            state: {
+              data: cobuyingData,
+            },
+          });
         },
       }
     );
