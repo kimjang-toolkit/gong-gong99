@@ -69,7 +69,6 @@ export default function QuantityForm({ formData }: { formData: any }) {
       ]);
       return;
     }
-
     // 변경된 옵션 처리
     const updatedOptions = findUpdatedOptions(nextOptions, itemOptions);
     if (updatedOptions.length > 0) {
