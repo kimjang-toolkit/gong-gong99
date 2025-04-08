@@ -108,6 +108,7 @@ export default function QuantityBottomSheet({
                       className="flex-1"
                       placeholder="옵션 이름 입력"
                       optionId={option.optionId}
+                      disabled
                     />
                     <div className="flex items-center gap-2">
                       <Option.Stepper
