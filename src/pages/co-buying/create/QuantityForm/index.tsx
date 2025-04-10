@@ -21,7 +21,10 @@ export default function QuantityForm({ formData }: { formData: any }) {
     }))
   );
 
-  // ownerOptions를 업데이트하는 함수
+  // itemOption이 변경되면 ownerOption도 변경된다
+  // 1. itemOption의 optionId가 삭제될 경우 -> 해당 optionId를 ownerOption에서도 삭제한다.
+  // 2. itemOption에 아이템이 추가될 경우 ->ownerOption에도 추가된다.. 단 quantity는 0으로 초기화
+  // 3. itemOption의 수량이 변경될 경우 -> 해당 ownerOption의 수량은 0으로 변경된다.
 
   const handleItemOptionChange = (nextOptions: FormItemOption[]) => {
     setItemOptions(nextOptions);
