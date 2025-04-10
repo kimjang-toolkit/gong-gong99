@@ -33,28 +33,9 @@ function CreatePage() {
     ownerName: '',
     ...extractedProduct,
   });
-  // const [formData, setFormData] = useState({
-  //   type: DivideType.quantity,
-  //   productName: '',
-  //   totalPrice: 0,
-  //   totalQuantity: 0,
-  //   productLink: '',
-  //   targetAttendeeCount: 0,
-  //   memo: '',
-  //   ownerOptions: [],
-  //   itemOptions: [],
-  //   sharingDateTime: '',
-  //   sharingLocation: '',
-  //   originalImageUrl: '', // 원본 이미지 url
-  //   thumbnailImageUrl: '', // 썸네일 이미지 url
-  //   ownerPassword: '',
-  //   ownerName: '',
-  // });
+
   const [step, setStep] = useState(1);
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
   const handleNextStep = () => {
     setStep(step + 1);
   };
@@ -73,7 +54,6 @@ function CreatePage() {
     }
   };
   const handleBackButton = () => {
-    console.log(formData);
     if (step === 1) {
       navigate(-1);
     } else {

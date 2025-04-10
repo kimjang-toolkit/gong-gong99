@@ -36,7 +36,6 @@ export default function ApplyStateCard({
       name: attendeeData.name,
     });
   };
-  console.log(attendeeData.isShared);
   return (
     <section
       className={cn(
