@@ -3,7 +3,7 @@ import TitleHeader from '@/components/Header/TitleHeader';
 import HeaderLayout from '@/layouts/HeaderLayout';
 
 import { DivideType } from '@domain/cobuying';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import CreateForm from '@/pages/co-buying/create/CreateForm';
 import PasswordForm from '@/pages/co-buying/create/PasswordForm';
 import { PasswordSchema } from '@/util/zod/cobuying-create';
