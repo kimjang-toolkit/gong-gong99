@@ -4,12 +4,14 @@ interface KakaoShareButtonProps {
   title: string;
   endpoint: string;
   description: string;
+  productImg: string;
 }
 
 export default function KakaoShareButton({
   title,
   endpoint,
   description,
+  productImg,
 }: KakaoShareButtonProps) {
   const handleShare = () => {
     window.Kakao.Share.sendCustom({
@@ -18,6 +20,7 @@ export default function KakaoShareButton({
         title,
         description: description,
         endpoint: endpoint,
+        productImg: productImg,
       },
     });
   };

@@ -1,6 +1,6 @@
-import ApplyStateCard from "@/components/ApplyStateCard";
-import { CoBuyingDetail, QuantityCoBuyingDetail } from "@interface/cobuying";
-import { DivideType } from "@domain/cobuying";
+import ApplyStateCard from '@/components/ApplyStateCard';
+import { CoBuyingDetail, QuantityCoBuyingDetail } from '@interface/cobuying';
+import { DivideType } from '@domain/cobuying';
 
 // 타입 가드 함수
 function isQuantityCoBuying(
@@ -22,14 +22,16 @@ export default function ApplyListSection({
   return (
     <section className={className}>
       <p className="typo-caption text-default-500 mb-1.5">나눔 현황</p>
-      {attendeeList?.map((attendee) => (
-        <ApplyStateCard
-          key={attendee.name}
-          attendeeData={attendee}
-          showCheckbox={canEdit}
-          unitPrice={isQuantityCoBuying(data) ? data.unitPrice : undefined}
-        />
-      ))}
+      <div className="flex flex-col gap-2">
+        {attendeeList?.map((attendee) => (
+          <ApplyStateCard
+            key={attendee.name}
+            attendeeData={attendee}
+            showCheckbox={canEdit}
+            unitPrice={isQuantityCoBuying(data) ? data.unitPrice : undefined}
+          />
+        ))}
+      </div>
     </section>
   );
 }
