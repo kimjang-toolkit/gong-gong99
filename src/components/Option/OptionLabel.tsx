@@ -19,10 +19,18 @@ function OptionLabel({
   const [inputValue, setInputValue] = useState(option?.name ?? '');
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // 🔁 name이 바깥에서 변경되었을 때 로컬 상태도 동기화
+  useEffect(() => {
+    if (option?.name !== inputValue) {
+      setInputValue(option?.name ?? '');
+    }
+  }, [option?.name]);
+
   const isLastOption = options[options.length - 1]?.optionId === optionId;
 
   useEffect(() => {
-    if (isLastOption && inputRef.current && inputValue.trim() == '') {
+    if (isLastOption && inputRef.current && inputValue.trim() === '') {
       inputRef.current.focus();
     }
   }, [isLastOption]);
