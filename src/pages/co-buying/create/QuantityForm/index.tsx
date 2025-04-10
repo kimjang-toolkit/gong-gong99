@@ -87,7 +87,7 @@ export default function QuantityForm({ formData }: { formData: any }) {
           {ownerOptions?.map((option) => (
             <div
               className="flex items-center justify-between w-full"
-              key={option.name}
+              key={option.optionId}
             >
               <Option.Label
                 placeholder="옵션 이름 입력"
