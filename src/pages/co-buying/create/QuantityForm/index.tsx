@@ -4,7 +4,7 @@ import Option from '@/components/Option';
 import QuantityCalcBox from '@/pages/co-buying/create/QuantityForm/QuantityCalcBox';
 import { toFormattedNumber } from '@/types/FormattedNumber';
 import { ItemOptionBase } from '@domain/product';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type FormItemOption = ItemOptionBase;
 
@@ -14,19 +14,30 @@ export default function QuantityForm({ formData }: { formData: any }) {
       ? [{ name: '', quantity: 0, optionId: 0 }]
       : formData.itemOptions
   );
-  const [ownerOptions, setOwnerOptions] = useState<FormItemOption[]>();
-
-  useEffect(() => {
-    setOwnerOptions(
-      itemOptions.map((option) => ({
-        ...option,
-        quantity: 0,
-      }))
-    );
-  }, [itemOptions]);
+  const [ownerOptions, setOwnerOptions] = useState<FormItemOption[]>(
+    itemOptions.map((option) => ({
+      ...option,
+      quantity: 0,
+    }))
+  );
 
   const handleItemOptionChange = (nextOptions: FormItemOption[]) => {
     setItemOptions(nextOptions);
+    setOwnerOptions((prevOwnerOptions) => {
+      return nextOptions.map((option) => {
+        const prev = prevOwnerOptions?.find(
+          // ownerOption에 itemOption이 있는지 확인
+          (o) => o.optionId === option.optionId
+        );
+        return {
+          ...option,
+          quantity:
+            prev && prev.quantity > option.quantity // ownerOption 수량보다 커지면 ownerOption 수량으로 설정
+              ? option.quantity
+              : (prev?.quantity ?? 0),
+        };
+      });
+    });
   };
 
   return (
