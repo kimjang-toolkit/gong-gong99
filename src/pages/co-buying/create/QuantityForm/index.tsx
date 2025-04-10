@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Form from "@/components/Form";
-import Option from "@/components/Option";
-import QuantityCalcBox from "@/pages/co-buying/create/QuantityForm/QuantityCalcBox";
-import { toFormattedNumber } from "@/types/FormattedNumber";
-import { ItemOptionBase } from "@domain/product";
-import { useState } from "react";
+import Form from '@/components/Form';
+import Option from '@/components/Option';
+import QuantityCalcBox from '@/pages/co-buying/create/QuantityForm/QuantityCalcBox';
+import { toFormattedNumber } from '@/types/FormattedNumber';
+import { ItemOptionBase } from '@domain/product';
+import { useState } from 'react';
 
 type FormItemOption = ItemOptionBase & { optionId: number };
 
 export default function QuantityForm({ formData }: { formData: any }) {
   const [itemOptions, setItemOptions] = useState<FormItemOption[]>(
     formData.itemOptions.length === 0
-      ? [{ name: "공구상품 이름", quantity: 0, optionId: 0 }]
+      ? [{ name: '공구상품 이름', quantity: 0, optionId: 0 }]
       : formData.itemOptions
   );
   const [ownerOptions, setOwnerOptions] = useState<FormItemOption[]>(
@@ -91,9 +91,13 @@ export default function QuantityForm({ formData }: { formData: any }) {
               className="flex items-center justify-between"
               key={option.name}
             >
+              <Option.DeleteButton
+                optionId={option.optionId}
+                className={`${itemOptions.length == 1 ? 'hidden' : ''}`}
+              />
               <Option.Label
-                className="flex-1"
                 placeholder="옵션 이름 입력"
+                className="w-full"
                 optionId={option.optionId}
               />
               <div className="flex items-center gap-2">
@@ -102,7 +106,6 @@ export default function QuantityForm({ formData }: { formData: any }) {
                   quantity={option.quantity}
                   remainQuantity={999}
                 />
-                <Option.DeleteButton optionId={option.optionId} />
               </div>
             </div>
           ))}
@@ -123,10 +126,10 @@ export default function QuantityForm({ formData }: { formData: any }) {
               key={option.name}
             >
               <Option.Label
-                className="flex-1"
                 placeholder="옵션 이름 입력"
                 optionId={option.optionId}
                 disabled
+                className="w-full"
               />
               <Option.Stepper
                 optionId={option.optionId}
