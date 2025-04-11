@@ -31,7 +31,7 @@ export default function AttendeeBottomSheet({
         coBuyingId: data.id,
         ownerName: data.ownerName,
         name: attendeeName,
-        totalQuantity: attendeeQuantity,
+        totalQuantity: data.perAttendeeQuantity,
         totalPrice: data.perAttendeePrice,
       });
       setIsOpen(false);
@@ -40,7 +40,8 @@ export default function AttendeeBottomSheet({
     }
   };
 
-  const attendeeQuantity = data.totalQuantity / data.targetAttendeeCount;
+  // 프론트 계산이 아닌 백에서 계산한 값을 사용
+  // const attendeeQuantity = data.totalQuantity / data.targetAttendeeCount;
 
   return (
     <Sheet
@@ -67,11 +68,12 @@ export default function AttendeeBottomSheet({
 
             <section className="flex justify-between p-4 border rounded-xl border-default-200">
               <p className="mb-1 typo-caption text-default-600">구매 수량</p>
-              <p className="typo-body-bold">{attendeeQuantity} 개</p>
+              <p className="typo-body-bold">{data.perAttendeeQuantity} 개</p>
             </section>
             <section className="flex items-start justify-between px-1">
               <p className="flex py-1 typo-tiny text-default-700">
-                <p className="text-primary-400">{attendeeQuantity}</p>개 구매액
+                <p className="text-primary-400">{data.perAttendeeQuantity}</p>개
+                구매액
               </p>
               <p className="typo-body-bold text-primary-400">
                 {data.perAttendeePrice}원
