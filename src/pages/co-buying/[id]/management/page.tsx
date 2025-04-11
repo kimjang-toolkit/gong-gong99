@@ -10,6 +10,7 @@ import useModalStore from '@/stores/modalStore';
 import Modal from '@/components/Modal';
 
 import useEditCobuying from '@/api/mutations/useEditCobuying';
+import useAlertStore from '@/stores/alertStore';
 export default function ManagementPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export default function ManagementPage() {
   const isApplying = data.coBuyingStatus === CoBuyingStatus.APPLYING;
 
   const { openModal } = useModalStore();
-
+  const { showAlert } = useAlertStore();
   const handleCloseApply = () => {
     openModal(
       <Modal
@@ -58,6 +59,12 @@ export default function ManagementPage() {
               onSuccess: () => {
                 navigate(`/co-buying/${data.id}?ownerName=${data.ownerName}`, {
                   replace: true,
+                });
+              },
+              onError: () => {
+                showAlert({
+                  status: 'fail',
+                  label: '모든 신청자에게 나눔완료를 해주세요.',
                 });
               },
             }
