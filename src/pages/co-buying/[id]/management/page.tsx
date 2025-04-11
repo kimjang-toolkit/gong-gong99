@@ -40,7 +40,7 @@ export default function ManagementPage() {
       />
       <div className="flex flex-col gap-2">
         <InfoSection data={data as CoBuyingDetail} />
-        <ApplyListSection data={data as CoBuyingDetail} canEdit />
+        <ApplyListSection data={data as CoBuyingDetail} canEdit={!isApplying} />
         <BottomButton
           label={isApplying ? '신청 마감하기' : '나눔 완료하기'}
           onClick={isApplying ? handleCloseApply : handleCompleteSharing}
