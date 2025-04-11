@@ -22,7 +22,7 @@ const Modal = ({
   };
 
   return (
-    <div className="bg-white rounded-xl w-44 ">
+    <div className="bg-white rounded-xl w-[186px] ">
       <div className="flex flex-col items-center justify-center gap-2 p-6">
         <h2 className="text-black typo-caption-bold">{title}</h2>
         <p className="text-center text-default-900 typo-caption">

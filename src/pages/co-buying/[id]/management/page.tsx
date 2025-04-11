@@ -32,12 +32,14 @@ export default function ManagementPage() {
             },
             {
               onSuccess: () => {
-                navigate(`/co-buying/${data.id}?ownerName=${data.ownerName}`);
+                navigate(`/co-buying/${data.id}?ownerName=${data.ownerName}`, {
+                  replace: true,
+                });
               },
             }
           );
         }}
-        confirmText="마감"
+        confirmText="나눔하기"
         cancelText="취소"
       />
     );
