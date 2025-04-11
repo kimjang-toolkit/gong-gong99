@@ -1,12 +1,12 @@
-import Button from '@/components/Button';
-import useApplyCobuying from '@/api/mutations/useApplyCobuying';
-import useOutsideClick from '@/hooks/useOutsideClick';
-import { QuantityCoBuyingDetail } from '@interface/cobuying';
-import { useState } from 'react';
-import { Sheet } from 'react-modal-sheet';
-import Input from '@/components/Input';
-import { ItemOptionBase } from '@domain/product';
-import Option from '@/components/Option';
+import Button from "@/components/Button";
+import useApplyCobuying from "@/api/mutations/useApplyCobuying";
+import useOutsideClick from "@/hooks/useOutsideClick";
+import { QuantityCoBuyingDetail } from "@interface/cobuying";
+import { useState } from "react";
+import { Sheet } from "react-modal-sheet";
+import Input from "@/components/Input";
+import { ItemOptionBase } from "@domain/product";
+import Option from "@/components/Option";
 
 interface ApplyBottomSheetProps {
   isOpen: boolean;
@@ -24,7 +24,7 @@ export default function QuantityBottomSheet({
   });
 
   // 옵션 별로 띄워주기 => 어떤 옵션을 구매하는지 보여주어야 함
-  const [attendeeName, setAttendeeName] = useState('');
+  const [attendeeName, setAttendeeName] = useState("");
 
   // 남은 수량을 제외한 사용자 입력 구매옵션
   const [itemOptions, setItemOptions] = useState<ItemOptionBase[]>(
@@ -63,7 +63,7 @@ export default function QuantityBottomSheet({
       setIsOpen(false);
       setItemOptions([]);
     } catch (error) {
-      console.log('신청실패했어요', error);
+      console.log("신청실패했어요", error);
     }
 
     setIsOpen(false);
@@ -89,7 +89,7 @@ export default function QuantityBottomSheet({
               variant="bordered"
             >
               <Input.Label>이름</Input.Label>
-              <Input.Field />
+              <Input.Field placeholder="입금자명과 동일하게 작성해주세요." />
             </Input>
 
             <section className="flex flex-col gap-2">
@@ -138,7 +138,7 @@ export default function QuantityBottomSheet({
                   itemOptions.reduce(
                     (acc, option) => acc + option.quantity,
                     0
-                  ) === 0 || attendeeName === ''
+                  ) === 0 || attendeeName === ""
                 }
                 size="small"
                 onClick={handleSubmit}
