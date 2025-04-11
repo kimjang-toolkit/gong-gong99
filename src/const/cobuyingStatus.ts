@@ -1,6 +1,6 @@
 export const COBUYING_STATUS_MAP = {
   1: {
-    label: '신청중',
+    label: '모집중',
     color: 'primary',
   },
   2: {
