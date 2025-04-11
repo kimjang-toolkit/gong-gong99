@@ -1,14 +1,13 @@
-import { CoBuyingStatus } from './../../common-type/src/domain/cobuying';
 export const COBUYING_STATUS_MAP = {
-  [CoBuyingStatus.APPLYING]: {
+  1: {
     label: '신청중',
     color: 'primary',
   },
-  [CoBuyingStatus.SHARING]: {
+  2: {
     label: '나눔중',
     color: 'yellow',
   },
-  [CoBuyingStatus.SHARING_COMPLETE]: {
+  3: {
     label: '나눔완료',
     color: 'neutral',
   },
