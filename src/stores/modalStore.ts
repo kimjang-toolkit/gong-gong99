@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 type Modal = {
-  element: React.FC;
+  element: React.ReactNode;
 };
 
 type State = {
@@ -9,7 +9,7 @@ type State = {
 };
 
 type Actions = {
-  openModal: (element: React.FC) => void;
+  openModal: (element: React.ReactNode) => void;
   closeModal: () => void;
 };
 

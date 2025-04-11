@@ -2,12 +2,12 @@ import {
   FormattedNumber,
   isFormattedNumber,
   toNumber,
-} from "@/types/FormattedNumber";
+} from '@/types/FormattedNumber';
 
 interface QuantityCalcBoxProps {
   totalPrice: FormattedNumber;
   totalQuantity: number;
-  ownerQuantity: number;
+  ownerQuantity?: number;
 }
 export default function QuantityCalcBox({
   totalPrice,
