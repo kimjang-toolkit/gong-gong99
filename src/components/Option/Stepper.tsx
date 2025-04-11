@@ -42,7 +42,14 @@ function StepperButton({
   };
   return (
     <div className="flex items-center justify-center min-w-[86px] border border-default-300 rounded-[4px] *:px-1 *:py-1 *:w-full *:typo-caption *:text-default-700">
-      <button onClick={handleDecrease}>-</button>
+      <button
+        type="button"
+        onClick={handleDecrease}
+        disabled={quantity === 0}
+        className="disabled:opacity-50 disabled:bg-default-100"
+      >
+        -
+      </button>
       <input
         className="text-center bg-white rounded-none border-x border-default-300"
         type="number"
@@ -60,7 +67,14 @@ function StepperButton({
           );
         }}
       />
-      <button onClick={handleIncrease}>+</button>
+      <button
+        type="button"
+        onClick={handleIncrease}
+        disabled={quantity === remainQuantity}
+        className="disabled:opacity-50 disabled:bg-default-100"
+      >
+        +
+      </button>
     </div>
   );
 }

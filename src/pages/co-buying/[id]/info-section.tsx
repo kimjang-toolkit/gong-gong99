@@ -1,22 +1,38 @@
-import Badge from '@/components/Badge';
-import { COBUYING_STATUS_MAP } from '@/const/cobuyingStatus';
-import { DivideType } from '@domain/cobuying';
-import { CoBuyingDetail } from '@interface/cobuying';
+import Badge from "@/components/Badge";
+import { COBUYING_STATUS_MAP } from "@/const/cobuyingStatus";
+import { DivideType } from "@domain/cobuying";
+import { CoBuyingDetail } from "@interface/cobuying";
 
 export default function InfoSection({ data }: { data: CoBuyingDetail }) {
   const { type } = data;
 
   const boxStyle =
-    'rounded-lg typo-caption bg-default-50 px-3 py-2 *:typo-caption';
+    "rounded-lg typo-caption bg-default-50 px-3 py-2 *:typo-caption";
 
   const availableQuantity =
     type === DivideType.attendee
-      ? data.totalQuantity && data.targetAttendeeCount
-        ? (data.totalQuantity / data.targetAttendeeCount).toLocaleString()
-        : '0'
+      ? data.remainAttendeeCount
+        ? data.remainAttendeeCount.toLocaleString()
+        : "0"
       : data.remainQuantity
         ? data.remainQuantity.toLocaleString()
-        : '0';
+        : "0";
+
+  const targetCount =
+    type === DivideType.attendee
+      ? data.targetAttendeeCount
+      : data.totalQuantity;
+
+  // 인원 나눔과 수량 나눔에 따라 신청가능 문구와 단위라벨 UX 라이팅 변경
+  let availableQuantityLabel = "";
+  let unitLabel = "";
+  if (type === DivideType.quantity) {
+    availableQuantityLabel = "구매 가능";
+    unitLabel = "개";
+  } else {
+    availableQuantityLabel = "신청 가능";
+    unitLabel = "명";
+  }
 
   return (
     <section className="mt-4">
@@ -41,7 +57,7 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
         <div className="flex gap-2 mt-2">
           <p className="typo-body-bold">{`${data.totalPrice.toLocaleString()}원`}</p>
           <p className="typo-body-bold">
-            {type === DivideType.attendee ? '(인당' : '(개당'}
+            {type === DivideType.attendee ? "(인당" : "(개당"}
           </p>
           <p className="typo-body-bold text-default-700">
             {`${
@@ -56,13 +72,13 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
         className={`${boxStyle} mt-4 flex justify-center items-center gap-2`}
       >
         <div className="flex gap-1">
-          <p className="text-default-500">구매가능</p>
-          <p className="text-primary-500">{`${availableQuantity}개`}</p>
+          <p className="text-default-500">{availableQuantityLabel}</p>
+          <p className="text-primary-500">{`${availableQuantity}${unitLabel}`}</p>
         </div>
         <div className="w-[1px] h-2.5 bg-layout-divider"></div>
         <div className="flex gap-1">
           <p className="text-default-500">전체</p>
-          <p className="text-default-700">{`${data.totalQuantity.toLocaleString()}개`}</p>
+          <p className="text-default-700">{`${targetCount}${unitLabel}`}</p>
         </div>
       </article>
       <article
