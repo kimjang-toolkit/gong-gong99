@@ -5,13 +5,11 @@ export const ENDPOINTS = {
     DETAIL: (id: string) => `/co-buying/${id}`,
     CREATE: '/co-buying',
     APPLY: '/co-buying/applications',
-    CHANGE_STATUS: (id: string) => `/co-buying/${id}/status`,
     IMG_EXTRACT: '/product/extract',
   },
   MANAGEMENT: {
-    CLOSE_APPLY: (id: string) => `/co-buying/${id}/status`,
+    EDIT: (id: string) => `/co-buying/manage/${id}`,
     SHARE_CHECK: (id: string) => `/co-buying/${id}/sharing-check`,
-
   },
   AUTH: {
     PWD_CHECK: (id: string) => `/co-buying/auth/${id}`,
