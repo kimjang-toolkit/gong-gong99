@@ -9,17 +9,14 @@ function ModalProvider() {
   const outsideClick = useOutsideClick(() => closeModal());
   if (modals.length === 0) return null;
   return (
-    <div className="absolute bottom-0 z-[999] h-screen w-full bg-black/40">
+    <div className="absolute bottom-0 z-[999] h-screen w-full bg-black/40 flex justify-center items-center">
       {modals.map(({ element }, key) => (
-        <div ref={outsideClick} key={key}>
-          <Component component={element} />
+        <div ref={outsideClick} key={key} className="mb-20">
+          {element}
         </div>
       ))}
     </div>
   );
 }
-
-const Component = ({ component, ...rest }: { component: React.FC }) =>
-  component({ ...rest });
 
 export default ModalProvider;
