@@ -30,7 +30,7 @@ export default function ApplyStateCard({
   const isOwner = attendeeData.name === ownerName;
   const handleCheckClick = () => {
     mutate({
-      isShared: !attendeeData.isShared,
+      isShared: !isShared,
       name: attendeeData.name,
     });
     setIsShared(!isShared);
