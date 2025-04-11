@@ -61,7 +61,12 @@ export default function QuantityBottomSheet({
         })),
       });
       setIsOpen(false);
-      setItemOptions([]);
+      setItemOptions((prev) =>
+        prev.map((option) => ({
+          ...option,
+          quantity: 0,
+        }))
+      );
     } catch (error) {
       console.log('신청실패했어요', error);
     }
