@@ -7,7 +7,11 @@ export const ENDPOINTS = {
     APPLY: '/co-buying/applications',
     CHANGE_STATUS: (id: string) => `/co-buying/${id}/status`,
     IMG_EXTRACT: '/product/extract',
+  },
+  MANAGEMENT: {
+    CLOSE_APPLY: (id: string) => `/co-buying/${id}/status`,
     SHARE_CHECK: (id: string) => `/co-buying/${id}/sharing-check`,
+
   },
   AUTH: {
     PWD_CHECK: (id: string) => `/co-buying/auth/${id}`,
