@@ -22,8 +22,8 @@ export default function ManagementPage() {
       <div className="flex flex-col gap-2">
         <InfoSection data={data as CoBuyingDetail} />
         <ApplyListSection data={data as CoBuyingDetail} canEdit />
+        <BottomButton label="신청 마감하기" />
       </div>
-      <BottomButton label="신청 마감하기" />
     </HeaderLayout>
   );
 }
