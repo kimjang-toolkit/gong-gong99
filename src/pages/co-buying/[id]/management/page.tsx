@@ -8,10 +8,12 @@ import ApplyListSection from '@/pages/co-buying/[id]/applyList-section';
 import { CoBuyingStatus } from '@domain/cobuying';
 import useModalStore from '@/stores/modalStore';
 import Modal from '@/components/Modal';
+import useCloseApply from '@/api/mutations/useCloseApply';
 
 export default function ManagementPage() {
   const location = useLocation();
   const { data } = location.state as { data: CoBuyingDetail };
+  const { mutate: closeApply } = useCloseApply(data.id);
   const isApplying = data.coBuyingStatus === CoBuyingStatus.APPLYING;
 
   const { openModal } = useModalStore();
@@ -21,7 +23,9 @@ export default function ManagementPage() {
       <Modal
         title="신청 마감"
         description="신청 마감 후 공구 상품을 나눔하시겠어요?"
-        onConfirm={() => {}}
+        onConfirm={() => {
+          closeApply();
+        }}
         confirmText="마감"
         cancelText="취소"
       />
