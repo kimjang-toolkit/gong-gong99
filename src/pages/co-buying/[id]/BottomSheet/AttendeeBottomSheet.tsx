@@ -63,7 +63,7 @@ export default function AttendeeBottomSheet({
               variant="bordered"
             >
               <Input.Label>이름</Input.Label>
-              <Input.Field />
+              <Input.Field placeholder="입금자명과 동일하게 작성해주세요." />
             </Input>
 
             <section className="flex justify-between p-4 border rounded-xl border-default-200">
