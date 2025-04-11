@@ -1,30 +1,47 @@
-import { DivideType } from "@domain/cobuying";
-import { CoBuyingDetail } from "@interface/cobuying";
+import Badge from '@/components/Badge';
+import { COBUYING_STATUS_MAP } from '@/const/cobuyingStatus';
+import { DivideType } from '@domain/cobuying';
+import { CoBuyingDetail } from '@interface/cobuying';
 
 export default function InfoSection({ data }: { data: CoBuyingDetail }) {
   const { type } = data;
 
   const boxStyle =
-    "rounded-lg typo-caption bg-default-50 px-3 py-2 *:typo-caption";
+    'rounded-lg typo-caption bg-default-50 px-3 py-2 *:typo-caption';
 
   const availableQuantity =
     type === DivideType.attendee
       ? data.totalQuantity && data.targetAttendeeCount
         ? (data.totalQuantity / data.targetAttendeeCount).toLocaleString()
-        : "0"
+        : '0'
       : data.remainQuantity
         ? data.remainQuantity.toLocaleString()
-        : "0";
+        : '0';
 
   return (
     <section className="mt-4">
       <article>
         <p className="w-full typo-tiny text-default-500">{data.ownerName}</p>
-        <p className="text-black typo-body line-clamp-2">{data.productName}</p>
+        <div className="last:text-black typo-body ">
+          <Badge
+            className="mr-1 "
+            label={
+              COBUYING_STATUS_MAP[
+                data.coBuyingStatus as keyof typeof COBUYING_STATUS_MAP
+              ].label
+            }
+            color={
+              COBUYING_STATUS_MAP[
+                data.coBuyingStatus as keyof typeof COBUYING_STATUS_MAP
+              ].color
+            }
+          />
+          {data.productName}
+        </div>
         <div className="flex gap-2 mt-2">
           <p className="typo-body-bold">{`${data.totalPrice.toLocaleString()}원`}</p>
           <p className="typo-body-bold">
-            {type === DivideType.attendee ? "(인당" : "(개당"}
+            {type === DivideType.attendee ? '(인당' : '(개당'}
           </p>
           <p className="typo-body-bold text-default-700">
             {`${

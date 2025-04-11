@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import BottomButton from "@/components/Button/BottomButton";
-import DatePicker from "@/components/DatePicker";
-import Form from "@/components/Form";
-import Input from "@/components/Input";
-import { getFormatDateTime } from "@/util/getFormatDateTime";
-import { CommitmentSchema, commitmentSchema } from "@/util/zod/cobuying-create";
-import { useState } from "react";
+import BottomButton from '@/components/Button/BottomButton';
+import DatePicker from '@/components/DatePicker';
+import Form from '@/components/Form';
+import Input from '@/components/Input';
+import { getFormatDateTime } from '@/util/getFormatDateTime';
+import { CommitmentSchema, commitmentSchema } from '@/util/zod/cobuying-create';
+import { useState } from 'react';
 
 interface CommitmentFormProps {
   handleNext: () => void;
@@ -67,7 +67,7 @@ export default function CommitmentForm({
         </Form.Input>
         {/* </section> */}
         <Form.Button>
-          <BottomButton label="약속 잡기" />
+          <BottomButton label="확인" />
         </Form.Button>
       </Form>
     </>

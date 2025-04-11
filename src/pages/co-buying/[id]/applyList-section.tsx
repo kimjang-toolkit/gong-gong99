@@ -21,7 +21,7 @@ export default function ApplyListSection({
   const { attendeeList } = data;
   return (
     <section className={className}>
-      <p className="typo-caption text-default-500 mb-1.5">나눔 현황</p>
+      <p className="typo-caption text-default-500 mb-1.5">신청 현황</p>
       <div className="flex flex-col gap-2">
         {attendeeList?.map((attendee) => (
           <ApplyStateCard

@@ -1,9 +1,9 @@
-import { cobuyingService } from "@/api/services/cobuying";
-import { useMutation } from "@tanstack/react-query";
+import { managementService } from '@/api/services/management';
+import { useMutation } from '@tanstack/react-query';
 
 export default function useSharingCheck(id: string, ownerName: string) {
   return useMutation({
     mutationFn: (body: { isShared: boolean; name: string }) =>
-      cobuyingService.putShareCheck(id, body, ownerName),
+      managementService.putShareCheck(id, body, ownerName),
   });
 }
