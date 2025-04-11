@@ -44,7 +44,30 @@ export default function ManagementPage() {
       />
     );
   };
-  const handleCompleteSharing = () => {};
+  const handleCompleteSharing = () => {
+    openModal(
+      <Modal
+        title="나눔 완료"
+        description="공구를 완료하시겠어요?"
+        onConfirm={() => {
+          editCobuying(
+            {
+              coBuyingStatus: 3, // 잘못된 enum값이 들어가서 우선 하드코딩
+            },
+            {
+              onSuccess: () => {
+                navigate(`/co-buying/${data.id}?ownerName=${data.ownerName}`, {
+                  replace: true,
+                });
+              },
+            }
+          );
+        }}
+        confirmText="완료하기"
+        cancelText="취소"
+      />
+    );
+  };
 
   return (
     <HeaderLayout>
