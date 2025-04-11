@@ -15,7 +15,7 @@ export default function CoBuyingCard({ data }: CoBuyingCardProps) {
   );
   return (
     <div className="flex gap-2 py-4">
-      <div className="h-20 min-w-20">
+      <div className="w-20 h-20">
         <img
           src={imgSrc}
           alt={data.productName}
