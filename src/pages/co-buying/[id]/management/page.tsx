@@ -2,7 +2,7 @@ import BottomButton from '@/components/Button/BottomButton';
 import RightButtonHeader from '@/components/Header/RightButtonHeader';
 import InfoSection from '@/pages/co-buying/[id]/info-section';
 import { CoBuyingDetail } from '@interface/cobuying';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import HeaderLayout from '@/layouts/HeaderLayout';
 import ApplyListSection from '@/pages/co-buying/[id]/applyList-section';
 import { CoBuyingStatus } from '@domain/cobuying';
@@ -12,6 +12,8 @@ import Modal from '@/components/Modal';
 import useEditCobuying from '@/api/mutations/useEditCobuying';
 export default function ManagementPage() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const { data } = location.state as { data: CoBuyingDetail };
   const { mutate: editCobuying } = useEditCobuying(data.id, data.ownerName);
   const isApplying = data.coBuyingStatus === CoBuyingStatus.APPLYING;
@@ -24,9 +26,16 @@ export default function ManagementPage() {
         title="신청 마감"
         description="신청 마감 후 공구 상품을 나눔하시겠어요?"
         onConfirm={() => {
-          editCobuying({
-            coBuyingStatus: 2, // 잘못된 enum값이 들어가서 우선 하드코딩
-          });
+          editCobuying(
+            {
+              coBuyingStatus: 2, // 잘못된 enum값이 들어가서 우선 하드코딩
+            },
+            {
+              onSuccess: () => {
+                navigate(`/co-buying/${data.id}?ownerName=${data.ownerName}`);
+              },
+            }
+          );
         }}
         confirmText="마감"
         cancelText="취소"
