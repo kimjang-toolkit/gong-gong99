@@ -19,9 +19,12 @@ export const managementService = {
     );
     return response.data;
   },
-  closeApply: async (id: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  editStatus: async (id: string, body: any, ownerName: string) => {
     const response = await privateAxiosInstance.put(
-      ENDPOINTS.MANAGEMENT.CLOSE_APPLY(id)
+      ENDPOINTS.MANAGEMENT.EDIT(id),
+      body,
+      { params: { ownerName } }
     );
     return response.data;
   },
