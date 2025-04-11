@@ -18,6 +18,17 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
         ? data.remainQuantity.toLocaleString()
         : '0';
 
+  // 인원 나눔과 수량 나눔에 따라 신청가능 문구와 단위라벨 UX 라이팅 변경
+  let availableQuantityLabel = "";
+  let unitLabel = "";
+  if (type === DivideType.quantity) {
+    availableQuantityLabel = "구매 가능";
+    unitLabel = "개";
+  } else {
+    availableQuantityLabel = "신청 가능";
+    unitLabel = "명";
+  }
+
   return (
     <section className="mt-4">
       <article>
@@ -56,13 +67,13 @@ export default function InfoSection({ data }: { data: CoBuyingDetail }) {
         className={`${boxStyle} mt-4 flex justify-center items-center gap-2`}
       >
         <div className="flex gap-1">
-          <p className="text-default-500">구매가능</p>
-          <p className="text-primary-500">{`${availableQuantity}개`}</p>
+          <p className="text-default-500">{availableQuantityLabel}</p>
+          <p className="text-primary-500">{`${availableQuantity}${unitLabel}`}</p>
         </div>
         <div className="w-[1px] h-2.5 bg-layout-divider"></div>
         <div className="flex gap-1">
           <p className="text-default-500">전체</p>
-          <p className="text-default-700">{`${data.totalQuantity.toLocaleString()}개`}</p>
+          <p className="text-default-700">{`${data.totalQuantity.toLocaleString()}${unitLabel}`}</p>
         </div>
       </article>
       <article
