@@ -1,19 +1,19 @@
-import BottomButton from '@/components/Button/BottomButton';
-import RightButtonHeader from '@/components/Header/RightButtonHeader';
-import { useCobuyingDetail } from '@/api/queries/cobuying';
-import HeaderLayout from '@/layouts/HeaderLayout';
-import AttendeeBottomSheet from '@/pages/co-buying/[id]/BottomSheet/AttendeeBottomSheet';
-import QuantityBottomSheet from '@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet';
-import InfoSection from '@/pages/co-buying/[id]/info-section';
-import { DivideType } from '@domain/cobuying';
-import { CoBuyingDetail } from '@interface/cobuying';
-import { useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
-import ImageSection from '@/pages/co-buying/[id]/image-section';
-import ImageSectionSkeleton from '@/components/Skeleton/ImageSection';
-import SkeletonWrapper from '@/components/Skeleton/SkeletonWrapper';
-import FormSectionSkeleton from '@/components/Skeleton/FormSection';
-import ApplyListSection from '@/pages/co-buying/[id]/applyList-section';
+import BottomButton from "@/components/Button/BottomButton";
+import RightButtonHeader from "@/components/Header/RightButtonHeader";
+import { useCobuyingDetail } from "@/api/queries/cobuying";
+import HeaderLayout from "@/layouts/HeaderLayout";
+import AttendeeBottomSheet from "@/pages/co-buying/[id]/BottomSheet/AttendeeBottomSheet";
+import QuantityBottomSheet from "@/pages/co-buying/[id]/BottomSheet/QuantityBottomSheet";
+import InfoSection from "@/pages/co-buying/[id]/info-section";
+import { DivideType } from "@domain/cobuying";
+import { CoBuyingDetail } from "@interface/cobuying";
+import { useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import ImageSection from "@/pages/co-buying/[id]/image-section";
+import ImageSectionSkeleton from "@/components/Skeleton/ImageSection";
+import SkeletonWrapper from "@/components/Skeleton/SkeletonWrapper";
+import FormSectionSkeleton from "@/components/Skeleton/FormSection";
+import ApplyListSection from "@/pages/co-buying/[id]/applyList-section";
 
 export default function DetailPage() {
   const navigate = useNavigate();
@@ -22,14 +22,14 @@ export default function DetailPage() {
 
   const { isLoading, data } = useCobuyingDetail(
     id!,
-    searchParams.get('ownerName')!
+    searchParams.get("ownerName")!
   );
 
   const [isApplyingFormOpen, setIsApplyingFormOpen] = useState(false);
 
   const handleManageButton = () => {
     // 관리하기 페이지
-    navigate(`management?ownerName=${searchParams.get('ownerName')}`, {
+    navigate(`management?ownerName=${searchParams.get("ownerName")}`, {
       state: {
         data,
       },
@@ -66,6 +66,7 @@ export default function DetailPage() {
             <ApplyListSection className="mt-4" data={data as CoBuyingDetail} />
           </SkeletonWrapper>
           <BottomButton
+            disabled={data?.coBuyingStatus !== 1}
             label="신청하기"
             onClick={() => {
               setIsApplyingFormOpen(true);
