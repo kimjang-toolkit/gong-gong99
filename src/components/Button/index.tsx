@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+import { motion, HTMLMotionProps } from 'framer-motion';
+interface ButtonProps extends HTMLMotionProps<'button'> {
   label: string;
   size: 'small' | 'large';
   onClick?: () => void;
@@ -17,8 +17,9 @@ export default function Button({
   ...props
 }: ButtonProps) {
   return (
-    <button
+    <motion.button
       type={type}
+      whileTap={{ scale: 0.95 }}
       className={cn(
         'bg-primary-300 active:brightness-95',
         size === 'small'
@@ -31,6 +32,6 @@ export default function Button({
       {...props}
     >
       <p className="text-white">{label}</p>
-    </button>
+    </motion.button>
   );
 }
