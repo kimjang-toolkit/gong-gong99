@@ -20,7 +20,7 @@ export default function Button({
     <button
       type={type}
       className={cn(
-        ' bg-primary-300',
+        'bg-primary-300 active:brightness-95',
         size === 'small'
           ? 'rounded-[10px] px-4 py-2 typo-caption-bold'
           : 'rounded-2xl px-5 py-3 typo-body-bold',
