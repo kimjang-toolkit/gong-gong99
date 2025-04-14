@@ -52,7 +52,7 @@ function OptionLabel({
   return (
     <input
       ref={inputRef}
-      className={`typo-caption text-default-600 mr-2 ${className} bg-transparent disabled:bg-transparent`}
+      className={`typo-caption text-default-700 mr-2 ${className} bg-transparent `}
       placeholder={placeholder}
       value={inputValue}
       onChange={(e) => setInputValue(e.target.value)}
