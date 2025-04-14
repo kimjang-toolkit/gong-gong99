@@ -7,6 +7,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CoBuyingSummary } from '@interface/cobuying';
 import SkeletonWrapper from '@/components/Skeleton/SkeletonWrapper';
 import List from '@/components/Skeleton/shared/List';
+import { COBUYING_STATUS_MAP } from '@/const/cobuyingStatus';
 
 export default function ListSection() {
   const { isLoading, data, fetchNextPage, hasNextPage } = useCobuyingList();
@@ -18,7 +19,7 @@ export default function ListSection() {
       ...page,
       coBuyingList: page.coBuyingList.filter(
         (item) => Number(item.coBuyingStatus) == tab
-      ),  
+      ),
     }))
     .filter((page) => page.coBuyingList.length > 0);
 
@@ -57,6 +58,16 @@ export default function ListSection() {
             <hr className="border-b-1 border-default-100" />
           </div>
         ))
+      )}
+      {filteredPage?.length === 0 && (
+        <div className="flex items-center justify-center h-full">
+          <p className="typo-body-regular text-default-400">
+            {
+              COBUYING_STATUS_MAP[tab as keyof typeof COBUYING_STATUS_MAP]
+                .fallback
+            }
+          </p>
+        </div>
       )}
       <div ref={loadMoreRef} style={{ height: '3px' }} />
       <CreateButton />
